@@ -1,0 +1,102 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block cuerpo %}
+
+	<div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav ">
+                <li class="sidebar-brand">
+                    <a class="navbar-brand" href="#" ><img id="limubac" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>
+                </li>
+                <li>
+                </br></br></br></br></br>
+                    <a href="#">Hoja de anotaciones</a>
+                </li>
+                <li>
+                    <a href="#">Jugadores</a>
+                </li>
+                <li>
+                    <a href="#">Equipos</a>
+                </li>
+                <li>
+                    <a href="#">Arbitros</a>
+                </li>
+                <li>
+                    <a href="#">Avisos</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <div class="container-fluid">
+                {#INICIO FILA 1#}
+                <div id="fl-1" class="row">
+                    
+                    <div  class="col-lg-4">
+                        <div id="hoja">
+                            <img id="hojaimg" src="{{asset('images/hoja.png')}}">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div id="equipos" >
+                            <img id="eqimg" src="{{asset('images/eq.png')}}">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div id="jugadores" >
+                            <img id="jugadoresimg" src="{{asset('images/jugadores.png')}}">
+                        </div>
+                    </div>
+                  
+                </div>
+                {#FIN FILA 1#}
+                <div id="fl-2" class="row">
+
+                    <div class="col-lg-4">
+                        <div id="arbitros" >
+                            <img id="arbitrosimg" src="{{asset('images/arbitros.png')}}">
+                        </div>
+                    </div>
+
+                    <div  class="col-lg-4">
+                        <div id="avisos" >
+                            <img id="avisosimg" src="{{asset('images/avisos.png')}}">
+                        </div>
+
+                    </div>
+                    <div id="mas" class="col-lg-4"></div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+	</div>
+
+
+    <!-- /#wrapper -->
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#icono").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+
+        if($('#flechita').attr("class")=="glyphicon glyphicon-chevron-right"){
+            $('#flechita').attr("class","glyphicon glyphicon-chevron-left");
+        }else{
+             $('#flechita').attr("class","glyphicon glyphicon-chevron-right");
+        }
+
+        
+    });
+    </script>
+
+{% endblock %}

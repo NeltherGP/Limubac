@@ -1,0 +1,76 @@
+#logo{
+	margin-top: -12px;
+	width: 45px;
+	height: 45px
+}
+
+#icono{
+	background-color: transparent;
+	border-color: transparent;
+}
+#equipos{
+	background-color: #CF000F;
+	
+}
+#hoja{
+	background-color:#26C281;
+	
+}
+#jugadores{
+	background-color:#19B5FE;
+}
+
+#jugadores #jugadoresimg {
+	margin-left: 280px;
+}
+
+#arbitros{
+	background-color:#F5D76E;
+}
+
+#avisos{
+	background-color: #BFBFBF;
+}
+
+#fl-1 > div >div {
+	padding: 10px;
+}
+#fl-1 > div > div >img{
+	margin-left: 250px;
+	width: 100px;
+	height:100px;
+}
+#fl-2{
+	margin-top: 30px;
+}
+#fl-2 > div >div {
+	padding: 10px;
+}
+#fl-2 > div > div >img{
+	margin-left: 250px;
+	width: 100px;
+	height:100px;
+}
+.navbar{
+
+	background-color: #1F4788;
+	border-color: #1F4788;
+}
+
+.navbar-default .navbar-nav > li > a {
+color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+color: #F5AB35;
+background-color: transparent;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+color: #F5AB35;
+background-color: #003171;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+color: #F5AB35;
+background-color: #003171;
+}
