@@ -2,7 +2,4 @@ limubacadministrator:
     resource: "@limubacadministratorBundle/Resources/config/routing.yml"
     prefix:   /
 
-acme_hello:
-    resource: "@AcmeHelloBundle/Resources/config/routing.yml"
-    prefix:   /
 
