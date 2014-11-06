@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
 {{parent()}}
-<link href="{{asset('css/estilo.css')}}" media="screen" rel="stylesheet">
+
 {% endblock %}
 
 {% block body %}
@@ -59,11 +59,11 @@
 	        <div id="sidebar-wrapper">
 		            <ul class="sidebar-nav ">
 		                <li class="sidebar-brand">
-		                    <a class="navbar-brand" href="#" ><img id="limubac" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>
+		                    <a class="navbar-brand" href="{{url('limubacadministrator_homepage')}}" ><img id="limubac" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>
 		                </li>
 		                <li>
 		                </br></br></br></br></br>
-		                    <a href="#">Hoja de anotaciones</a>
+		                    <a href="{{url('limubacadministrator_hojaAnotaciones')}}">Hoja de anotaciones</a>
 		                </li>
 		                <li>
 		                    <a href="#">Jugadores</a>

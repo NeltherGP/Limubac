@@ -31,11 +31,20 @@
 #avisos{
 	background-color: #BFBFBF;
 }
-
-#fl-1 > div >div {
+#fl-1 > a> div >div {
 	padding: 10px;
 }
-#fl-1 > div > div >img{
+#fl-1 > div >div {/*Borrar despues de actualizar*/
+	padding: 10px;
+}
+
+#fl-1 > div > div >img{ /*Borrar despues de actualizar*/
+	margin-left: 250px;
+	width: 100px;
+	height:100px;
+}
+
+#fl-1 > a > div > div  >img{
 	margin-left: 250px;
 	width: 100px;
 	height:100px;
@@ -43,10 +52,10 @@
 #fl-2{
 	margin-top: 30px;
 }
-#fl-2 > div >div {
+#fl-2 > div >div {/*Borrar despues de actualizar*/
 	padding: 10px;
 }
-#fl-2 > div > div >img{
+#fl-2 > div > div >img{/*Borrar despues de actualizar*/
 	margin-left: 250px;
 	width: 100px;
 	height:100px;
@@ -76,16 +85,24 @@ background-color: #003171;
 }
 
 /*Estilo de la hoja de Anotaciones*/
+
 #VS{
-	text-align: center;
+	padding-top: 	7px;
 }
-.formAnotacion {
+.form-group {
+ margin-bottom: 10px;
+ margin-top: 10px;
+}
+.ajuste-izq{
+	text-align: left;
+}
+.prueba{
 	padding: 5px;
 	border: 1px solid black;
 	border-radius: 4px;
 
 }
-
+/*
 .formAnotacion > div{
 	padding-left: 0px;
 	padding-right: 0px;
@@ -94,7 +111,7 @@ background-color: #003171;
 	padding-left: 0px;
 	padding-right: 0px;
 }
-
+*/
 .Fila2{
 	margin-top: 10px;
 }
