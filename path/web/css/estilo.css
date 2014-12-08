@@ -85,7 +85,10 @@ background-color: #003171;
 }
 
 /*Estilo de la hoja de Anotaciones*/
-
+.form-horizontal .form-group{
+	margin-left: 0px;
+	margin-right: 0px;
+}
 #VS{
 	padding-top: 	7px;
 }
@@ -96,23 +99,32 @@ background-color: #003171;
 .ajuste-izq{
 	text-align: left;
 }
-.prueba{
+.bordes{
+	
 	padding: 5px;
 	border: 1px solid black;
 	border-radius: 4px;
 
+
 }
-/*
-.formAnotacion > div{
-	padding-left: 0px;
-	padding-right: 0px;
+
+.bordesFaltas{
+	
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 4px;
+
+
 }
-.formAnotacion > label{
-	padding-left: 0px;
-	padding-right: 0px;
-}
-*/
+
 .Fila2{
 	margin-top: 10px;
 }
 
+#A{
+	margin:auto;
+}
+
+.margen-top{
+	margin-top: 20px;
+}
