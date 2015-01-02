@@ -20,9 +20,6 @@
 	background-color:#19B5FE;
 }
 
-#jugadores #jugadoresimg {
-	margin-left: 280px;
-}
 
 #arbitros{
 	background-color:#F5D76E;
@@ -39,13 +36,13 @@
 }
 
 #fl-1 > div > div >img{ /*Borrar despues de actualizar*/
-	margin-left: 250px;
+	/*margin-left: 250px;*/
 	width: 100px;
 	height:100px;
 }
 
 #fl-1 > a > div > div  >img{
-	margin-left: 250px;
+	/*margin-left: 250px;*/
 	width: 100px;
 	height:100px;
 }
@@ -56,7 +53,7 @@
 	padding: 10px;
 }
 #fl-2 > div > div >img{/*Borrar despues de actualizar*/
-	margin-left: 250px;
+	/*margin-left: 250px;*/
 	width: 100px;
 	height:100px;
 }
