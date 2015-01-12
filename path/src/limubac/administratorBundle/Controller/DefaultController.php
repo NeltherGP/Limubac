@@ -19,4 +19,7 @@ class DefaultController extends Controller
     public function hojaAnotacionesAction(){
     	return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig');
     }
+	public function equiposAction(){
+    	return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig');
+    }
 }
