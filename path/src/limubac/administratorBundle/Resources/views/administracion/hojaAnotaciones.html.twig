@@ -1,13 +1,16 @@
-{% extends 'limubacadministratorBundle:default:header.html.twig'%}
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
-	<form action="{{ path('limubacadministrator_hojaAnotaciones') }}" method="GET"  class="form-horizontal" role="form">
+	<form class="form-horizontal" role="form">
+
       {#Encabezado primera parte#}
   		<div class="bordes">
         <div class="formAnotacion form-group">		
     			
           <div class="col-md-3">
-            <input class="form-control" id="EqA" name="EqA" placeholder="Equipo A">
+
+            <input class="form-control" id="EqA" placeholder="Equipo A">
+
           </div>
           
           <label id="VS" class="col-md-1 text-center">VS</label>
@@ -30,7 +33,6 @@
 
       {#Encabezado segunda parte #}
 
-      {#Encabezado segunda parte #}
     <div class="bordes">
       <div class="formAnotacion form-group">
           {#Fila 1#}
@@ -59,9 +61,11 @@
               <input class="form-control" id="Fecha" placeholder="Fecha">
             </div>
 
-            <label for="Horas" class="col-md-1 control-label text-center">Hora: </label>
+
+            <label for="Hora" class="col-md-1 control-label text-center">Hora: </label>
             <div class="col-md-3 Fila2">
-              <input class="form-control" id="Horas" placeholder="Horas">
+              <input class="form-control" id="Hora" placeholder="Hora">
+
             </div>
           
             <label for="2dojuez" class="col-md-1 control-label text-center">2dojuez: </label>
@@ -70,6 +74,7 @@
             </div>
           </div>
         </div>
+
          {#End Fila 2#}
          	</br>
          {#marcador 1#}

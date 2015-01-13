@@ -5,3 +5,7 @@ limubacadministrator_homepage:
 limubacadministrator_hojaAnotaciones:
     path:     /hojaAnotaciones
     defaults: { _controller: limubacadministratorBundle:Default:hojaAnotaciones}
+
+limubacadministrator_equipos:
+    path:     /equipos
+    defaults: { _controller: limubacadministratorBundle:Default:equipos}
