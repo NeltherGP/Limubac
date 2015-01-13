@@ -1,0 +1,10 @@
+
+limubac\administratorBundle\claseForm\Author:
+    properties:
+        name:
+            - Email: ~
+
+limubac\administratorBundle\claseForm\hojaAnotacion:
+    properties:
+        EqA:
+            - NotBlank: ~
