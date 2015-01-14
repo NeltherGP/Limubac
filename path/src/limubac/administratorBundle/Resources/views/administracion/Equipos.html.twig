@@ -1,74 +1,44 @@
-{% extends 'limubacadministratorBundle:equipos:header.html.twig'%}
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
 	<form class="form-horizontal" role="form">
       {#Encabezado primera parte#}
   		<div class="bordes">
-        <div class="formAnotacion form-group">		
-    			
-          <div class="col-md-3">
-            <input class="form-control" id="EqA" placeholder="Equipo A">
-          </div>
-          
-          <label id="VS" class="col-md-1 text-center">VS</label>
-          
-          <div class="col-md-3">
-            <input class="form-control" id="Eqb" placeholder="Equipo B">
-          </div>
-          
-          <div class="col-md-2">
-            <input class="form-control" id="Rama" placeholder="Rama">
-          </div>
-          
-          <div class="col-md-3">
-            <input class="form-control" id="Categoria" placeholder="Categoria">
-          </div>
-
-    		</div>
-      </div>
-    </br>
+		<div class="formAnotacion form-group">	
+			<div class="col-md-3">		    			
+				<select class="form-control input-sm">
+					{% for equipo in ListEquip %}
+					<option value="{{equipo.num}}">{{equipo.nombre}}</option>
+					{% endfor%}
+				</select>
+			</div>	
+			<button class="btn btn-primary col-md-1" type="button">Aceptar</button>
+			
+			<div class="col-md-3">		    			
+				<input class="form-control" id="NuevoEquipo" placeholder="Nombre del nuevo equipo">
+			</div>	
+			<button class="btn btn-primary col-md-1" type="button">Agregar</button>
+			
+		</div>
+        </div>
+		</br>
 
       {#Encabezado segunda parte #}
-    <div class="bordes">
-      <div class="formAnotacion form-group">
+		<div class="bordes">
+			<div class="formAnotacion form-group">
           {#Fila 1#}
-
-            <label for="Lugar" class="col-md-1 control-label text-center">Lugar: </label>
-            <div class="col-md-3">
-              <input class="form-control" id="Lugar" placeholder="Lugar">
-            </div>
-
-            <label for="Torneo" class="col-md-1 control-label text-center">Torneo: </label>
-            <div class="col-md-3">
-              <input class="form-control" id="Torneo" placeholder="Torneo">
-            </div>
-
-            <label for="1erjuez" class="col-md-1 control-label text-center">1er. Juez: </label>
-            <div class="col-md-3">
-              <input class="form-control" id="1erjuez" placeholder="1er. Juez">
-            </div>
+				<label class="col-md-5 control-label "><h3>{{NomEquipo}}</h3></label>
           {#End Fila 1#}
 
-            <div class="clearfix visible-xs-block"></div>
+				<div class="clearfix visible-xs-block">
+				
+				</div>
 
           {#Fila 2#}
-            <label for="Fecha" class="col-md-1 control-label text-center">Fecha: </label>
-            <div class="col-md-3 Fila2">
-              <input class="form-control" id="Fecha" placeholder="Fecha">
-            </div>
-
-            <label for="Hora" class="col-md-1 control-label text-center">Hora: </label>
-            <div class="col-md-3 Fila2">
-              <input class="form-control" id="Hora" placeholder="Hora">
-            </div>
-          
-            <label for="2dojuez" class="col-md-1 control-label text-center">2dojuez: </label>
-            <div class="col-md-3 Fila2">
-              <input class="form-control" id="2dojuez" placeholder="2do. Juez">
-            </div>
-          </div>
-        </div>
+            
+			
           {#End Fila 2#}
+	  </div>  
         </br>
           {#Detalles equipo A#}
 
