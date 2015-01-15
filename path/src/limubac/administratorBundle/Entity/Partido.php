@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Partido
  *
- * @ORM\Table(name="partido", indexes={@ORM\Index(name="IDX_4E79750BA1BBFED3", columns={"id_sede"}), @ORM\Index(name="IDX_4E79750BE69574FA", columns={"id_arbitran"}), @ORM\Index(name="IDX_4E79750B5ADCD613", columns={"id_torneo"}), @ORM\Index(name="id_torneo", columns={"id_torneo", "id_arbitran", "id_sede"})})
+ * @ORM\Table(name="partido", indexes={@ORM\Index(name="id_torneo", columns={"id_torneo", "id_arbitran", "id_sede"}), @ORM\Index(name="id_arbitran", columns={"id_arbitran"}), @ORM\Index(name="id_sede", columns={"id_sede"}), @ORM\Index(name="IDX_4E79750B5ADCD613", columns={"id_torneo"})})
  * @ORM\Entity
  */
 class Partido
@@ -36,16 +36,6 @@ class Partido
     private $idPartido;
 
     /**
-     * @var \limubac\administratorBundle\Entity\Arbitran
-     *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Arbitran")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_arbitran", referencedColumnName="id_arbitran")
-     * })
-     */
-    private $idArbitran;
-
-    /**
      * @var \limubac\administratorBundle\Entity\Sede
      *
      * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Sede")
@@ -54,6 +44,16 @@ class Partido
      * })
      */
     private $idSede;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Arbitran
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Arbitran")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_arbitran", referencedColumnName="id_arbitran")
+     * })
+     */
+    private $idArbitran;
 
     /**
      * @var \limubac\administratorBundle\Entity\Torneo
@@ -146,29 +146,6 @@ class Partido
     }
 
     /**
-     * Set idArbitran
-     *
-     * @param \limubac\administratorBundle\Entity\Arbitran $idArbitran
-     * @return Partido
-     */
-    public function setIdArbitran(\limubac\administratorBundle\Entity\Arbitran $idArbitran = null)
-    {
-        $this->idArbitran = $idArbitran;
-
-        return $this;
-    }
-
-    /**
-     * Get idArbitran
-     *
-     * @return \limubac\administratorBundle\Entity\Arbitran 
-     */
-    public function getIdArbitran()
-    {
-        return $this->idArbitran;
-    }
-
-    /**
      * Set idSede
      *
      * @param \limubac\administratorBundle\Entity\Sede $idSede
@@ -189,6 +166,29 @@ class Partido
     public function getIdSede()
     {
         return $this->idSede;
+    }
+
+    /**
+     * Set idArbitran
+     *
+     * @param \limubac\administratorBundle\Entity\Arbitran $idArbitran
+     * @return Partido
+     */
+    public function setIdArbitran(\limubac\administratorBundle\Entity\Arbitran $idArbitran = null)
+    {
+        $this->idArbitran = $idArbitran;
+
+        return $this;
+    }
+
+    /**
+     * Get idArbitran
+     *
+     * @return \limubac\administratorBundle\Entity\Arbitran 
+     */
+    public function getIdArbitran()
+    {
+        return $this->idArbitran;
     }
 
     /**

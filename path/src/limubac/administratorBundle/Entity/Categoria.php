@@ -20,6 +20,20 @@ class Categoria
     private $nombre;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="edad", type="string", length=40, nullable=false)
+     */
+    private $edad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="limite_equipo", type="integer", nullable=false)
+     */
+    private $limiteEquipo;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_categoria", type="integer")
@@ -51,6 +65,52 @@ class Categoria
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set edad
+     *
+     * @param string $edad
+     * @return Categoria
+     */
+    public function setEdad($edad)
+    {
+        $this->edad = $edad;
+
+        return $this;
+    }
+
+    /**
+     * Get edad
+     *
+     * @return string 
+     */
+    public function getEdad()
+    {
+        return $this->edad;
+    }
+
+    /**
+     * Set limiteEquipo
+     *
+     * @param integer $limiteEquipo
+     * @return Categoria
+     */
+    public function setLimiteEquipo($limiteEquipo)
+    {
+        $this->limiteEquipo = $limiteEquipo;
+
+        return $this;
+    }
+
+    /**
+     * Get limiteEquipo
+     *
+     * @return integer 
+     */
+    public function getLimiteEquipo()
+    {
+        return $this->limiteEquipo;
     }
 
     /**

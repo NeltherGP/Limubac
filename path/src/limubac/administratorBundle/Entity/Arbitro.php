@@ -2,7 +2,6 @@
 
 namespace limubac\administratorBundle\Entity;
 
-    
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,6 +18,20 @@ class Arbitro
      * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
      */
     private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="correo", type="string", length=30, nullable=true)
+     */
+    private $correo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="telefono", type="integer", nullable=true)
+     */
+    private $telefono;
 
     /**
      * @var integer
@@ -52,6 +65,52 @@ class Arbitro
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set correo
+     *
+     * @param string $correo
+     * @return Arbitro
+     */
+    public function setCorreo($correo)
+    {
+        $this->correo = $correo;
+
+        return $this;
+    }
+
+    /**
+     * Get correo
+     *
+     * @return string 
+     */
+    public function getCorreo()
+    {
+        return $this->correo;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param integer $telefono
+     * @return Arbitro
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return integer 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
     }
 
     /**

@@ -7,7 +7,7 @@
 
 {% block body %}
 	<div class="container-fluid">
-		<nav class="navbar navbar-default" role="navigation">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -19,7 +19,7 @@
 			      </button>
 		      {#logo#}
 
-		      	<a class="navbar-brand" href="#" ><img id="logo" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>    
+		      	<a class="navbar-brand" href="{{url('limubacadministrator_homepage')}}" ><img id="logo" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>    
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,10 +53,10 @@
 		
 		{% block sidebar%}
 
-		<div id="wrapper">
+		<div id="wrapper" class="upBar">
 
         <!-- Sidebar -->
-	        <div id="sidebar-wrapper">
+	        <div id="sidebar-wrapper" class="col-md-2 sideBar" style="height:484px;">
 		            <ul class="sidebar-nav ">
 		                <li class="sidebar-brand">
 		                    <a class="navbar-brand" href="{{url('limubacadministrator_homepage')}}" ><img id="limubac" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>
@@ -66,7 +66,7 @@
 		                    <a href="{{url('limubacadministrator_hojaAnotaciones')}}">Hoja de anotaciones</a>
 		                </li>
 		                <li>
-		                    <a href="#">Jugadores</a>
+		                    <a href="{{url('limubacadministrator_jugadoresAdmin')}}">Jugadores</a>
 		                </li>
 		                <li>
 		                    <a href="{{url('limubacadministrator_equipos')}}">Equipos</a>

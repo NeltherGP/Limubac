@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ParticipanT
  *
- * @ORM\Table(name="participan_t", indexes={@ORM\Index(name="IDX_997D1858C8A14E3A", columns={"id_rama"}), @ORM\Index(name="IDX_997D1858CE25AE0A", columns={"id_categoria"}), @ORM\Index(name="IDX_997D1858E2ABE6E6", columns={"id_equipo"}), @ORM\Index(name="IDX_997D18585ADCD613", columns={"id_torneo"}), @ORM\Index(name="id_torneo", columns={"id_torneo", "id_equipo", "id_categoria", "id_rama"})})
+ * @ORM\Table(name="participan_t", indexes={@ORM\Index(name="id_torneo", columns={"id_torneo", "id_equipo", "id_categoria", "id_rama"}), @ORM\Index(name="id_equipo", columns={"id_equipo"}), @ORM\Index(name="id_categoria", columns={"id_categoria"}), @ORM\Index(name="id_rama", columns={"id_rama"}), @ORM\Index(name="IDX_997D18585ADCD613", columns={"id_torneo"})})
  * @ORM\Entity
  */
 class ParticipanT
@@ -22,14 +22,14 @@ class ParticipanT
     private $idRegistro;
 
     /**
-     * @var \limubac\administratorBundle\Entity\Equipo
+     * @var \limubac\administratorBundle\Entity\RamaEquipo
      *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Equipo")
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\RamaEquipo")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_equipo", referencedColumnName="id_equipo")
+     *   @ORM\JoinColumn(name="id_rama", referencedColumnName="id_rama")
      * })
      */
-    private $idEquipo;
+    private $idRama;
 
     /**
      * @var \limubac\administratorBundle\Entity\Categoria
@@ -42,14 +42,14 @@ class ParticipanT
     private $idCategoria;
 
     /**
-     * @var \limubac\administratorBundle\Entity\RamaEquipo
+     * @var \limubac\administratorBundle\Entity\Equipo
      *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\RamaEquipo")
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Equipo")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_rama", referencedColumnName="id_rama")
+     *   @ORM\JoinColumn(name="id_equipo", referencedColumnName="id_equipo")
      * })
      */
-    private $idRama;
+    private $idEquipo;
 
     /**
      * @var \limubac\administratorBundle\Entity\Torneo
@@ -74,26 +74,26 @@ class ParticipanT
     }
 
     /**
-     * Set idEquipo
+     * Set idRama
      *
-     * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
+     * @param \limubac\administratorBundle\Entity\RamaEquipo $idRama
      * @return ParticipanT
      */
-    public function setIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo = null)
+    public function setIdRama(\limubac\administratorBundle\Entity\RamaEquipo $idRama = null)
     {
-        $this->idEquipo = $idEquipo;
+        $this->idRama = $idRama;
 
         return $this;
     }
 
     /**
-     * Get idEquipo
+     * Get idRama
      *
-     * @return \limubac\administratorBundle\Entity\Equipo 
+     * @return \limubac\administratorBundle\Entity\RamaEquipo 
      */
-    public function getIdEquipo()
+    public function getIdRama()
     {
-        return $this->idEquipo;
+        return $this->idRama;
     }
 
     /**
@@ -120,26 +120,26 @@ class ParticipanT
     }
 
     /**
-     * Set idRama
+     * Set idEquipo
      *
-     * @param \limubac\administratorBundle\Entity\RamaEquipo $idRama
+     * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
      * @return ParticipanT
      */
-    public function setIdRama(\limubac\administratorBundle\Entity\RamaEquipo $idRama = null)
+    public function setIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo = null)
     {
-        $this->idRama = $idRama;
+        $this->idEquipo = $idEquipo;
 
         return $this;
     }
 
     /**
-     * Get idRama
+     * Get idEquipo
      *
-     * @return \limubac\administratorBundle\Entity\RamaEquipo 
+     * @return \limubac\administratorBundle\Entity\Equipo 
      */
-    public function getIdRama()
+    public function getIdEquipo()
     {
-        return $this->idRama;
+        return $this->idEquipo;
     }
 
     /**

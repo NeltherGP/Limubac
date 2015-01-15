@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * FaltasEquipo
  *
- * @ORM\Table(name="faltas_equipo", indexes={@ORM\Index(name="IDX_7EFD2A198D647BDE", columns={"id_falta"}), @ORM\Index(name="IDX_7EFD2A198CE0C668", columns={"id_jugador"}), @ORM\Index(name="IDX_7EFD2A1990E4DC7B", columns={"id_partido"}), @ORM\Index(name="IDX_7EFD2A19E2ABE6E6", columns={"id_equipo"}), @ORM\Index(name="id_equipo", columns={"id_equipo", "id_partido", "id_jugador", "id_falta"})})
+ * @ORM\Table(name="faltas_equipo", indexes={@ORM\Index(name="id_equipo", columns={"id_equipo", "id_partido", "id_jugador", "id_falta"}), @ORM\Index(name="id_partido", columns={"id_partido"}), @ORM\Index(name="id_jugador", columns={"id_jugador"}), @ORM\Index(name="id_falta", columns={"id_falta"}), @ORM\Index(name="IDX_7EFD2A19E2ABE6E6", columns={"id_equipo"})})
  * @ORM\Entity
  */
 class FaltasEquipo
@@ -36,26 +36,6 @@ class FaltasEquipo
     private $idFaltasEq;
 
     /**
-     * @var \limubac\administratorBundle\Entity\Equipo
-     *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Equipo")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_equipo", referencedColumnName="id_equipo")
-     * })
-     */
-    private $idEquipo;
-
-    /**
-     * @var \limubac\administratorBundle\Entity\Partido
-     *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Partido")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_partido", referencedColumnName="id_partido")
-     * })
-     */
-    private $idPartido;
-
-    /**
      * @var \limubac\administratorBundle\Entity\Falta
      *
      * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Falta")
@@ -74,6 +54,26 @@ class FaltasEquipo
      * })
      */
     private $idJugador;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Partido
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Partido")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_partido", referencedColumnName="id_partido")
+     * })
+     */
+    private $idPartido;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Equipo
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Equipo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_equipo", referencedColumnName="id_equipo")
+     * })
+     */
+    private $idEquipo;
 
 
 
@@ -134,52 +134,6 @@ class FaltasEquipo
     }
 
     /**
-     * Set idEquipo
-     *
-     * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
-     * @return FaltasEquipo
-     */
-    public function setIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo = null)
-    {
-        $this->idEquipo = $idEquipo;
-
-        return $this;
-    }
-
-    /**
-     * Get idEquipo
-     *
-     * @return \limubac\administratorBundle\Entity\Equipo 
-     */
-    public function getIdEquipo()
-    {
-        return $this->idEquipo;
-    }
-
-    /**
-     * Set idPartido
-     *
-     * @param \limubac\administratorBundle\Entity\Partido $idPartido
-     * @return FaltasEquipo
-     */
-    public function setIdPartido(\limubac\administratorBundle\Entity\Partido $idPartido = null)
-    {
-        $this->idPartido = $idPartido;
-
-        return $this;
-    }
-
-    /**
-     * Get idPartido
-     *
-     * @return \limubac\administratorBundle\Entity\Partido 
-     */
-    public function getIdPartido()
-    {
-        return $this->idPartido;
-    }
-
-    /**
      * Set idFalta
      *
      * @param \limubac\administratorBundle\Entity\Falta $idFalta
@@ -223,5 +177,51 @@ class FaltasEquipo
     public function getIdJugador()
     {
         return $this->idJugador;
+    }
+
+    /**
+     * Set idPartido
+     *
+     * @param \limubac\administratorBundle\Entity\Partido $idPartido
+     * @return FaltasEquipo
+     */
+    public function setIdPartido(\limubac\administratorBundle\Entity\Partido $idPartido = null)
+    {
+        $this->idPartido = $idPartido;
+
+        return $this;
+    }
+
+    /**
+     * Get idPartido
+     *
+     * @return \limubac\administratorBundle\Entity\Partido 
+     */
+    public function getIdPartido()
+    {
+        return $this->idPartido;
+    }
+
+    /**
+     * Set idEquipo
+     *
+     * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
+     * @return FaltasEquipo
+     */
+    public function setIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo = null)
+    {
+        $this->idEquipo = $idEquipo;
+
+        return $this;
+    }
+
+    /**
+     * Get idEquipo
+     *
+     * @return \limubac\administratorBundle\Entity\Equipo 
+     */
+    public function getIdEquipo()
+    {
+        return $this->idEquipo;
     }
 }
