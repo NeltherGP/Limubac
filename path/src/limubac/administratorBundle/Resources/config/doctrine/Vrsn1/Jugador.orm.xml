@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="limubac\administratorBundle\Entity\Jugador" table="jugador">
+    <id name="idJugador" type="integer" column="id_jugador">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="nombre" length="35" nullable="false"/>
+    <field name="apPaterno" type="string" column="ap_paterno" length="35" nullable="false"/>
+    <field name="apMaterno" type="string" column="ap_materno" length="35" nullable="false"/>
+    <field name="fNacimiento" type="date" column="f_nacimiento" nullable="false"/>
+    <field name="correo" type="string" column="correo" length="35" nullable="false"/>
+    <field name="noPlayera" type="integer" column="no_playera" nullable="false"/>
+    <field name="telefono" type="string" column="telefono" length="12" nullable="false"/>
+    <field name="profesion" type="string" column="profesion" length="35" nullable="false"/>
+    <field name="status" type="string" column="status" length="25" nullable="false"/>
+    <field name="genero" type="string" column="genero" length="9" nullable="false"/>
+    <field name="foto" type="string" column="foto" length="255" nullable="false"/>
+    <many-to-many field="idEquipo" target-entity="Equipo" inversed-by="idJugador">
+      <join-table name="integra">
+        <join-columns>
+          <join-column name="id_jugador" referenced-column-name="id_jugador"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="id_equipo" referenced-column-name="id_equipo"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>
