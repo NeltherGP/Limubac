@@ -3,7 +3,8 @@
 namespace limubac\administratorBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use limubac\administratorBundle\Entity\equipo;
+use limubac\administratorBundle\Entity\Equipo;
+use limubac\administratorBundle\Entity\Jugador;
 
 class DefaultController extends Controller
 {
@@ -24,7 +25,7 @@ class DefaultController extends Controller
 	
 	public function equiposAction(){
 		if(isset($_POST['NuevoEquipo'])){
-			$equipo = new equipo();
+			$equipo = new Equipo();
 			$equipo->setNombre($_POST['NuevoEquipo']);
 			
 			$Manager = $this->getDoctrine()->getManager();
@@ -40,17 +41,17 @@ class DefaultController extends Controller
 	public function equipoAction(){
 		if(isset($_POST['opciones'])){
 		
-		$Equi = array(
-			'NumEquipo' =>$_POST['opciones'],
-			'NomEquipo' =>'valedores',
-			'Capitan'=>'',
-			'Representante'=>'',
-			'Auxiliar'=>'',
-			$jugadores = array(
-				array("numero"=>1,"nombre"=>"Pablo")
-			)
-		);
-		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$Equi));
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			
+			$equipo = $repositorio->find($_POST['opciones']);
+			
+			
+			$Manager = $this->getDoctrine()->getManager();
+			$q = "Select j.id_jugador,j.nombre FROM limubacadministratorBundle:Jugador j JOIN limubacadministratorBundle:integra i ON j.id_jugador=i.id_jugador where i.id_equipo='".$_POST['opciones']."'";
+
+			$query = $Manager->createQuery($q); 
+			$jugadores = $query->getResult();
+		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores));
 		
 		}else{//si no esta definido el valor del equipo
 		
