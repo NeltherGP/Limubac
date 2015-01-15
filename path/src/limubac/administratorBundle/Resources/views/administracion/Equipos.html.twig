@@ -1,151 +1,36 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
-	<form class="form-horizontal" role="form">
+	<form class="form-horizontal" role="form" action="../app_dev.php/equipo" method="post">
       {#Encabezado primera parte#}
+		<label class="col-md-1">Equipos</label>
   		<div class="bordes">
-		<div class="formAnotacion form-group">	
+		<div class="formAnotacion form-group">
 			<div class="col-md-3">		    			
-				<select class="form-control input-sm">
-					{% for equipo in ListEquip %}
+				<select class="form-control input-sm" name="opciones">
+					{% for equipo in listEquip %}
 					<option value="{{equipo.num}}">{{equipo.nombre}}</option>
 					{% endfor%}
 				</select>
 			</div>	
-			<button class="btn btn-primary col-md-1" type="button">Aceptar</button>
-			
-			<div class="col-md-3">		    			
-				<input class="form-control" id="NuevoEquipo" placeholder="Nombre del nuevo equipo">
-			</div>	
-			<button class="btn btn-primary col-md-1" type="button">Agregar</button>
+			<input type="submit" class="btn btn-primary col-md-1">
 			
 		</div>
         </div>
+	</form>
+	
 		</br>
-
-      {#Encabezado segunda parte #}
+	<form class="form-horizontal" role="form" action="../app_dev.php/equipos" method="post">
+		<label class="col-md-1">Agregar un equipo</label>
 		<div class="bordes">
-			<div class="formAnotacion form-group">
-          {#Fila 1#}
-				<label class="col-md-5 control-label "><h3>{{NomEquipo}}</h3></label>
-          {#End Fila 1#}
-
-				<div class="clearfix visible-xs-block">
-				
-				</div>
-
-          {#Fila 2#}
-            
-			
-          {#End Fila 2#}
-	  </div>  
-        </br>
-          {#Detalles equipo A#}
-
-          <div class="bordes">
-            <div class="formAnotacion form-group">
-              <label class="col-md-3 control-label  ">Equipo A: "Nombre del equipo" </label>
-              <label class="col-md-1 control-label">Score: </label>
-              <div class="col-md-1">
-                <input class="form-control" id="ScoreTxt">
-              </div>
-            </div>
-            <h3>&nbspFaltas</h3>
-
-          <div class="formAnotacion form-group ">
-              <label class="col-md-1"></label>
-              <div class="col-md-4 bordesFaltas">           
-                  
-                  <label class="col-md-4 control-label  ">Faltas 1T: </label>
-
-                  <div class="col-md-4">
-                    <input class="form-control" id="Faltas1t1" placeholder="1er">
-                  </div>
-
-                  <div class="col-md-4">
-                    <input class="form-control" id="Faltas1t2" placeholder="2do">
-                  </div>
-
-              </div>
-             <label class="col-md-1"></label>
-
-              <div class="col-md-4 bordesFaltas">           
-                  <label class="col-md-4 control-label  ">Faltas 2T: </label>
-
-                  <div class="col-md-4">
-                    <input class="form-control" id="Faltas2t1" placeholder="1er">
-                  </div>
-                  
-                  <div class="col-md-4">
-                    <input class="form-control" id="Faltas2t2" placeholder="2do">
-                  </div>
-
-              </div><div class="col-md-2 " style="height: 46px;"></div>
-
-          {#Control faltas por jugador#}
-          <div id="jugadorFaltoso">
-           <div id="jugadorFaltas">
-
-                <div class="col-md-1 margen-top">
-                  <input class="form-control" id="noLic" placeholder="No.Lic">
-                </div>
-
-                <div class="col-md-6 margen-top">
-                  <input class="form-control" id="nombreJugadorFaltas" placeholder="Nombre">
-                </div>
-
-                <div class="col-md-1 margen-top">
-                  <input class="form-control" id="numeroFaltas" placeholder="Numero">
-                </div>
-
-                <div class="col-md-1 margen-top">
-                  <input class="form-control" id="nquipo" placeholder="E">
-                </div>
-
-                <div class="col-md-1 margen-top">
-                  <input class="form-control" id="numFaltas" placeholder="#Faltas">
-                </div>
-                
-                <button class="btn btn-primary col-md-1 margen-top añadirF" type="button">Añadir</button><div class="col-md-1 margen-top" style="height: 46px;"></div>
-
-            </div>
-          </div>
-
-          {#End Control faltas por jugador#}
-           <h3>&nbspAnotaciones</h3>
-           {#Control anotaciones por jugador#}
-
-           <div id="jugadorAnotador">
-               <div id="jugadorAnotacion">              
-                  <div class="col-md-5 margen-top">
-                    <input class="form-control" id="nombreAnotacion" placholder="Nombre">
-                  </div>
-                  <label class= "col-md-1 text-right margen-top">1x</label>
-                  <div class="col-md-1 margen-top">
-                      <input class="form-control" id="antc1" value="0">
-                  </div>
-
-                  <label class= "col-md-1 text-right margen-top">2x</label>
-                  <div class="col-md-1 margen-top">
-                      <input class="form-control" id="antc2" value="0">
-                  </div>
-
-                  <label class= "col-md-1 text-right margen-top">3x</label>
-                  <div class="col-md-1 margen-top">
-                      <input class="form-control" id="antc3" value="0">
-                  </div>
-
-                  <button class="btn btn-primary col-md-1 añadirA margen-top" type="button">Añadir</button>
-
-               </div>
-           </div>
-
-           {#End anotaciones por jugador#}
-          </div>
-
-
-          </div> {#End Detalles equipo A#}
-
+		<div class="formAnotacion form-group">
+			<div class="col-md-3">		    			
+				<input class="form-control" name="NuevoEquipo" placeholder="Nombre del nuevo equipo">
+			</div>	
+			<button class="btn btn-primary col-md-1" type="submit">Agregar</button>
+		</div>
+        </div>
+		
      
   	</form>
 {% endblock %}

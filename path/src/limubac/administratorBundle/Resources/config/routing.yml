@@ -9,3 +9,7 @@ limubacadministrator_hojaAnotaciones:
 limubacadministrator_equipos:
     path:     /equipos
     defaults: { _controller: limubacadministratorBundle:Default:equipos}
+
+limubacadministrator_equipo:
+    path:     /equipo
+    defaults: { _controller: limubacadministratorBundle:Default:equipo}
