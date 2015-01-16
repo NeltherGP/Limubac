@@ -43,19 +43,42 @@ class DefaultController extends Controller
     }
 	
 	public function equipoAction(){
-		if(isset($_POST['opciones'])){
-		
+		if(isset($_POST['opciones']) and isset($_POST['idCapitan'])){
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-			
 			$equipo = $repositorio->find($_POST['opciones']);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$Capi = $repositorio->find($_POST['idCapitan']);
+			
+			$equipo->setIdCapitan($Capi);
 			
 			
 			$Manager = $this->getDoctrine()->getManager();
-			$q = "Select j.id_jugador,j.nombre FROM limubacadministratorBundle:Jugador j JOIN limubacadministratorBundle:integra i ON j.id_jugador=i.id_jugador where i.id_equipo='".$_POST['opciones']."'";
-
-			$query = $Manager->createQuery($q); 
+			$Manager->persist($equipo);
+			$Manager->flush();
+		}
+		
+		if(isset($_POST['opciones'])){
+		
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$equipo = $repositorio->find($_POST['opciones']);
+			
+			$Manager = $this->getDoctrine()->getManager();
+			
+			$q = "Select j.idJugador,j.nombre FROM limubacadministratorBundle:Jugador j JOIN limubacadministratorBundle:Integra i where i.idEquipo='".$_POST['opciones']."'";
+			$query = $Manager->createQuery($q);
 			$jugadores = $query->getResult();
-		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores));
+			
+			$q = "Select j.nombre,i.noPlayera FROM limubacadministratorBundle:Jugador j inner JOIN limubacadministratorBundle:Integra i where i.idEquipo='".$_POST['opciones']."' and i.idJugador='".$equipo->getIdCapitan()->getIdJugador()."'";
+			$query = $Manager->createQuery($q);
+			$Capi = $query->getResult();
+			if(count($Capi)==0){
+				$Capi = array(
+					'noPlayera'=>0,
+					'nombre'=>""
+				);
+			}
+		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi));
 		
 		}else{//si no esta definido el valor del equipo
 		

@@ -1,26 +1,37 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
-		<div class="bordes">
-			<div class="formAnotacion form-group">
-			{#Fila 1#}
-				<label class="col-md-3"><h3>{{equipo.nombre}}</h3></label>
-			{#End Fila 1#}
-			</br></br></br></br>
-			{#Fila 2#}
-			<div class="bordes">
-				<div class="formAnotacion form-group">
-					<div class="col-md-3">		    			
-						{% for jugador in jugadores %}
+	<div class="row-fluid">
+     	<div class="col-md-12 borBox well btn-dashboard">			
+        <div class="formAnotacion form-group">
+        <div class="col-md-6 tLeft" >
+            <h1>{{equipo.nombre}}</h1>
+		</div>
+		</div>
+		</div>
+	</div>
+	</br>
+	
+	<form class="formAnotacion form-group" action="../app_dev.php/equipo" method="post">
+		<label class="col-md-1">Capitan</label>
+		<div class="col-md-1">		    			
+			<input class="form-control" name="idCapitan" placeholder="{{equipo.idCapitan.idJugador}}">
+		</div>
+		<div class="col-md-1">		    			
+			<input class="form-control" name="NoCapitan" placeholder="{{capitan.noPlayera}}">
+		</div>
+		<div class="col-md-5">
+			<input class="form-control" name="NomCapitan" placeholder="{{capitan.nombre}}">
+		</div>
+		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
+		<div class="col-md-3">
+			<button class="btn btn-primary" type="submit">Actualizar</button>
+		</div>
+	</form>
+	
+		{% for jugador in jugadores %}
 							
-						{% endfor%}
-					</div>	
-					<input type="submit" class="btn btn-primary col-md-1">
-			
-				</div>
-			</div>
-			{#End Fila 2#}
-			</div>
-		</div> 
+		{% endfor%}
+
 		
 {% endblock %}
