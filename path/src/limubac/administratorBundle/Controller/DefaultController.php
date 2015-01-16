@@ -4,6 +4,7 @@ namespace limubac\administratorBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use limubac\administratorBundle\Entity\Equipo;
+use limubac\administratorBundle\Entity\Integra;
 use limubac\administratorBundle\Entity\Jugador;
 use limubac\administratorBundle\Entity\TipoSanguineo;
 use limubac\administratorBundle\Form\Type\JugadorType;
@@ -43,6 +44,28 @@ class DefaultController extends Controller
     }
 	
 	public function equipoAction(){
+		if(isset($_POST['accion'])){
+			switch($_POST['accion']){
+				case 'Nuevo':
+					$integra = new Integra();
+					$integra->setNoPlayera(intval($_POST['NoJugador']));
+					
+					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+					$equipo = $repositorio->find($_POST['opciones']);
+					$integra->setIdEquipo($equipo);
+					
+					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+					$jugador = $repositorio->find($_POST['idJugador']);
+					$integra->setIdJugador($jugador);
+					
+					$Manager = $this->getDoctrine()->getManager();
+					$Manager->persist($integra);
+					$Manager->flush();
+				break;
+			}
+		
+		}
+	
 		if(isset($_POST['opciones']) and isset($_POST['idCapitan'])){
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_POST['opciones']);
@@ -65,20 +88,47 @@ class DefaultController extends Controller
 			
 			$Manager = $this->getDoctrine()->getManager();
 			
-			$q = "Select j.idJugador,j.nombre FROM limubacadministratorBundle:Jugador j JOIN limubacadministratorBundle:Integra i where i.idEquipo='".$_POST['opciones']."'";
+			$q = "Select j.idJugador,j.nombre,i.noPlayera FROM limubacadministratorBundle:Jugador j JOIN limubacadministratorBundle:Integra i where i.idEquipo='".$_POST['opciones']."'";
 			$query = $Manager->createQuery($q);
 			$jugadores = $query->getResult();
 			
-			$q = "Select j.nombre,i.noPlayera FROM limubacadministratorBundle:Jugador j inner JOIN limubacadministratorBundle:Integra i where i.idEquipo='".$_POST['opciones']."' and i.idJugador='".$equipo->getIdCapitan()->getIdJugador()."'";
-			$query = $Manager->createQuery($q);
-			$Capi = $query->getResult();
+			//Capitan
+			$Capi = $equipo->getIdCapitan();
+			
+			
+			//Representante
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$IDRep = $equipo->getRepresentante();
+			
+			if($IDRep==NULL){
+				$Representante = array(
+					'IdJugador'=>0,
+					'nombre'=>'No Asignado'
+				);
+			}else{
+				$Representante = $repositorio->find($IDRep);
+			}
+			
+			//Auxiliar
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$IDAux = $equipo->getAuxiliar();
+			
+			if($IDAux==NULL){
+				$Auxiliar = array(
+					'IdJugador'=>0,
+					'nombre'=>'No Asignado'
+				);
+			}else{
+				$Auxiliar = $repositorio->find($IDAux);
+			}
+			
 			if(count($Capi)==0){
 				$Capi = array(
 					'noPlayera'=>0,
-					'nombre'=>""
+					'nombre'=>"No Asignado"
 				);
 			}
-		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi));
+		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar));
 		
 		}else{//si no esta definido el valor del equipo
 		
