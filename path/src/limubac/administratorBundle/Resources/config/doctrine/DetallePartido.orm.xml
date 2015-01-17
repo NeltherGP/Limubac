@@ -2,9 +2,9 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\DetallePartido" table="detalle_partido">
     <indexes>
-      <index name="IDX_6A79BA390E4DC7B" columns="id_partido"/>
-      <index name="IDX_6A79BA38CE0C668" columns="id_jugador"/>
       <index name="id_jugador" columns="id_jugador,id_partido"/>
+      <index name="id_partido" columns="id_partido"/>
+      <index name="IDX_6A79BA38CE0C668" columns="id_jugador"/>
     </indexes>
     <id name="idDetalle" type="integer" column="id_detalle">
       <generator strategy="IDENTITY"/>

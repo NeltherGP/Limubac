@@ -2,18 +2,18 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\ParticipanT" table="participan_t">
     <indexes>
-      <index name="IDX_997D1858C8A14E3A" columns="id_rama"/>
-      <index name="IDX_997D1858CE25AE0A" columns="id_categoria"/>
-      <index name="IDX_997D1858E2ABE6E6" columns="id_equipo"/>
-      <index name="IDX_997D18585ADCD613" columns="id_torneo"/>
       <index name="id_torneo" columns="id_torneo,id_equipo,id_categoria,id_rama"/>
+      <index name="id_equipo" columns="id_equipo"/>
+      <index name="id_categoria" columns="id_categoria"/>
+      <index name="id_rama" columns="id_rama"/>
+      <index name="IDX_997D18585ADCD613" columns="id_torneo"/>
     </indexes>
     <id name="idRegistro" type="integer" column="id_registro">
       <generator strategy="IDENTITY"/>
     </id>
-    <many-to-one field="idEquipo" target-entity="Equipo">
+    <many-to-one field="idRama" target-entity="RamaEquipo">
       <join-columns>
-        <join-column name="id_equipo" referenced-column-name="id_equipo"/>
+        <join-column name="id_rama" referenced-column-name="id_rama"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="idCategoria" target-entity="Categoria">
@@ -21,9 +21,9 @@
         <join-column name="id_categoria" referenced-column-name="id_categoria"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idRama" target-entity="RamaEquipo">
+    <many-to-one field="idEquipo" target-entity="Equipo">
       <join-columns>
-        <join-column name="id_rama" referenced-column-name="id_rama"/>
+        <join-column name="id_equipo" referenced-column-name="id_equipo"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="idTorneo" target-entity="Torneo">

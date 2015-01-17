@@ -20,6 +20,20 @@ class Categoria
     private $nombre;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="edad", type="string", length=40, nullable=false)
+     */
+    private $edad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="limite_equipo", type="integer", nullable=false)
+     */
+    private $limiteEquipo;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_categoria", type="integer")

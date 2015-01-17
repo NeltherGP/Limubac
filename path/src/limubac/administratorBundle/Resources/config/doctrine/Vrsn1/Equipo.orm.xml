@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="limubac\administratorBundle\Entity\Equipo" table="equipo">
+    <indexes>
+      <index name="IDX_C49C530BEF72FA" columns="id_capitan"/>
+      <index name="IDX_C49C530B407BE8B2" columns="auxiliar"/>
+      <index name="IDX_C49C530BDE2D595" columns="representante"/>
+      <index name="id_capitan" columns="id_capitan,representante,auxiliar"/>
+    </indexes>
+    <id name="idEquipo" type="integer" column="id_equipo">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="nombre" length="35" nullable="false"/>
+    <many-to-one field="auxiliar" target-entity="Jugador">
+      <join-columns>
+        <join-column name="auxiliar" referenced-column-name="id_jugador"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCapitan" target-entity="Jugador">
+      <join-columns>
+        <join-column name="id_capitan" referenced-column-name="id_jugador"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="representante" target-entity="Jugador">
+      <join-columns>
+        <join-column name="representante" referenced-column-name="id_jugador"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="idPartido" target-entity="Partido" mapped-by="idEquipo"/>
+    <many-to-many field="idJugador" target-entity="Jugador" mapped-by="idEquipo"/>
+  </entity>
+</doctrine-mapping>

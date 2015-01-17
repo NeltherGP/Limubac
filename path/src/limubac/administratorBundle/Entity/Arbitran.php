@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Arbitran
  *
- * @ORM\Table(name="arbitran", indexes={@ORM\Index(name="IDX_B64E986F6DCC743D", columns={"id_arbitro3"}), @ORM\Index(name="IDX_B64E986F1ACB44AB", columns={"id_arbitro2"}), @ORM\Index(name="IDX_B64E986F83C21511", columns={"id_arbitro1"}), @ORM\Index(name="id_arbitro1", columns={"id_arbitro1", "id_arbitro2", "id_arbitro3"})})
+ * @ORM\Table(name="arbitran", indexes={@ORM\Index(name="id_arbitro1", columns={"id_arbitro1", "id_arbitro2", "id_arbitro3"}), @ORM\Index(name="id_arbitro2", columns={"id_arbitro2"}), @ORM\Index(name="id_arbitro3", columns={"id_arbitro3"}), @ORM\Index(name="IDX_B64E986F83C21511", columns={"id_arbitro1"})})
  * @ORM\Entity
  */
 class Arbitran
@@ -20,16 +20,6 @@ class Arbitran
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idArbitran;
-
-    /**
-     * @var \limubac\administratorBundle\Entity\Arbitro
-     *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Arbitro")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_arbitro1", referencedColumnName="id_arbitro")
-     * })
-     */
-    private $idArbitro1;
 
     /**
      * @var \limubac\administratorBundle\Entity\Arbitro
@@ -51,6 +41,16 @@ class Arbitran
      */
     private $idArbitro2;
 
+    /**
+     * @var \limubac\administratorBundle\Entity\Arbitro
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Arbitro")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_arbitro1", referencedColumnName="id_arbitro")
+     * })
+     */
+    private $idArbitro1;
+
 
 
     /**
@@ -61,29 +61,6 @@ class Arbitran
     public function getIdArbitran()
     {
         return $this->idArbitran;
-    }
-
-    /**
-     * Set idArbitro1
-     *
-     * @param \limubac\administratorBundle\Entity\Arbitro $idArbitro1
-     * @return Arbitran
-     */
-    public function setIdArbitro1(\limubac\administratorBundle\Entity\Arbitro $idArbitro1 = null)
-    {
-        $this->idArbitro1 = $idArbitro1;
-
-        return $this;
-    }
-
-    /**
-     * Get idArbitro1
-     *
-     * @return \limubac\administratorBundle\Entity\Arbitro 
-     */
-    public function getIdArbitro1()
-    {
-        return $this->idArbitro1;
     }
 
     /**
@@ -130,5 +107,28 @@ class Arbitran
     public function getIdArbitro2()
     {
         return $this->idArbitro2;
+    }
+
+    /**
+     * Set idArbitro1
+     *
+     * @param \limubac\administratorBundle\Entity\Arbitro $idArbitro1
+     * @return Arbitran
+     */
+    public function setIdArbitro1(\limubac\administratorBundle\Entity\Arbitro $idArbitro1 = null)
+    {
+        $this->idArbitro1 = $idArbitro1;
+
+        return $this;
+    }
+
+    /**
+     * Get idArbitro1
+     *
+     * @return \limubac\administratorBundle\Entity\Arbitro 
+     */
+    public function getIdArbitro1()
+    {
+        return $this->idArbitro1;
     }
 }

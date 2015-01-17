@@ -1,0 +1,104 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+	<div class="row-fluid">
+     	<div class="col-md-12 borBox well btn-dashboard">			
+        <div class="formAnotacion form-group">
+        <div class="col-md-6 tLeft" >
+            <h1>{{equipo.nombre}}</h1>
+		</div>
+		</div>
+		</div>
+	</div>
+	</br>
+	
+	<form class="formAnotacion form-group col-md-12" action="../app_dev.php/equipo" method="post">
+		<label class="col-md-2">Capitan</label>
+		<div class="col-md-1">		    			
+			<input class="form-control" name="idCapitan" placeholder="{{equipo.idCapitan.idJugador}}">
+		</div>
+		<div class="col-md-4">
+			<input class="form-control" name="NomCapitan" placeholder="{{capitan.nombre}}">
+		</div>
+		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
+		<div class="col-md-3">
+			<button class="btn btn-primary" type="submit">Actualizar</button>
+		</div>
+	</form>
+	
+	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
+		<label class="col-md-2">Representante</label>
+		<div class="col-md-1">		    			
+			<input class="form-control" name="idRepresentante" placeholder="{{equipo.representante}}">
+		</div>
+		<div class="col-md-4">
+			<input class="form-control" name="NomCapitan" placeholder="{{representante.nombre}}">
+		</div>
+		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
+		<div class="col-md-3">
+			<button class="btn btn-primary" type="submit">Actualizar</button>
+		</div>
+	</form>
+	
+	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
+		<label class="col-md-2">Auxiliar</label>
+		<div class="col-md-1">		    			
+			<input class="form-control" name="idAuxiliar" placeholder="{{equipo.auxiliar}}">
+		</div>
+		<div class="col-md-4">
+			<input class="form-control" name="NomAuxiliar" placeholder="{{auxiliar.nombre}}">
+		</div>
+		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
+		<div class="col-md-3">
+			<button class="btn btn-primary" type="submit">Actualizar</button>
+		</div>
+	</form>
+	
+	<div class="row-fluid borBox btn-dashboard">
+     	<div class="col-md-12 well">			
+        <div class="formAnotacion form-group">
+        <div class="col-md-6 tLeft">
+            <h1>Jugadores</h1>
+		</div>
+		</div>
+		
+		{% for jugador in jugadores %}
+		<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
+			<div class="col-md-1">		    			
+				<label class="form-control" name="idJugador">{{jugador.idJugador}}</label>
+			</div>
+			<div class="col-md-1">		    			
+				<input class="form-control" name="NoJugador" placeholder="{{jugador.noPlayera}}">
+			</div>
+			<div class="col-md-4">
+				<label class="form-control" name="NomJugador">{{jugador.nombre}}</label>
+			</div>
+			<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
+			<div class="col-md-3">
+				<button class="btn btn-primary" type="submit">Actualizar</button>
+			</div>
+		</form>
+		{% endfor%}
+		
+		<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
+			<div class="col-md-1">		    			
+				<input class="form-control" name="idJugador" placeholder="Id Jugador">
+			</div>
+			<div class="col-md-1">		    			
+				<input class="form-control" name="NoJugador" placeholder="Numero">
+			</div>
+			<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
+			<div class="col-md-3">
+				<button class="btn btn-primary" type="submit" name="accion" value="Nuevo">Nuevo</button>
+			</div>
+		</form>
+	</div>
+	
+	
+	
+		
+							
+		
+
+		
+{% endblock %}

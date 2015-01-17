@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\Jugador" table="jugador">
+    <indexes>
+      <index name="id_status" columns="id_status,id_genero,id_tiposanguineo"/>
+      <index name="id_genero" columns="id_genero"/>
+      <index name="id_tiposanguineo" columns="id_tiposanguineo"/>
+      <index name="IDX_527D6F185D37D0F1" columns="id_status"/>
+    </indexes>
     <id name="idJugador" type="integer" column="id_jugador">
       <generator strategy="IDENTITY"/>
     </id>
@@ -9,21 +15,25 @@
     <field name="apMaterno" type="string" column="ap_materno" length="35" nullable="false"/>
     <field name="fNacimiento" type="date" column="f_nacimiento" nullable="false"/>
     <field name="correo" type="string" column="correo" length="35" nullable="false"/>
-    <field name="noPlayera" type="integer" column="no_playera" nullable="false"/>
-    <field name="telefono" type="string" column="telefono" length="12" nullable="false"/>
-    <field name="profesion" type="string" column="profesion" length="35" nullable="false"/>
-    <field name="status" type="string" column="status" length="25" nullable="false"/>
-    <field name="genero" type="string" column="genero" length="9" nullable="false"/>
+    <field name="telefono" type="string" column="telefono" length="12" nullable="true"/>
+    <field name="profesion" type="string" column="profesion" length="35" nullable="true"/>
+    <field name="estatura" type="float" column="estatura" precision="10" scale="0" nullable="true"/>
+    <field name="peso" type="float" column="peso" precision="10" scale="0" nullable="true"/>
     <field name="foto" type="string" column="foto" length="255" nullable="false"/>
-    <many-to-many field="idEquipo" target-entity="Equipo" inversed-by="idJugador">
-      <join-table name="integra">
-        <join-columns>
-          <join-column name="id_jugador" referenced-column-name="id_jugador"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="id_equipo" referenced-column-name="id_equipo"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
+    <many-to-one field="idTiposanguineo" target-entity="TipoSanguineo">
+      <join-columns>
+        <join-column name="id_tiposanguineo" referenced-column-name="id_tiposanguineo"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idGenero" target-entity="Genero">
+      <join-columns>
+        <join-column name="id_genero" referenced-column-name="id_genero"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idStatus" target-entity="Status">
+      <join-columns>
+        <join-column name="id_status" referenced-column-name="id_status"/>
+      </join-columns>
+    </many-to-one>
   </entity>
 </doctrine-mapping>

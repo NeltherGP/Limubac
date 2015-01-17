@@ -3,17 +3,19 @@
 namespace limubac\administratorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Jugador
  *
- * @ORM\Table(name="jugador")
+ * @ORM\Table(name="jugador", indexes={@ORM\Index(name="id_status", columns={"id_status", "id_genero", "id_tiposanguineo"}), @ORM\Index(name="id_genero", columns={"id_genero"}), @ORM\Index(name="id_tiposanguineo", columns={"id_tiposanguineo"}), @ORM\Index(name="IDX_527D6F185D37D0F1", columns={"id_status"})})
  * @ORM\Entity
  */
 class Jugador
 {
     /**
      * @var string
+     * @Assert|NotBlank()
      *
      * @ORM\Column(name="nombre", type="string", length=35, nullable=false)
      */
@@ -21,6 +23,7 @@ class Jugador
 
     /**
      * @var string
+     * @Assert|NotBlank()
      *
      * @ORM\Column(name="ap_paterno", type="string", length=35, nullable=false)
      */
@@ -28,6 +31,7 @@ class Jugador
 
     /**
      * @var string
+     * @Assert|NotBlank()
      *
      * @ORM\Column(name="ap_materno", type="string", length=35, nullable=false)
      */
@@ -35,6 +39,8 @@ class Jugador
 
     /**
      * @var \DateTime
+     * @Assert|NotBlank()
+     * @Assert|Date()
      *
      * @ORM\Column(name="f_nacimiento", type="date", nullable=false)
      */
@@ -42,45 +48,41 @@ class Jugador
 
     /**
      * @var string
+     * @Assert|NotBlank()
+     * @Assert|Email()
      *
      * @ORM\Column(name="correo", type="string", length=35, nullable=false)
      */
     private $correo;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="no_playera", type="integer", nullable=false)
-     */
-    private $noPlayera;
-
-    /**
      * @var string
+     * @Assert|Integer()
      *
-     * @ORM\Column(name="telefono", type="string", length=12, nullable=false)
+     * @ORM\Column(name="telefono", type="string", length=12, nullable=true)
      */
     private $telefono;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="profesion", type="string", length=35, nullable=false)
+     * @ORM\Column(name="profesion", type="string", length=35, nullable=true)
      */
     private $profesion;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="status", type="string", length=25, nullable=false)
+     * @ORM\Column(name="estatura", type="float", precision=10, scale=0, nullable=true)
      */
-    private $status;
+    private $estatura;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="genero", type="string", length=9, nullable=false)
+     * @ORM\Column(name="peso", type="float", precision=10, scale=0, nullable=true)
      */
-    private $genero;
+    private $peso;
 
     /**
      * @var string
@@ -99,27 +101,40 @@ class Jugador
     private $idJugador;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \limubac\administratorBundle\Entity\TipoSanguineo
+     * @Assert|Integer()
      *
-     * @ORM\ManyToMany(targetEntity="limubac\administratorBundle\Entity\Equipo", inversedBy="idJugador")
-     * @ORM\JoinTable(name="integra",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="id_jugador", referencedColumnName="id_jugador")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_equipo", referencedColumnName="id_equipo")
-     *   }
-     * )
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\TipoSanguineo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tiposanguineo", referencedColumnName="id_tiposanguineo")
+     * })
      */
-    private $idEquipo;
+    private $idTiposanguineo;
 
     /**
-     * Constructor
+     * @var \limubac\administratorBundle\Entity\Genero
+     * @Assert|NotBlank()
+     * @Assert|Integer()
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Genero")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_genero", referencedColumnName="id_genero")
+     * })
      */
-    public function __construct()
-    {
-        $this->idEquipo = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $idGenero;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Status
+     * @Assert|NotBlank()
+     * @Assert|Integer()
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Status")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_status", referencedColumnName="id_status")
+     * })
+     */
+    private $idStatus;
+
 
 
     /**
@@ -238,29 +253,6 @@ class Jugador
     }
 
     /**
-     * Set noPlayera
-     *
-     * @param integer $noPlayera
-     * @return Jugador
-     */
-    public function setNoPlayera($noPlayera)
-    {
-        $this->noPlayera = $noPlayera;
-
-        return $this;
-    }
-
-    /**
-     * Get noPlayera
-     *
-     * @return integer 
-     */
-    public function getNoPlayera()
-    {
-        return $this->noPlayera;
-    }
-
-    /**
      * Set telefono
      *
      * @param string $telefono
@@ -307,49 +299,49 @@ class Jugador
     }
 
     /**
-     * Set status
+     * Set estatura
      *
-     * @param string $status
+     * @param float $estatura
      * @return Jugador
      */
-    public function setStatus($status)
+    public function setEstatura($estatura)
     {
-        $this->status = $status;
+        $this->estatura = $estatura;
 
         return $this;
     }
 
     /**
-     * Get status
+     * Get estatura
      *
-     * @return string 
+     * @return float 
      */
-    public function getStatus()
+    public function getEstatura()
     {
-        return $this->status;
+        return $this->estatura;
     }
 
     /**
-     * Set genero
+     * Set peso
      *
-     * @param string $genero
+     * @param float $peso
      * @return Jugador
      */
-    public function setGenero($genero)
+    public function setPeso($peso)
     {
-        $this->genero = $genero;
+        $this->peso = $peso;
 
         return $this;
     }
 
     /**
-     * Get genero
+     * Get peso
      *
-     * @return string 
+     * @return float 
      */
-    public function getGenero()
+    public function getPeso()
     {
-        return $this->genero;
+        return $this->peso;
     }
 
     /**
@@ -386,35 +378,71 @@ class Jugador
     }
 
     /**
-     * Add idEquipo
+     * Set idTiposanguineo
      *
-     * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
+     * @param \limubac\administratorBundle\Entity\TipoSanguineo $idTiposanguineo
      * @return Jugador
      */
-    public function addIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo)
+    public function setIdTiposanguineo(\limubac\administratorBundle\Entity\TipoSanguineo $idTiposanguineo = null)
     {
-        $this->idEquipo[] = $idEquipo;
+        $this->idTiposanguineo = $idTiposanguineo;
 
         return $this;
     }
 
     /**
-     * Remove idEquipo
+     * Get idTiposanguineo
      *
-     * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
+     * @return \limubac\administratorBundle\Entity\TipoSanguineo 
      */
-    public function removeIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo)
+    public function getIdTiposanguineo()
     {
-        $this->idEquipo->removeElement($idEquipo);
+        return $this->idTiposanguineo;
     }
 
     /**
-     * Get idEquipo
+     * Set idGenero
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param \limubac\administratorBundle\Entity\Genero $idGenero
+     * @return Jugador
      */
-    public function getIdEquipo()
+    public function setIdGenero(\limubac\administratorBundle\Entity\Genero $idGenero = null)
     {
-        return $this->idEquipo;
+        $this->idGenero = $idGenero;
+
+        return $this;
+    }
+
+    /**
+     * Get idGenero
+     *
+     * @return \limubac\administratorBundle\Entity\Genero 
+     */
+    public function getIdGenero()
+    {
+        return $this->idGenero;
+    }
+
+    /**
+     * Set idStatus
+     *
+     * @param \limubac\administratorBundle\Entity\Status $idStatus
+     * @return Jugador
+     */
+    public function setIdStatus(\limubac\administratorBundle\Entity\Status $idStatus = null)
+    {
+        $this->idStatus = $idStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get idStatus
+     *
+     * @return \limubac\administratorBundle\Entity\Status 
+     */
+    public function getIdStatus()
+    {
+        return $this->idStatus;
     }
 }

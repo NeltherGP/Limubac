@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Equipo
  *
- * @ORM\Table(name="equipo", indexes={@ORM\Index(name="IDX_C49C530BEF72FA", columns={"id_capitan"}), @ORM\Index(name="IDX_C49C530B407BE8B2", columns={"auxiliar"}), @ORM\Index(name="IDX_C49C530BDE2D595", columns={"representante"}), @ORM\Index(name="id_capitan", columns={"id_capitan", "representante", "auxiliar"})})
+ * @ORM\Table(name="equipo", indexes={@ORM\Index(name="id_capitan", columns={"id_capitan", "representante", "auxiliar"}), @ORM\Index(name="representante", columns={"representante"}), @ORM\Index(name="auxiliar", columns={"auxiliar"}), @ORM\Index(name="IDX_C49C530BEF72FA", columns={"id_capitan"})})
  * @ORM\Entity
  */
 class Equipo
@@ -43,20 +43,20 @@ class Equipo
      *
      * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_capitan", referencedColumnName="id_jugador")
+     *   @ORM\JoinColumn(name="representante", referencedColumnName="id_jugador")
      * })
      */
-    private $idCapitan;
+    private $representante;
 
     /**
      * @var \limubac\administratorBundle\Entity\Jugador
      *
      * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="representante", referencedColumnName="id_jugador")
+     *   @ORM\JoinColumn(name="id_capitan", referencedColumnName="id_jugador")
      * })
      */
-    private $representante;
+    private $idCapitan;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -66,19 +66,11 @@ class Equipo
     private $idPartido;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="limubac\administratorBundle\Entity\Jugador", mappedBy="idEquipo")
-     */
-    private $idJugador;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
         $this->idPartido = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idJugador = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -139,29 +131,6 @@ class Equipo
     }
 
     /**
-     * Set idCapitan
-     *
-     * @param \limubac\administratorBundle\Entity\Jugador $idCapitan
-     * @return Equipo
-     */
-    public function setIdCapitan(\limubac\administratorBundle\Entity\Jugador $idCapitan = null)
-    {
-        $this->idCapitan = $idCapitan;
-
-        return $this;
-    }
-
-    /**
-     * Get idCapitan
-     *
-     * @return \limubac\administratorBundle\Entity\Jugador 
-     */
-    public function getIdCapitan()
-    {
-        return $this->idCapitan;
-    }
-
-    /**
      * Set representante
      *
      * @param \limubac\administratorBundle\Entity\Jugador $representante
@@ -182,6 +151,29 @@ class Equipo
     public function getRepresentante()
     {
         return $this->representante;
+    }
+
+    /**
+     * Set idCapitan
+     *
+     * @param \limubac\administratorBundle\Entity\Jugador $idCapitan
+     * @return Equipo
+     */
+    public function setIdCapitan(\limubac\administratorBundle\Entity\Jugador $idCapitan = null)
+    {
+        $this->idCapitan = $idCapitan;
+
+        return $this;
+    }
+
+    /**
+     * Get idCapitan
+     *
+     * @return \limubac\administratorBundle\Entity\Jugador 
+     */
+    public function getIdCapitan()
+    {
+        return $this->idCapitan;
     }
 
     /**
@@ -215,38 +207,5 @@ class Equipo
     public function getIdPartido()
     {
         return $this->idPartido;
-    }
-
-    /**
-     * Add idJugador
-     *
-     * @param \limubac\administratorBundle\Entity\Jugador $idJugador
-     * @return Equipo
-     */
-    public function addIdJugador(\limubac\administratorBundle\Entity\Jugador $idJugador)
-    {
-        $this->idJugador[] = $idJugador;
-
-        return $this;
-    }
-
-    /**
-     * Remove idJugador
-     *
-     * @param \limubac\administratorBundle\Entity\Jugador $idJugador
-     */
-    public function removeIdJugador(\limubac\administratorBundle\Entity\Jugador $idJugador)
-    {
-        $this->idJugador->removeElement($idJugador);
-    }
-
-    /**
-     * Get idJugador
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdJugador()
-    {
-        return $this->idJugador;
     }
 }

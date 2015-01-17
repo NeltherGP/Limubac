@@ -20,6 +20,20 @@ class Arbitro
     private $nombre;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="correo", type="string", length=30, nullable=true)
+     */
+    private $correo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="telefono", type="integer", nullable=true)
+     */
+    private $telefono;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_arbitro", type="integer")

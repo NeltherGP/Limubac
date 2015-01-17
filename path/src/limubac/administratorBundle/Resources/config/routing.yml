@@ -9,3 +9,27 @@ limubacadministrator_hojaAnotaciones:
 limubacadministrator_equipos:
     path:     /equipos
     defaults: { _controller: limubacadministratorBundle:Default:equipos}
+
+limubacadministrator_equipo:
+    path:     /equipo
+    defaults: { _controller: limubacadministratorBundle:Default:equipo}
+
+limubacadministrator_jugadoresAdmin:
+    path:     /jugadoresAdmin
+    defaults: { _controller: limubacadministratorBundle:Default:jugadoresAdmin}
+
+limubacadministrator_addjugador:
+    path:     /addjugador
+    defaults: { _controller: limubacadministratorBundle:Default:addjugador}
+
+limubacadministrator_upload:
+    path:     /upload
+    defaults: { _controller: limubacadministratorBundle:Upload:upload}
+
+limubacadministrator_eliminar:
+    path:     /eliminar/{page}
+    defaults: { _controller: limubacadministratorBundle:Default:eliminar, page: 0}
+
+limubacadministrator_buscar:
+    path:     /buscar/{page}
+    defaults: { _controller: limubacadministratorBundle:Default:buscar, page: 0}

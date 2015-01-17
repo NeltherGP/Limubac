@@ -1,0 +1,65 @@
+<?php
+
+namespace limubac\administratorBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ParticipanT
+ *
+ * @ORM\Table(name="participan_t", indexes={@ORM\Index(name="IDX_997D1858C8A14E3A", columns={"id_rama"}), @ORM\Index(name="IDX_997D1858CE25AE0A", columns={"id_categoria"}), @ORM\Index(name="IDX_997D1858E2ABE6E6", columns={"id_equipo"}), @ORM\Index(name="IDX_997D18585ADCD613", columns={"id_torneo"}), @ORM\Index(name="id_torneo", columns={"id_torneo", "id_equipo", "id_categoria", "id_rama"})})
+ * @ORM\Entity
+ */
+class ParticipanT
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_registro", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idRegistro;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Equipo
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Equipo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_equipo", referencedColumnName="id_equipo")
+     * })
+     */
+    private $idEquipo;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Categoria
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Categoria")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_categoria", referencedColumnName="id_categoria")
+     * })
+     */
+    private $idCategoria;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\RamaEquipo
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\RamaEquipo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_rama", referencedColumnName="id_rama")
+     * })
+     */
+    private $idRama;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Torneo
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Torneo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_torneo", referencedColumnName="id_torneo")
+     * })
+     */
+    private $idTorneo;
+
+
+}
