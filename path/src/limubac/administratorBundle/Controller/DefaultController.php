@@ -85,16 +85,18 @@ class DefaultController extends Controller
 		
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_POST['opciones']);
-			
+			if($equipo->getIdCapitan()==null){
+				$equipo->setIdCapitan(new Jugador);
+			}
 			$Manager = $this->getDoctrine()->getManager();
 			
-			$q = "Select j.idJugador,j.nombre,i.noPlayera FROM limubacadministratorBundle:Jugador j JOIN limubacadministratorBundle:Integra i where i.idEquipo='".$_POST['opciones']."'";
+			$q = "Select IDENTITY(i.idEquipo),j.idJugador,i.noPlayera,j.nombre FROM limubacadministratorBundle:Integra i JOIN limubacadministratorBundle:Jugador j where i.idEquipo='".$_POST['opciones']."'";
 			$query = $Manager->createQuery($q);
 			$jugadores = $query->getResult();
-			
+			echo '<script language="javascript">alert("'.var_dump($jugadores).'");</script>'; 
 			//Capitan
 			$Capi = $equipo->getIdCapitan();
-			
+
 			
 			//Representante
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");

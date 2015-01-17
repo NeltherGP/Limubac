@@ -65,13 +65,13 @@
 		{% for jugador in jugadores %}
 		<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
 			<div class="col-md-1">		    			
-				<input class="form-control" name="idJugador" placeholder="{{jugador.idJugador}}">
+				<label class="form-control" name="idJugador">{{jugador.idJugador}}</label>
 			</div>
 			<div class="col-md-1">		    			
 				<input class="form-control" name="NoJugador" placeholder="{{jugador.noPlayera}}">
 			</div>
 			<div class="col-md-4">
-				<input class="form-control" name="NomJugador" placeholder="{{jugador.nombre}}">
+				<label class="form-control" name="NomJugador">{{jugador.nombre}}</label>
 			</div>
 			<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
 			<div class="col-md-3">
