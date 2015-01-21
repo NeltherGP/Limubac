@@ -93,7 +93,6 @@ class DefaultController extends Controller
 			$q = "Select IDENTITY(i.idEquipo),j.idJugador,i.noPlayera,j.nombre FROM limubacadministratorBundle:Integra i JOIN limubacadministratorBundle:Jugador j where i.idEquipo='".$_POST['opciones']."'";
 			$query = $Manager->createQuery($q);
 			$jugadores = $query->getResult();
-			echo '<script language="javascript">alert("'.var_dump($jugadores).'");</script>'; 
 			//Capitan
 			$Capi = $equipo->getIdCapitan();
 
