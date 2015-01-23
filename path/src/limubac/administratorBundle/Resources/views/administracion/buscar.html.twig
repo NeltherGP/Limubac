@@ -67,10 +67,15 @@
                     <td> {{bs.telefono}} </td>
                     <td> {{bs.estatura}} </td>
                     <td> {{bs.peso}} </td>
-                    <td> {{bs.1}} </td>
+                    <td> {{bs.tipoSangre}} </td>
                     <td>
                       <div class="btn-group sharp" data-toggle="radio">
-                        <a class="btn btn-mini btn-success" href="#"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{{bs.idJugador}}'>
+                          <i class="glyphicon-pencil glyphicon"></i>
+                        </button>
+                        <button class="btn btn-mini btn-success" type='submit' name='foto[]' value ='{{bs.idJugador}}'>
+                          <i class="glyphicon-camera glyphicon"></i>
+                        </button>
                       </div>
                     </td>
                     <td>

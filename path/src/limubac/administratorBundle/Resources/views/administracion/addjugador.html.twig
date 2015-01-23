@@ -25,10 +25,8 @@
         <div class="col-md-7">
           <div class="form sharp vertical">
             <h6>Debes llenar todos los campos marcados con un asterisco</h6>
-            <a class="btn bnt-large btn-prima col-md-4" href="{{url('limubacadministrator_upload')}}">
-              <i class="glyphicon-camera glyphicon"></i>
-              Agregar fotografia
-            </a><br><br>
+            
+            <br>
             {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
               {{form_widget(form.nombre, {'attr': {'placeholder': 'Nombre'|trans}} )}}<font color="red"> *</font><br>
               {{form_widget(form.apPaterno, {'attr': {'placeholder': 'Apellido paterno'|trans}} )}}<font color="red"> *</font><br>
@@ -58,7 +56,7 @@
                 </i>
               </a>
               <br>
-             {# {{form_widget(form.foto, {'attr': {'placeholder': 'Foto'|trans}} )}}<font color="red"> *</font><br> #}
+             {# {{form_widget(form., {'attr': {'placeholder': 'Foto'|trans}} )}}<font color="red"> *</font><br> #}
             {{form_end(form)}}
           </div>
         </div>

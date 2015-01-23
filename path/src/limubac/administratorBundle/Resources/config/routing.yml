@@ -26,10 +26,24 @@ limubacadministrator_upload:
     path:     /upload
     defaults: { _controller: limubacadministratorBundle:Upload:upload}
 
-limubacadministrator_eliminar:
-    path:     /eliminar/{page}
-    defaults: { _controller: limubacadministratorBundle:Default:eliminar, page: 0}
+limubacadministrator_uploados:
+    path:     /uploados
+    defaults: { _controller: limubacadministratorBundle:Default:uploados}
+
+limubacadministrator_update:
+    path:     /update/{page}
+    defaults: { _controller: limubacadministratorBundle:Default:update, page: 0}
 
 limubacadministrator_buscar:
     path:     /buscar/{page}
     defaults: { _controller: limubacadministratorBundle:Default:buscar, page: 0}
+
+limubacadministrator_editar:
+    path:     /editar
+    defaults: { _controller: limubacadministratorBundle:Default:editar}
+
+limubacadministrator_photo:
+    path:     /photo/{number}
+    defaults: { _controller: limubacadministratorBundle:Default:photo}
+    requirements:
+        number: \d+

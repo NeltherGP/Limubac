@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityRepository;
 
 class JugadorType extends AbstractType{
 	public function buildForm(FormBuilderInterface $builder, array $options){
+		$builder->add('idJugador', 'integer');
 		$builder->add('nombre','text');
 		$builder->add('apPaterno','text');
 		$builder->add('apMaterno','text');
