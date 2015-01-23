@@ -25,10 +25,7 @@
         <div class="col-md-7">
           <div class="form sharp vertical">
             <h6>Debes llenar todos los campos marcados con un asterisco</h6>
-            <a class="btn bnt-large btn-prima col-md-4" href="{{url('limubacadministrator_upload')}}">
-              <i class="glyphicon-camera glyphicon"></i>
-              Agregar fotografia
-            </a><br><br>
+            <br>
             
               {{form_widget(form.idJugador, {value : edita[0]['idJugador']} ) }}
               {{form_widget(form.nombre, {value : edita[0]['nombre']} )}}<font color="red"> *</font><br>
