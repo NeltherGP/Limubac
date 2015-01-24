@@ -142,7 +142,6 @@ class DefaultController extends Controller
 			$q = "Select IDENTITY(i.idEquipo),j.idJugador,i.noPlayera,j.nombre FROM limubacadministratorBundle:Integra i JOIN limubacadministratorBundle:Jugador j where i.idEquipo='".$_POST['opciones']."'";
 			$query = $Manager->createQuery($q);
 			$jugadores = $query->getResult();
-			echo '<script language="javascript">alert("'.var_dump($jugadores).'");</script>'; 
 			//Capitan
 			$Capi = $equipo->getIdCapitan();
 
@@ -191,8 +190,8 @@ class DefaultController extends Controller
 	public function jugadoresAdminAction(){
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
         $queryPlayers = $repository->createQueryBuilder('p')
-            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno','p.fNacimiento','p.correo','p.telefono','p.estatura','p.peso','IDENTITY(p.idTiposanguineo)')
-            
+            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno','p.fNacimiento','p.correo','p.telefono','p.estatura','p.peso','tsan.tipoSangre')
+            ->join('limubacadministratorBundle:TipoSanguineo', 'tsan', 'WITH' ,'tsan.idTiposanguineo = p.idTiposanguineo')
             ->orderBy('p.idJugador', 'DESC')
             ->getQuery();
         $entities = $queryPlayers->getResult();
@@ -262,7 +261,9 @@ class DefaultController extends Controller
                         $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:TipoSanguineo');
                         $category = $class_repository->find($out['jugador']['idTiposanguineo']);
                     $player -> setIdTiposanguineo($category);
-                    $player -> setFoto('null');
+                        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+                        $category = $class_repository->find($out['jugador']['idFoto']);
+                    $player -> setIdFoto($category);
 
                     $em = $this->getDoctrine()->getManager();
                     $em -> persist($player);
@@ -278,7 +279,7 @@ class DefaultController extends Controller
         return $this->render('limubacadministratorBundle:administracion:addjugador.html.twig',array('form' => $form->createView()));
     }
 
-    public function eliminarAction($page){
+    public function updateAction($page){
         $url_to_parse = $_SERVER['REQUEST_URI'];
         $parsed_url = parse_url($url_to_parse);
         
@@ -286,14 +287,14 @@ class DefaultController extends Controller
             $sr = $_REQUEST['Search'];
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
             $queryFind = $repository->createQueryBuilder('p')
-            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno','p.fNacimiento','p.correo','p.telefono','p.estatura','p.peso','IDENTITY(p.idTiposanguineo)')
+            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno','p.fNacimiento','p.correo','p.telefono','p.estatura','p.peso','tsan.tipoSangre')
+            ->join('limubacadministratorBundle:TipoSanguineo', 'tsan', 'WITH' ,'tsan.idTiposanguineo = p.idTiposanguineo')
             ->where('p.nombre LIKE :word')
             ->orWhere('p.apPaterno LIKE :word')
             ->orWhere('p.apMaterno LIKE :word')
             ->setParameter('word', $sr)
             ->getQuery();
             $resul = $queryFind->getResult();
-            $ar = [$sr];
             return $this->render('limubacadministratorBundle:administracion:buscar.html.twig', array('busca' => $resul));
         }
         elseif (!empty($_REQUEST['check'])) {
@@ -308,14 +309,249 @@ class DefaultController extends Controller
             }
             return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
         }
+        elseif (!empty($_REQUEST['edit'])) {
+            $jugador = new Jugador();
+            $form = $this->createForm(new JugadorType(), $jugador);
+            $ed = $_REQUEST['edit'][0];
+            
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+            $queryEdit = $repository->createQueryBuilder('e')
+            ->select('e.idJugador','e.nombre','e.apPaterno','e.apMaterno','e.fNacimiento','e.correo','e.telefono','e.profesion','IDENTITY(e.idStatus)','IDENTITY(e.idGenero)','e.estatura','e.peso','IDENTITY(e.idTiposanguineo)','fot.foto','IDENTITY(e.idFoto)')
+            ->join('limubacadministratorBundle:Fotos', 'fot', 'WITH' ,'fot.idFoto = e.idFoto')
+            ->where('e.idJugador = :word')
+            ->setParameter('word', $ed)
+            ->getQuery();
+            $resul = $queryEdit->getResult();
+            //print_r($resul);
+            
+            return $this->render('limubacadministratorBundle:administracion:edita.html.twig',array('form' => $form->createView(), 'edita' => $resul));
+        }
+        elseif (!empty($_REQUEST['foto'])) {
+            $per = $_REQUEST['foto'];
+            $idUserPics = $per[0];
+            
+            return $this->render('limubacadministratorBundle:administracion:uploados.html.twig', array('person' => $per));
+        }
         elseif (empty($parsed_url['query']) || empty($_REQUEST['Search'])) {
             return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
         }
     }
 
+    /**
+     * @Route("/photo/{number}", name="photo", requirements={"id" = "\d+"})
+     */
+    public function photoAction(Request $request){
+        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+        $foto = $repository->find('id_foto',$request->get('number'));
+        if (count($foto)>0) {
+            $response = $this->getResponse();
+            $response -> setContent('image');
+            $response->headers->set('Content-Type', 'image/jpeg');
+            echo $foto -> getInhalt();
+        }else{
+            return false;
+        }
+        //$request = $this->getRequest();
+        //$workerId = $request->get('number');
+        
+        /*
+        $em = $this->getDoctrine()->getManager();
+        //$repository = $em->getRepository('limubacadministratorBundle:Fotos');
+        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+
+        $photo = $repository->find($workerId);
+
+        $response = new StreamedResponse(function () use ($photo) {
+            //echo stream_get_contents($photo['foto:limubac\administratorBundle\Entity\Fotos:private']);
+        });
+
+        $response->headers->set('Content-Type', 'image/jpeg');
+        
+        return $response;
+        
+        if (!empty($workerId)) {
+            $id = mysql_real_escape_string($workerId);
+
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+            $query = $repository->createQueryBuilder('p')
+                ->select('p.idFoto','p.nombre','p.foto')
+                ->where('p.idFoto = :word')
+                ->setParameter('word', $id)
+                ->getQuery();
+            $entities = $query->getResult();
+
+            foreach ($entities as $row) {
+                $imageData = $row['foto'];
+            }
+            header("content-type: image/jpeg");
+            echo '<img src="data:image/gif;base64,' . base64_encode($imageData) . '" />';
+        }
+        else{
+            echo "Error!";
+        }
+        */
+    }
+
     public function buscarAction(){
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
 
+    }
+
+    public function editarAction(){
+        print_r($_REQUEST['jugador']);
+
+        $upt = $_REQUEST['jugador'];
+        echo("<br>aiidiii: ".$upt['idJugador']);
+        $fn = $upt['fNacimiento'];
+        $dt = date_create_from_format('Y-m-d', $fn);
+
+        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Status');
+        $category1 = $class_repository->find($upt['idStatus']);
+
+        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
+        $category2 = $class_repository->find($upt['idGenero']);
+
+        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:TipoSanguineo');
+        $category3 = $class_repository->find($upt['idTiposanguineo']);
+
+        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+        $queryAct = $repository->createQueryBuilder('z');
+        $q = $queryAct->update('limubacadministratorBundle:Jugador', 'z')
+            ->set('z.nombre', ':nom')
+            ->set('z.apPaterno', ':app')
+            ->set('z.apMaterno', ':apm')    
+            ->set('z.fNacimiento', ':fna')
+            ->set('z.correo', ':cor')
+            ->set('z.telefono', ':tel')
+            ->set('z.profesion', ':pro')
+            ->set('z.idStatus', ':ist')
+            ->set('z.idGenero', ':ige')
+            ->set('z.estatura', ':est')
+            ->set('z.peso', ':pes')
+            ->set('z.idTiposanguineo', ':iti')
+            ->set('z.foto', ':fot')
+            ->where('z.idJugador= :idj')
+            ->setParameter('idj', $upt['idJugador'])
+            ->setParameter('nom', $upt['nombre'])
+            ->setParameter('app', $upt['apPaterno'])
+            ->setParameter('apm', $upt['apMaterno'])
+            ->setParameter('fna', new \DateTime($fn))
+            ->setParameter('cor', $upt['correo'])
+            ->setParameter('tel', $upt['telefono'])
+            ->setParameter('pro', $upt['profesion'])
+            ->setParameter('ist', $category1)
+            ->setParameter('ige', $category2)
+            ->setParameter('est', $upt['estatura'])
+            ->setParameter('pes', $upt['peso'])
+            ->setParameter('iti', $category3)
+            ->setParameter('fot', 0)
+            ->getQuery();
+        $resul = $q->execute();
+
+        return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
+    }
+
+    public function uploadosAction(Request $request){
+        //return $this->render('limubacadministratorBundle:administracion:uploados.html.twig');
+        if (isset($_POST['submit'])) {
+            $pics = new Fotos();
+            $idjug = $_REQUEST['id'];
+            $status = "success";
+            $message = '';
+
+            
+            $imageName = mysql_real_escape_string($_FILES['img']['name']);
+            $imageData = mysql_real_escape_string(file_get_contents($_FILES['img']['tmp_name']));
+            $imageType = mysql_real_escape_string($_FILES['img']['type']);
+
+            if (substr($imageType,0,5) == "image") {
+                $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+                $queryEdit = $repository->createQueryBuilder('e')
+                    ->select('e.idFoto','e.nombre')
+                    ->where('e.nombre = :word')
+                    ->setParameter('word', $idjug)
+                    ->getQuery();
+                $resul1 = $queryEdit->getResult();
+
+                $pics -> setNombre($idjug);
+                $pics -> setFoto($imageData);
+
+                $em = $this->getDoctrine()->getManager();
+                $em -> persist($pics);
+                $em -> flush();
+                $pics -> getIdFoto();
+
+                
+                $category = $pics->getIdFoto();
+
+                $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+                $queryAct = $repository->createQueryBuilder('f');
+                $q = $queryAct->update('limubacadministratorBundle:Jugador', 'f')
+                    ->set('f.idFoto', ':fot')
+                    ->where('f.idJugador= :idj')
+                    ->setParameter('fot', $category)
+                    ->setParameter('idj', $idjug)
+                    ->getQuery();
+                $resul = $q->execute();
+                $per = array(0 => $idjug);
+
+                if (is_array($resul1) and !empty($resul1)) {
+                    print_r($resul1);
+                    $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+                    $queryDelete = $repository->createQueryBuilder('d')
+                        ->delete()
+                        ->where('d.idFoto = '.$resul1[0]['idFoto'])
+                        ->getQuery();
+                    $entities = $queryDelete->getResult();    
+                }
+
+                $status = "success";
+                $message = "Imagen guardada correctamente";
+            }
+            else{
+                $status = "failed";
+                $message = "Solo se permiten imagenes.<br>Intentalo de nuevo con un archivo valido.";
+            }
+            return $this->render('limubacadministratorBundle:administracion:uploados.html.twig',array('status'=>$status,'message'=>$message, 'person' => $per));
+        }
+    }
+    
+    public function uploadAction(Request $request){
+        if ($request->getMethod() == 'POST') {
+            $image = $request->files->get('img');
+            $status = 'success';
+            $uploadedURL='';
+            $message='';
+            if (($image instanceof UploadedFile) && ($image->getError() == '0')) {
+                if (($image->getSize() < 200000000000)) {
+                    $originalName = $image->getClientOriginalName();
+                    $name_array = explode('.', $originalName);
+                    $file_type = $name_array[sizeof($name_array) - 1];
+                    $valid_filetypes = array('jpg', 'jpeg', 'bmp', 'png');
+                    if (in_array(strtolower($file_type), $valid_filetypes)) {
+                        //Start Uploading Image
+
+                        //$document = new Document();
+                        //$document->setFile($image);
+                        //$document->setSubDirectory('/upload');
+                        //$document->processFile();
+                        //$uploadedURL=$uploadedURL = $document->getUploadDirectory() . DIRECTORY_SEPARATOR . $document->getSubDirectory() . DIRECTORY_SEPARATOR . $image->getBasename();
+                    }else{
+                        $status="failed";
+                        $message="Tipo de archivo invalido";
+                    }
+                }else{
+                   $status="failed";
+                   $message="Tamaño demasiado grande";
+                }
+            }else{
+                $status="failed";
+                $message="Error en el archivo";
+            }
+            return $this->render('limubacadministratorBundle:administracion:upload.html.twig',array('status'=>$status,'message'=>$message,'uploadedURL'=>$uploadedURL));
+        } else{
+            return $this->render('limubacadministratorBundle:administracion:upload.html.twig');
+        }
     }
     //-----------------------FINAL CONTROLADOR DE FAFI---------------------------------------------------
 }

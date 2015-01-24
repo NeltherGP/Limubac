@@ -8,7 +8,7 @@
           <div class="col-md-9 tLeft">
           </div>
           <div class="col-md-3 tRight" style="margin-bottom:20px">
-            <form class="search" action="../app_dev.php/eliminar">
+            <form class="search" action="../app_dev.php/update">
               <input class="btn btn-primary btn-info" id="submit" value="" type="submit">
               <label for="submit" class="submit"></label>
               <a href="javascript: void(0)" class="icon"></a>
@@ -56,7 +56,7 @@
     </div>
 
 
-	<form class="form-horizontal" role="form" action="../app_dev.php/eliminar">
+	<form class="form-horizontal" role="form" action="../app_dev.php/update">
     <div class="row-fluid">
      	<div class="col-md-12 borBox well btn-dashboard">			
         <div class="formAnotacion form-group">
@@ -142,10 +142,15 @@
                     <td> {{entitie.telefono}} </td>
                     <td> {{entitie.estatura}} </td>
                     <td> {{entitie.peso}} </td>
-                    <td> {{entitie.1}} </td>
+                    <td> {{entitie.tipoSangre}} </td>
                     <td>
-                      <div class="btn-group sharp" data-toggle="radio">
-                        <a class="btn btn-mini btn-success" href="#"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                        <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{{entitie.idJugador}}'>
+                          <i class="glyphicon-pencil glyphicon"></i>
+                        </button>
+                        <button class="btn btn-mini btn-success" type='submit' name='foto[]' value ='{{entitie.idJugador}}'>
+                          <i class="glyphicon-camera glyphicon"></i>
+                        </button>
                       </div>
                     </td>
                     <td>

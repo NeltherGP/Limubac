@@ -3,19 +3,17 @@
 namespace limubac\administratorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Jugador
  *
- * @ORM\Table(name="jugador", indexes={@ORM\Index(name="id_status", columns={"id_status", "id_genero", "id_tiposanguineo"}), @ORM\Index(name="id_genero", columns={"id_genero"}), @ORM\Index(name="id_tiposanguineo", columns={"id_tiposanguineo"}), @ORM\Index(name="IDX_527D6F185D37D0F1", columns={"id_status"})})
+ * @ORM\Table(name="jugador", indexes={@ORM\Index(name="id_status", columns={"id_status", "id_genero", "id_tiposanguineo", "id_foto"}), @ORM\Index(name="id_genero", columns={"id_genero"}), @ORM\Index(name="id_tiposanguineo", columns={"id_tiposanguineo"}), @ORM\Index(name="id_foto", columns={"id_foto"}), @ORM\Index(name="IDX_527D6F185D37D0F1", columns={"id_status"})})
  * @ORM\Entity
  */
 class Jugador
 {
     /**
      * @var string
-     * @Assert|NotBlank()
      *
      * @ORM\Column(name="nombre", type="string", length=35, nullable=false)
      */
@@ -23,7 +21,6 @@ class Jugador
 
     /**
      * @var string
-     * @Assert|NotBlank()
      *
      * @ORM\Column(name="ap_paterno", type="string", length=35, nullable=false)
      */
@@ -31,7 +28,6 @@ class Jugador
 
     /**
      * @var string
-     * @Assert|NotBlank()
      *
      * @ORM\Column(name="ap_materno", type="string", length=35, nullable=false)
      */
@@ -39,8 +35,6 @@ class Jugador
 
     /**
      * @var \DateTime
-     * @Assert|NotBlank()
-     * @Assert|Date()
      *
      * @ORM\Column(name="f_nacimiento", type="date", nullable=false)
      */
@@ -48,8 +42,6 @@ class Jugador
 
     /**
      * @var string
-     * @Assert|NotBlank()
-     * @Assert|Email()
      *
      * @ORM\Column(name="correo", type="string", length=35, nullable=false)
      */
@@ -57,7 +49,6 @@ class Jugador
 
     /**
      * @var string
-     * @Assert|Integer()
      *
      * @ORM\Column(name="telefono", type="string", length=12, nullable=true)
      */
@@ -85,13 +76,6 @@ class Jugador
     private $peso;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="foto", type="string", length=255, nullable=false)
-     */
-    private $foto;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="id_jugador", type="integer")
@@ -101,8 +85,17 @@ class Jugador
     private $idJugador;
 
     /**
+     * @var \limubac\administratorBundle\Entity\Fotos
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Fotos")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_foto", referencedColumnName="id_foto")
+     * })
+     */
+    private $idFoto;
+
+    /**
      * @var \limubac\administratorBundle\Entity\TipoSanguineo
-     * @Assert|Integer()
      *
      * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\TipoSanguineo")
      * @ORM\JoinColumns({
@@ -113,8 +106,6 @@ class Jugador
 
     /**
      * @var \limubac\administratorBundle\Entity\Genero
-     * @Assert|NotBlank()
-     * @Assert|Integer()
      *
      * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Genero")
      * @ORM\JoinColumns({
@@ -125,8 +116,6 @@ class Jugador
 
     /**
      * @var \limubac\administratorBundle\Entity\Status
-     * @Assert|NotBlank()
-     * @Assert|Integer()
      *
      * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Status")
      * @ORM\JoinColumns({
@@ -345,29 +334,6 @@ class Jugador
     }
 
     /**
-     * Set foto
-     *
-     * @param string $foto
-     * @return Jugador
-     */
-    public function setFoto($foto)
-    {
-        $this->foto = $foto;
-
-        return $this;
-    }
-
-    /**
-     * Get foto
-     *
-     * @return string 
-     */
-    public function getFoto()
-    {
-        return $this->foto;
-    }
-
-    /**
      * Get idJugador
      *
      * @return integer 
@@ -375,6 +341,29 @@ class Jugador
     public function getIdJugador()
     {
         return $this->idJugador;
+    }
+
+    /**
+     * Set idFoto
+     *
+     * @param \limubac\administratorBundle\Entity\Fotos $idFoto
+     * @return Jugador
+     */
+    public function setIdFoto(\limubac\administratorBundle\Entity\Fotos $idFoto = null)
+    {
+        $this->idFoto = $idFoto;
+
+        return $this;
+    }
+
+    /**
+     * Get idFoto
+     *
+     * @return \limubac\administratorBundle\Entity\Fotos 
+     */
+    public function getIdFoto()
+    {
+        return $this->idFoto;
     }
 
     /**
