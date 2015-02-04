@@ -17,15 +17,13 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 
-class DefaultController extends Controller
-{
-    public function indexAction($name)
-    {
+class DefaultController extends Controller{
+    
+	public function indexAction($name){
         return $this->render('limubacadministratorBundle:Default:index.html.twig', array('name' => $name));
     }
 
-    public function adminAction()
-    {
+    public function adminAction(){
         return $this->render('limubacadministratorBundle:administracion:adminPanel.html.twig');
     }
 
@@ -76,7 +74,6 @@ class DefaultController extends Controller
 	
 	public function equiposAction(){
 
-
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();
 			$equipo->setNombre($_POST['NuevoEquipo']);
@@ -123,7 +120,6 @@ class DefaultController extends Controller
 			
 			$equipo->setIdCapitan($Capi);
 			
-			
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($equipo);
 			$Manager->flush();
@@ -143,7 +139,6 @@ class DefaultController extends Controller
 			$jugadores = $query->getResult();
 			//Capitan
 			$Capi = $equipo->getIdCapitan();
-
 			
 			//Representante
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
@@ -388,9 +383,9 @@ class DefaultController extends Controller
         else{
             echo "Error!";
         }
-        */
+		*/
     }
-
+	
     public function buscarAction(){
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
 
@@ -450,6 +445,7 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
     }
 
+	
     public function uploadosAction(Request $request){
         //return $this->render('limubacadministratorBundle:administracion:uploados.html.twig');
         if (isset($_POST['submit'])) {
@@ -514,7 +510,9 @@ class DefaultController extends Controller
             return $this->render('limubacadministratorBundle:administracion:uploados.html.twig',array('status'=>$status,'message'=>$message, 'person' => $per));
         }
     }
-    
+   
+	
+	
     public function uploadAction(Request $request){
         if ($request->getMethod() == 'POST') {
             $image = $request->files->get('img');

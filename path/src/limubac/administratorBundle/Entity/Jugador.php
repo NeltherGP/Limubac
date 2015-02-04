@@ -92,7 +92,7 @@ class Jugador
      *   @ORM\JoinColumn(name="id_foto", referencedColumnName="id_foto")
      * })
      */
-    private $idFoto;
+    private $foto;
 
     /**
      * @var \limubac\administratorBundle\Entity\TipoSanguineo
@@ -344,26 +344,26 @@ class Jugador
     }
 
     /**
-     * Set idFoto
+     * Set foto
      *
-     * @param \limubac\administratorBundle\Entity\Fotos $idFoto
+     * @param \limubac\administratorBundle\Entity\Fotos $foto
      * @return Jugador
      */
-    public function setIdFoto(\limubac\administratorBundle\Entity\Fotos $idFoto = null)
+    public function setfoto(\limubac\administratorBundle\Entity\Fotos $foto = null)
     {
-        $this->idFoto = $idFoto;
+        $this->foto = $foto;
 
         return $this;
     }
 
     /**
-     * Get idFoto
+     * Get foto
      *
      * @return \limubac\administratorBundle\Entity\Fotos 
      */
-    public function getIdFoto()
+    public function getfoto()
     {
-        return $this->idFoto;
+        return $this->foto;
     }
 
     /**
