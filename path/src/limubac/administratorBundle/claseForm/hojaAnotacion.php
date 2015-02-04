@@ -19,6 +19,7 @@ class hojaAnotacion {
 	protected $faltas1T_2;
 	protected $faltas2T_1;
 	protected $faltas2T_2;
+	protected $Puntos = array();
 
 
 	public function setEqA($name){
@@ -102,6 +103,15 @@ class hojaAnotacion {
 	public function getJuez2 (){
 		return $this->Juez2;
 	}
+
+	public function setPuntos ($puntos){
+		$this->Puntos=$puntos;
+	}
+
+	public function getPuntos (){
+		return $this->Puntos;
+	}
+
 
 	
 

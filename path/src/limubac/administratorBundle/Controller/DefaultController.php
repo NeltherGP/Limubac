@@ -32,7 +32,10 @@ class DefaultController extends Controller
     public function hojaAnotacionesAction(){
 
         
-
+        $contadorA=0;
+        $contadorB=0;
+        $marcadorA=0;
+        $marcadorB=0;
         $request = $this->getRequest();      
 
         echo $request->getMethod() ;//Quitar o comentar
@@ -56,7 +59,74 @@ class DefaultController extends Controller
                 $datos->setHora($_POST["Hora"]);
                 $datos->setJuez1($_POST["Juez1"]);
                 $datos->setJuez2($_POST["Juez2"]);
-               
+
+                $datos->setPuntos(array_values((array_slice($_POST, 10,20))));
+                
+                $puntos = $datos->getPuntos();
+                $puntosA=array();
+                $puntosB=array();
+
+                for ($j=0; $j < count($puntos); $j++) { 
+                    if(($j%2)==0){
+                        $puntosA[]=$puntos[$j];
+                    }else{
+                        $puntosB[]=$puntos[$j];
+                    }
+                }
+
+                //print_r($puntosA);
+               // print_r($puntosB);
+
+               for ($i=0; $i < count($puntosA); $i++) { 
+                 if($i==0 && $puntosA[$i]!=''){
+                    $marcadorA++;
+                 }else{
+                    if($puntosA[$i]==''){
+                        $contadorA++; echo "hola";
+                    }else{
+                        if($contadorA==0){
+                            $marcadorA=$marcadorA+1;
+                        }else{
+                        if($contadorA==1){
+                            $marcadorA=$marcadorA+2;
+                            $contadorA=0;
+                        }else{
+                            if($contadorA==2){
+                                $marcadorA=$marcadorA+3;
+                                $contadorA=0;
+                            }
+                        }
+                     }
+                    }
+                 }
+               }
+
+               echo $marcadorA;
+
+                for ($i=0; $i < count($puntosB); $i++) { 
+                 if($i==0 && $puntosB[$i]!=''){
+                    $marcadorB++;
+                 }else{
+                    if($puntosA[$i]==''){
+                        $contadorB++; echo "hola";
+                    }else{
+                        if($contadorB==0){
+                            $marcadorB=$marcadorB+1;
+                        }else{
+                        if($contadorB==1){
+                            $marcadorB=$marcadorB+2;
+                            $contadorB=0;
+                        }else{
+                            if($contadorB==2){
+                                $marcadorB=$marcadorB+3;
+                                $contadorB=0;
+                            }
+                        }
+                     }
+                    }
+                 }
+               }
+             
 
                 $errors = $validator->validate($datos);
 
@@ -64,6 +134,7 @@ class DefaultController extends Controller
 
                       $errorsString = (string) $errors;
                     
+                
                     echo $errorsString;
 
                     }
@@ -71,7 +142,9 @@ class DefaultController extends Controller
             }
 
     	return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig');
-    }
+    }  //Ends Hoja de anotacion
+
+
 	//Edgar
 	
 	public function equiposAction(){
