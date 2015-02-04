@@ -149,7 +149,6 @@ class DefaultController extends Controller
 	
 	public function equiposAction(){
 
-    	return $this->render('limubacadministratorBundle:administracion:Equipos.html.twig');
 
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();
