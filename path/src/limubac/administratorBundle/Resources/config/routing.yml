@@ -49,3 +49,19 @@ limubacadministrator_photo:
     defaults: { _controller: limubacadministratorBundle:Default:photo}
     requirements:
         number: \d+
+
+limubacadministrator_torneos:
+    path:     /torneos
+    defaults: { _controller: limubacadministratorBundle:Default:torneos}
+
+limubacadministrator_crearTorneo:
+    path:     /crearTorneo
+    defaults: { _controller: limubacadministratorBundle:Default:crearTorneo}
+
+limubacadministrator_categorias:
+    path:     /categorias
+    defaults: { _controller: limubacadministratorBundle:Default:categorias}
+
+limubacadministrator_crearCategoria:
+    path:     /crearCategoria
+    defaults: { _controller: limubacadministratorBundle:Default:crearCategoria}
