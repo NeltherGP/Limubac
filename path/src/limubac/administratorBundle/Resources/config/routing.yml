@@ -5,3 +5,37 @@ limubacadministrator_homepage:
 limubacadministrator_hojaAnotaciones:
     path:     /hojaAnotaciones
     defaults: { _controller: limubacadministratorBundle:Default:hojaAnotaciones}
+
+limubacadministrator_jugadoresAdmin:
+    path:     /jugadoresAdmin
+    defaults: { _controller: limubacadministratorBundle:Default:jugadoresAdmin}
+
+limubacadministrator_addjugador:
+    path:     /addjugador
+    defaults: { _controller: limubacadministratorBundle:Default:addjugador}
+
+limubacadministrator_upload:
+    path:     /upload
+    defaults: { _controller: limubacadministratorBundle:Default:upload}
+
+limubacadministrator_uploados:
+    path:     /uploados
+    defaults: { _controller: limubacadministratorBundle:Default:uploados}
+
+limubacadministrator_update:
+    path:     /update/{page}
+    defaults: { _controller: limubacadministratorBundle:Default:update, page: 0}
+
+limubacadministrator_buscar:
+    path:     /buscar/{page}
+    defaults: { _controller: limubacadministratorBundle:Default:buscar, page: 0}
+
+limubacadministrator_editar:
+    path:     /editar
+    defaults: { _controller: limubacadministratorBundle:Default:editar}
+
+limubacadministrator_photo:
+    path:     /photo/{number}
+    defaults: { _controller: limubacadministratorBundle:Default:photo}
+    requirements:
+        number: \d+

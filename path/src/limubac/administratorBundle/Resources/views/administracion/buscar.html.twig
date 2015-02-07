@@ -1,0 +1,94 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+	<form class="form-horizontal" role="form">
+    
+    <div class="row-fluid">
+      <div class="col-md-12 borBox well btn-dashboard">
+        <div class="formAnotacion form-group">
+          <h3 class="col-md-7">Resultados de busqueda</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-md-12 borBox wellDark btn-dashboard">
+        <div class="formAnotacion form-group">
+          <h3 class="col-md-7">Accion</h3>
+          <div class="btn-group sharp pull-right">
+            <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_jugadoresAdmin')}}"><i class="glyphicon glyphicon-circle-arrow-left"></i> Regresar</a>
+            <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_addjugador')}}"><i class="glyphicon-plus glyphicon"></i> Agregar</a>
+            <button class="btn btn-primary btn-info" type='submit'><i class="glyphicon-minus glyphicon"></i> Eliminar</button>
+            <!--<a class="btn btn-primary btn-info" href="../app_dev.php/eliminar"><i class="glyphicon-minus glyphicon"></i> Eliminar</a>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if busca is empty %}
+      <div class="row-fluid">
+      <div class="col-md-12" style="text-align:center;">
+        <div class="formAnotacion form-group" >
+          <h3 class="col-md-12">Su busqueda no produjo ningun resultado.</h3><br>
+          <strong>Intente nuevamente, ya sea por nombre completo, apellido paterno o apellido materno.</strong>
+        </div>
+      </div>
+    </div>
+    {% else %}  
+      <div class="row-fluid">
+        <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+          <div class="formAnotacion form-group">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Apellido Paterno</th>
+                  <th>Apellido Materno</th>
+                  <th>Nacimiento</th>
+                  <th>Correo</th>
+                  <th>Telefono</th>
+                  <th>Estatura</th>
+                  <th>Peso</th>
+                  <th>Tipo Sangineo</th>
+                  <th>Editar</th>
+                  <th>Seleccionar</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for bs in busca %}
+                  <tr>
+                    <td> {{bs.idJugador}} </td>
+                    <td> {{bs.nombre}} </td>
+                    <td> {{bs.apPaterno}} </td>
+                    <td> {{bs.apMaterno}} </td>
+                    <td> {{bs.fNacimiento|date('Y-m-d')}} </td>
+                    <td> {{bs.correo}} </td>
+                    <td> {{bs.telefono}} </td>
+                    <td> {{bs.estatura}} </td>
+                    <td> {{bs.peso}} </td>
+                    <td> {{bs.tipoSangre}} </td>
+                    <td>
+                      <div class="btn-group sharp" data-toggle="radio">
+                        <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{{bs.idJugador}}'>
+                          <i class="glyphicon-pencil glyphicon"></i>
+                        </button>
+                        <button class="btn btn-mini btn-success" type='submit' name='foto[]' value ='{{bs.idJugador}}'>
+                          <i class="glyphicon-camera glyphicon"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td>
+                      <input type="checkbox" style="width:20px;" class="group1" name='check[{{bs.idJugador}}]' id ='id{{bs.idJugador}}'>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  </form>
+{% endblock %}

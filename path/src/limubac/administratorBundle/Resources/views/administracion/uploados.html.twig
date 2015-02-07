@@ -1,0 +1,63 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+	<form class="form-horizontal" role="form" action="../app_dev.php/uploados?id={{person.0}}">
+	    <div class="row-fluid">
+	      <div class="col-md-12 borBox well btn-dashboard">
+	        <div class="formAnotacion form-group">
+	          <h3 class="col-md-7">Favor de seleccionar fotografia</h3>
+	        </div>
+	      </div>
+	    </div>
+
+	    <div class="row-fluid">
+	      <div class="col-md-12 borBox wellDark btn-dashboard">
+	        <div class="formAnotacion form-group">
+	          <h3 class="col-md-7">Accion</h3>
+	          <div class="btn-group sharp pull-right">
+	            <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_jugadoresAdmin')}}"><i class="glyphicon glyphicon-circle-arrow-left"></i> Regresar</a>
+	            <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_addjugador')}}"><i class="glyphicon-plus glyphicon"></i> Agregar</a>
+	            <!--<button class="btn btn-primary btn-info" type='submit'><i class="glyphicon-minus glyphicon"></i> Eliminar</button>-->
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</form>   
+
+	{% if status is not defined %}
+		<form class="form" method="POST" enctype="multipart/form-data" action="../app_dev.php/uploados?id={{person.0}}">
+	    	<input type="file" name="img" style="height:20px; width:320px;">
+	    	<button class="btn btn-large btn-prima" name="submit" type="submit">
+		    	<i class="glyphicon-camera glyphicon"></i>
+    	  		Cargar fotografia
+	    	</button>
+	  	</form>
+	{% elseif status=='success' %}
+			<form class="form" method="POST" enctype="multipart/form-data" action="../app_dev.php/uploados?id={{person.0}}">
+		    	<input type="file" name="img" style="height:20px; width:320px;">
+		    	<button class="btn btn-large btn-prima" name="submit" type="submit">
+			    	<i class="glyphicon-camera glyphicon"></i>
+	    	  		Cargar fotografia
+		    	</button>
+		  	</form>
+			<br><br>
+			<div class="">
+				<h3> {{message}} </h3>
+			</div>	
+	{% else %}
+		{% if message is defined %}
+			<form class="form" method="POST" enctype="multipart/form-data" action="../app_dev.php/uploados">
+		    	<input type="file" name="img" style="height:20px; width:320px;">
+		    	<button class="btn btn-large btn-prima" name="submit" type="submit">
+			    	<i class="glyphicon-camera glyphicon"></i>
+	    	  		Cargar fotografia
+		    	</button>
+		  	</form>
+			<br><br>
+			<div class="">
+				<h3> {{message}} </h3>
+			</div>		
+		{% endif %}
+	{% endif %}
+	 
+{% endblock %}

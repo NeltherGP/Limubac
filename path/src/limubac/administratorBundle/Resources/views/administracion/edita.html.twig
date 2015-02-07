@@ -1,0 +1,73 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+  {% block documentReady %}
+  <script>
+    $(document).ready(function(){
+      $("[rel=tooltip]").tooltip({ placement: 'right'});
+    });
+  </script>
+  {% endblock documentReady %}
+	<form class="form-horizontal" role="form" action="../app_dev.php/editar">
+    
+    <div class="row-fluid">
+      <div class="page-header">
+        <h1>Jugadores <small>Unete a la LIMUBAC</small>
+        </h1>
+      </div>
+              <!--http://localhost:81/LIMUBAC/path/web/app_dev.php/photo/60-->
+              {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+     	<div class="row-fluid">
+        <div class="col-md-3 profilePerson thumbnail">
+          <img src="{{ asset(url('limubacadministrator_photo', {'number': edita[0][4] })) }}" alt="This Guy">
+          <div class="profileOptions"></div>
+        </div>
+        <div class="col-md-7">
+          <div class="form sharp vertical">
+            <h6>Debes llenar todos los campos marcados con un asterisco</h6>
+            <br>
+            
+              {{form_widget(form.idJugador, {value : edita[0]['idJugador']} ) }}
+              {{form_widget(form.nombre, {value : edita[0]['nombre']} )}}<font color="red"> *</font><br>
+              {{form_widget(form.apPaterno, {value : edita[0]['apPaterno']} )}}<font color="red"> *</font><br>
+              {{form_widget(form.apMaterno, {value : edita[0]['apMaterno']} )}}<font color="red"> *</font><br>
+              <br>
+              {{form_widget(form.fNacimiento, {value : edita[0]['fNacimiento']|date('Y-m-d')} )}}
+              <br>
+              {{form_widget(form.correo, {value : edita[0]['correo']} )}}<font color="red"> *</font><br>
+              {{form_widget(form.telefono, {value : edita[0]['telefono']} )}}<font color="red"> *</font><br>
+              {{form_widget(form.profesion, {value : edita[0]['profesion']} )}}<font color="red"> *</font><br>
+              {{form_widget(form.idStatus, {value : edita[0][1]} )}}<font color="red"> * </font>
+              <a>
+                <i class="glyphicon-exclamation-sign glyphicon" rel="tooltip" title="<div style='text-align:left;'><strong>Ingresa el numero adecuado</strong><br>Activo.- 1 <br> Descansando.- 2 <br> Inactivo.- 3</div>" id="tt1" data-html="true">
+                </i>
+              </a><br>
+              <br>
+              {{form_widget(form.idGenero, {value : edita[0][2]} )}}<font color="red"> * </font>
+              <a>
+                <i class="glyphicon-exclamation-sign glyphicon" rel="tooltip" title="<div style='text-align:left;'><strong>Ingresa el numero adecuado</strong> <br> Masculino.- 1 <br> Femenino- 2 <br> Gay.- 3</div>" id="tt2" data-html="true">
+                </i>
+              </a><br>
+              {{form_widget(form.estatura, {value : edita[0]['estatura']} )}}<font color="red"> *</font><br>
+              {{form_widget(form.peso, {value : edita[0]['peso']} )}}<font color="red"> *</font><br>
+              {{form_widget(form.idTiposanguineo, {value : edita[0][3]} )}}<font color="red"> * </font>
+              <a>
+                <i class="glyphicon-exclamation-sign glyphicon" rel="tooltip" title="<div style='text-align:left'><strong>Ingresa el numero adecuado</strong><br>A+: 1 <br> A-: 2 <br> B+: 3 <br> B-: 4 <br> AB+:5 <br> AB-: 6 <br> O+: 7 <br> O-: 8 <br> RH+: 9 <br> RH-: 10</div>" id="tt3" data-html="true">
+                </i>
+              </a>
+              <br>
+             {# {{form_widget(form.foto, {'attr': {'placeholder': 'Foto'|trans}} )}}<font color="red"> *</font><br> #}
+            {{form_end(form)}}
+
+          </div>
+        </div>
+        <div class="col-md-2 tRight">
+          <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Editar" name="jugador[{{edita[0]['nombre']}}]"><i class="glyphicon-ok glyphicon"></i> Actualizar</button>
+          <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_jugadoresAdmin')}}"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
+        </div>
+      </div>
+    </div>
+  
+
+  </form>
+{% endblock %}
