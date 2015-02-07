@@ -551,4 +551,25 @@ class DefaultController extends Controller{
         }
     }
     //-----------------------FINAL CONTROLADOR DE FAFI---------------------------------------------------
+
+    //CONTROLADOR TORNEO
+
+    public function torneosAction(){
+        return $this->render('limubacadministratorBundle:administracion:torneos.html.twig');
+    }
+
+    public function crearTorneoAction(){
+        return $this->render('limubacadministratorBundle:administracion:crearTorneo.html.twig');
+    }
+
+    public function categoriasAction(){
+        return $this->render('limubacadministratorBundle:administracion:categorias.html.twig');
+    }
+
+    public function crearCategoriaAction(){
+        return $this->render('limubacadministratorBundle:administracion:crearCategoria.html.twig');
+    }
+
+    //FINAL CONTROLADOR TORNEO
+
 }
