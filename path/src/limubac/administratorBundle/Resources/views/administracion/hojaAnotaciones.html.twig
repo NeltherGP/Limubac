@@ -1,18 +1,30 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
+<<<<<<< HEAD
 	<form class="form-horizontal" role="form">
+=======
+	<form action="{{ path('limubacadministrator_hojaAnotaciones') }}" method='POST' class="form-horizontal" role="form">
+
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
       {#Encabezado primera parte#}
   		<div class="bordes">
         <div class="formAnotacion form-group">		
     			
           <div class="col-md-3">
+<<<<<<< HEAD
             <input class="form-control" id="EqA" placeholder="Equipo A">
+=======
+
+            <input class="form-control" id="EqA" name="EqA" placeholder="Equipo A">
+
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
           </div>
           
           <label id="VS" class="col-md-1 text-center">VS</label>
           
           <div class="col-md-3">
+<<<<<<< HEAD
             <input class="form-control" id="Eqb" placeholder="Equipo B">
           </div>
           
@@ -22,6 +34,17 @@
           
           <div class="col-md-3">
             <input class="form-control" id="Categoria" placeholder="Categoria">
+=======
+            <input class="form-control" id="Eqb" name="EqB" placeholder="Equipo B">
+          </div>
+          
+          <div class="col-md-2">
+            <input class="form-control" id="Rama" name="Rama" placeholder="Rama">
+          </div>
+          
+          <div class="col-md-3">
+            <input class="form-control" id="Categoria" name="Categoria" placeholder="Categoria">
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
           </div>
 
     		</div>
@@ -29,29 +52,46 @@
     </br>
 
       {#Encabezado segunda parte #}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
     <div class="bordes">
       <div class="formAnotacion form-group">
           {#Fila 1#}
 
             <label for="Lugar" class="col-md-1 control-label text-center">Lugar: </label>
             <div class="col-md-3">
+<<<<<<< HEAD
               <input class="form-control" id="Lugar" placeholder="Lugar">
+=======
+              <input class="form-control" id="Lugar" name="Lugar" placeholder="Lugar">
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
             </div>
 
             <label for="Torneo" class="col-md-1 control-label text-center">Torneo: </label>
             <div class="col-md-3">
+<<<<<<< HEAD
               <input class="form-control" id="Torneo" placeholder="Torneo">
+=======
+              <input class="form-control" id="Torneo" name ="Torneo" placeholder="Torneo">
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
             </div>
 
             <label for="1erjuez" class="col-md-1 control-label text-center">1er. Juez: </label>
             <div class="col-md-3">
+<<<<<<< HEAD
               <input class="form-control" id="1erjuez" placeholder="1er. Juez">
+=======
+              <input class="form-control" id="1erjuez" name="Juez1" placeholder="1er. Juez">
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
             </div>
           {#End Fila 1#}
 
             <div class="clearfix visible-xs-block"></div>
 
           {#Fila 2#}
+<<<<<<< HEAD
             <label for="Fecha" class="col-md-1 control-label text-center">Fecha: </label>
             <div class="col-md-3 Fila2">
               <input class="form-control" id="Fecha" placeholder="Fecha">
@@ -178,4 +218,261 @@
 
      
   	</form>
+=======
+            <label for="Fecha" name = "fecha" class="col-md-1 control-label text-center">Fecha: </label>
+            <div class="col-md-3 Fila2">
+              <input name = "Fecha"class="form-control" id="Fecha" placeholder="Fecha">
+            </div>
+
+
+            <label for="Hora" name="hora" class="col-md-1 control-label text-center">Hora: </label>
+            <div class="col-md-3 Fila2">
+              <input class="form-control" name="Hora"id="Hora" placeholder="Hora">
+
+            </div>
+          
+            <label for="2dojuez" name="juez2" class="col-md-1 control-label text-center">2dojuez: </label>
+            <div class="col-md-3 Fila2">
+              <input name="Juez2"class="form-control" id="2dojuez" placeholder="2do. Juez">
+            </div>
+          </div>
+        </div>
+
+         {#End Fila 2#}
+         	</br>
+         {#marcador 1#}
+
+         	<div class="bordes col-md-6">
+
+	      		<div class="formAnotacion form-group">{#Etiquetas#} 
+	      			<label class="col-md-6 text-center">A</label>
+	      			<label class="col-md-6 text-center">B</label>
+            </div>
+
+            <div class="formAnotacion form-group">
+	      			<label class="col-md-1 text-center"></label> {#espacio#}	
+	      			<label class="col-md-1 text-center">#</label>
+	      			<label class="col-md-1 text-center">x1</label>
+	      			<label class="col-md-1 text-center">x2</label>
+	      			<label class="col-md-1 text-center">x3</label>
+
+	      			<label  class="col-md-3  col-lg-3 text-center"></label>{#espacio#}
+	      			
+
+	      			<label class="col-md-1 text-center">#</label>
+	      			<label class="col-md-1 text-center">x1</label>
+	      			<label class="col-md-1 text-center">x2</label>
+	      			<label class="col-md-1 text-center">x3</label>
+           </div> {#etiquetas#}
+
+           <div class="formAnotacion form-group">
+
+              {#Grupo 0#}
+  	      			<div class="col-md-2 ">
+                	<input class="form-control" id="numeroJugador" name="numjugador" placeholder="num">
+              	</div>
+               
+              		<div class="radio col-md-1 text-center">
+                		<label>
+  						        <input type="radio" name="optionsRadios" id="optionsRadios1" value="x1" >  
+   						      </label>
+              		</div>
+
+              		<div class="radio col-md-1 text-center">
+                		<label>
+  						         <input type="radio" name="optionsRadios" id="optionsRadios1" value="x2" >  
+   						      </label>
+              		</div>
+
+              		<div class="radio col-md-1 text-center">
+                		<label>
+  						         <input type="radio" name="optionsRadios" id="optionsRadios1" value="x3" >  
+   						      </label>
+              		</div>
+               {#END Grupo 0#}
+
+            		<label  class="col-md-2 text-center"></label>{#espacio#}
+              {#Grupo 1#}
+            		<div class="col-md-2 ">
+              			<input class="form-control" id="numerojugador1" placeholder="num">
+            		</div>
+
+            		<div class="radio col-md-1 text-center">
+              		<label>
+						          <input type="radio" name="optionsRadios1" id="optionsRadios1" value="x1" >  
+ 						      </label>
+            		</div>
+
+            		<div class="radio col-md-1 text-center">
+              		<label>
+						         <input type="radio" name="optionsRadios1" id="optionsRadios1" value="x2" >  
+ 						      </label>
+            		</div>
+
+            		<div class="radio col-md-1 text-center">
+              		<label>
+						        <input type="radio" name="optionsRadios1" id="optionsRadios1" value="x3" >  
+ 						      </label>
+            		</div>
+                 {#END Grupo 1#}
+           </div>
+             
+
+           <div class="formAnotacion form-group">
+              {#Grupo 2#}
+                <div class="col-md-2 ">
+                  <input class="form-control" id="numeroJugador2" placeholder="num">
+                </div>
+               
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                      <input type="radio" name="optionsRadios2" id="optionsRadios2" value="x1" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios2" id="optionsRadios2" value="x2" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios2" id="optionsRadios2" value="x3" >  
+                    </label>
+                  </div>
+               {#END Grupo 2#}
+               <label  class="col-md-2 text-center"></label>{#espacio#}
+               {#Grupo 3#}
+                <div class="col-md-2 ">
+                  <input class="form-control" id="numeroJugador3" placeholder="num">
+                </div>
+               
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                      <input type="radio" name="optionsRadios3" id="optionsRadios3" value="x1" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios3" id="optionsRadios3" value="x2" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios3" id="optionsRadios3" value="x3" >  
+                    </label>
+                  </div>
+               {#END Grupo 3#}
+	      	 </div>
+
+           <div class="formAnotacion form-group">
+              {#Grupo 4#}
+                <div class="col-md-2 ">
+                  <input class="form-control" id="numeroJugador4" placeholder="num">
+                </div>
+               
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                      <input type="radio" name="optionsRadios4" id="optionsRadios4" value="x1" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios4" id="optionsRadios4" value="x2" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios4" id="optionsRadios4" value="x3" >  
+                    </label>
+                  </div>
+               {#END Grupo 4#}
+               <label  class="col-md-2 text-center"></label>{#espacio#}
+               {#Grupo 5#}
+                <div class="col-md-2 ">
+                  <input class="form-control" id="numeroJugador5" placeholder="num">
+                </div>
+               
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                      <input type="radio" name="optionsRadios5" id="optionsRadios5" value="x1" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios5" id="optionsRadios5" value="x2" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios5" id="optionsRadios5" value="x3" >  
+                    </label>
+                  </div>
+               {#END Grupo 5#}
+           </div>
+
+            <div class="formAnotacion form-group">
+              {#Grupo 6#}
+                <div class="col-md-2 ">
+                  <input class="form-control" id="numeroJugador6" placeholder="num">
+                </div>
+               
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                      <input type="radio" name="optionsRadios6" id="optionsRadios6" value="x1" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios6" id="optionsRadios6" value="x2" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios6" id="optionsRadios6" value="x3" >  
+                    </label>
+                  </div>
+               {#END Grupo 6#}
+               <label  class="col-md-2 text-center"></label>{#espacio#}
+               {#Grupo 7#}
+                <div class="col-md-2 ">
+                  <input class="form-control" id="numeroJugador7" placeholder="num">
+                </div>
+               
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                      <input type="radio" name="optionsRadios7" id="optionsRadios7" value="x1" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios7" id="optionsRadios7" value="x2" >  
+                    </label>
+                  </div>
+
+                  <div class="radio col-md-1 text-center">
+                    <label>
+                       <input type="radio" name="optionsRadios7" id="optionsRadios7" value="x3" >  
+                    </label>
+                  </div>
+               {#END Grupo 7#}
+            </div>
+
+	      		</div>
+      		</div>
+        <input type="submit" />
+         {#End marcador 1#}
+    </form>
+
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
 {% endblock %}

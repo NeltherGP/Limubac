@@ -1,0 +1,37 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+	<form class="form-horizontal" role="form" action="../app_dev.php/equipo" method="post">
+      {#Encabezado primera parte#}
+		<label class="col-md-1">Equipos</label>
+  		<div class="bordes">
+		<div class="formAnotacion form-group">
+			<div class="col-md-3">		    			
+				<select class="form-control input-sm" name="opciones">
+					{% for equipo in listEquip %}
+						<option value="{{equipo.idEquipo}}">{{equipo.nombre}}</option>
+					{% endfor%}
+				</select>
+			</div>	
+			<input type="submit" class="btn btn-primary col-md-1">
+			
+		</div>
+        </div>
+	</form>
+	
+		</br>
+	<form class="form-horizontal" role="form" action="../app_dev.php/equipos" method="post">
+		
+		<div class="bordes">
+		<div class="formAnotacion form-group">
+			<label class="col-md-1">Agregar un equipo</label>
+			<div class="col-md-3">		    			
+				<input class="form-control" name="NuevoEquipo" placeholder="Nombre del nuevo equipo">
+			</div>	
+			<button class="btn btn-primary col-md-1" type="submit">Agregar</button>
+		</div>
+        </div>
+		
+     
+  	</form>
+{% endblock %}

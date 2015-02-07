@@ -5,7 +5,6 @@ namespace limubac\administratorBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use limubac\administratorBundle\Entity\Jugador;
 use limubac\administratorBundle\Entity\Fotos;
-use limubac\administratorBundle\Entity\TipoSanguineo;
 use limubac\administratorBundle\Form\Type\JugadorType;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -14,13 +13,20 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use limubac\administratorBundle\Models\Document;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use limubac\administratorBundle\claseForm\hojaAnotacion;
+use Symfony\Component\HttpFoundation\Response;
+use limubac\administratorBundle\Entity\Equipo;
+use limubac\administratorBundle\Entity\Integra;
+use limubac\administratorBundle\Entity\TipoSanguineo;
+
+
+
 
 
 class DefaultController extends Controller{
+    
+	public function indexAction($name){
 
- public $idUserPics = 0;
-
-    public function indexAction($name){
         return $this->render('limubacadministratorBundle:Default:index.html.twig', array('name' => $name));
     }
 
@@ -29,10 +35,162 @@ class DefaultController extends Controller{
     }
 
     public function hojaAnotacionesAction(){
+
+        
+
+        $request = $this->getRequest();      
+
+        echo $request->getMethod() ;//Quitar o comentar
+
+
+        if($request->getMethod() == 'POST')//si se envia el formulario
+            {
+              $datos = new hojaAnotacion();
+
+              $validator = $this->get('validator'); 
+            
+              
+
+                $datos->setEqA($_POST["EqA"]);
+                $datos->setEqB($_POST["EqB"]);
+                $datos->setRama($_POST["Rama"]);
+                $datos->setCategoria($_POST["Categoria"]);
+                $datos->setLugar($_POST["Lugar"]);
+                $datos->setTorneo($_POST["Torneo"]);
+                $datos->setFecha($_POST["Fecha"]);
+                $datos->setHora($_POST["Hora"]);
+                $datos->setJuez1($_POST["Juez1"]);
+                $datos->setJuez2($_POST["Juez2"]);
+               
+
+                $errors = $validator->validate($datos);
+
+                    if (count($errors) > 0) {
+
+                      $errorsString = (string) $errors;
+                    
+                    echo $errorsString;
+
+                    }
+
+            }
+
     	return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig');
     }
 
-    public function jugadoresAdminAction(){
+	//Edgar
+	
+	public function equiposAction(){
+
+		if(isset($_POST['NuevoEquipo'])){
+			$equipo = new Equipo();
+			$equipo->setNombre($_POST['NuevoEquipo']);
+			
+			$Manager = $this->getDoctrine()->getManager();
+			$Manager->persist($equipo);
+			$Manager->flush();
+		}
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+		
+		$ListaEquipos = $repositorio->findAll();
+    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('listEquip' =>$ListaEquipos));
+    }
+	
+	public function equipoAction(){
+		if(isset($_POST['accion'])){
+			switch($_POST['accion']){
+				case 'Nuevo':
+					$integra = new Integra();
+					$integra->setNoPlayera(intval($_POST['NoJugador']));
+					
+					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+					$equipo = $repositorio->find($_POST['opciones']);
+					$integra->setIdEquipo($equipo);
+					
+					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+					$jugador = $repositorio->find($_POST['idJugador']);
+					$integra->setIdJugador($jugador);
+					
+					$Manager = $this->getDoctrine()->getManager();
+					$Manager->persist($integra);
+					$Manager->flush();
+				break;
+			}
+		
+		}
+	
+		if(isset($_POST['opciones']) and isset($_POST['idCapitan'])){
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$equipo = $repositorio->find($_POST['opciones']);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$Capi = $repositorio->find($_POST['idCapitan']);
+			
+			$equipo->setIdCapitan($Capi);
+			
+			$Manager = $this->getDoctrine()->getManager();
+			$Manager->persist($equipo);
+			$Manager->flush();
+		}
+		
+		if(isset($_POST['opciones'])){
+		
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$equipo = $repositorio->find($_POST['opciones']);
+			if($equipo->getIdCapitan()==null){
+				$equipo->setIdCapitan(new Jugador);
+			}
+			$Manager = $this->getDoctrine()->getManager();
+			
+			$q = "Select IDENTITY(i.idEquipo),j.idJugador,i.noPlayera,j.nombre FROM limubacadministratorBundle:Integra i JOIN limubacadministratorBundle:Jugador j where i.idEquipo='".$_POST['opciones']."'";
+			$query = $Manager->createQuery($q);
+			$jugadores = $query->getResult();
+			//Capitan
+			$Capi = $equipo->getIdCapitan();
+			
+			//Representante
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$IDRep = $equipo->getRepresentante();
+			
+			if($IDRep==NULL){
+				$Representante = array(
+					'IdJugador'=>0,
+					'nombre'=>'No Asignado'
+				);
+			}else{
+				$Representante = $repositorio->find($IDRep);
+			}
+			
+			//Auxiliar
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$IDAux = $equipo->getAuxiliar();
+			
+			if($IDAux==NULL){
+				$Auxiliar = array(
+					'IdJugador'=>0,
+					'nombre'=>'No Asignado'
+				);
+			}else{
+				$Auxiliar = $repositorio->find($IDAux);
+			}
+			
+			if(count($Capi)==0){
+				$Capi = array(
+					'noPlayera'=>0,
+					'nombre'=>"No Asignado"
+				);
+			}
+		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar));
+		
+		}else{//si no esta definido el valor del equipo
+		
+		}
+	}
+	//End Edgar
+
+	//-----------------------INICIO CONTROLADOR DE FAFI---------------------------------------------------
+	public function jugadoresAdminAction(){
+
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
         $queryPlayers = $repository->createQueryBuilder('p')
             ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno','p.fNacimiento','p.correo','p.telefono','p.estatura','p.peso','tsan.tipoSangre')
@@ -181,6 +339,7 @@ class DefaultController extends Controller{
             return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
         }
     }
+
     /**
      * @Route("/photo/{number}", name="photo", requirements={"id" = "\d+"})
      */
@@ -233,11 +392,16 @@ class DefaultController extends Controller{
         else{
             echo "Error!";
         }
+
         */
     }
 
+   
+	
     public function buscarAction(){
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
+
+
     }
 
     public function editarAction(){
@@ -292,7 +456,10 @@ class DefaultController extends Controller{
         $resul = $q->execute();
 
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
-    } 
+
+    }
+
+	
 
     public function uploadosAction(Request $request){
         //return $this->render('limubacadministratorBundle:administracion:uploados.html.twig');
@@ -358,7 +525,6 @@ class DefaultController extends Controller{
             return $this->render('limubacadministratorBundle:administracion:uploados.html.twig',array('status'=>$status,'message'=>$message, 'person' => $per));
         }
     }
-
     public function uploadAction(Request $request){
         if ($request->getMethod() == 'POST') {
             $image = $request->files->get('img');
@@ -395,7 +561,10 @@ class DefaultController extends Controller{
         } else{
             return $this->render('limubacadministratorBundle:administracion:upload.html.twig');
         }
-    }    
+
+    }
+    //-----------------------FINAL CONTROLADOR DE FAFI---------------------------------------------------
+
 }
 
 

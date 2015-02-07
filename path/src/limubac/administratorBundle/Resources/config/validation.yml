@@ -1,0 +1,26 @@
+
+
+limubac\administratorBundle\claseForm\hojaAnotacion:
+    properties:
+        EqA:
+            - NotBlank: ~
+        EqB:
+            - NotBlank: ~
+        Rama:
+        - NotBlank: ~
+        Categoria:
+        - NotBlank: ~
+        Lugar:
+        - NotBlank: ~
+        Torneo:
+        - NotBlank: ~
+        Fecha:
+        - NotBlank: ~
+        - Date : ~
+        Hora:
+        - NotBlank: ~
+        - Time : ~
+        Juez1:
+        - NotBlank: ~
+        Juez2:
+        - NotBlank: ~

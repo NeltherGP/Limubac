@@ -6,6 +6,16 @@ limubacadministrator_hojaAnotaciones:
     path:     /hojaAnotaciones
     defaults: { _controller: limubacadministratorBundle:Default:hojaAnotaciones}
 
+
+limubacadministrator_equipos:
+    path:     /equipos
+    defaults: { _controller: limubacadministratorBundle:Default:equipos}
+
+limubacadministrator_equipo:
+    path:     /equipo
+    defaults: { _controller: limubacadministratorBundle:Default:equipo}
+
+
 limubacadministrator_jugadoresAdmin:
     path:     /jugadoresAdmin
     defaults: { _controller: limubacadministratorBundle:Default:jugadoresAdmin}
@@ -16,7 +26,7 @@ limubacadministrator_addjugador:
 
 limubacadministrator_upload:
     path:     /upload
-    defaults: { _controller: limubacadministratorBundle:Default:upload}
+    defaults: { _controller: limubacadministratorBundle:Upload:upload}
 
 limubacadministrator_uploados:
     path:     /uploados
