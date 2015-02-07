@@ -89,6 +89,7 @@ class DefaultController extends Controller{
     }
 	
 	public function equipoAction(){
+		
 		if(isset($_POST['accion'])){
 			switch($_POST['accion']){
 				case 'Nuevo':
@@ -112,13 +113,23 @@ class DefaultController extends Controller{
 		}
 	
 		if(isset($_POST['opciones']) and isset($_POST['idCapitan'])){
+			//print_r($_POST['opciones']);
+			echo "dos";
+			print_r($_POST['idCapitan']);
+			print_r($_POST['idRepresentante']);
+			print_r($_POST['idAuxiliar']);
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_POST['opciones']);
 			
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			$Capi = $repositorio->find($_POST['idCapitan']);
+			//$Capi = $repositorio->find($_POST['idCapitan']);
 			
-			$equipo->setIdCapitan($Capi);
+			$queryPlayers = $repositorio->createQueryBuilder('c')
+            ->select('c.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+            ->getQuery();
+        $Capi = $queryPlayers->getResult();
+			
+			$equipo->setIdCapitan($_POST['idCapitan']);
 			
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($equipo);
@@ -126,7 +137,8 @@ class DefaultController extends Controller{
 		}
 		
 		if(isset($_POST['opciones'])){
-		
+			print_r($_POST['opciones']);
+			echo "tres";
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_POST['opciones']);
 			if($equipo->getIdCapitan()==null){
@@ -139,6 +151,7 @@ class DefaultController extends Controller{
 			$jugadores = $query->getResult();
 			//Capitan
 			$Capi = $equipo->getIdCapitan();
+			
 			
 			//Representante
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
@@ -172,10 +185,12 @@ class DefaultController extends Controller{
 					'nombre'=>"No Asignado"
 				);
 			}
+			//print_r($Capi);
 		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar));
 		
 		}else{//si no esta definido el valor del equipo
-		
+			
+			echo "tres";
 		}
 	}
 	//End Edgar
