@@ -182,9 +182,13 @@ class DefaultController extends Controller{
 			}//end capi
 			
 			//Jugadores
-			$Manager = $this->getDoctrine()->getManager();
-			$q = "Select IDENTITY(i.idEquipo),j.idJugador,i.noPlayera,j.nombre FROM limubacadministratorBundle:Integra i JOIN limubacadministratorBundle:Jugador j where i.idEquipo='".$_POST['opciones']."'";
-			$query = $Manager->createQuery($q);
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Integra");
+				$query = $repositorio->createQueryBuilder('i')
+				->select('IDENTITY(i.idJugador)','j.nombre','j.apPaterno','j.apMaterno','i.noPlayera')
+				->join('limubacadministratorBundle:Jugador', 'j', 'WITH' ,'j.idJugador = i.idJugador')
+				->where('i.idEquipo = '.$equipo->getIdEquipo())
+				->getQuery();
+			
 			$jugadores = $query->getResult();
 			//end Jugadores
 			
