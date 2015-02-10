@@ -111,25 +111,40 @@ class DefaultController extends Controller{
 			}
 		
 		}
-	
+		
+		//Agregar o modificar capitan
 		if(isset($_POST['opciones']) and isset($_POST['idCapitan'])){
-			//print_r($_POST['opciones']);
-			echo "dos";
-			print_r($_POST['idCapitan']);
-			print_r($_POST['idRepresentante']);
-			print_r($_POST['idAuxiliar']);
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_POST['opciones']);
 			
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			//$Capi = $repositorio->find($_POST['idCapitan']);
 			
-			$queryPlayers = $repositorio->createQueryBuilder('c')
-            ->select('c.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+			$queryPlayers = $repositorio->createQueryBuilder('p')
+            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
             ->getQuery();
         $Capi = $queryPlayers->getResult();
 			
-			$equipo->setIdCapitan($_POST['idCapitan']);
+			$equipo->setIdCapitan($Capi);
+			
+			$Manager = $this->getDoctrine()->getManager();
+			$Manager->persist($equipo);
+			$Manager->flush();
+		}
+		
+		//Agregar o modificar Representante
+		if(isset($_POST['opciones']) and isset($_POST['idRepresentante'])){
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$equipo = $repositorio->find($_POST['opciones']);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			
+			/*$queryPlayers = $repositorio->createQueryBuilder('p')
+            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+            ->getQuery();
+			
+			$Repre = $queryPlayers->getResult();
+			*/
+			$equipo->setIdRepresentante($_POST['idRepresentante']);
 			
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($equipo);
@@ -137,20 +152,27 @@ class DefaultController extends Controller{
 		}
 		
 		if(isset($_POST['opciones'])){
-			print_r($_POST['opciones']);
-			echo "tres";
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_POST['opciones']);
-			if($equipo->getIdCapitan()==null){
+			/**if($equipo->getIdCapitan()==null){
 				$equipo->setIdCapitan(new Jugador);
-			}
+				echo "Sin capi";
+			}*/
+			
+			//Capitan
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$query = $repositorio->createQueryBuilder('p')
+            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+            ->where('p.idJugador = '.$equipo->getIdCapitan()->getIdJugador())
+            ->getQuery();
+			
+			$Capi = $query->getResult();
+			
 			$Manager = $this->getDoctrine()->getManager();
 			
 			$q = "Select IDENTITY(i.idEquipo),j.idJugador,i.noPlayera,j.nombre FROM limubacadministratorBundle:Integra i JOIN limubacadministratorBundle:Jugador j where i.idEquipo='".$_POST['opciones']."'";
 			$query = $Manager->createQuery($q);
 			$jugadores = $query->getResult();
-			//Capitan
-			$Capi = $equipo->getIdCapitan();
 			
 			
 			//Representante
@@ -178,19 +200,20 @@ class DefaultController extends Controller{
 			}else{
 				$Auxiliar = $repositorio->find($IDAux);
 			}
-			
-			if(count($Capi)==0){
-				$Capi = array(
-					'noPlayera'=>0,
+			print_r($Capi);
+			/**if($Capi[0]["idJugador"]==0){
+				$Capi = array( array(
+					'IdJugador'=>0,
 					'nombre'=>"No Asignado"
-				);
-			}
-			//print_r($Capi);
+					
+				));
+			}*/
+			
 		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar));
 		
 		}else{//si no esta definido el valor del equipo
 			
-			echo "tres";
+			echo "cuatro";
 		}
 	}
 	//End Edgar
@@ -403,7 +426,6 @@ class DefaultController extends Controller{
 	
     public function buscarAction(){
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
-
     }
 
     public function editarAction(){

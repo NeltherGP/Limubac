@@ -13,17 +13,19 @@
 	</br>
 	
 	<form class="formAnotacion form-group col-md-12" action="../app_dev.php/equipo" method="post">
+		{% for capi in capitan %}
 		<label class="col-md-2">Capitan</label>
-		<div class="col-md-1">		    			
-			<input class="form-control" name="idCapitan" placeholder="{{equipo.idCapitan.idJugador}}">
+		<div class="col-md-1">		    	
+			<input class="form-control" name="idCapitan" placeholder="{{capi.idJugador}}">
 		</div>
 		<div class="col-md-4">
-			<input class="form-control" name="NomCapitan" placeholder="{{equipo.idCapitan.nombre}}">
+			<input class="form-control" name="NomCapitan" placeholder="{{capi.nombre}} {{capi.apPaterno}} {{capi.apMaterno}}">
 		</div>
 		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
 		<div class="col-md-3">
 			<button class="btn btn-primary" type="submit">Actualizar</button>
 		</div>
+		{% endfor%}
 	<!--</form>
 	
 	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">-->
@@ -33,7 +35,7 @@
 			<input class="form-control" name="idRepresentante" placeholder="{{equipo.representante}}">
 		</div>
 		<div class="col-md-4">
-			<input class="form-control" name="NomCapitan" placeholder="{{representante.nombre}}">
+			<input class="form-control" name="NomRepresentante" placeholder="{{representante.nombre}}">
 		</div>
 		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
 		<div class="col-md-3">
