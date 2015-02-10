@@ -118,11 +118,7 @@ class DefaultController extends Controller{
 			$equipo = $repositorio->find($_POST['opciones']);
 			
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			
-			$queryPlayers = $repositorio->createQueryBuilder('p')
-            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
-            ->getQuery();
-        $Capi = $queryPlayers->getResult();
+			$Capi = $repositorio->find($_POST['idCapitan']);
 			
 			$equipo->setIdCapitan($Capi);
 			
@@ -137,77 +133,96 @@ class DefaultController extends Controller{
 			$equipo = $repositorio->find($_POST['opciones']);
 			
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			
-			/*$queryPlayers = $repositorio->createQueryBuilder('p')
-            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
-            ->getQuery();
-			
-			$Repre = $queryPlayers->getResult();
-			*/
-			$equipo->setIdRepresentante($_POST['idRepresentante']);
+			$Repre= $repositorio->find($_POST['idRepresentante']);
+
+			$equipo->setRepresentante($Repre);
 			
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($equipo);
 			$Manager->flush();
 		}
 		
+		//Agregar o modificar Auxiliar
+		if(isset($_POST['opciones']) and isset($_POST['idAuxiliar'])){
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$equipo = $repositorio->find($_POST['opciones']);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$Auxi= $repositorio->find($_POST['idAuxiliar']);
+			
+			$equipo->setAuxiliar($Auxi);
+			
+			$Manager = $this->getDoctrine()->getManager();
+			$Manager->persist($equipo);
+			$Manager->flush();
+		}
+		
+		//Llenado de los expacios
 		if(isset($_POST['opciones'])){
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_POST['opciones']);
-			/**if($equipo->getIdCapitan()==null){
-				$equipo->setIdCapitan(new Jugador);
-				echo "Sin capi";
-			}*/
 			
 			//Capitan
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			$query = $repositorio->createQueryBuilder('p')
-            ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
-            ->where('p.idJugador = '.$equipo->getIdCapitan()->getIdJugador())
-            ->getQuery();
+			if($equipo->getIdCapitan()==null){
+				$Capi = array( array(
+					'idJugador'=>0,
+					'nombre'=>"No Asignado",
+					'apPaterno'=>"",
+					'apMaterno'=>""
+				));
+			}else{
 			
-			$Capi = $query->getResult();
+				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+				$query = $repositorio->createQueryBuilder('p')
+				->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+				->where('p.idJugador = '.$equipo->getIdCapitan()->getIdJugador())
+				->getQuery();
 			
+				$Capi = $query->getResult();
+			}//end capi
+			
+			//Jugadores
 			$Manager = $this->getDoctrine()->getManager();
-			
 			$q = "Select IDENTITY(i.idEquipo),j.idJugador,i.noPlayera,j.nombre FROM limubacadministratorBundle:Integra i JOIN limubacadministratorBundle:Jugador j where i.idEquipo='".$_POST['opciones']."'";
 			$query = $Manager->createQuery($q);
 			$jugadores = $query->getResult();
-			
+			//end Jugadores
 			
 			//Representante
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			$IDRep = $equipo->getRepresentante();
-			
-			if($IDRep==NULL){
-				$Representante = array(
-					'IdJugador'=>0,
-					'nombre'=>'No Asignado'
-				);
+			if($equipo->getRepresentante()==null){
+				$Representante = array(array(
+					'idJugador'=>0,
+					'nombre'=>'No Asignado',
+					'apPaterno'=>"",
+					'apMaterno'=>""
+				));
 			}else{
-				$Representante = $repositorio->find($IDRep);
-			}
+				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+				$query = $repositorio->createQueryBuilder('p')
+				->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+				->where('p.idJugador = '.$equipo->getRepresentante()->getIdJugador())
+				->getQuery();
+			
+				$Representante = $query->getResult();
+			}//end Representante
 			
 			//Auxiliar
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			$IDAux = $equipo->getAuxiliar();
-			
-			if($IDAux==NULL){
-				$Auxiliar = array(
-					'IdJugador'=>0,
-					'nombre'=>'No Asignado'
-				);
-			}else{
-				$Auxiliar = $repositorio->find($IDAux);
-			}
-			print_r($Capi);
-			/**if($Capi[0]["idJugador"]==0){
-				$Capi = array( array(
-					'IdJugador'=>0,
-					'nombre'=>"No Asignado"
-					
+			if($equipo->getAuxiliar()==null){
+				$Auxiliar = array(array(
+					'idJugador'=>0,
+					'nombre'=>'No Asignado',
+					'apPaterno'=>"",
+					'apMaterno'=>""
 				));
-			}*/
+			}else{
+				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+				$query = $repositorio->createQueryBuilder('p')
+				->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+				->where('p.idJugador = '.$equipo->getAuxiliar()->getIdJugador())
+				->getQuery();
+			
+				$Auxiliar = $query->getResult();
+			}
 			
 		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar));
 		

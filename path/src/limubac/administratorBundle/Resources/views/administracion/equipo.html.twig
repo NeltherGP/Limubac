@@ -26,36 +26,38 @@
 			<button class="btn btn-primary" type="submit">Actualizar</button>
 		</div>
 		{% endfor%}
-	<!--</form>
+	</form>
 	
-	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">-->
-		<br><br><br>
+	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
+		{% for Rep in representante %}
 		<label class="col-md-2">Representante</label>
 		<div class="col-md-1">		    			
-			<input class="form-control" name="idRepresentante" placeholder="{{equipo.representante}}">
+			<input class="form-control" name="idRepresentante" placeholder="{{Rep.idJugador}}">
 		</div>
 		<div class="col-md-4">
-			<input class="form-control" name="NomRepresentante" placeholder="{{representante.nombre}}">
+			<input class="form-control" name="NomRepresentante" placeholder="{{Rep.nombre}} {{Rep.apPaterno}} {{Rep.apMaterno}}">
 		</div>
 		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
 		<div class="col-md-3">
 			<button class="btn btn-primary" type="submit">Actualizar</button>
 		</div>
-	<!--</form>
+		{%endfor%}
+	</form>
 	
-	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">-->
-		<br><br><br>
+	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
+	{% for Aux in auxiliar %}
 		<label class="col-md-2">Auxiliar</label>
 		<div class="col-md-1">		    			
-			<input class="form-control" name="idAuxiliar" placeholder="{{equipo.auxiliar}}">
+			<input class="form-control" name="idAuxiliar" placeholder="{{Aux.idJugador}}">
 		</div>
 		<div class="col-md-4">
-			<input class="form-control" name="NomAuxiliar" placeholder="{{auxiliar.nombre}}">
+			<input class="form-control" name="NomAuxiliar" placeholder="{{Aux.nombre}} {{Aux.apPaterno}} {{Aux.apMaterno}}">
 		</div>
 		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
 		<div class="col-md-3">
 			<button class="btn btn-primary" type="submit">Actualizar</button>
 		</div>
+		{%endfor%}
 	</form>
 	
 	<div class="row-fluid borBox btn-dashboard">
