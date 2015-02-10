@@ -1,0 +1,32 @@
+<?php
+
+namespace limubac\administratorBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Sede
+ *
+ * @ORM\Table(name="sede")
+ * @ORM\Entity
+ */
+class Sede
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=35, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_sede", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idSede;
+
+
+}

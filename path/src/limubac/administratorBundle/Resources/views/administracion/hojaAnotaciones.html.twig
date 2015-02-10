@@ -1,21 +1,40 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
+<<<<<<< HEAD
+	<form class="form-horizontal" role="form">
+=======
 	<form action="{{ path('limubacadministrator_hojaAnotaciones') }}" method='POST' class="form-horizontal" role="form">
 
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
       {#Encabezado primera parte#}
   		<div class="bordes">
         <div class="formAnotacion form-group">		
     			
           <div class="col-md-3">
+<<<<<<< HEAD
+            <input class="form-control" id="EqA" placeholder="Equipo A">
+=======
 
             <input class="form-control" id="EqA" name="EqA" placeholder="Equipo A">
 
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
           </div>
           
           <label id="VS" class="col-md-1 text-center">VS</label>
           
           <div class="col-md-3">
+<<<<<<< HEAD
+            <input class="form-control" id="Eqb" placeholder="Equipo B">
+          </div>
+          
+          <div class="col-md-2">
+            <input class="form-control" id="Rama" placeholder="Rama">
+          </div>
+          
+          <div class="col-md-3">
+            <input class="form-control" id="Categoria" placeholder="Categoria">
+=======
             <input class="form-control" id="Eqb" name="EqB" placeholder="Equipo B">
           </div>
           
@@ -25,6 +44,7 @@
           
           <div class="col-md-3">
             <input class="form-control" id="Categoria" name="Categoria" placeholder="Categoria">
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
           </div>
 
     		</div>
@@ -32,30 +52,173 @@
     </br>
 
       {#Encabezado segunda parte #}
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
     <div class="bordes">
       <div class="formAnotacion form-group">
           {#Fila 1#}
 
             <label for="Lugar" class="col-md-1 control-label text-center">Lugar: </label>
             <div class="col-md-3">
+<<<<<<< HEAD
+              <input class="form-control" id="Lugar" placeholder="Lugar">
+=======
               <input class="form-control" id="Lugar" name="Lugar" placeholder="Lugar">
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
             </div>
 
             <label for="Torneo" class="col-md-1 control-label text-center">Torneo: </label>
             <div class="col-md-3">
+<<<<<<< HEAD
+              <input class="form-control" id="Torneo" placeholder="Torneo">
+=======
               <input class="form-control" id="Torneo" name ="Torneo" placeholder="Torneo">
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
             </div>
 
             <label for="1erjuez" class="col-md-1 control-label text-center">1er. Juez: </label>
             <div class="col-md-3">
+<<<<<<< HEAD
+              <input class="form-control" id="1erjuez" placeholder="1er. Juez">
+=======
               <input class="form-control" id="1erjuez" name="Juez1" placeholder="1er. Juez">
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
             </div>
           {#End Fila 1#}
 
             <div class="clearfix visible-xs-block"></div>
 
           {#Fila 2#}
+<<<<<<< HEAD
+            <label for="Fecha" class="col-md-1 control-label text-center">Fecha: </label>
+            <div class="col-md-3 Fila2">
+              <input class="form-control" id="Fecha" placeholder="Fecha">
+            </div>
+
+            <label for="Hora" class="col-md-1 control-label text-center">Hora: </label>
+            <div class="col-md-3 Fila2">
+              <input class="form-control" id="Hora" placeholder="Hora">
+            </div>
+          
+            <label for="2dojuez" class="col-md-1 control-label text-center">2dojuez: </label>
+            <div class="col-md-3 Fila2">
+              <input class="form-control" id="2dojuez" placeholder="2do. Juez">
+            </div>
+          </div>
+        </div>
+          {#End Fila 2#}
+        </br>
+          {#Detalles equipo A#}
+
+          <div class="bordes">
+            <div class="formAnotacion form-group">
+              <label class="col-md-3 control-label  ">Equipo A: "Nombre del equipo" </label>
+              <label class="col-md-1 control-label">Score: </label>
+              <div class="col-md-1">
+                <input class="form-control" id="ScoreTxt">
+              </div>
+            </div>
+            <h3>&nbspFaltas</h3>
+
+          <div class="formAnotacion form-group ">
+              <label class="col-md-1"></label>
+              <div class="col-md-4 bordesFaltas">           
+                  
+                  <label class="col-md-4 control-label  ">Faltas 1T: </label>
+
+                  <div class="col-md-4">
+                    <input class="form-control" id="Faltas1t1" placeholder="1er">
+                  </div>
+
+                  <div class="col-md-4">
+                    <input class="form-control" id="Faltas1t2" placeholder="2do">
+                  </div>
+
+              </div>
+             <label class="col-md-1"></label>
+
+              <div class="col-md-4 bordesFaltas">           
+                  <label class="col-md-4 control-label  ">Faltas 2T: </label>
+
+                  <div class="col-md-4">
+                    <input class="form-control" id="Faltas2t1" placeholder="1er">
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <input class="form-control" id="Faltas2t2" placeholder="2do">
+                  </div>
+
+              </div><div class="col-md-2 " style="height: 46px;"></div>
+
+          {#Control faltas por jugador#}
+          <div id="jugadorFaltoso">
+           <div id="jugadorFaltas">
+
+                <div class="col-md-1 margen-top">
+                  <input class="form-control" id="noLic" placeholder="No.Lic">
+                </div>
+
+                <div class="col-md-6 margen-top">
+                  <input class="form-control" id="nombreJugadorFaltas" placeholder="Nombre">
+                </div>
+
+                <div class="col-md-1 margen-top">
+                  <input class="form-control" id="numeroFaltas" placeholder="Numero">
+                </div>
+
+                <div class="col-md-1 margen-top">
+                  <input class="form-control" id="nquipo" placeholder="E">
+                </div>
+
+                <div class="col-md-1 margen-top">
+                  <input class="form-control" id="numFaltas" placeholder="#Faltas">
+                </div>
+                
+                <button class="btn btn-primary col-md-1 margen-top añadirF" type="button">Añadir</button><div class="col-md-1 margen-top" style="height: 46px;"></div>
+
+            </div>
+          </div>
+
+          {#End Control faltas por jugador#}
+           <h3>&nbspAnotaciones</h3>
+           {#Control anotaciones por jugador#}
+
+           <div id="jugadorAnotador">
+               <div id="jugadorAnotacion">              
+                  <div class="col-md-5 margen-top">
+                    <input class="form-control" id="nombreAnotacion" placholder="Nombre">
+                  </div>
+                  <label class= "col-md-1 text-right margen-top">1x</label>
+                  <div class="col-md-1 margen-top">
+                      <input class="form-control" id="antc1" value="0">
+                  </div>
+
+                  <label class= "col-md-1 text-right margen-top">2x</label>
+                  <div class="col-md-1 margen-top">
+                      <input class="form-control" id="antc2" value="0">
+                  </div>
+
+                  <label class= "col-md-1 text-right margen-top">3x</label>
+                  <div class="col-md-1 margen-top">
+                      <input class="form-control" id="antc3" value="0">
+                  </div>
+
+                  <button class="btn btn-primary col-md-1 añadirA margen-top" type="button">Añadir</button>
+
+               </div>
+           </div>
+
+           {#End anotaciones por jugador#}
+          </div>
+
+
+          </div> {#End Detalles equipo A#}
+
+     
+  	</form>
+=======
             <label for="Fecha" name = "fecha" class="col-md-1 control-label text-center">Fecha: </label>
             <div class="col-md-3 Fila2">
               <input name = "Fecha"class="form-control" id="Fecha" placeholder="Fecha">
@@ -311,4 +474,5 @@
          {#End marcador 1#}
     </form>
 
+>>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
 {% endblock %}
