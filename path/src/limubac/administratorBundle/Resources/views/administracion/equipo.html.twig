@@ -13,59 +13,70 @@
 	</br>
 	
 	<form class="formAnotacion form-group col-md-12" action="../app_dev.php/equipo" method="post">
+		{% for capi in capitan %}
 		<label class="col-md-2">Capitan</label>
-		<div class="col-md-1">		    			
-			<input class="form-control" name="idCapitan" placeholder="{{equipo.idCapitan.idJugador}}">
+		<div class="col-md-1">		    	
+			<input class="form-control" name="idCapitan" placeholder="{{capi.idJugador}}">
 		</div>
 		<div class="col-md-4">
-			<input class="form-control" name="NomCapitan" placeholder="{{capitan.nombre}}">
+			<label class="form-control" name="NomCapitan">{{capi.nombre}} {{capi.apPaterno}} {{capi.apMaterno}}</label>
 		</div>
 		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
 		<div class="col-md-3">
 			<button class="btn btn-primary" type="submit">Actualizar</button>
 		</div>
+		{% endfor%}
 	</form>
 	
 	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
+		{% for Rep in representante %}
 		<label class="col-md-2">Representante</label>
 		<div class="col-md-1">		    			
-			<input class="form-control" name="idRepresentante" placeholder="{{equipo.representante}}">
+			<input class="form-control" name="idRepresentante" placeholder="{{Rep.idJugador}}">
 		</div>
 		<div class="col-md-4">
-			<input class="form-control" name="NomCapitan" placeholder="{{representante.nombre}}">
+			<label class="form-control" name="NomRepresentante">{{Rep.nombre}} {{Rep.apPaterno}} {{Rep.apMaterno}}</label>
 		</div>
 		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
 		<div class="col-md-3">
 			<button class="btn btn-primary" type="submit">Actualizar</button>
 		</div>
+		{%endfor%}
 	</form>
 	
 	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
+	{% for Aux in auxiliar %}
 		<label class="col-md-2">Auxiliar</label>
 		<div class="col-md-1">		    			
-			<input class="form-control" name="idAuxiliar" placeholder="{{equipo.auxiliar}}">
+			<input class="form-control" name="idAuxiliar" placeholder="{{Aux.idJugador}}">
 		</div>
 		<div class="col-md-4">
-			<input class="form-control" name="NomAuxiliar" placeholder="{{auxiliar.nombre}}">
+			<label class="form-control" name="NomAuxiliar">{{Aux.nombre}} {{Aux.apPaterno}} {{Aux.apMaterno}}</label>
 		</div>
 		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
 		<div class="col-md-3">
 			<button class="btn btn-primary" type="submit">Actualizar</button>
 		</div>
+		{%endfor%}
 	</form>
 	
 	<div class="row-fluid borBox btn-dashboard">
      	<div class="col-md-12 well">			
-        <div class="formAnotacion form-group">
-        <div class="col-md-6 tLeft">
-            <h1>Jugadores</h1>
-		</div>
+			<div class="formAnotacion form-group">
+				<div class="col-md-6 tLeft">
+					<h1>Jugadores</h1>
+				</div>
+			</div>
+		<div class="col-md-12">
+			<div class="col-md-1"><h4>ID</h4></div>
+			<div class="col-md-2"><h4>Playera</h4></div>
+			<div class="col-md-4"><h4>Nombre</h4></div>
 		</div>
 		
 		{% for jugador in jugadores %}
 		<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
 			<div class="col-md-1">		    			
-				<label class="form-control" name="idJugador">{{jugador.idJugador}}</label>
+				<label class="form-control" name="idJugador">{{jugador.1}}</label>
 			</div>
 			<div class="col-md-1">		    			
 				<input class="form-control" name="NoJugador" placeholder="{{jugador.noPlayera}}">

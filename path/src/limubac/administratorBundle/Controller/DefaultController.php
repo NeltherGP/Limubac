@@ -17,15 +17,13 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 
-class DefaultController extends Controller
-{
-    public function indexAction($name)
-    {
+class DefaultController extends Controller{
+    
+	public function indexAction($name){
         return $this->render('limubacadministratorBundle:Default:index.html.twig', array('name' => $name));
     }
 
-    public function adminAction()
-    {
+    public function adminAction(){
         return $this->render('limubacadministratorBundle:administracion:adminPanel.html.twig');
     }
 
@@ -149,7 +147,6 @@ class DefaultController extends Controller
 	
 	public function equiposAction(){
 
-
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();
 			$equipo->setNombre($_POST['NuevoEquipo']);
@@ -165,6 +162,7 @@ class DefaultController extends Controller
     }
 	
 	public function equipoAction(){
+		
 		if(isset($_POST['accion'])){
 			switch($_POST['accion']){
 				case 'Nuevo':
@@ -186,7 +184,8 @@ class DefaultController extends Controller
 			}
 		
 		}
-	
+		
+		//Agregar o modificar capitan
 		if(isset($_POST['opciones']) and isset($_POST['idCapitan'])){
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_POST['opciones']);
@@ -196,64 +195,117 @@ class DefaultController extends Controller
 			
 			$equipo->setIdCapitan($Capi);
 			
+			$Manager = $this->getDoctrine()->getManager();
+			$Manager->persist($equipo);
+			$Manager->flush();
+		}
+		
+		//Agregar o modificar Representante
+		if(isset($_POST['opciones']) and isset($_POST['idRepresentante'])){
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$equipo = $repositorio->find($_POST['opciones']);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$Repre= $repositorio->find($_POST['idRepresentante']);
+
+			$equipo->setRepresentante($Repre);
 			
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($equipo);
 			$Manager->flush();
 		}
 		
-		if(isset($_POST['opciones'])){
-		
+		//Agregar o modificar Auxiliar
+		if(isset($_POST['opciones']) and isset($_POST['idAuxiliar'])){
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_POST['opciones']);
-			if($equipo->getIdCapitan()==null){
-				$equipo->setIdCapitan(new Jugador);
-			}
-			$Manager = $this->getDoctrine()->getManager();
 			
-			$q = "Select IDENTITY(i.idEquipo),j.idJugador,i.noPlayera,j.nombre FROM limubacadministratorBundle:Integra i JOIN limubacadministratorBundle:Jugador j where i.idEquipo='".$_POST['opciones']."'";
-			$query = $Manager->createQuery($q);
-			$jugadores = $query->getResult();
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$Auxi= $repositorio->find($_POST['idAuxiliar']);
+			
+			$equipo->setAuxiliar($Auxi);
+			
+			$Manager = $this->getDoctrine()->getManager();
+			$Manager->persist($equipo);
+			$Manager->flush();
+		}
+		
+		//Llenado de los expacios
+		if(isset($_POST['opciones'])){
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$equipo = $repositorio->find($_POST['opciones']);
+			
 			//Capitan
-			$Capi = $equipo->getIdCapitan();
-
+			if($equipo->getIdCapitan()==null){
+				$Capi = array( array(
+					'idJugador'=>0,
+					'nombre'=>"No Asignado",
+					'apPaterno'=>"",
+					'apMaterno'=>""
+				));
+			}else{
+			
+				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+				$query = $repositorio->createQueryBuilder('p')
+				->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+				->where('p.idJugador = '.$equipo->getIdCapitan()->getIdJugador())
+				->getQuery();
+			
+				$Capi = $query->getResult();
+			}//end capi
+			
+			//Jugadores
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Integra");
+				$query = $repositorio->createQueryBuilder('i')
+				->select('IDENTITY(i.idJugador)','j.nombre','j.apPaterno','j.apMaterno','i.noPlayera')
+				->join('limubacadministratorBundle:Jugador', 'j', 'WITH' ,'j.idJugador = i.idJugador')
+				->where('i.idEquipo = '.$equipo->getIdEquipo())
+				->getQuery();
+			
+			$jugadores = $query->getResult();
+			//end Jugadores
 			
 			//Representante
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			$IDRep = $equipo->getRepresentante();
-			
-			if($IDRep==NULL){
-				$Representante = array(
-					'IdJugador'=>0,
-					'nombre'=>'No Asignado'
-				);
+			if($equipo->getRepresentante()==null){
+				$Representante = array(array(
+					'idJugador'=>0,
+					'nombre'=>'No Asignado',
+					'apPaterno'=>"",
+					'apMaterno'=>""
+				));
 			}else{
-				$Representante = $repositorio->find($IDRep);
-			}
+				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+				$query = $repositorio->createQueryBuilder('p')
+				->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+				->where('p.idJugador = '.$equipo->getRepresentante()->getIdJugador())
+				->getQuery();
+			
+				$Representante = $query->getResult();
+			}//end Representante
 			
 			//Auxiliar
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			$IDAux = $equipo->getAuxiliar();
-			
-			if($IDAux==NULL){
-				$Auxiliar = array(
-					'IdJugador'=>0,
-					'nombre'=>'No Asignado'
-				);
+			if($equipo->getAuxiliar()==null){
+				$Auxiliar = array(array(
+					'idJugador'=>0,
+					'nombre'=>'No Asignado',
+					'apPaterno'=>"",
+					'apMaterno'=>""
+				));
 			}else{
-				$Auxiliar = $repositorio->find($IDAux);
+				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+				$query = $repositorio->createQueryBuilder('p')
+				->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
+				->where('p.idJugador = '.$equipo->getAuxiliar()->getIdJugador())
+				->getQuery();
+			
+				$Auxiliar = $query->getResult();
 			}
 			
-			if(count($Capi)==0){
-				$Capi = array(
-					'noPlayera'=>0,
-					'nombre'=>"No Asignado"
-				);
-			}
 		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar));
 		
 		}else{//si no esta definido el valor del equipo
-		
+			
+			echo "cuatro";
 		}
 	}
 	//End Edgar
@@ -461,12 +513,11 @@ class DefaultController extends Controller
         else{
             echo "Error!";
         }
-        */
+		*/
     }
-
+	
     public function buscarAction(){
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
-
     }
 
     public function editarAction(){
@@ -523,6 +574,7 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
     }
 
+	
     public function uploadosAction(Request $request){
         //return $this->render('limubacadministratorBundle:administracion:uploados.html.twig');
         if (isset($_POST['submit'])) {
@@ -587,7 +639,9 @@ class DefaultController extends Controller
             return $this->render('limubacadministratorBundle:administracion:uploados.html.twig',array('status'=>$status,'message'=>$message, 'person' => $per));
         }
     }
-    
+   
+	
+	
     public function uploadAction(Request $request){
         if ($request->getMethod() == 'POST') {
             $image = $request->files->get('img');
@@ -626,4 +680,25 @@ class DefaultController extends Controller
         }
     }
     //-----------------------FINAL CONTROLADOR DE FAFI---------------------------------------------------
+
+    //CONTROLADOR TORNEO
+
+    public function torneosAction(){
+        return $this->render('limubacadministratorBundle:administracion:torneos.html.twig');
+    }
+
+    public function crearTorneoAction(){
+        return $this->render('limubacadministratorBundle:administracion:crearTorneo.html.twig');
+    }
+
+    public function categoriasAction(){
+        return $this->render('limubacadministratorBundle:administracion:categorias.html.twig');
+    }
+
+    public function crearCategoriaAction(){
+        return $this->render('limubacadministratorBundle:administracion:crearCategoria.html.twig');
+    }
+
+    //FINAL CONTROLADOR TORNEO
+
 }
