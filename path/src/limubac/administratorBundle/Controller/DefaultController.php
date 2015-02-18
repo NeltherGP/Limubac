@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 use limubac\administratorBundle\Entity\Equipo;
+use limubac\administratorBundle\Entity\Torneo;
+use limubac\administratorBundle\Entity\Categoria;
 use limubac\administratorBundle\Entity\Integra;
 use limubac\administratorBundle\Entity\Jugador;
 use limubac\administratorBundle\Entity\TipoSanguineo;
@@ -73,7 +75,7 @@ class DefaultController extends Controller{
 	//Edgar
 	
 	public function equiposAction(){
-
+		
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();
 			$equipo->setNombre($_POST['NuevoEquipo']);
@@ -82,10 +84,20 @@ class DefaultController extends Controller{
 			$Manager->persist($equipo);
 			$Manager->flush();
 		}
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 		
+		//Lista de Equipos
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 		$ListaEquipos = $repositorio->findAll();
-    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('listEquip' =>$ListaEquipos));
+		
+		//Conseguir Categorias
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
+		$ListaCategorias = $repositorio->findAll();
+		
+		//Conseguir Torneos
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
+		$Torneos = $repositorio->findAll();
+		
+    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('listEquip' =>$ListaEquipos,'Categorias'=>$ListaCategorias,'Torneos'=>$Torneos));
     }
 	
 	public function equipoAction(){
