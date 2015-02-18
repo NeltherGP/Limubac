@@ -19,6 +19,7 @@ use limubac\administratorBundle\Entity\TipoSanguineo;
 use limubac\administratorBundle\Form\Type\JugadorType;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
+use limubac\administratorBundle\Entity\ParticipanT;
 
 
 class DefaultController extends Controller{
@@ -648,7 +649,18 @@ class DefaultController extends Controller{
     //CONTROLADOR TORNEO
 
     public function torneosAction(){
-        return $this->render('limubacadministratorBundle:administracion:torneos.html.twig');
+
+        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
+        $queryTorneos = $repository->createQueryBuilder('p')
+            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo','r.nombre AS rama', 'c.nombre AS categ')
+            ->join('limubacadministratorBundle:Torneo', 't', 'WITH' ,'t.idTorneo = p.idTorneo')
+            ->join('limubacadministratorBundle:RamaEquipo', 'r', 'WITH' ,'r.idRama = p.idRama')
+            ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'c.idCategoria = p.idCategoria')
+            ->orderBy('t.idTorneo', 'DESC')
+            ->getQuery();
+        $entities = $queryTorneos->getResult();
+
+        return $this->render('limubacadministratorBundle:administracion:torneos.html.twig',array('entities' => $entities));
     }
 
     public function crearTorneoAction(){

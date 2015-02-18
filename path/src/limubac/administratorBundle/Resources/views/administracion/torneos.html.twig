@@ -37,15 +37,25 @@
                   <th>Nombre</th>
                   <th>Fecha de Inicio</th>
                   <th>Fecha de Termino</th>
-                  <th>Categoria</th>
-                  <th>Rama</th>
                   <th>Costo</th>
+                  <th>Rama</th>
+                  <th>Categoria</th>
                   <th>Editar</th>
                   <th>Seleccionar</th>
                 </tr>
               </thead>
               <tbody>
-
+                {% for entitie in entities %}
+                  <tr>
+                    <td> {{entitie.idTorneo}} </td>
+                    <td> {{entitie.nombre}} </td>
+                    <td> {{entitie.fInicio|date('Y-m-d')}} </td>
+                    <td> {{entitie.fTermino|date('Y-m-d')}} </td>
+                    <td> {{entitie.costo}} </td>
+                    <td> {{entitie.rama}} </td>
+                    <td> {{entitie.categ}} </td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
