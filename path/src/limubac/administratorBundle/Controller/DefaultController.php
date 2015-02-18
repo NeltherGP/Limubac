@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use limubac\administratorBundle\Entity\Equipo;
 use limubac\administratorBundle\Entity\Torneo;
 use limubac\administratorBundle\Entity\Categoria;
+use limubac\administratorBundle\Entity\ParticipanT;
+
 use limubac\administratorBundle\Entity\Integra;
 use limubac\administratorBundle\Entity\Jugador;
 use limubac\administratorBundle\Entity\TipoSanguineo;
@@ -75,13 +77,32 @@ class DefaultController extends Controller{
 	//Edgar
 	
 	public function equiposAction(){
-		
+		//Agregando nuevo equipo
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();
 			$equipo->setNombre($_POST['NuevoEquipo']);
 			
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($equipo);
+			$Manager->flush();
+			
+			$participacion = new ParticipanT();
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
+			$cat = $repositorio->find($_POST['category']);
+			$participacion->setIdCategoria($cat);
+			
+			$participacion->setIdEquipo($equipo);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
+			$tor = $repositorio->find($_POST['torneo']);
+			$participacion->setIdTorneo($tor);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
+			$ram = $repositorio->find($_POST['rama']);
+			$participacion->setIdRama($ram);
+			
+			$Manager->persist($participacion);
 			$Manager->flush();
 		}
 		
@@ -97,7 +118,11 @@ class DefaultController extends Controller{
 		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
 		$Torneos = $repositorio->findAll();
 		
-    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('listEquip' =>$ListaEquipos,'Categorias'=>$ListaCategorias,'Torneos'=>$Torneos));
+		//Conseguir Ramas
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
+		$Ramas = $repositorio->findAll();
+		
+    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('listEquip' =>$ListaEquipos,'Categorias'=>$ListaCategorias,'Torneos'=>$Torneos,'Ramas'=>$Ramas));
     }
 	
 	public function equipoAction(){
