@@ -17,7 +17,7 @@ use limubac\administratorBundle\Entity\DetallePartido;
 use limubac\administratorBundle\Form\Type\JugadorType;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
-use limubac\administratorBundle\Entity\ParticipanT;
+
 
 
 class DefaultController extends Controller{
