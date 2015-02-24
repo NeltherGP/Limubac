@@ -2,4 +2,6 @@ limubacadministrator:
     resource: "@limubacadministratorBundle/Resources/config/routing.yml"
     prefix:   /
 
-
+blog:
+    resource: "@limubacadministratorBundle/Controller"
+    type: annotation

@@ -34,6 +34,13 @@ class Categoria
     private $limiteEquipo;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="ref_edad", type="boolean", nullable=true)
+     */
+    private $refEdad;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_categoria", type="integer")

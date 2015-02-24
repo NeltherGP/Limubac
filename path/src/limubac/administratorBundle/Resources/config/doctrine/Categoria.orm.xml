@@ -7,5 +7,6 @@
     <field name="nombre" type="string" column="nombre" length="35" nullable="false"/>
     <field name="edad" type="string" column="edad" length="40" nullable="false"/>
     <field name="limiteEquipo" type="integer" column="limite_equipo" nullable="false"/>
+    <field name="refEdad" type="boolean" column="ref_edad" nullable="true"/>
   </entity>
 </doctrine-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="limubac\administratorBundle\Entity\FaltasEquipo" table="faltas_equipo">
+    <indexes>
+      <index name="id_equipo" columns="id_equipo,id_partido,id_jugador,id_falta"/>
+      <index name="id_partido" columns="id_partido"/>
+      <index name="id_jugador" columns="id_jugador"/>
+      <index name="id_falta" columns="id_falta"/>
+      <index name="IDX_7EFD2A19E2ABE6E6" columns="id_equipo"/>
+    </indexes>
+    <id name="idFaltasEq" type="integer" column="id_faltas_eq">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tiempo" type="integer" column="tiempo" nullable="false"/>
+    <field name="descFalta" type="string" column="desc_falta" length="255" nullable="false"/>
+    <many-to-one field="idFalta" target-entity="Falta">
+      <join-columns>
+        <join-column name="id_falta" referenced-column-name="id_falta"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idJugador" target-entity="Jugador">
+      <join-columns>
+        <join-column name="id_jugador" referenced-column-name="id_jugador"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idPartido" target-entity="Partido">
+      <join-columns>
+        <join-column name="id_partido" referenced-column-name="id_partido"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEquipo" target-entity="Equipo">
+      <join-columns>
+        <join-column name="id_equipo" referenced-column-name="id_equipo"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

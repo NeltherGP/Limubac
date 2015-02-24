@@ -34,6 +34,13 @@ class Categoria
     private $limiteEquipo;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="ref_edad", type="boolean", nullable=true)
+     */
+    private $refEdad;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_categoria", type="integer")
@@ -111,6 +118,29 @@ class Categoria
     public function getLimiteEquipo()
     {
         return $this->limiteEquipo;
+    }
+
+    /**
+     * Set refEdad
+     *
+     * @param boolean $refEdad
+     * @return Categoria
+     */
+    public function setRefEdad($refEdad)
+    {
+        $this->refEdad = $refEdad;
+
+        return $this;
+    }
+
+    /**
+     * Get refEdad
+     *
+     * @return boolean 
+     */
+    public function getRefEdad()
+    {
+        return $this->refEdad;
     }
 
     /**

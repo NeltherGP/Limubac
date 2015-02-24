@@ -65,28 +65,6 @@ class Partido
      */
     private $idTorneo;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="limubac\administratorBundle\Entity\Equipo", inversedBy="idPartido")
-     * @ORM\JoinTable(name="juegan",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="id_partido", referencedColumnName="id_partido")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_equipo", referencedColumnName="id_equipo")
-     *   }
-     * )
-     */
-    private $idEquipo;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->idEquipo = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 
     /**
@@ -212,38 +190,5 @@ class Partido
     public function getIdTorneo()
     {
         return $this->idTorneo;
-    }
-
-    /**
-     * Add idEquipo
-     *
-     * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
-     * @return Partido
-     */
-    public function addIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo)
-    {
-        $this->idEquipo[] = $idEquipo;
-
-        return $this;
-    }
-
-    /**
-     * Remove idEquipo
-     *
-     * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
-     */
-    public function removeIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo)
-    {
-        $this->idEquipo->removeElement($idEquipo);
-    }
-
-    /**
-     * Get idEquipo
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdEquipo()
-    {
-        return $this->idEquipo;
     }
 }

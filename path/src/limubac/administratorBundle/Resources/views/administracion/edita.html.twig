@@ -19,7 +19,8 @@
               {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
      	<div class="row-fluid">
         <div class="col-md-3 profilePerson thumbnail">
-          <img src="{{ asset(url('limubacadministrator_photo', {'number': edita[0][4] })) }}" alt="This Guy">
+          <!--<img src="{{ asset(path('photo', {'number': edita[0][4] })) }}" alt="This Guy">-->
+          <img src="data:image/jpg;base64,{{ im[0] }}" alt="This Guy">
           <div class="profileOptions"></div>
         </div>
         <div class="col-md-7">

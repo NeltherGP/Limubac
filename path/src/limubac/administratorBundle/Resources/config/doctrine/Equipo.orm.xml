@@ -26,6 +26,5 @@
         <join-column name="id_capitan" referenced-column-name="id_jugador"/>
       </join-columns>
     </many-to-one>
-    <many-to-many field="idPartido" target-entity="Partido" mapped-by="idEquipo"/>
   </entity>
 </doctrine-mapping>
