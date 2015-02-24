@@ -65,27 +65,5 @@ class Partido
      */
     private $idTorneo;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="limubac\administratorBundle\Entity\Equipo", inversedBy="idPartido")
-     * @ORM\JoinTable(name="juegan",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="id_partido", referencedColumnName="id_partido")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_equipo", referencedColumnName="id_equipo")
-     *   }
-     * )
-     */
-    private $idEquipo;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->idEquipo = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 }

@@ -46,7 +46,7 @@
 			</div>	
 	{% else %}
 		{% if message is defined %}
-			<form class="form" method="POST" enctype="multipart/form-data" action="../app_dev.php/uploados">
+			<form class="form" method="POST" enctype="multipart/form-data" action="../app_dev.php/uploados?id={{person.0}}">
 		    	<input type="file" name="img" style="height:20px; width:320px;">
 		    	<button class="btn btn-large btn-prima" name="submit" type="submit">
 			    	<i class="glyphicon-camera glyphicon"></i>
