@@ -1,17 +1,15 @@
 <?php
 
 namespace limubac\administratorBundle\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use limubac\administratorBundle\claseForm\hojaAnotacion;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
 use limubac\administratorBundle\Entity\Equipo;
 use limubac\administratorBundle\Entity\Integra;
 use limubac\administratorBundle\Entity\Jugador;
 use limubac\administratorBundle\Entity\TipoSanguineo;
+use limubac\administratorBundle\Entity\DetallePartido;
 use limubac\administratorBundle\Form\Type\JugadorType;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -29,7 +27,7 @@ class DefaultController extends Controller{
 
     public function hojaAnotacionesAction(){
 
-        
+        $detallePartido= new DetallePartido();
         $contadorA=0;
         $contadorB=0;
         $marcadorA=0;
@@ -72,12 +70,13 @@ class DefaultController extends Controller{
                     }
                 }
 
-                //print_r($puntosA);
+                print_r($puntosA);
                // print_r($puntosB);
 
                for ($i=0; $i < count($puntosA); $i++) { 
                  if($i==0 && $puntosA[$i]!=''){
                     $marcadorA++;
+
                  }else{
                     if($puntosA[$i]==''){
                         $contadorA++; echo "hola";
@@ -656,7 +655,6 @@ class DefaultController extends Controller{
                     $valid_filetypes = array('jpg', 'jpeg', 'bmp', 'png');
                     if (in_array(strtolower($file_type), $valid_filetypes)) {
                         //Start Uploading Image
-
                         //$document = new Document();
                         //$document->setFile($image);
                         //$document->setSubDirectory('/upload');
