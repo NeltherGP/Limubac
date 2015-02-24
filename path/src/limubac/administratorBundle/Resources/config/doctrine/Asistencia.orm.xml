@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="limubac\administratorBundle\Entity\Asistencia" table="asistencia">
+    <indexes>
+      <index name="id_asistencia" columns="id_asistencia,id_partido,id_jugador"/>
+      <index name="id_partido" columns="id_partido"/>
+      <index name="id_jugador" columns="id_jugador"/>
+    </indexes>
+    <id name="idAsistencia" type="integer" column="id_asistencia">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="idJugador" target-entity="Jugador">
+      <join-columns>
+        <join-column name="id_jugador" referenced-column-name="id_jugador"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idPartido" target-entity="Partido">
+      <join-columns>
+        <join-column name="id_partido" referenced-column-name="id_partido"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

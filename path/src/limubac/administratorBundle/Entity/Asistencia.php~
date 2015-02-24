@@ -1,0 +1,45 @@
+<?php
+
+namespace limubac\administratorBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Asistencia
+ *
+ * @ORM\Table(name="asistencia", indexes={@ORM\Index(name="id_asistencia", columns={"id_asistencia", "id_partido", "id_jugador"}), @ORM\Index(name="id_partido", columns={"id_partido"}), @ORM\Index(name="id_jugador", columns={"id_jugador"})})
+ * @ORM\Entity
+ */
+class Asistencia
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_asistencia", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idAsistencia;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Jugador
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_jugador", referencedColumnName="id_jugador")
+     * })
+     */
+    private $idJugador;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Partido
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Partido")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_partido", referencedColumnName="id_partido")
+     * })
+     */
+    private $idPartido;
+
+
+}
