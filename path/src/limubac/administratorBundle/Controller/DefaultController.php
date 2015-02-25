@@ -206,17 +206,48 @@ class DefaultController extends Controller{
 					$integra = new Integra();
 					$integra->setNoPlayera(intval($_POST['NoJugador']));
 					
-					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-					$equipo = $repositorio->find($_POST['opciones']);
-					$integra->setIdEquipo($equipo);
 					
+					//Jugador
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
 					$jugador = $repositorio->find($_POST['idJugador']);
-					$integra->setIdJugador($jugador);
 					
-					$Manager = $this->getDoctrine()->getManager();
-					$Manager->persist($integra);
-					$Manager->flush();
+					//Equipo
+					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+					$equipo = $repositorio->find($_POST['opciones']);
+					
+					//Categoria
+					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
+					$Participan  = $repositorio->findById_Equipo($equipo);
+					$Categoria = $Participan->getIdCategoria();
+						
+						//Comprobar limite de edad
+						if($Categoria->getRefEdad()){//true = igual o mayor que
+							if($jugador->getEdad()>=$Categoria->getEdad()){//si la edad es mayorigual a la de la categoria
+								$Booleano = true;
+							}else{
+								$Booleano = false;
+								$Mensaje ="El jugador no tiene la edad minima para participar en este torneo";
+							}
+							
+						}else{//false = igual o menor que
+							if($jugador->getEdad()<=$Categoria->getEdad()){//si la edad es mayorigual a la de la categoria
+								$Booleano = true;
+							}else{
+								$Booleano = false;
+								$Mensaje ="El jugador exede la edad maxima para participar en este torneo";
+							}
+							
+						}
+					
+					if($Booleano){
+						$integra->setIdJugador($jugador);
+						$integra->setIdEquipo($equipo);
+						$Manager = $this->getDoctrine()->getManager();
+						$Manager->persist($integra);
+						$Manager->flush();
+						$Mensaje =null;
+					}
+					
 				break;
 			}
 		
@@ -338,7 +369,7 @@ class DefaultController extends Controller{
 				$Auxiliar = $query->getResult();
 			}
 			
-		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar));
+		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar,'mensaje'=>$Mensaje));
 		
 		}else{//si no esta definido el valor del equipo
 			
