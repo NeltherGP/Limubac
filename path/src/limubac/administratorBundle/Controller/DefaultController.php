@@ -199,8 +199,9 @@ class DefaultController extends Controller{
     }
 	
 	public function equipoAction(){
-		
+		$Mensaje =null;
 		if(isset($_POST['accion'])){
+			
 			switch($_POST['accion']){
 				case 'Nuevo':
 					$integra = new Integra();
@@ -217,12 +218,25 @@ class DefaultController extends Controller{
 					
 					//Categoria
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
-					$Participan  = $repositorio->findById_Equipo($equipo);
-					$Categoria = $Participan->getIdCategoria();
-						
+					$query = $repositorio->createQueryBuilder('P')
+						->select('IDENTITY(P.idCategoria)')
+						->where('P.idEquipo = '.$equipo->getIdEquipo())
+						->getQuery();
+					$IdCategoria = $query->getResult();//Realmente mantiene el ID de la categoria
+					//var_dump($IdCategoria[0][1]);
+					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
+					$Categoria = $repositorio->find($IdCategoria[0][1]);
+					
+					
+					$actual = new \DateTime(Date("Y-m-d H:i:s"));
+					
+					$edad=$actual->diff($jugador->getFNacimiento())->format('%Y');
+					
 						//Comprobar limite de edad
 						if($Categoria->getRefEdad()){//true = igual o mayor que
-							if($jugador->getEdad()>=$Categoria->getEdad()){//si la edad es mayorigual a la de la categoria
+							
+							
+							if($edad>=$Categoria->getEdad()){//si la edad es mayorigual a la de la categoria
 								$Booleano = true;
 							}else{
 								$Booleano = false;
@@ -230,7 +244,8 @@ class DefaultController extends Controller{
 							}
 							
 						}else{//false = igual o menor que
-							if($jugador->getEdad()<=$Categoria->getEdad()){//si la edad es mayorigual a la de la categoria
+							
+							if($edad<=$Categoria->getEdad()){//si la edad es mayorigual a la de la categoria
 								$Booleano = true;
 							}else{
 								$Booleano = false;
@@ -245,7 +260,7 @@ class DefaultController extends Controller{
 						$Manager = $this->getDoctrine()->getManager();
 						$Manager->persist($integra);
 						$Manager->flush();
-						$Mensaje =null;
+						
 					}
 					
 				break;
