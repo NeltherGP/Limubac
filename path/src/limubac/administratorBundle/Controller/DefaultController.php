@@ -16,6 +16,7 @@ use limubac\administratorBundle\Entity\TipoSanguineo;
 use limubac\administratorBundle\Entity\DetallePartido;
 use limubac\administratorBundle\Form\Type\JugadorType;
 use limubac\administratorBundle\Form\Type\TorneoType;
+use limubac\administratorBundle\Form\Type\CategoriaType;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -900,7 +901,46 @@ class DefaultController extends Controller{
     }
 
     public function crearCategoriaAction(){
-        return $this->render('limubacadministratorBundle:administracion:crearCategoria.html.twig');
+        $categoria = new Categoria();
+        $form = $this->createForm(new CategoriaType(), $categoria);
+
+        $request = $this->get('request');
+        $form->handleRequest($request);
+
+        if ($request->getMethod() == 'GET') {
+            $url_to_parse = $_SERVER['REQUEST_URI'];
+            $parsed_url = parse_url($url_to_parse);
+            if (empty($parsed_url['query'])) {
+                return $this->render('limubacadministratorBundle:administracion:crearCategoria.html.twig',array('form' => $form->createView()));
+            }
+            else{
+                $url_query = $parsed_url['query'];
+                parse_str($url_query,$out);
+                if (is_array($out) && !empty($out)) {
+                    $cat = new Categoria();
+                    //print_r($out);
+                    $cat -> setNombre($out['categoria']['nombre']);
+
+                    $cat -> setLimiteEquipo($out['categoria']['limiteEquipo']);
+
+                    $cat -> setEdad($out['categoria']['edad']);
+
+                    $cat -> setRefEdad($out['categoria']['refEdad']);
+                    
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em -> persist($cat);
+                    $em -> flush();
+
+                    return $this->redirect($this->generateUrl('limubacadministrator_categorias'));
+                }
+                else{
+                    return new SymfonyResponse('Algo Fallo!');   
+                }
+            }
+        }
+
+        return $this->render('limubacadministratorBundle:administracion:crearCategoria.html.twig',array('form' => $form->createView()));
     }
 
     //FINAL CONTROLADOR TORNEO

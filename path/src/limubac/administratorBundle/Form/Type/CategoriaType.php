@@ -13,10 +13,11 @@ class CategoriaType extends AbstractType{
 		$builder->add('nombre','text');
 		$builder->add('edad','integer');
 		$builder->add('limiteEquipo','integer');
+		$builder->add('refEdad','integer');
 	}
 
 	public function getName(){
-		return 'torneo';
+		return 'categoria';
 	}
 
 	/*public function setDefaultOptions(OptionsResolverInterface $resolver)
