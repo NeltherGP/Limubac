@@ -206,10 +206,6 @@ class DefaultController extends Controller{
 			
 			switch($_POST['accion']){
 				case 'Nuevo':
-					$integra = new Integra();
-					$integra->setNoPlayera(intval($_POST['NoJugador']));
-					
-					
 					//Jugador
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
 					$jugador = $repositorio->find($_POST['idJugador']);
@@ -229,15 +225,20 @@ class DefaultController extends Controller{
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
 					$Categoria = $repositorio->find($IdCategoria[0][1]);
 					
+					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Integra");
+					$query = $repositorio->createQueryBuilder('I')
+						->select('IDENTITY(I.idJugador)')
+						->where('I.idEquipo = '.$equipo->getIdEquipo())
+						->andWhere('I.noPlayera = '.intval($_POST['NoJugador']))
+						->getQuery();
+					$Repetido = $query->getResult();
 					
 					$actual = new \DateTime(Date("Y-m-d H:i:s"));
 					
 					$edad=$actual->diff($jugador->getFNacimiento())->format('%Y');
-					
+					if(!$Repetido){
 						//Comprobar limite de edad
 						if($Categoria->getRefEdad()){//true = igual o mayor que
-							
-							
 							if($edad>=$Categoria->getEdad() && $jugador->getIdGenero()->getIdGenero() ==$IdCategoria[0][2]){//si la edad es mayorigual a la de la categoria
 								$Booleano = true;
 							}else{
@@ -255,8 +256,15 @@ class DefaultController extends Controller{
 							}
 							
 						}
+					}else{
+						$Booleano = false;
+						$Mensaje ="El numero del jugador ya esta registrado";
+					}//end Repetido
 					
 					if($Booleano){
+						$integra = new Integra();
+						$integra->setNoPlayera(intval($_POST['NoJugador']));
+						
 						$integra->setIdJugador($jugador);
 						$integra->setIdEquipo($equipo);
 						$Manager = $this->getDoctrine()->getManager();
