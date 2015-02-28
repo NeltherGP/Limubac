@@ -219,10 +219,10 @@ class DefaultController extends Controller{
 					//Categoria
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
 					$query = $repositorio->createQueryBuilder('P')
-						->select('IDENTITY(P.idCategoria)')
+						->select('IDENTITY(P.idCategoria)','IDENTITY(P.idRama)')
 						->where('P.idEquipo = '.$equipo->getIdEquipo())
 						->getQuery();
-					$IdCategoria = $query->getResult();//Realmente mantiene el ID de la categoria
+					$IdCategoria = $query->getResult();//Realmente mantiene el ID de la categoria y la rama 
 					//var_dump($IdCategoria[0][1]);
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
 					$Categoria = $repositorio->find($IdCategoria[0][1]);
@@ -236,20 +236,20 @@ class DefaultController extends Controller{
 						if($Categoria->getRefEdad()){//true = igual o mayor que
 							
 							
-							if($edad>=$Categoria->getEdad()){//si la edad es mayorigual a la de la categoria
+							if($edad>=$Categoria->getEdad() && $jugador->getIdGenero()->getIdGenero() ==$IdCategoria[0][2]){//si la edad es mayorigual a la de la categoria
 								$Booleano = true;
 							}else{
 								$Booleano = false;
-								$Mensaje ="El jugador no tiene la edad minima para participar en este torneo";
+								$Mensaje ="El jugador no cumple los requerimientos para participar en este equipo";
 							}
 							
 						}else{//false = igual o menor que
 							
-							if($edad<=$Categoria->getEdad()){//si la edad es mayorigual a la de la categoria
+							if($edad<=$Categoria->getEdad()&& $jugador->getIdGenero()->getIdGenero() ==$IdCategoria[0][2]){//si la edad es mayorigual a la de la categoria
 								$Booleano = true;
 							}else{
 								$Booleano = false;
-								$Mensaje ="El jugador exede la edad maxima para participar en este torneo";
+								$Mensaje ="El jugador no cumple los requerimientos para participar en este equipo";
 							}
 							
 						}

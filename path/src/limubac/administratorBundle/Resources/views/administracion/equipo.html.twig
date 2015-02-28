@@ -10,8 +10,11 @@
 		</div>
 		</div>
 	</div>
-	</br>
-	
+	{% if mensaje!=null %}
+	<div class="col-md-12 bg-danger">		    			
+			<label class="col-md-12">{{mensaje}}</label>
+	</div>
+	{% endif %}
 	<form class="formAnotacion form-group col-md-12" action="../app_dev.php/equipo" method="post">
 		{% for capi in capitan %}
 		<label class="col-md-2">Capitan</label>
@@ -104,12 +107,5 @@
 			</div>
 		</form>
 	</div>
-	
-	
-	
-		
-							
-		
-
 		
 {% endblock %}
