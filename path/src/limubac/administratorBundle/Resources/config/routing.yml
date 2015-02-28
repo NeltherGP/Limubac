@@ -65,3 +65,6 @@ limubacadministrator_categorias:
 limubacadministrator_crearCategoria:
     path:     /crearCategoria
     defaults: { _controller: limubacadministratorBundle:Default:crearCategoria}
+limubacadministrator_acTorneo:
+    path:     /acTorneo/{page}
+    defaults: { _controller: limubacadministratorBundle:Default:acTorneo, page: 0}

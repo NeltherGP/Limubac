@@ -18,7 +18,7 @@
         <div class="formAnotacion form-group">
           <h3 class="col-md-7">Accion</h3>
           <div class="btn-group sharp pull-right">
-            <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_crearCategoria')}}"><i class="glyphicon-plus glyphicon"></i> Crear</a>
+            <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_crearCategoria')}}"><i class="glyphicon-plus glyphicon"></i> Crear Categoria</a>
             <button class="btn btn-primary btn-info" type='submit'><i class="glyphicon-minus glyphicon"></i> Eliminar</button>
           </div>
         </div>
@@ -37,11 +37,17 @@
                   <th>Edad</th>
                   <th>Limite de Equipo</th>
                   <th>Editar</th>
-                  <th>Seleccionar</th>
                 </tr>
               </thead>
               <tbody>
-
+                {% for entitie in entities %}
+                  <tr>
+                    <td> {{entitie.idCategoria}} </td>
+                    <td> {{entitie.nombre}} </td>
+                    <td> {{entitie.edad}} </td>
+                    <td> {{entitie.limiteEquipo}} </td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>

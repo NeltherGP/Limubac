@@ -13,18 +13,28 @@
       </div>
     </div>
 
-  <form class="form-horizontal">
-    <div class="control-group">
-      <label class="control-label" for="inputNombre">Nombre</label>
-      <div class="controls">
-        <input type="text" id="inputNombre" placeholder="Nombre">
-      </div>
+  <div class="row-fluid">  
+    <div class="col-md-7">
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="inputNombre">Nombre</label>
+          <div class="controls">
+            <input type="text" id="inputNombre" placeholder="Nombre">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputEdad">Edad</label>
+          <div class="controls">
+            <input type="text" id="inputEdad" placeholder="Edad">
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="control-group">
-      <label class="control-label" for="inputEdad">Edad</label>
-      <div class="controls">
-        <input type="text" id="inputEdad" placeholder="Edad">
-      </div>
+
+        <div class="col-md-2 tRight">
+          <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Salvar" name="jugador[Salvar]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
+        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_torneos')}}"><i class="glyphicon glyphicon-remove"></i>Cancelar</a>
     </div>
+  </div>
   </form>
 {% endblock %}
