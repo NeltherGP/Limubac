@@ -27,6 +27,13 @@ class Partido
     private $hTermino;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="commited", type="boolean", nullable=true)
+     */
+    private $commited;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_partido", type="integer")

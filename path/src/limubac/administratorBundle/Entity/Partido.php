@@ -27,6 +27,13 @@ class Partido
     private $hTermino;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="commited", type="boolean", nullable=true)
+     */
+    private $commited;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_partido", type="integer")
@@ -111,6 +118,29 @@ class Partido
     public function getHTermino()
     {
         return $this->hTermino;
+    }
+
+    /**
+     * Set commited
+     *
+     * @param boolean $commited
+     * @return Partido
+     */
+    public function setCommited($commited)
+    {
+        $this->commited = $commited;
+
+        return $this;
+    }
+
+    /**
+     * Get commited
+     *
+     * @return boolean 
+     */
+    public function getCommited()
+    {
+        return $this->commited;
     }
 
     /**
