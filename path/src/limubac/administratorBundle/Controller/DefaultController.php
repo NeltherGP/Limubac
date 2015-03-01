@@ -887,13 +887,51 @@ class DefaultController extends Controller{
 
     public function acTorneoAction(){
         if(!empty($_REQUEST['edit'])){
-            echo('entro');
-            break;
+            $torneo = new Torneo();
+            $form = $this->createForm(new TorneoType(), $torneo);
+            $ed = $_REQUEST['edit'][0];
+            
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+            $queryEdit = $repository->createQueryBuilder('e')
+            ->select('e.idTorneo','e.nombre','e.fInicio','e.fTermino','e.costo')
+            ->where('e.idTorneo = :word')
+            ->setParameter('word', $ed)
+            ->getQuery();
+            $resul = $queryEdit->getResult();
+            //print_r($resul);
+            
+            return $this->render('limubacadministratorBundle:administracion:acTorneo.html.twig',array('form' => $form->createView(), 'edita' => $resul));
         }
-        else{
-            echo('no entro');
-            break;
-        }
+    }
+
+    public function editTorneoAction(){
+        $upt = $_REQUEST['torneo'];
+
+        $fni = $upt['fInicio'];
+        $di = date_create_from_format('Y-m-d', $fni);
+
+        $fnt = $upt['fTermino'];
+        $dt = date_create_from_format('Y-m-d', $fnt);
+
+        //print_r($resul[0]['idFoto']);
+
+        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+        $queryAct = $repository->createQueryBuilder('z');
+        $q = $queryAct->update('limubacadministratorBundle:Torneo', 'z')
+            ->set('z.nombre', ':nom')   
+            ->set('z.fInicio', ':fni')
+            ->set('z.fTermino', ':fnt')
+            ->set('z.costo', ':cos')
+            ->where('z.idTorneo= :idt')
+            ->setParameter('idt', $upt['idTorneo'])
+            ->setParameter('nom', $upt['nombre'])
+            ->setParameter('fni', new \DateTime($fni))
+            ->setParameter('fnt', new \DateTime($fnt))
+            ->setParameter('cos', $upt['costo'])
+            ->getQuery();
+        $resul = $q->execute();
+
+        return $this->redirect($this->generateUrl('limubacadministrator_torneos'));
     }
 
     public function categoriasAction(){
@@ -949,6 +987,45 @@ class DefaultController extends Controller{
         }
 
         return $this->render('limubacadministratorBundle:administracion:crearCategoria.html.twig',array('form' => $form->createView()));
+    }
+
+    public function acCategoriaAction(){
+        if(!empty($_REQUEST['edit'])){
+            $categoria = new Categoria();
+            $form = $this->createForm(new CategoriaType(), $categoria);
+            $ed = $_REQUEST['edit'][0];
+            
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Categoria');
+            $queryEdit = $repository->createQueryBuilder('e')
+            ->select('e.idCategoria','e.nombre','e.edad','e.limiteEquipo')
+            ->where('e.idCategoria = :word')
+            ->setParameter('word', $ed)
+            ->getQuery();
+            $resul = $queryEdit->getResult();
+            //print_r($resul);
+            
+            return $this->render('limubacadministratorBundle:administracion:acCategoria.html.twig',array('form' => $form->createView(), 'edita' => $resul));
+        }
+    }
+
+    public function editCategoriaAction(){
+        $upt = $_REQUEST['categoria'];
+
+        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Categoria');
+        $queryAct = $repository->createQueryBuilder('z');
+        $q = $queryAct->update('limubacadministratorBundle:Categoria', 'z')
+            ->set('z.nombre', ':nom')   
+            ->set('z.edad', ':edd')
+            ->set('z.limiteEquipo', ':lme')
+            ->where('z.idCategoria= :idc')
+            ->setParameter('idc', $upt['idCategoria'])
+            ->setParameter('nom', $upt['nombre'])
+            ->setParameter('edd', $upt['edad'])
+            ->setParameter('lme', $upt['limiteEquipo'])
+            ->getQuery();
+        $resul = $q->execute();
+
+        return $this->redirect($this->generateUrl('limubacadministrator_categorias'));
     }
 
     //FINAL CONTROLADOR TORNEO

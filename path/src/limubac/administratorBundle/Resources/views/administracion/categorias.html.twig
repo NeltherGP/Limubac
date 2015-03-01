@@ -2,7 +2,7 @@
 
 {% block PageContent %}
 
-  <form class="form-horizontal" role="form" >
+  <form class="form-horizontal" role="form" action="../app_dev.php/acCategoria">
     <div class="row-fluid">
       <div class="col-md-12 borBox well btn-dashboard">     
         <div class="formAnotacion form-group">
@@ -46,6 +46,13 @@
                     <td> {{entitie.nombre}} </td>
                     <td> {{entitie.edad}} </td>
                     <td> {{entitie.limiteEquipo}} </td>
+                    <td>
+                      <div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                        <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{{entitie.idCategoria}}'>
+                          <i class="glyphicon-pencil glyphicon"></i>
+                        </button>
+                      </div>  
+                    </td>
                   </tr>
                 {% endfor %}
               </tbody>
