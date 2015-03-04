@@ -20,9 +20,11 @@
               {{form_widget(form.idTorneo, {value : edita[0]['idTorneo']} ) }}
               {{form_widget(form.nombre, {value : edita[0]['nombre']} )}}<font color="red"> *</font>
               <br>
-              {{form_widget(form.edad, {value : edita[0]['edad']} )}}<font color="red"> *</font>
+              {{form_widget(form.fInicio, {value : edita[0]['fInicio']|date('Y-m-d')} )}}
               <br>
-              {{form_widget(form.limiteEquipo, {value : edita[0]['limiteEquipo']} )}}<font color="red"> *</font>
+              {{form_widget(form.fTermino, {value : edita[0]['fTermino']|date('Y-m-d')} )}}
+              <br>
+              {{form_widget(form.costo, {value : edita[0]['costo']} )}}<font color="red"> *</font>
             {{form_end(form)}}
     </div>
 
