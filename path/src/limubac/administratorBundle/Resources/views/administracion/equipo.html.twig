@@ -15,97 +15,72 @@
 			<label class="col-md-12">{{mensaje}}</label>
 	</div>
 	{% endif %}
-	<form class="formAnotacion form-group col-md-12" action="../app_dev.php/equipo" method="post">
-		{% for capi in capitan %}
-		<label class="col-md-2">Capitan</label>
-		<div class="col-md-1">		    	
-			<input class="form-control" name="idCapitan" placeholder="{{capi.idJugador}}">
-		</div>
-		<div class="col-md-4">
-			<label class="form-control" name="NomCapitan">{{capi.nombre}} {{capi.apPaterno}} {{capi.apMaterno}}</label>
-		</div>
-		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
-		<div class="col-md-3">
-			<button class="btn btn-primary btn-info" type="submit">Actualizar</button>
-		</div>
-		{% endfor%}
-	</form>
-	
-	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
-		{% for Rep in representante %}
-		<label class="col-md-2">Representante</label>
-		<div class="col-md-1">		    			
-			<input class="form-control" name="idRepresentante" placeholder="{{Rep.idJugador}}">
-		</div>
-		<div class="col-md-4">
-			<label class="form-control" name="NomRepresentante">{{Rep.nombre}} {{Rep.apPaterno}} {{Rep.apMaterno}}</label>
-		</div>
-		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
-		<div class="col-md-3">
-			<button class="btn btn-primary btn-info" type="submit">Actualizar</button>
-		</div>
-		{%endfor%}
-	</form>
-	
-	<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
-	{% for Aux in auxiliar %}
-		<label class="col-md-2">Auxiliar</label>
-		<div class="col-md-1">		    			
-			<input class="form-control" name="idAuxiliar" placeholder="{{Aux.idJugador}}">
-		</div>
-		<div class="col-md-4">
-			<label class="form-control" name="NomAuxiliar">{{Aux.nombre}} {{Aux.apPaterno}} {{Aux.apMaterno}}</label>
-		</div>
-		<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
-		<div class="col-md-3">
-			<button class="btn btn-primary btn-info" type="submit">Actualizar</button>
-		</div>
-		{%endfor%}
-	</form>
 	
 	<div class="row-fluid borBox btn-dashboard">
-     	<div class="col-md-12 well">			
-			<div class="formAnotacion form-group">
-				<div class="col-md-6 tLeft">
+		<div class="col-md-6 well">	
+			<div class="formAnotacion form-group row">
+				<div class"col-md-6 tLeft">
 					<h1>Jugadores</h1>
 				</div>
 			</div>
-		<div class="col-md-12">
-			<div class="col-md-1"><h4>ID</h4></div>
-			<div class="col-md-2"><h4>Playera</h4></div>
-			<div class="col-md-4"><h4>Nombre</h4></div>
+			<div class="formAnotacion form-group row">
+				<div class="col-md-2">
+					<h4>Playera</h4>
+				</div>
+				<div class="col-md-2">
+					<h4>Nombre</h4>
+				</div>
+			</div>
+			{% for jugador in jugadores %}
+				<div class="formAnotacion form-group row">
+					<form class="formAnotacion form-group" action="../app_dev.php/equipo" method="post">
+						<div class="col-md-2">		    			
+							<input class="form-control" name="NoJugador" placeholder="{{jugador.noPlayera}}">
+						</div>
+						<div class="col-md-7">
+							<label class="form-control" name="NomJugador">{{jugador.nombre}}  {{jugador.apPaterno}} {{jugador.apMaterno}}</label>
+						</div>
+						<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
+						<button class="btn btn-primary btn-info" type="submit">Actualizar</button>
+					</form>
+				</div>
+			{% endfor%}
 		</div>
-		
-		{% for jugador in jugadores %}
-		<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
-			<div class="col-md-1">		    			
-				<label class="form-control" name="idJugador">{{jugador.1}}</label>
+		<div class="col-md-6 well">	
+			<div class="formAnotacion form-group row">
+				<div class"col-md-6 tLeft">
+					<h1>Agregar</h1>
+				</div>
 			</div>
-			<div class="col-md-1">		    			
-				<input class="form-control" name="NoJugador" placeholder="{{jugador.noPlayera}}">
-			</div>
-			<div class="col-md-4">
-				<label class="form-control" name="NomJugador">{{jugador.nombre}}  {{jugador.apPaterno}} {{jugador.apMaterno}}</label>
-			</div>
-			<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
-			<div class="col-md-3">
-				<button class="btn btn-primary btn-info" type="submit">Actualizar</button>
-			</div>
-		</form>
-		{% endfor%}
-		
-		<form class="formAnotacion form-group col-md-12"" action="../app_dev.php/equipo" method="post">
-			<div class="col-md-1">		    			
-				<input class="form-control" name="idJugador" placeholder="Id Jugador">
-			</div>
-			<div class="col-md-1">		    			
-				<input class="form-control" name="NoJugador" placeholder="Numero">
-			</div>
-			<input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
-			<div class="col-md-3">
-				<button class="btn btn-primary btn-info" type="submit" name="accion" value="Nuevo">Nuevo</button>
-			</div>
-		</form>
-	</div>
-		
+			<br>
+            {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+              {{form_widget(form.nombre, {'attr': {'placeholder': 'Nombre'|trans}} )}}<font color="red"> *</font><br>
+              {{form_widget(form.apPaterno, {'attr': {'placeholder': 'Apellido paterno'|trans}} )}}<font color="red"> *</font><br>
+              {{form_widget(form.apMaterno, {'attr': {'placeholder': 'Apellido materno'|trans}} )}}<font color="red"> *</font><br>
+              <br>
+              {{form_widget(form.fNacimiento)}}
+              <br>
+              {{form_widget(form.correo, {'attr': {'placeholder': 'Correo'|trans}} )}}<font color="red"> *</font><br>
+              {{form_widget(form.telefono, {'attr': {'placeholder': 'Telefono'|trans}} )}}<font color="red"> *</font><br>
+              {{form_widget(form.profesion, {'attr': {'placeholder': 'Profesion'|trans}} )}}<font color="red"> *</font><br>
+              {{form_widget(form.idStatus, {'attr': {'placeholder': 'Status'|trans}} )}}<font color="red"> * </font>
+              <a>
+                <i class="glyphicon-exclamation-sign glyphicon" rel="tooltip" title="<div style='text-align:left;'><strong>Ingresa el numero adecuado</strong><br>Activo.- 1 <br> Descansando.- 2 <br> Inactivo.- 3</div>" id="tt1" data-html="true">
+                </i>
+              </a><br>
+              <br>
+              {{form_widget(form.idGenero, {'attr': {'placeholder': 'Genero'|trans}} )}}<font color="red"> * </font>
+              <a>
+                <i class="glyphicon-exclamation-sign glyphicon" rel="tooltip" title="<div style='text-align:left;'><strong>Ingresa el numero adecuado</strong> <br> Masculino.- 1 <br> Femenino- 2 <br> Gay.- 3</div>" id="tt2" data-html="true">
+                </i>
+              </a><br>
+              {{form_widget(form.estatura, {'attr': {'placeholder': 'Estatura'|trans}} )}}<font color="red"> *</font><br>
+              {{form_widget(form.peso, {'attr': {'placeholder': 'Peso'|trans}} )}}<font color="red"> *</font><br>
+              {{form_widget(form.idTiposanguineo, {'attr': {'placeholder': 'Tipo Sanguineo'|trans}} )}}<font color="red"> * </font>
+              <a>
+                <i class="glyphicon-exclamation-sign glyphicon" rel="tooltip" title="<div style='text-align:left'><strong>Ingresa el numero adecuado</strong><br>A+: 1 <br> A-: 2 <br> B+: 3 <br> B-: 4 <br> AB+:5 <br> AB-: 6 <br> O+: 7 <br> O-: 8 <br> RH+: 9 <br> RH-: 10</div>" id="tt3" data-html="true">
+                </i>
+              </a>
+		</div>
+	</div>	
 {% endblock %}

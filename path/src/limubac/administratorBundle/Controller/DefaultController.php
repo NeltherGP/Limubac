@@ -393,8 +393,9 @@ class DefaultController extends Controller{
 			
 				$Auxiliar = $query->getResult();
 			}
-			
-		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar,'mensaje'=>$Mensaje));
+			$jugador = new Jugador();
+			$form = $this->createForm(new JugadorType(), $jugador);
+		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'mensaje'=>$Mensaje,'form'=>$form->createView()));
 		
 		}else{//si no esta definido el valor del equipo
 			
