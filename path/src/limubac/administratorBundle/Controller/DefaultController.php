@@ -18,6 +18,7 @@ namespace limubac\administratorBundle\Controller;
 		use limubac\administratorBundle\Entity\Faltas;
 		use limubac\administratorBundle\Entity\Asistencia;
 		use limubac\administratorBundle\Form\Type\JugadorType;
+		use limubac\administratorBundle\Form\Type\JugadorAType;
 		use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 		use Symfony\Component\Validator\Constraints\DateTime;
 
