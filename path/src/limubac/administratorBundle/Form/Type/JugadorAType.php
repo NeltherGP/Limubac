@@ -8,21 +8,21 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class JugadorAType extends AbstractType{
-	public function buildForm(FormBuilderInterface $builder, array $options){
-		$builder->add('idJugador', 'hidden');
-		$builder->add('nombre','text');
-		$builder->add('apPaterno','text');
-		$builder->add('apMaterno','text');
-		$builder->add('fNacimiento','date', array('widget' => 'single_text','format' => 'yyyy-MM-dd',));
-		$builder->add('correo','email');
-		$builder->add('telefono','integer');
-		$builder->add('profesion','text');
-		$builder->add('estatura','text');
-		$builder->add('peso','text');
-		//$builder->add('idFoto','hidden');
-		//$builder->add('idTiposanguineo','integer');
-		//$builder->add('idGenero','integer');
-		$builder->add('idGenero', 'choice', array(
+  public function buildForm(FormBuilderInterface $builder, array $options){
+    $builder->add('idJugador', 'hidden');
+    $builder->add('nombre','text');
+    $builder->add('apPaterno','text');
+    $builder->add('apMaterno','text');
+    $builder->add('fNacimiento','date', array('widget' => 'single_text','format' => 'yyyy-MM-dd',));
+    $builder->add('correo','email');
+    $builder->add('telefono','integer');
+    $builder->add('profesion','text');
+    $builder->add('estatura','text');
+    $builder->add('peso','text');
+    //$builder->add('idFoto','hidden');
+    //$builder->add('idTiposanguineo','integer');
+    //$builder->add('idGenero','integer');
+    $builder->add('idGenero', 'choice', array(
         'choices' => array(
           1 => 'Masculino',
           2 => 'Femenino',
@@ -32,8 +32,8 @@ class JugadorAType extends AbstractType{
         'multiple' => false,
         'expanded' => false,
         'required' => true,
-    	));
-    	$builder->add('idStatus', 'choice', array(
+      ));
+      $builder->add('idStatus', 'choice', array(
         'choices' => array(
           1 => 'Activo',
           2 => 'Descansando',
@@ -43,8 +43,8 @@ class JugadorAType extends AbstractType{
         'multiple' => false,
         'expanded' => false,
         'required' => true,
-    	));
-    	$builder->add('idTiposanguineo', 'choice', array(
+      ));
+      $builder->add('idTiposanguineo', 'choice', array(
         'choices' => array(
           1 => 'A+',
           2 => 'A-',
@@ -61,15 +61,15 @@ class JugadorAType extends AbstractType{
         'multiple' => false,
         'expanded' => false,
         'required' => true,
-    	));
-		//$builder->add('idStatus','integer');
-	}
+      ));
+    //$builder->add('idStatus','integer');
+  }
 
-	public function getName(){
-		return 'jugador';
-	}
+  public function getName(){
+    return 'jugador';
+  }
 
-	/*public function setDefaultOptions(OptionsResolverInterface $resolver)
+  /*public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
     $resolver->setDefaults(array(
         'data_class' => 'limubac\administratorBundle\Entity\Jugador',

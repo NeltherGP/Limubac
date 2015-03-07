@@ -8,7 +8,7 @@
     });
   </script>
   {% endblock documentReady %}
-	<form class="form-horizontal" role="form" >
+  <form class="form-horizontal" role="form" >
     
     <div class="row-fluid">
       <div class="page-header">
@@ -17,7 +17,7 @@
       </div>
 
 
-     	<div class="row-fluid">
+      <div class="row-fluid">
         <div class="col-md-3 profilePerson thumbnail">
           <img src="http://placehold.it/220x400&text=Profile+Pic" alt="This Guy">
           <div class="profileOptions"></div>
@@ -37,24 +37,12 @@
               {{form_widget(form.correo, {'attr': {'placeholder': 'Correo'|trans}} )}}<font color="red"> *</font><br>
               {{form_widget(form.telefono, {'attr': {'placeholder': 'Telefono'|trans}} )}}<font color="red"> *</font><br>
               {{form_widget(form.profesion, {'attr': {'placeholder': 'Profesion'|trans}} )}}<font color="red"> *</font><br>
-              {{form_widget(form.idStatus, {'attr': {'placeholder': 'Status'|trans}} )}}<font color="red"> * </font>
-              <a>
-                <i class="glyphicon-exclamation-sign glyphicon" rel="tooltip" title="<div style='text-align:left;'><strong>Ingresa el numero adecuado</strong><br>Activo.- 1 <br> Descansando.- 2 <br> Inactivo.- 3</div>" id="tt1" data-html="true">
-                </i>
-              </a><br>
               <br>
-              {{form_widget(form.idGenero, {'attr': {'placeholder': 'Genero'|trans}} )}}<font color="red"> * </font>
-              <a>
-                <i class="glyphicon-exclamation-sign glyphicon" rel="tooltip" title="<div style='text-align:left;'><strong>Ingresa el numero adecuado</strong> <br> Masculino.- 1 <br> Femenino- 2 <br> Gay.- 3</div>" id="tt2" data-html="true">
-                </i>
-              </a><br>
+              <font color:#999>Genero: </font>{{form_widget(form.idGenero, {'attr': {'placeholder': 'Genero'|trans}} )}}<font color="red"> *</font>
+              <br>
               {{form_widget(form.estatura, {'attr': {'placeholder': 'Estatura'|trans}} )}}<font color="red"> *</font><br>
               {{form_widget(form.peso, {'attr': {'placeholder': 'Peso'|trans}} )}}<font color="red"> *</font><br>
-              {{form_widget(form.idTiposanguineo, {'attr': {'placeholder': 'Tipo Sanguineo'|trans}} )}}<font color="red"> * </font>
-              <a>
-                <i class="glyphicon-exclamation-sign glyphicon" rel="tooltip" title="<div style='text-align:left'><strong>Ingresa el numero adecuado</strong><br>A+: 1 <br> A-: 2 <br> B+: 3 <br> B-: 4 <br> AB+:5 <br> AB-: 6 <br> O+: 7 <br> O-: 8 <br> RH+: 9 <br> RH-: 10</div>" id="tt3" data-html="true">
-                </i>
-              </a>
+              <font color:#999>Tipo sanguineo: </font>{{form_widget(form.idTiposanguineo, {'attr': {'placeholder': 'Tipo Sanguineo'|trans}} )}}<font color="red"> * </font>
               <br>
              {# {{form_widget(form., {'attr': {'placeholder': 'Foto'|trans}} )}}<font color="red"> *</font><br> #}
             {{form_end(form)}}

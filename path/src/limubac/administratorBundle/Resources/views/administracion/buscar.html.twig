@@ -1,7 +1,7 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
-	<form class="form-horizontal" role="form">
+  <form class="form-horizontal" role="form">
     
     <div class="row-fluid">
       <div class="col-md-12 borBox well btn-dashboard">
@@ -18,7 +18,7 @@
           <div class="btn-group sharp pull-right">
             <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_jugadoresAdmin')}}"><i class="glyphicon glyphicon-circle-arrow-left"></i> Regresar</a>
             <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_addjugador')}}"><i class="glyphicon-plus glyphicon"></i> Agregar</a>
-            <button class="btn btn-primary btn-info" type='submit'><i class="glyphicon-minus glyphicon"></i> Eliminar</button>
+            
             <!--<a class="btn btn-primary btn-info" href="../app_dev.php/eliminar"><i class="glyphicon-minus glyphicon"></i> Eliminar</a>-->
           </div>
         </div>
@@ -52,7 +52,6 @@
                   <th>Peso</th>
                   <th>Tipo Sangineo</th>
                   <th>Editar</th>
-                  <th>Seleccionar</th>
                 </tr>
               </thead>
               <tbody>
@@ -73,13 +72,7 @@
                         <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{{bs.idJugador}}'>
                           <i class="glyphicon-pencil glyphicon"></i>
                         </button>
-                        <button class="btn btn-mini btn-success" type='submit' name='foto[]' value ='{{bs.idJugador}}'>
-                          <i class="glyphicon-camera glyphicon"></i>
-                        </button>
                       </div>
-                    </td>
-                    <td>
-                      <input type="checkbox" style="width:20px;" class="group1" name='check[{{bs.idJugador}}]' id ='id{{bs.idJugador}}'>
                     </td>
                   </tr>
                 {% endfor %}

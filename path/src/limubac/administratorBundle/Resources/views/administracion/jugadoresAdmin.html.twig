@@ -56,9 +56,9 @@
     </div>
 
 
-	<form class="form-horizontal" role="form" action="../app_dev.php/update">
+  <form class="form-horizontal" role="form" action="../app_dev.php/update">
     <div class="row-fluid">
-     	<div class="col-md-12 borBox well btn-dashboard">			
+      <div class="col-md-12 borBox well btn-dashboard">     
         <div class="formAnotacion form-group">
           <div class="col-md-6 tLeft" >
             <h1>Jugadores</h1>
@@ -102,8 +102,6 @@
           <h3 class="col-md-7">Accion</h3>
           <div class="btn-group sharp pull-right">
             <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_addjugador')}}"><i class="glyphicon-plus glyphicon"></i> Agregar</a>
-            <button class="btn btn-primary btn-info" type='submit'><i class="glyphicon-minus glyphicon"></i> Eliminar</button>
-            <!--<a class="btn btn-primary btn-info" href="../app_dev.php/eliminar"><i class="glyphicon-minus glyphicon"></i> Eliminar</a>-->
           </div>
         </div>
       </div>
@@ -127,7 +125,6 @@
                   <th>Peso</th>
                   <th>Tipo Sangineo</th>
                   <th>Editar</th>
-                  <th>Seleccionar</th>
                 </tr>
               </thead>
               <tbody>
@@ -144,17 +141,14 @@
                     <td> {{entitie.peso}} </td>
                     <td> {{entitie.tipoSangre}} </td>
                     <td>
-                      <div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                      <div class="btn-group sharp" data-toggle="radio" style="width: 50px"  text-align:"center">
                         <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{{entitie.idJugador}}'>
                           <i class="glyphicon-pencil glyphicon"></i>
                         </button>
-                        <button class="btn btn-mini btn-success" type='submit' name='foto[]' value ='{{entitie.idJugador}}'>
+                        <!--<button class="btn btn-mini btn-success" type='submit' name='foto[]' value ='{{entitie.idJugador}}'>
                           <i class="glyphicon-camera glyphicon"></i>
-                        </button>
+                        </button>-->
                       </div>
-                    </td>
-                    <td>
-                      <input type="checkbox" style="width:20px;" class="group1" name='check[{{entitie.idJugador}}]' id ='id{{entitie.idJugador}}'>
                     </td>
                   </tr>
                 {% endfor %}

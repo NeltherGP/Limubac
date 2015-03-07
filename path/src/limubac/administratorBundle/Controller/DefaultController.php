@@ -694,7 +694,7 @@ class DefaultController extends Controller{
 	//End Edgar
 
 	//-----------------------INICIO CONTROLADOR DE FAFI---------------------------------------------------
-	public function jugadoresAdminAction(){
+		public function jugadoresAdminAction(){
 
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
         $queryPlayers = $repository->createQueryBuilder('p')
@@ -734,7 +734,7 @@ class DefaultController extends Controller{
     public function addjugadorAction(){
         $jugador = new Jugador();
         $form = $this->createForm(new JugadorType(), $jugador);
-
+        
         $request = $this->get('request');
         $form->handleRequest($request);
 
@@ -745,33 +745,34 @@ class DefaultController extends Controller{
                 return $this->render('limubacadministratorBundle:administracion:addjugador.html.twig',array('form' => $form->createView()));
             }
             else{
-                $url_query = $parsed_url['query'];
-                parse_str($url_query,$out);
+                //$url_query = $parsed_url['query'];
+                //parse_str($url_query,$out);
+                $out = $_REQUEST['jugador'];
                 if (is_array($out) && !empty($out)) {
                     $player = new Jugador();
-                    $player -> setNombre($out['jugador']['nombre']);
-                    $player -> setApPaterno($out['jugador']['apPaterno']);
-                    $player -> setApMaterno($out['jugador']['apMaterno']);
-                    $fn = $out['jugador']['fNacimiento'];
+                    $player -> setNombre($out['nombre']);
+                    $player -> setApPaterno($out['apPaterno']);
+                    $player -> setApMaterno($out['apMaterno']);
+                    $fn = $out['fNacimiento'];
                     $dt = date_create_from_format('Y-m-d', $fn);
                     $player -> setFNacimiento(new \DateTime($fn));
-                    $player -> setCorreo($out['jugador']['correo']);
-                    $player -> setTelefono($out['jugador']['telefono']);
-                    $player -> setProfesion($out['jugador']['profesion']);
-                        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Status');
-                        $category = $class_repository->find($out['jugador']['idStatus']);
+                    $player -> setCorreo($out['correo']);
+                    $player -> setTelefono($out['telefono']);
+                    $player -> setProfesion($out['profesion']);
+                        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
+                        $category = $class_repository->find("Activo");
                     $player -> setIdStatus($category);
                         $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
-                        $category = $class_repository->find($out['jugador']['idGenero']);
+                        $category = $class_repository->find($out['idGenero']);
                     $player -> setIdGenero($category);
-                    $player -> setEstatura($out['jugador']['estatura']);
-                    $player -> setPeso($out['jugador']['peso']);
+                    $player -> setEstatura($out['estatura']);
+                    $player -> setPeso($out['peso']);
                         $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:TipoSanguineo');
-                        $category = $class_repository->find($out['jugador']['idTiposanguineo']);
+                        $category = $class_repository->find($out['idTiposanguineo']);
                     $player -> setIdTiposanguineo($category);
-                        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
-                        $category = $class_repository->find($out['jugador']['idFoto']);
-                    $player -> setIdFoto($category);
+                        //$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+                        //$category = $class_repository->find($out['idFoto']);
+                    //$player -> setIdFoto($category);
 
                     $em = $this->getDoctrine()->getManager();
                     $em -> persist($player);
@@ -805,38 +806,26 @@ class DefaultController extends Controller{
             $resul = $queryFind->getResult();
             return $this->render('limubacadministratorBundle:administracion:buscar.html.twig', array('busca' => $resul));
         }
-        elseif (!empty($_REQUEST['check'])) {
-            $ch = $_REQUEST['check'];
-            foreach ($ch as $key => $value) {
-                $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
-                $queryDelete = $repository->createQueryBuilder('j')
-                    ->delete()
-                    ->where('j.idJugador = '.$key)
-                    ->getQuery();
-                $entities = $queryDelete->getResult();
-            }
-            return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
-        }
         elseif (!empty($_REQUEST['edit'])) {
             $jugador = new Jugador();
-            $form = $this->createForm(new JugadorType(), $jugador);
+            $form = $this->createForm(new JugadorAType(), $jugador);
             $ed = $_REQUEST['edit'][0];
             
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
             $queryEdit = $repository->createQueryBuilder('e')
-            ->select('e.idJugador','e.nombre','e.apPaterno','e.apMaterno','e.fNacimiento','e.correo','e.telefono','e.profesion','IDENTITY(e.idStatus)','IDENTITY(e.idGenero)','e.estatura','e.peso','IDENTITY(e.idTiposanguineo)','fot.foto','IDENTITY(e.idFoto)')
-            ->join('limubacadministratorBundle:Fotos', 'fot', 'WITH' ,'fot.idFoto = e.idFoto')
+            ->select('e.idJugador','e.nombre','e.apPaterno','e.apMaterno','e.fNacimiento','e.correo','e.telefono','e.profesion','IDENTITY(e.idStatus)','IDENTITY(e.idGenero)','e.estatura','e.peso','IDENTITY(e.idTiposanguineo)','IDENTITY(e.idFoto)')
+            //->join('limubacadministratorBundle:Fotos', 'fot', 'WITH' ,'fot.idFoto = e.idFoto')
             ->where('e.idJugador = :word')
             ->setParameter('word', $ed)
             ->getQuery();
             $resul = $queryEdit->getResult();
             //print_r($resul);
 
-            $images = array();
+            //$images = array();
 
-            $images[0] = base64_encode(stream_get_contents($resul[0]['foto']));
+            //$images[0] = base64_encode(stream_get_contents($resul[0]['foto']));
             
-            return $this->render('limubacadministratorBundle:administracion:edita.html.twig',array('form' => $form->createView(), 'edita' => $resul, 'im' => $images));
+            return $this->render('limubacadministratorBundle:administracion:edita.html.twig',array('form' => $form->createView(), 'edita' => $resul));
         }
         elseif (!empty($_REQUEST['foto'])) {
             $per = $_REQUEST['foto'];
@@ -925,8 +914,6 @@ class DefaultController extends Controller{
 
         */
     }
-
-   
 	
     public function buscarAction(){
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
@@ -974,7 +961,7 @@ class DefaultController extends Controller{
             ->set('z.estatura', ':est')
             ->set('z.peso', ':pes')
             ->set('z.idTiposanguineo', ':iti')
-            ->set('z.idFoto', ':fot')
+            //->set('z.idFoto', ':fot')
             ->where('z.idJugador= :idj')
             ->setParameter('idj', $upt['idJugador'])
             ->setParameter('nom', $upt['nombre'])
@@ -989,12 +976,11 @@ class DefaultController extends Controller{
             ->setParameter('est', $upt['estatura'])
             ->setParameter('pes', $upt['peso'])
             ->setParameter('iti', $category3)
-            ->setParameter('fot', $resul[0]['idFoto'])
+            //->setParameter('fot', $resul[0]['idFoto'])
             ->getQuery();
         $resul = $q->execute();
 
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
-
     }
 
 	
@@ -1082,6 +1068,7 @@ class DefaultController extends Controller{
                     $valid_filetypes = array('jpg', 'jpeg', 'bmp', 'png');
                     if (in_array(strtolower($file_type), $valid_filetypes)) {
                         //Start Uploading Image
+
                         //$document = new Document();
                         //$document->setFile($image);
                         //$document->setSubDirectory('/upload');
