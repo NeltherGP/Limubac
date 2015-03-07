@@ -3,7 +3,7 @@
 {% block PageContent %}
 
 
-  <form class="form-horizontal" role="form" >
+<form class="form-horizontal" role="form" >
     <div class="row-fluid">
       <div class="col-md-12 borBox well btn-dashboard">     
         <div class="formAnotacion form-group">
@@ -14,43 +14,50 @@
       </div>
     </div>
 
-  <form class="form-horizontal">
-    <div class="control-group">
-      <label class="control-label" for="inputNombre">Nombre</label>
-      <div class="controls">
-        <input type="text" id="inputNombre" placeholder="Nombre">
-      </div>
+  <div class="row-fluid">  
+    <div class="col-md-7">
+      <!--<form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label" for="inputNombre">Nombre</label>
+            <div class="controls">
+              <input type="text" id="inputNombre" placeholder="Nombre">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputFechIni">Fecha de Inicio</label>
+            <div class="controls">
+              <input type="text" id="inputFechIni" placeholder="Fecha de Inicio">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputFechTer">Fecha de Termino</label>
+            <div class="controls">
+              <input type="text" id="inputFechTer" placeholder="Fecha de Termino">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputCosto">Costo</label>
+            <div class="controls">
+              <input type="text" id="inputCosto" placeholder="Costo">
+            </div>
+          </div>
+      </form>-->
+            {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+              {{form_widget(form.nombre, {'attr': {'placeholder': 'Nombre'|trans}} )}}<font color="red"> *</font>
+              <br>
+              {{form_widget(form.fInicio)}}
+              <br>
+              {{form_widget(form.fTermino)}}
+              <br>
+              {{form_widget(form.costo, {'attr': {'placeholder': 'Costo'|trans}} )}}<font color="red"> *</font><br>
+            {{form_end(form)}}
     </div>
-    <div class="control-group">
-      <label class="control-label" for="inputFechIni">Fecha de Inicio</label>
-      <div class="controls">
-        <input type="text" id="inputFechIni" placeholder="Fecha de Inicio">
-      </div>
+
+        <div class="col-md-2 tRight">
+          <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Salvar" name="jugador[Salvar]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
+        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_torneos')}}"><i class="glyphicon glyphicon-remove"></i>Cancelar</a>
     </div>
-    <div class="control-group">
-      <label class="control-label" for="inputFechTer">Fecha de Termino</label>
-      <div class="controls">
-        <input type="text" id="inputFechTer" placeholder="Fecha de Termino">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="inputCat">Categoria</label>
-      <div class="controls">
-        <input type="text" id="inputCat" placeholder="Categoria">
-      </div>
-    </div>
-        <div class="control-group">
-      <label class="control-label" for="inputRama">Rama</label>
-      <div class="controls">
-        <input type="text" id="inputRama" placeholder="Rama">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="inputCosto">Costo</label>
-      <div class="controls">
-        <input type="text" id="inputCosto" placeholder="Costo">
-      </div>
-    </div>
-  </form>
+  </div>
+</form>
 
 {% endblock %}

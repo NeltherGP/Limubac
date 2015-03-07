@@ -1,0 +1,38 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+
+
+<form class="form-horizontal" role="form" action="../app_dev.php/editTorneo">
+    <div class="row-fluid">
+      <div class="col-md-12 borBox well btn-dashboard">     
+        <div class="formAnotacion form-group">
+          <div class="col-md-6 tLeft" >
+            <h1>Crear Torneo</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="row-fluid">  
+    <div class="col-md-7">
+            {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+              {{form_widget(form.idTorneo, {value : edita[0]['idTorneo']} ) }}
+              {{form_widget(form.nombre, {value : edita[0]['nombre']} )}}<font color="red"> *</font>
+              <br>
+              {{form_widget(form.fInicio, {value : edita[0]['fInicio']|date('Y-m-d')} )}}
+              <br>
+              {{form_widget(form.fTermino, {value : edita[0]['fTermino']|date('Y-m-d')} )}}
+              <br>
+              {{form_widget(form.costo, {value : edita[0]['costo']} )}}<font color="red"> *</font>
+            {{form_end(form)}}
+    </div>
+
+    <div class="col-md-2 tRight">
+          <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Editar" name="jugador[{{edita[0]['nombre']}}]"><i class="glyphicon-ok glyphicon"></i> Actualizar</button>
+        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_torneos')}}"><i class="glyphicon glyphicon-remove"></i>Cancelar</a>
+    </div>
+  </div>
+</form>
+
+{% endblock %}
