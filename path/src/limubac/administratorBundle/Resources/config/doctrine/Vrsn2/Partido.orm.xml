@@ -27,5 +27,15 @@
         <join-column name="id_torneo" referenced-column-name="id_torneo"/>
       </join-columns>
     </many-to-one>
+    <many-to-many field="idEquipo" target-entity="Equipo" inversed-by="idPartido">
+      <join-table name="juegan">
+        <join-columns>
+          <join-column name="id_partido" referenced-column-name="id_partido"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="id_equipo" referenced-column-name="id_equipo"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
   </entity>
 </doctrine-mapping>

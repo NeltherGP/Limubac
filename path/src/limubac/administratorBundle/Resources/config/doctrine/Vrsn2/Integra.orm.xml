@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="limubac\administratorBundle\Entity\Integra" table="integra">
+    <indexes>
+      <index name="id_jugador" columns="id_jugador,id_equipo"/>
+      <index name="id_equipo" columns="id_equipo"/>
+      <index name="IDX_DB326E438CE0C668" columns="id_jugador"/>
+    </indexes>
+    <id name="noPlayera" type="integer" column="no_playera"/>
+    <id name="idJugador" association-key="true"/>
+    <id name="idEquipo" association-key="true"/>
+    <one-to-one field="idEquipo" target-entity="Equipo">
+      <join-columns>
+        <join-column name="id_equipo" referenced-column-name="id_equipo"/>
+      </join-columns>
+    </one-to-one>
+    <one-to-one field="idJugador" target-entity="Jugador">
+      <join-columns>
+        <join-column name="id_jugador" referenced-column-name="id_jugador"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

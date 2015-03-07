@@ -58,20 +58,6 @@ class Equipo
      */
     private $idCapitan;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="limubac\administratorBundle\Entity\Partido", mappedBy="idEquipo")
-     */
-    private $idPartido;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->idPartido = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 
     /**
@@ -174,38 +160,5 @@ class Equipo
     public function getIdCapitan()
     {
         return $this->idCapitan;
-    }
-
-    /**
-     * Add idPartido
-     *
-     * @param \limubac\administratorBundle\Entity\Partido $idPartido
-     * @return Equipo
-     */
-    public function addIdPartido(\limubac\administratorBundle\Entity\Partido $idPartido)
-    {
-        $this->idPartido[] = $idPartido;
-
-        return $this;
-    }
-
-    /**
-     * Remove idPartido
-     *
-     * @param \limubac\administratorBundle\Entity\Partido $idPartido
-     */
-    public function removeIdPartido(\limubac\administratorBundle\Entity\Partido $idPartido)
-    {
-        $this->idPartido->removeElement($idPartido);
-    }
-
-    /**
-     * Get idPartido
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdPartido()
-    {
-        return $this->idPartido;
     }
 }

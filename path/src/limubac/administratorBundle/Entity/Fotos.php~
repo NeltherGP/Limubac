@@ -15,16 +15,16 @@ class Fotos
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
+     * @ORM\Column(name="foto", type="blob", nullable=false)
      */
-    private $nombre;
+    private $foto;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="foto", type="blob", nullable=false)
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=true)
      */
-    private $foto;
+    private $nombre;
 
     /**
      * @var integer

@@ -13,7 +13,7 @@
 					{% endfor%}
 				</select>
 			</div>	
-			<input type="submit" class="btn btn-primary col-md-1">
+			<input type="submit" class="btn btn-primary btn-info col-md-1">
 			
 		</div>
         </div>
@@ -27,8 +27,30 @@
 			<label class="col-md-1">Agregar un equipo</label>
 			<div class="col-md-3">		    			
 				<input class="form-control" name="NuevoEquipo" placeholder="Nombre del nuevo equipo">
+			</div>
+			
+			<div class="col-md-2">		    			
+				<select class="form-control input-sm" name="category">
+					{% for categoria in Categorias %}
+						<option value="{{categoria.idCategoria}}">{{categoria.nombre}}</option>
+					{% endfor%}
+				</select>
 			</div>	
-			<button class="btn btn-primary col-md-1" type="submit">Agregar</button>
+			<div class="col-md-2">		    			
+				<select class="form-control input-sm" name="torneo">
+					{% for Torneo in Torneos %}
+						<option value="{{Torneo.idTorneo}}">{{Torneo.nombre}}</option>
+					{% endfor%}
+				</select>
+			</div>	
+			<div class="col-md-2">		    			
+				<select class="form-control input-sm" name="rama">
+					{% for Rama in Ramas %}
+						<option value="{{Rama.idRama}}">{{Rama.nombre}}</option>
+					{% endfor%}
+				</select>
+			</div>	
+			<button class="btn btn-primary btn-info col-md-1" type="submit">Agregar</button>
 		</div>
         </div>
 		

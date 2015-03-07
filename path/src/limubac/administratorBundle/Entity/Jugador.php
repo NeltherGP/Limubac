@@ -349,7 +349,7 @@ class Jugador
      * @param \limubac\administratorBundle\Entity\Fotos $idFoto
      * @return Jugador
      */
-    public function setIdFoto(\limubac\administratorBundle\Entity\Fotos $idFoto = null)
+    public function setidFoto(\limubac\administratorBundle\Entity\Fotos $idFoto = null)
     {
         $this->idFoto = $idFoto;
 
@@ -361,7 +361,7 @@ class Jugador
      *
      * @return \limubac\administratorBundle\Entity\Fotos 
      */
-    public function getIdFoto()
+    public function getidFoto()
     {
         return $this->idFoto;
     }

@@ -65,3 +65,18 @@ limubacadministrator_categorias:
 limubacadministrator_crearCategoria:
     path:     /crearCategoria
     defaults: { _controller: limubacadministratorBundle:Default:crearCategoria}
+limubacadministrator_acTorneo:
+    path:     /acTorneo
+    defaults: { _controller: limubacadministratorBundle:Default:acTorneo}
+limubacadministrator_editTorneo:
+    path:     /editTorneo
+    defaults: { _controller: limubacadministratorBundle:Default:editTorneo}
+limubacadministrator_acCategoria:
+    path:     /acCategoria
+    defaults: { _controller: limubacadministratorBundle:Default:acCategoria}
+limubacadministrator_editCategoria:
+    path:     /editCategoria
+    defaults: { _controller: limubacadministratorBundle:Default:editCategoria}
+limubacadministrator_rol:
+    path:     /rol
+    defaults: { _controller: limubacadministratorBundle:Default:rol}

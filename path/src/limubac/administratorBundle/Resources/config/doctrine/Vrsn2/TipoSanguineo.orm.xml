@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="limubac\administratorBundle\Entity\Fotos" table="fotos">
-    <id name="idFoto" type="integer" column="id_foto">
+  <entity name="limubac\administratorBundle\Entity\TipoSanguineo" table="tipo_sanguineo">
+    <id name="idTiposanguineo" type="integer" column="id_tiposanguineo">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="foto" type="blob" column="foto" nullable="false"/>
-    <field name="nombre" type="string" column="nombre" length="255" nullable="true"/>
+    <field name="tipoSangre" type="string" column="tipo_sangre" length="5" nullable="false"/>
   </entity>
 </doctrine-mapping>

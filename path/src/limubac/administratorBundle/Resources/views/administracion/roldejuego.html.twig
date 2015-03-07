@@ -1,0 +1,22 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+
+
+	<form class="form-horizontal" role="form" action="../app_dev.php/update">
+
+    <div class="row-fluid">
+      <div class="col-md-12 borBox wellDark btn-dashboard">
+        <div class="formAnotacion form-group">
+          <h3 class="col-md-7">Accion</h3>
+          <div class="btn-group sharp pull-right">
+            <a class="btn btn-primary btn-info" href="#"><i class="glyphicon-plus glyphicon"></i> Crear Nuevo Rol</a>
+            <a class="btn btn-primary btn-info" href="#"><i class="glyphicon-minus glyphicon"></i> Eliminar Rol actual</a>
+			<a class="btn btn-primary btn-info" href="#"><i class="glyphicon-eye-open glyphicon"></i> checar/editar Rol</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+{% endblock %}

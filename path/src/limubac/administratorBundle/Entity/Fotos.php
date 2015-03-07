@@ -15,16 +15,16 @@ class Fotos
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
+     * @ORM\Column(name="foto", type="blob", nullable=false)
      */
-    private $nombre;
+    private $foto;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="foto", type="blob", nullable=false)
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=true)
      */
-    private $foto;
+    private $nombre;
 
     /**
      * @var integer
@@ -36,29 +36,6 @@ class Fotos
     private $idFoto;
 
 
-
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     * @return Fotos
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    /**
-     * Get nombre
-     *
-     * @return string 
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
 
     /**
      * Set foto
@@ -81,6 +58,29 @@ class Fotos
     public function getFoto()
     {
         return $this->foto;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Fotos
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
     }
 
     /**

@@ -2,7 +2,7 @@
 
 {% block PageContent %}
 
-  <form class="form-horizontal" role="form" >
+  <form class="form-horizontal" role="form" action="../app_dev.php/acTorneo">
     <div class="row-fluid">
       <div class="col-md-12 borBox well btn-dashboard">     
         <div class="formAnotacion form-group">
@@ -19,8 +19,7 @@
           <h3 class="col-md-7">Accion</h3>
           <div class="btn-group sharp pull-right">
             <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_categorias')}}"><i class="glyphicon-plus glyphicon"></i> Categorias</a>
-            <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_crearTorneo')}}"><i class="glyphicon-plus glyphicon"></i> Crear</a>
-            <button class="btn btn-primary btn-info" type='submit'><i class="glyphicon-minus glyphicon"></i> Eliminar</button>
+            <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_crearTorneo')}}"><i class="glyphicon-plus glyphicon"></i> Crear Torneo</a>
           </div>
         </div>
       </div>
@@ -37,15 +36,27 @@
                   <th>Nombre</th>
                   <th>Fecha de Inicio</th>
                   <th>Fecha de Termino</th>
-                  <th>Categoria</th>
-                  <th>Rama</th>
                   <th>Costo</th>
                   <th>Editar</th>
-                  <th>Seleccionar</th>
                 </tr>
               </thead>
               <tbody>
-
+                {% for entitie in entities %}
+                  <tr>
+                    <td> {{entitie.idTorneo}} </td>
+                    <td> {{entitie.nombre}} </td>
+                    <td> {{entitie.fInicio|date('Y-m-d')}} </td>
+                    <td> {{entitie.fTermino|date('Y-m-d')}} </td>
+                    <td> {{entitie.costo}} </td>
+                    <td>
+                      <div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                        <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{{entitie.idTorneo}}'>
+                          <i class="glyphicon-pencil glyphicon"></i>
+                        </button>
+                      </div>  
+                    </td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>

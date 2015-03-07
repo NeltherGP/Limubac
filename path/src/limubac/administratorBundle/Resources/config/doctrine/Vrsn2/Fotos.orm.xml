@@ -4,7 +4,7 @@
     <id name="idFoto" type="integer" column="id_foto">
       <generator strategy="IDENTITY"/>
     </id>
+    <field name="nombre" type="string" column="nombre" length="255" nullable="false"/>
     <field name="foto" type="blob" column="foto" nullable="false"/>
-    <field name="nombre" type="string" column="nombre" length="255" nullable="true"/>
   </entity>
 </doctrine-mapping>

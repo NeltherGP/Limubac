@@ -1,50 +1,34 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
-<<<<<<< HEAD
-	<form class="form-horizontal" role="form">
-=======
+
+
 	<form action="{{ path('limubacadministrator_hojaAnotaciones') }}" method='POST' class="form-horizontal" role="form">
 
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
       {#Encabezado primera parte#}
   		<div class="bordes">
         <div class="formAnotacion form-group">		
-    			
+
           <div class="col-md-3">
-<<<<<<< HEAD
-            <input class="form-control" id="EqA" placeholder="Equipo A">
-=======
 
-            <input class="form-control" id="EqA" name="EqA" placeholder="Equipo A">
+            <input class="form-control" id="EqA" name="EqA" placeholder="Equipo A" disabled>
 
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
           </div>
           
           <label id="VS" class="col-md-1 text-center">VS</label>
           
           <div class="col-md-3">
-<<<<<<< HEAD
-            <input class="form-control" id="Eqb" placeholder="Equipo B">
+
+            <input class="form-control" id="Eqb" name="EqB" placeholder="Equipo B"  disabled>
           </div>
           
           <div class="col-md-2">
-            <input class="form-control" id="Rama" placeholder="Rama">
+            <input class="form-control" id="Rama" name="Rama" placeholder="Rama"  disabled>
           </div>
           
           <div class="col-md-3">
-            <input class="form-control" id="Categoria" placeholder="Categoria">
-=======
-            <input class="form-control" id="Eqb" name="EqB" placeholder="Equipo B">
-          </div>
-          
-          <div class="col-md-2">
-            <input class="form-control" id="Rama" name="Rama" placeholder="Rama">
-          </div>
-          
-          <div class="col-md-3">
-            <input class="form-control" id="Categoria" name="Categoria" placeholder="Categoria">
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
+            <input class="form-control" id="Categoria" name="Categoria" placeholder="Categoria"  disabled>
+
           </div>
 
     		</div>
@@ -52,182 +36,46 @@
     </br>
 
       {#Encabezado segunda parte #}
-<<<<<<< HEAD
-=======
 
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
     <div class="bordes">
       <div class="formAnotacion form-group">
           {#Fila 1#}
 
             <label for="Lugar" class="col-md-1 control-label text-center">Lugar: </label>
             <div class="col-md-3">
-<<<<<<< HEAD
-              <input class="form-control" id="Lugar" placeholder="Lugar">
-=======
-              <input class="form-control" id="Lugar" name="Lugar" placeholder="Lugar">
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
+
+              <input class="form-control" id="Lugar" name="Lugar" placeholder="Lugar"  disabled>
+
             </div>
 
             <label for="Torneo" class="col-md-1 control-label text-center">Torneo: </label>
             <div class="col-md-3">
-<<<<<<< HEAD
-              <input class="form-control" id="Torneo" placeholder="Torneo">
-=======
-              <input class="form-control" id="Torneo" name ="Torneo" placeholder="Torneo">
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
+
+              <input class="form-control" id="Torneo" name ="Torneo" placeholder="Torneo"  disabled>
+
             </div>
 
             <label for="1erjuez" class="col-md-1 control-label text-center">1er. Juez: </label>
             <div class="col-md-3">
-<<<<<<< HEAD
-              <input class="form-control" id="1erjuez" placeholder="1er. Juez">
-=======
+
               <input class="form-control" id="1erjuez" name="Juez1" placeholder="1er. Juez">
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
+
             </div>
           {#End Fila 1#}
 
             <div class="clearfix visible-xs-block"></div>
 
           {#Fila 2#}
-<<<<<<< HEAD
-            <label for="Fecha" class="col-md-1 control-label text-center">Fecha: </label>
-            <div class="col-md-3 Fila2">
-              <input class="form-control" id="Fecha" placeholder="Fecha">
-            </div>
 
-            <label for="Hora" class="col-md-1 control-label text-center">Hora: </label>
-            <div class="col-md-3 Fila2">
-              <input class="form-control" id="Hora" placeholder="Hora">
-            </div>
-          
-            <label for="2dojuez" class="col-md-1 control-label text-center">2dojuez: </label>
-            <div class="col-md-3 Fila2">
-              <input class="form-control" id="2dojuez" placeholder="2do. Juez">
-            </div>
-          </div>
-        </div>
-          {#End Fila 2#}
-        </br>
-          {#Detalles equipo A#}
-
-          <div class="bordes">
-            <div class="formAnotacion form-group">
-              <label class="col-md-3 control-label  ">Equipo A: "Nombre del equipo" </label>
-              <label class="col-md-1 control-label">Score: </label>
-              <div class="col-md-1">
-                <input class="form-control" id="ScoreTxt">
-              </div>
-            </div>
-            <h3>&nbspFaltas</h3>
-
-          <div class="formAnotacion form-group ">
-              <label class="col-md-1"></label>
-              <div class="col-md-4 bordesFaltas">           
-                  
-                  <label class="col-md-4 control-label  ">Faltas 1T: </label>
-
-                  <div class="col-md-4">
-                    <input class="form-control" id="Faltas1t1" placeholder="1er">
-                  </div>
-
-                  <div class="col-md-4">
-                    <input class="form-control" id="Faltas1t2" placeholder="2do">
-                  </div>
-
-              </div>
-             <label class="col-md-1"></label>
-
-              <div class="col-md-4 bordesFaltas">           
-                  <label class="col-md-4 control-label  ">Faltas 2T: </label>
-
-                  <div class="col-md-4">
-                    <input class="form-control" id="Faltas2t1" placeholder="1er">
-                  </div>
-                  
-                  <div class="col-md-4">
-                    <input class="form-control" id="Faltas2t2" placeholder="2do">
-                  </div>
-
-              </div><div class="col-md-2 " style="height: 46px;"></div>
-
-          {#Control faltas por jugador#}
-          <div id="jugadorFaltoso">
-           <div id="jugadorFaltas">
-
-                <div class="col-md-1 margen-top">
-                  <input class="form-control" id="noLic" placeholder="No.Lic">
-                </div>
-
-                <div class="col-md-6 margen-top">
-                  <input class="form-control" id="nombreJugadorFaltas" placeholder="Nombre">
-                </div>
-
-                <div class="col-md-1 margen-top">
-                  <input class="form-control" id="numeroFaltas" placeholder="Numero">
-                </div>
-
-                <div class="col-md-1 margen-top">
-                  <input class="form-control" id="nquipo" placeholder="E">
-                </div>
-
-                <div class="col-md-1 margen-top">
-                  <input class="form-control" id="numFaltas" placeholder="#Faltas">
-                </div>
-                
-                <button class="btn btn-primary col-md-1 margen-top añadirF" type="button">Añadir</button><div class="col-md-1 margen-top" style="height: 46px;"></div>
-
-            </div>
-          </div>
-
-          {#End Control faltas por jugador#}
-           <h3>&nbspAnotaciones</h3>
-           {#Control anotaciones por jugador#}
-
-           <div id="jugadorAnotador">
-               <div id="jugadorAnotacion">              
-                  <div class="col-md-5 margen-top">
-                    <input class="form-control" id="nombreAnotacion" placholder="Nombre">
-                  </div>
-                  <label class= "col-md-1 text-right margen-top">1x</label>
-                  <div class="col-md-1 margen-top">
-                      <input class="form-control" id="antc1" value="0">
-                  </div>
-
-                  <label class= "col-md-1 text-right margen-top">2x</label>
-                  <div class="col-md-1 margen-top">
-                      <input class="form-control" id="antc2" value="0">
-                  </div>
-
-                  <label class= "col-md-1 text-right margen-top">3x</label>
-                  <div class="col-md-1 margen-top">
-                      <input class="form-control" id="antc3" value="0">
-                  </div>
-
-                  <button class="btn btn-primary col-md-1 añadirA margen-top" type="button">Añadir</button>
-
-               </div>
-           </div>
-
-           {#End anotaciones por jugador#}
-          </div>
-
-
-          </div> {#End Detalles equipo A#}
-
-     
-  	</form>
-=======
             <label for="Fecha" name = "fecha" class="col-md-1 control-label text-center">Fecha: </label>
             <div class="col-md-3 Fila2">
-              <input name = "Fecha"class="form-control" id="Fecha" placeholder="Fecha">
+              <input name = "Fecha"class="form-control" id="Fecha" placeholder="Fecha"  disabled>
             </div>
 
 
             <label for="Hora" name="hora" class="col-md-1 control-label text-center">Hora: </label>
             <div class="col-md-3 Fila2">
-              <input class="form-control" name="Hora"id="Hora" placeholder="Hora">
+              <input class="form-control" name="Hora"id="Hora" placeholder="Hora"  disabled>
 
             </div>
           
@@ -237,242 +85,827 @@
             </div>
           </div>
         </div>
+        <div class="bordes">
+            
+        </div>
 
          {#End Fila 2#}
          	</br>
          {#marcador 1#}
 
-         	<div class="bordes col-md-6">
-
-	      		<div class="formAnotacion form-group">{#Etiquetas#} 
-	      			<label class="col-md-6 text-center">A</label>
-	      			<label class="col-md-6 text-center">B</label>
-            </div>
-
-            <div class="formAnotacion form-group">
-	      			<label class="col-md-1 text-center"></label> {#espacio#}	
-	      			<label class="col-md-1 text-center">#</label>
-	      			<label class="col-md-1 text-center">x1</label>
-	      			<label class="col-md-1 text-center">x2</label>
-	      			<label class="col-md-1 text-center">x3</label>
-
-	      			<label  class="col-md-3  col-lg-3 text-center"></label>{#espacio#}
-	      			
-
-	      			<label class="col-md-1 text-center">#</label>
-	      			<label class="col-md-1 text-center">x1</label>
-	      			<label class="col-md-1 text-center">x2</label>
-	      			<label class="col-md-1 text-center">x3</label>
-           </div> {#etiquetas#}
-
-           <div class="formAnotacion form-group">
-
-              {#Grupo 0#}
-  	      			<div class="col-md-2 ">
-                	<input class="form-control" id="numeroJugador" name="numjugador" placeholder="num">
-              	</div>
-               
-              		<div class="radio col-md-1 text-center">
-                		<label>
-  						        <input type="radio" name="optionsRadios" id="optionsRadios1" value="x1" >  
-   						      </label>
-              		</div>
-
-              		<div class="radio col-md-1 text-center">
-                		<label>
-  						         <input type="radio" name="optionsRadios" id="optionsRadios1" value="x2" >  
-   						      </label>
-              		</div>
-
-              		<div class="radio col-md-1 text-center">
-                		<label>
-  						         <input type="radio" name="optionsRadios" id="optionsRadios1" value="x3" >  
-   						      </label>
-              		</div>
-               {#END Grupo 0#}
-
-            		<label  class="col-md-2 text-center"></label>{#espacio#}
-              {#Grupo 1#}
-            		<div class="col-md-2 ">
-              			<input class="form-control" id="numerojugador1" placeholder="num">
-            		</div>
-
-            		<div class="radio col-md-1 text-center">
-              		<label>
-						          <input type="radio" name="optionsRadios1" id="optionsRadios1" value="x1" >  
- 						      </label>
-            		</div>
-
-            		<div class="radio col-md-1 text-center">
-              		<label>
-						         <input type="radio" name="optionsRadios1" id="optionsRadios1" value="x2" >  
- 						      </label>
-            		</div>
-
-            		<div class="radio col-md-1 text-center">
-              		<label>
-						        <input type="radio" name="optionsRadios1" id="optionsRadios1" value="x3" >  
- 						      </label>
-            		</div>
-                 {#END Grupo 1#}
-           </div>
-             
-
-           <div class="formAnotacion form-group">
-              {#Grupo 2#}
-                <div class="col-md-2 ">
-                  <input class="form-control" id="numeroJugador2" placeholder="num">
+         	<div class="bordes col-md-3"> {#columna de puntos 1#}
+             <div class="formAnotacion form-group">{#1#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA1" placeholder="Numero">
                 </div>
-               
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                      <input type="radio" name="optionsRadios2" id="optionsRadios2" value="x1" >  
-                    </label>
-                  </div>
-
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios2" id="optionsRadios2" value="x2" >  
-                    </label>
-                  </div>
-
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios2" id="optionsRadios2" value="x3" >  
-                    </label>
-                  </div>
-               {#END Grupo 2#}
-               <label  class="col-md-2 text-center"></label>{#espacio#}
-               {#Grupo 3#}
-                <div class="col-md-2 ">
-                  <input class="form-control" id="numeroJugador3" placeholder="num">
+                 <label class="col-md-4 text-center ">1</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB1" placeholder="Numero">
                 </div>
-               
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                      <input type="radio" name="optionsRadios3" id="optionsRadios3" value="x1" >  
-                    </label>
-                  </div>
+             </div>{#End 1#}
 
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios3" id="optionsRadios3" value="x2" >  
-                    </label>
-                  </div>
-
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios3" id="optionsRadios3" value="x3" >  
-                    </label>
-                  </div>
-               {#END Grupo 3#}
-	      	 </div>
-
-           <div class="formAnotacion form-group">
-              {#Grupo 4#}
-                <div class="col-md-2 ">
-                  <input class="form-control" id="numeroJugador4" placeholder="num">
+             <div class="formAnotacion form-group">{#2#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA2" placeholder="Numero">
                 </div>
-               
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                      <input type="radio" name="optionsRadios4" id="optionsRadios4" value="x1" >  
-                    </label>
-                  </div>
-
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios4" id="optionsRadios4" value="x2" >  
-                    </label>
-                  </div>
-
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios4" id="optionsRadios4" value="x3" >  
-                    </label>
-                  </div>
-               {#END Grupo 4#}
-               <label  class="col-md-2 text-center"></label>{#espacio#}
-               {#Grupo 5#}
-                <div class="col-md-2 ">
-                  <input class="form-control" id="numeroJugador5" placeholder="num">
+                 <label class="col-md-4 text-center ">2</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB2" placeholder="Numero">
                 </div>
-               
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                      <input type="radio" name="optionsRadios5" id="optionsRadios5" value="x1" >  
-                    </label>
-                  </div>
+             </div>{#End 2#}
 
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios5" id="optionsRadios5" value="x2" >  
-                    </label>
-                  </div>
-
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios5" id="optionsRadios5" value="x3" >  
-                    </label>
-                  </div>
-               {#END Grupo 5#}
-           </div>
-
-            <div class="formAnotacion form-group">
-              {#Grupo 6#}
-                <div class="col-md-2 ">
-                  <input class="form-control" id="numeroJugador6" placeholder="num">
+             <div class="formAnotacion form-group">{#3#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA3" placeholder="Numero">
                 </div>
-               
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                      <input type="radio" name="optionsRadios6" id="optionsRadios6" value="x1" >  
-                    </label>
-                  </div>
-
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios6" id="optionsRadios6" value="x2" >  
-                    </label>
-                  </div>
-
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios6" id="optionsRadios6" value="x3" >  
-                    </label>
-                  </div>
-               {#END Grupo 6#}
-               <label  class="col-md-2 text-center"></label>{#espacio#}
-               {#Grupo 7#}
-                <div class="col-md-2 ">
-                  <input class="form-control" id="numeroJugador7" placeholder="num">
+                 <label class="col-md-4 text-center ">3</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB3" placeholder="Numero">
                 </div>
-               
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                      <input type="radio" name="optionsRadios7" id="optionsRadios7" value="x1" >  
-                    </label>
-                  </div>
+             </div>{#End 3#}
 
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios7" id="optionsRadios7" value="x2" >  
-                    </label>
-                  </div>
+             <div class="formAnotacion form-group">{#4#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA4" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">4</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB4" placeholder="Numero">
+                </div>
+             </div>{#End 4#}
 
-                  <div class="radio col-md-1 text-center">
-                    <label>
-                       <input type="radio" name="optionsRadios7" id="optionsRadios7" value="x3" >  
-                    </label>
-                  </div>
-               {#END Grupo 7#}
-            </div>
+             <div class="formAnotacion form-group">{#5#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA5" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">5</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB5" placeholder="Numero">
+                </div>
+             </div>{#End 5#}
 
-	      		</div>
-      		</div>
+             <div class="formAnotacion form-group">{#6#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA6" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">6</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB6" placeholder="Numero">
+                </div>
+             </div>{#End 6#}
+
+             <div class="formAnotacion form-group">{#7#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA7" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">7</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB7" placeholder="Numero">
+                </div>
+             </div>{#End 7#}
+
+             <div class="formAnotacion form-group">{#8#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA8" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">8</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB8" placeholder="Numero">
+                </div>
+             </div>{#End 8#}
+
+             <div class="formAnotacion form-group">{#9#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA9" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">9</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB9" placeholder="Numero">
+                </div>
+             </div>{#End 9#}
+
+             <div class="formAnotacion form-group">{#10#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA10" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">10</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB10" placeholder="Numero">
+                </div>
+             </div>{#End 10#}
+
+             <div class="formAnotacion form-group">{#11#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA11" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">11</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB11" placeholder="Numero">
+                </div>
+             </div>{#End 11#}
+
+             <div class="formAnotacion form-group">{#12#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA12" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">12</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB12" placeholder="Numero">
+                </div>
+             </div>{#End 12#}
+
+             <div class="formAnotacion form-group">{#13#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA13" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">13</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB13" placeholder="Numero">
+                </div>
+             </div>{#End 13#}
+
+             <div class="formAnotacion form-group">{#14#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA14" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">14</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB14" placeholder="Numero">
+                </div>
+             </div>{#End 14#}
+
+             <div class="formAnotacion form-group">{#15#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA15" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">15</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB15" placeholder="Numero">
+                </div>
+             </div>{#End 15#}
+
+             <div class="formAnotacion form-group">{#16#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA16" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">16</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB16" placeholder="Numero">
+                </div>
+             </div>{#End 16#}
+
+             <div class="formAnotacion form-group">{#17#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA17" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">17</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB17" placeholder="Numero">
+                </div>
+             </div>{#End 17#}
+
+             <div class="formAnotacion form-group">{#18#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA18" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">18</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB18" placeholder="Numero">
+                </div>
+             </div>{#End 18#}
+
+             <div class="formAnotacion form-group">{#19#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA19" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">19</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB19" placeholder="Numero">
+                </div>
+             </div>{#End 19#}
+
+             <div class="formAnotacion form-group">{#20#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorA20" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">20</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="NumanotadorB20" placeholder="Numero">
+                </div>
+             </div>{#End 20#}
+
+	      	</div>
+
+        <div class="bordes col-md-3">{#columna de puntos 2#}
+            <div class="formAnotacion form-group">{#21#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">21</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 21#}
+
+             <div class="formAnotacion form-group">{#22#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">22</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 22#}
+
+             <div class="formAnotacion form-group">{#23#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">23</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 23#}
+
+             <div class="formAnotacion form-group">{#24#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">24</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 24#}
+
+             <div class="formAnotacion form-group">{#25#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">25</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 25#}
+
+             <div class="formAnotacion form-group">{#26#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">26</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 26#}
+
+             <div class="formAnotacion form-group">{#27#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">27</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 27#}
+
+             <div class="formAnotacion form-group">{#28#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">28</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 28#}
+
+             <div class="formAnotacion form-group">{#29#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">29</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 29#}
+
+             <div class="formAnotacion form-group">{#30#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">30</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 30#}
+
+             <div class="formAnotacion form-group">{#31#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">31</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 31#}
+
+             <div class="formAnotacion form-group">{#32#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">32</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 32#}
+
+             <div class="formAnotacion form-group">{#33#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">33</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 33#}
+
+             <div class="formAnotacion form-group">{#34#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">34</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 34#}
+
+             <div class="formAnotacion form-group">{#35#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">35</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 35#}
+
+             <div class="formAnotacion form-group">{#36#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">36</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 36#}
+
+             <div class="formAnotacion form-group">{#37#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">37</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 37#}
+
+             <div class="formAnotacion form-group">{#38#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">38</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 38#}
+
+             <div class="formAnotacion form-group">{#39#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">39</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 39#}
+
+             <div class="formAnotacion form-group">{#40#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">40</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 40#}
+
+        </div>
+
+        <div class="bordes col-md-3">{#columna de puntos 3#}
+            <div class="formAnotacion form-group">{#41#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">41</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 41#}
+
+             <div class="formAnotacion form-group">{#42#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">42</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 42#}
+
+             <div class="formAnotacion form-group">{#43#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">43</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 43#}
+
+             <div class="formAnotacion form-group">{#44#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">44</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 44#}
+
+             <div class="formAnotacion form-group">{#45#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">45</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 45#}
+
+             <div class="formAnotacion form-group">{#46#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">46</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 46#}
+
+             <div class="formAnotacion form-group">{#47#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">47</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 47#}
+
+             <div class="formAnotacion form-group">{#48#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">48</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 28#}
+
+             <div class="formAnotacion form-group">{#49#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">49</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 49#}
+
+             <div class="formAnotacion form-group">{#60#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">50</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 60#}
+
+             <div class="formAnotacion form-group">{#51#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">51</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 51#}
+
+             <div class="formAnotacion form-group">{#52#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">52</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 52#}
+
+             <div class="formAnotacion form-group">{#53#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">53</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 53#}
+
+             <div class="formAnotacion form-group">{#54#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">54</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 54#}
+
+             <div class="formAnotacion form-group">{#55#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">55</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 55#}
+
+             <div class="formAnotacion form-group">{#56#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">56</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 56#}
+
+             <div class="formAnotacion form-group">{#57#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">57</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 57#}
+
+             <div class="formAnotacion form-group">{#58#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">58</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 58#}
+
+             <div class="formAnotacion form-group">{#59#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">59</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 59#}
+
+             <div class="formAnotacion form-group">{#60#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">60</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 60#}
+        </div>
+
+          <div class="bordes col-md-3">{#columna de puntos 4#}
+             <div class="formAnotacion form-group">{#61#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">61</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 61#}
+
+             <div class="formAnotacion form-group">{#62#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">62</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 62#}
+
+             <div class="formAnotacion form-group">{#63#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">63</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 63#}
+
+             <div class="formAnotacion form-group">{#64#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">64</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 64#}
+
+             <div class="formAnotacion form-group">{#65#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">65</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 65#}
+
+             <div class="formAnotacion form-group">{#66#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">66</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 66#}
+
+             <div class="formAnotacion form-group">{#67#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">67</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 67#}
+
+             <div class="formAnotacion form-group">{#68#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">68</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 68#}
+
+             <div class="formAnotacion form-group">{#69#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">69</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 69#}
+
+             <div class="formAnotacion form-group">{#70#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">70</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 70#}
+
+             <div class="formAnotacion form-group">{#71#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">71</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 71#}
+
+             <div class="formAnotacion form-group">{#72#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">72</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 72#}
+
+             <div class="formAnotacion form-group">{#73#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">73</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 73#}
+
+             <div class="formAnotacion form-group">{#74#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">74</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 74#}
+
+             <div class="formAnotacion form-group">{#75#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">75</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 75#}
+
+             <div class="formAnotacion form-group">{#76#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">76</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 76#}
+
+             <div class="formAnotacion form-group">{#77#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">77</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 77#}
+
+             <div class="formAnotacion form-group">{#78#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">78</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 78#}
+
+             <div class="formAnotacion form-group">{#79#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">79</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 79#}
+
+             <div class="formAnotacion form-group">{#80#}
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+                 <label class="col-md-4 text-center ">80</label>
+                <div class="col-md-4">
+                    <input class="form-control" id="NA" name="Numanotador" placeholder="Numero">
+                </div>
+             </div>{#End 80#}
+          </div>
+
+
+      	</div>
         <input type="submit" />
          {#End marcador 1#}
     </form>
-
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
 {% endblock %}
