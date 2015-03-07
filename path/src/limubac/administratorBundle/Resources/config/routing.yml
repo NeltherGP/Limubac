@@ -77,6 +77,6 @@ limubacadministrator_acCategoria:
 limubacadministrator_editCategoria:
     path:     /editCategoria
     defaults: { _controller: limubacadministratorBundle:Default:editCategoria}
-limubacadministrador_rol:
+limubacadministrator_rol:
     path:     /rol
-    defaults: { _controller: limubacadministradorBundle:Default:rol}
+    defaults: { _controller: limubacadministratorBundle:Default:rol}
