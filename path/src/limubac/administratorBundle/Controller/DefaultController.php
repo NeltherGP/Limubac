@@ -760,11 +760,19 @@ class DefaultController extends Controller{
                     $player -> setCorreo($out['correo']);
                     $player -> setTelefono($out['telefono']);
                     $player -> setProfesion($out['profesion']);
+                    	/**$sr = "Activo";
+                        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Status');
+        				$queryPlayers = $repository->createQueryBuilder('p')
+				            ->select('p.idStatus')
+				            ->where('p.status LIKE :word')
+				            ->setParameter('word', $sr)
+				            ->getQuery();
+				        $entities = $queryPlayers->getResult();**/
+				        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Status');
+                        $category = $class_repository->findByStatus("Activo");	
+                    $player -> setIdStatus($category[0]);
                         $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
-                        $category = $class_repository->find("Activo");
-                    $player -> setIdStatus($category);
-                        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
-                        $category = $class_repository->find($out['idGenero']);
+                       	$category = $class_repository->find($out['idGenero']);
                     $player -> setIdGenero($category);
                     $player -> setEstatura($out['estatura']);
                     $player -> setPeso($out['peso']);
