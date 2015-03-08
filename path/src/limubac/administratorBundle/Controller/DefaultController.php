@@ -701,6 +701,7 @@ class DefaultController extends Controller{
         $queryPlayers = $repository->createQueryBuilder('p')
             ->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno','p.fNacimiento','p.correo','p.telefono','p.estatura','p.peso','tsan.tipoSangre')
             ->join('limubacadministratorBundle:TipoSanguineo', 'tsan', 'WITH' ,'tsan.idTiposanguineo = p.idTiposanguineo')
+            ->setMaxResults(10)
             ->orderBy('p.idJugador', 'DESC')
             ->getQuery();
         $entities = $queryPlayers->getResult();
@@ -746,8 +747,6 @@ class DefaultController extends Controller{
                 return $this->render('limubacadministratorBundle:administracion:addjugador.html.twig',array('form' => $form->createView()));
             }
             else{
-                //$url_query = $parsed_url['query'];
-                //parse_str($url_query,$out);
                 $out = $_REQUEST['jugador'];
                 if (is_array($out) && !empty($out)) {
                     $player = new Jugador();
@@ -760,14 +759,6 @@ class DefaultController extends Controller{
                     $player -> setCorreo($out['correo']);
                     $player -> setTelefono($out['telefono']);
                     $player -> setProfesion($out['profesion']);
-                    	/**$sr = "Activo";
-                        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Status');
-        				$queryPlayers = $repository->createQueryBuilder('p')
-				            ->select('p.idStatus')
-				            ->where('p.status LIKE :word')
-				            ->setParameter('word', $sr)
-				            ->getQuery();
-				        $entities = $queryPlayers->getResult();**/
 				        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Status');
                         $category = $class_repository->findByStatus("Activo");	
                     $player -> setIdStatus($category[0]);
