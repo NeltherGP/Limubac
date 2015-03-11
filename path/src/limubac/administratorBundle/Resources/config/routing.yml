@@ -12,11 +12,11 @@ limubacadministrator_nombresEquipos:
 
 limubacadministrator_equipos:
     path:     /equipos
-    defaults: { _controller: limubacadministratorBundle:Default:equipos}
+    defaults: { _controller: limubacadministratorBundle:Equipos:equipos}
 
 limubacadministrator_equipo:
     path:     /equipo
-    defaults: { _controller: limubacadministratorBundle:Default:equipo}
+    defaults: { _controller: limubacadministratorBundle:Equipos:equipo}
 
 
 limubacadministrator_jugadoresAdmin:
