@@ -921,5 +921,221 @@ class DefaultController extends Controller{
     }
 
     //FINAL CONTROLADOR TORNEO
+	
+	//CONTROLADOR ROL DE JUEGOS
+	public function rolAction(){
+        return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig');
+    }
+	
+	public function addrolAction(){
+	$torn=0;
+	$cate=0;
+	$rama=0;
+	$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
+		$queryCuantEqui = $repository->createQueryBuilder('h')
+            ->select('count(h.idRegistro)')
+            ->where('h.idTorneo = :torn')
+			->andWhere('h.idCategoria = :cate')
+			->andWhere('h.idRama = :rama')
+			->setParameter('torn',$torn)
+			->setParameter('cate',$cate)
+			->setParameter('rama',$rama)
+            ->getQuery();
+        $n = $queryCuantEqui->getResult(); 
+		
+		$queryEquis = $repository->createQueryBuilder('h')
+            ->select('h.idEquipo')
+            ->where('h.idTorneo = :torn')
+			->andWhere('h.idCategoria = :cate')
+			->andWhere('h.idRama = :rama')
+			->setParameter('torn',$torn)
+			->setParameter('cate',$cate)
+			->setParameter('rama',$rama)
+            ->getQuery();
+        $equipos = $queryEquis->getResult(); 
+		if($n%2==0){
+			$r=($n-1)*2; 
+				for($i=0;$i<$n/2;$i++){
+					$p[$i][0]=$equipos[i];
+					$p2[$i][0]=$p[$i][0];
+				}
+				for($i=0;$i<$n/2;$i++){
+					$p[$i][1]=$equipos[i+$n/2];
+					$p2[$n/2-1-$i][1]=$p[$i][1];
+				}
+			}
+		else {
+			$r=$n*2;
+			$n++;
+				for($i=0;$i<$n/2;$i++){
+					$p[$i][0]=$equipos[i];
+					$p2[$i][0]=$p[$i][0];
+				}
+				for($i=0;$i<$n/2-1;$i++){
+					$p[$i][1]=$equipos[i+$n/2];
+					$p2[$n/2-1-$i][1]=$p[$i][1];
+				}
+				$p[$n/2-1][1]=0;
+				$p2[0][1]=0;
+		}
+		for($cont=1;$cont<=$r/2;$cont++){
+			for($c=0;$c<$n/2;$c++){
+				if($p[$c][0]!=0&&$p[$c][1]!=0){ 
+					//insert $p[$c][0]  vs  $p[$c][1] en la jornada cont
+					$partido = new Partido();
+					$partido -> setidTorneo($torn);
+					$partido -> setJornada($cont);
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($partido);
+                    $em -> flush();
+					
+					$juegana = new Juegan();
+					$juegana -> setidEquipo($p[$c][0]);
+					$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+					$queryPartido = $repository->createQueryBuilder('h')
+						->select('max(h.idPartido)')
+						->getQuery();
+					$idpart =	$queryPartido->getResult();
+					$juegana -> setidPartido($idpart);
+					$juegana -> setside('A');
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($juegana);
+                    $em -> flush();
+					
+					$jueganb = new Juegan();
+					$jueganb -> setidEquipo($p[$c][1]);
+					$jueganb -> setidPartido($idpart);
+					$jueganb -> setside('B');
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($jueganb);
+                    $em -> flush();
+					
+				}
+			}
+			$j=2;
+			$t1=$p[1][0];
+			for($i=1;$i<$n-1;$i++){
+				if($i<$n/2-1){
+					$t2=$p[$j][0];
+					$p[j][0]=$t1;
+					$t1=$t2;
+					$j++;
+				}
+				else{
+					if($i==$n/2-1){
+						$j--;
+						$t2=$p[$j][1];
+						$p[$j][1]=$t1;
+						$t1=$t2;
+						$j--;
+					}
+					else{
+						$t2=$p[$j][1];
+						$p[$j][1]=$t1;
+						$t1=$t2;
+						$j--;
+					}
+				}
+			}
+			$p[1][0]=$t1;
+		}
+		for($cont=$r/2+1;$cont<=$r;$cont++){
+			for($c=0;$c<$n/2;$c++){
+				if($p2[$c][0]!=0&&$p2[$c][1]!=0) {
+					//insert $p2[$c][0]  vs  $p2[$c][1] en la jornada $cont
+					$partido = new Partido();
+					$partido -> setidTorneo($torn);
+					$partido -> setJornada($cont);
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($partido);
+                    $em -> flush();
+					
+					$juegan1 = new Juegan();
+					$juegan1 -> setidEquipo($p2[$c][0]);
+					$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+					$queryPartido = $repository->createQueryBuilder('h')
+						->select('max(h.idPartido)')
+						->getQuery();
+					$idpart =	$queryPartido->getResult();
+					$juegan1 -> setidPartido($idpart);
+					$juegan1 -> setside('B');
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($juegan1);
+                    $em -> flush();
+					
+					$juegan2 = new Juegan();
+					$juegan2 -> setidEquipo($p2[$c][1]);
+					$juegan2 -> setidPartido($idpart);
+					$juegan2 -> setside('A');
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($juegan2);
+                    $em -> flush();
+				}
+			}
+			$j=2;
+			$t1=$p2[1][0];
+			for($i=1;$i<$n-1;$i++){
+				if($i<$n/2-1){
+					$t2=$p2[$j][0];
+					$p2[j][0]=$t1;
+					$t1=$t2;
+					$j++;
+				}
+				else{
+					if($i==$n/2-1){
+						$j--;
+						$t2=$p2[$j][1];
+						$p2[j][1]=$t1;
+						$t1=$t2;
+						$j--;
+					}
+					else{
+						$t2=$p2[$j][1];
+						$p2[j][1]=$t1;
+						$t1=$t2;
+						$j--;
+					}
+				}
+			}
+			$p2[1][0]=$t1;
+		}
+		
+	}
+	
+	public function actrolAction(){
+	$torn = 0;
+	$cate=0;
+	$rama=0;
+		$queryCuantEqui = $repository->createQueryBuilder('h')
+            ->select('count(h.idRegistro)')
+            ->where('h.idTorneo = :torn')
+			->andWhere('h.idCategoria = :cate')
+			->andWhere('h.idRama = :rama')
+			->setParameter('torn',$torn)
+			->setParameter('cate',$cate)
+			->setParameter('rama',$rama)
+            ->getQuery();
+        $n = $queryCuantEqui->getResult(); 
+		//$r=numero de jornadas ya jugada
+		//$cont=numero de la siguiente jornada
+		if($n%2==0){
+				$cont1=($n-1)*2; 
+		}
+		else {
+				$cont1=$n*2;
+		}
+		if($n>16||$r>15){
+			//no se puede agregar mas equipos
+		}
+		else{
+			//falta...
+			
+			
+			
+		}
+		
+	}
+	
+	//FINAL CONTROLADOR  ROL DE JUEGOS
 
 }

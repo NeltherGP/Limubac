@@ -72,3 +72,7 @@ limubacadministrator_crearCategoria:
 limubacadministrator_rol:
     path:     /rol
     defaults: { _controller: limubacadministratorBundle:Default:rol}
+    
+limubacadministrator_addrol:
+    path:     /addrol
+    defaults: { _controller: limubacadministratorBundle:Default:addrol}
