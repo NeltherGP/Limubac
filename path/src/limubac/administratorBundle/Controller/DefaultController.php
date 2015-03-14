@@ -25,7 +25,7 @@ namespace limubac\administratorBundle\Controller;
 
 
 class DefaultController extends Controller{
-    
+
 	public function indexAction($name){
         return $this->render('limubacadministratorBundle:Default:index.html.twig', array('name' => $name));
     }
@@ -41,7 +41,7 @@ class DefaultController extends Controller{
         $contadorB=0;
         $marcadorA=0;
         $marcadorB=0;
-        $request = $this->getRequest();      
+        $request = $this->getRequest();
         $doctrineManager= $this -> getDoctrine()->getManager();
         $idPartido=1;//SE SUPONE LO RECIBE DE PARAMETRO...
         $idJugador;
@@ -55,9 +55,9 @@ class DefaultController extends Controller{
         if($request->getMethod() == 'POST')//si se envia el formulario
             {
               $datos = new hojaAnotacion();
-              
-              $validator = $this->get('validator'); 
-      
+
+              $validator = $this->get('validator');
+
               /*$datos->setEqA($_POST["EqA"]);
                 $datos->setEqB($_POST["EqB"]);
                 $datos->setRama($_POST["Rama"]);
@@ -68,86 +68,86 @@ class DefaultController extends Controller{
                 $datos->setHora($_POST["Hora"]);*/
                 $datos->setJuez1($_POST["Juez1"]);
                 $datos->setJuez2($_POST["Juez2"]);
-                
+
                 //TOMAR ASISTENCIA
 
                 if(isset($_POST['asistA'])){
 	                	$assistA=$_POST['asistA'];
 	                }
-	                
+
 	                if(isset($_POST['asistB'])){
 	                	$assistB=$_POST['asistB'];
 	                }
-	                
+
 	                if(!empty($assistA)){
-	             
+
 	                	foreach ($assist as $a) {
 	                	  	$asistencia = new Asistencia();
-	                		$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+	                		$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 												$auxFinder= $auxRepository->find(''.$idPartido);
 	                		$asistencia->setIdPartido($auxFinder);
 
-	                		$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+	                		$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 							$auxFinder= $auxRepository->find($a);
 							$asistencia->setIdJugador($auxFinder);
 
 							$doctrineManager-> persist($asistencia);
 							$doctrineManager-> flush();
-	               		}  
+	               		}
 	               	}
 
 	               	if(!empty($assistB)){
 		               	foreach ($assist as $a) {
 		                	  	$asistencia = new Asistencia();
-		                		$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+		                		$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 													$auxFinder= $auxRepository->find(''.$idPartido);
 		                		$asistencia->setIdPartido($auxFinder);
 
-		                		$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+		                		$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 								$auxFinder= $auxRepository->find($a);
 								$asistencia->setIdJugador($auxFinder);
 
 								$doctrineManager-> persist($asistencia);
 								$doctrineManager-> flush();
-		               	} 
+		               	}
 	              }
 	            //END TOMAR ASISTENCIA
 
 	            //FALTAS
-	              
+
 	              $idsJugadores=array_keys($_POST['faltasA']);
 	              print_r($idsJugadores);
 	               if(isset($_POST['faltasA'])){
 	                	$faltasA=$_POST['faltasA'];
 	                }
-	                
+
 	                if(isset($_POST['faltasB'])){
 	                	$faltasB=$_POST['faltasB'];
 	                }
 
 	                foreach ($idsJugadores as $jugador => $Idjugador) {
 	                	foreach ($faltasA[$Idjugador] as $falta=> $Idfalta) {
-	                	
+
 	                	if($Idfalta!=0){
 
 	                		$queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador)
-		                    												FROM limubacadministratorBundle:FaltasEquipo d 
-		                    												 WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$Idjugador. 
+		                    												FROM limubacadministratorBundle:FaltasEquipo d
+		                    												 WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$Idjugador.
 		                    												 	'AND d.idFalta= '.$Idfalta);
 								$falta=$queryDetalleList->getResult();
 
 							if(empty($falta)){
 								$faltasEquipo= new FaltasEquipo();
 
-								$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Falta'); 
+								$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Falta');
 								$auxFinder= $auxRepository->find(''.$Idfalta);
 								$faltasEquipo->setIdFalta($auxFinder);
 
-								$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+								$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 								$auxFinder= $auxRepository->find(''.$Idjugador);
 								$faltasEquipo->setIdJugador($auxFinder);
 
-								$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+								$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 								$auxFinder= $auxRepository->find(''.$idPartido);
 								$faltasEquipo->setIdPartido($auxFinder);
 
@@ -169,14 +169,14 @@ class DefaultController extends Controller{
 
 							}
 	                	}
-	                }	
+	                }
 	                }
 
 
 	            //END FALTAS
-               
+
                 $datos->setPuntos(array_values((array_slice($_POST, 6,40))));
-                
+
                 $puntos = $datos->getPuntos();
                 $puntosA=array();
                 $puntosB=array();
@@ -199,28 +199,28 @@ class DefaultController extends Controller{
 
                 }
 
-               for ($i=0; $i < count($puntosA); $i++) { 
+               for ($i=0; $i < count($puntosA); $i++) {
                  if($i==0 && $puntosA[$i]!=''){//ANOTACION DE UN PUNTO
                     $marcadorA++;
                     $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
 
-                    $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad 
-		                    													FROM limubacadministratorBundle:DetallePartido d 
+                    $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+		                    													FROM limubacadministratorBundle:DetallePartido d
 		                    														WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
 								$anotacion=$queryDetalleList->getResult();
-								
+
 								if(count($anotacion)<=0){//verificar
 									$detallePartido = new DetallePartido();
 									$detallePartido->setAnotaciones(1);
 									$detallePartido->setCantidad(1);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 											$auxFinder= $auxRepository->find(''.$idPartido);
 												$detallePartido->setIdPartido($auxFinder);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 											$auxFinder= $auxRepository->find(''.$x[0]["id"]);
-												$detallePartido->setIdJugador($auxFinder);	
+												$detallePartido->setIdJugador($auxFinder);
 
 									$doctrineManager-> persist($detallePartido);
                     				$doctrineManager -> flush();
@@ -230,30 +230,30 @@ class DefaultController extends Controller{
 								}
 
                  }else{
-                    if($puntosA[$i]==''){//BRINCOS, ESPACIOS EN BLANCO 
-                        $contadorA++; 
+                    if($puntosA[$i]==''){//BRINCOS, ESPACIOS EN BLANCO
+                        $contadorA++;
 
                     }else{
                         if($contadorA==0){
                             $marcadorA=$marcadorA+1;//ANOTACION DE UN PUNTO
                             $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
-                            	$queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad 
-		                    													FROM limubacadministratorBundle:DetallePartido d 
+                            	$queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+		                    													FROM limubacadministratorBundle:DetallePartido d
 		                    														WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
 								$anotacion=$queryDetalleList->getResult();
-								
+
 								if(count($anotacion)<=0){//verificar
 									$detallePartido = new DetallePartido();
 									$detallePartido->setAnotaciones(1);
 									$detallePartido->setCantidad(1);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 											$auxFinder= $auxRepository->find(''.$idPartido);
 												$detallePartido->setIdPartido($auxFinder);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 											$auxFinder= $auxRepository->find(''.$x[0]["id"]);
-												$detallePartido->setIdJugador($auxFinder);	
+												$detallePartido->setIdJugador($auxFinder);
 
 									$doctrineManager-> persist($detallePartido);
                     				$doctrineManager -> flush();
@@ -261,29 +261,29 @@ class DefaultController extends Controller{
 								}else{
 									$consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,1,1,$doctrineManager);
 								}
-						 		
+
                         }else{
                         if($contadorA==1){
                             $marcadorA=$marcadorA+2;//ANOTACION DE DOS PUNTOS
                             $contadorA=0;
                             $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
-                            $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad 
-		                    													FROM limubacadministratorBundle:DetallePartido d 
+                            $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+		                    													FROM limubacadministratorBundle:DetallePartido d
 		                    														WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 2');
 								$anotacion=$queryDetalleList->getResult();
-								
+
 								if(count($anotacion)<=0){//verificar
 									$detallePartido = new DetallePartido();
 									$detallePartido->setAnotaciones(2);
 									$detallePartido->setCantidad(1);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 											$auxFinder= $auxRepository->find(''.$idPartido);
 												$detallePartido->setIdPartido($auxFinder);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 											$auxFinder= $auxRepository->find(''.$x[0]["id"]);
-												$detallePartido->setIdJugador($auxFinder);	
+												$detallePartido->setIdJugador($auxFinder);
 
 									$doctrineManager-> persist($detallePartido);
                     				$doctrineManager -> flush();
@@ -296,23 +296,23 @@ class DefaultController extends Controller{
                                 $marcadorA=$marcadorA+3;//ANOTACION DE TRES PUTO
                                 $contadorA=0;
                                 $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
-                                $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad 
-		                    													FROM limubacadministratorBundle:DetallePartido d 
+                                $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+		                    													FROM limubacadministratorBundle:DetallePartido d
 		                    														WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 3');
 								$anotacion=$queryDetalleList->getResult();
-								
+
 								if(count($anotacion)<=0){//verificar
 									$detallePartido = new DetallePartido();
 									$detallePartido->setAnotaciones(3);
 									$detallePartido->setCantidad(1);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 											$auxFinder= $auxRepository->find(''.$idPartido);
 												$detallePartido->setIdPartido($auxFinder);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 											$auxFinder= $auxRepository->find(''.$x[0]["id"]);
-												$detallePartido->setIdJugador($auxFinder);	
+												$detallePartido->setIdJugador($auxFinder);
 
 									$doctrineManager-> persist($detallePartido);
                     				$doctrineManager -> flush();
@@ -328,32 +328,32 @@ class DefaultController extends Controller{
                  }
                }
 
-              print_r($puntosA); 
+              print_r($puntosA);
               print_r($puntosB);
-             
 
-                for ($i=0; $i < count($puntosB); $i++) { 
+
+                for ($i=0; $i < count($puntosB); $i++) {
                  if($i==0 && $puntosB[$i]!=''){
-                    $marcadorB++; 
+                    $marcadorB++;
                     $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
 
-                    $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad 
-		                    													FROM limubacadministratorBundle:DetallePartido d 
+                    $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+		                    													FROM limubacadministratorBundle:DetallePartido d
 		                    														WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
 								$anotacion=$queryDetalleList->getResult();
-								
+
 								if(count($anotacion)<=0){//verificar
 									$detallePartido = new DetallePartido();
 									$detallePartido->setAnotaciones(1);
 									$detallePartido->setCantidad(1);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 											$auxFinder= $auxRepository->find(''.$idPartido);
 												$detallePartido->setIdPartido($auxFinder);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 											$auxFinder= $auxRepository->find(''.$x[0]["id"]);
-												$detallePartido->setIdJugador($auxFinder);	
+												$detallePartido->setIdJugador($auxFinder);
 
 									$doctrineManager-> persist($detallePartido);
                     				$doctrineManager -> flush();
@@ -363,30 +363,30 @@ class DefaultController extends Controller{
 								}
                  }else{
                     if($puntosB[$i]==''){
-                        $contadorB++; 
+                        $contadorB++;
 
                     }else{
                         if($contadorB==0){
                             $marcadorB=$marcadorB+1;
                             $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
 
-                   			 $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad 
-		                    														FROM limubacadministratorBundle:DetallePartido d 
+                   			 $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+		                    														FROM limubacadministratorBundle:DetallePartido d
 		                    															WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
 								$anotacion=$queryDetalleList->getResult();
-								
+
 								if(count($anotacion)<=0){//verificar
 									$detallePartido = new DetallePartido();
 									$detallePartido->setAnotaciones(1);
 									$detallePartido->setCantidad(1);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 											$auxFinder= $auxRepository->find(''.$idPartido);
 												$detallePartido->setIdPartido($auxFinder);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 											$auxFinder= $auxRepository->find(''.$x[0]["id"]);
-												$detallePartido->setIdJugador($auxFinder);	
+												$detallePartido->setIdJugador($auxFinder);
 
 									$doctrineManager-> persist($detallePartido);
                     				$doctrineManager -> flush();
@@ -399,23 +399,23 @@ class DefaultController extends Controller{
                             $marcadorB=$marcadorB+2;
                             $contadorB=0;
                             $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
-                            $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad 
-		                    													FROM limubacadministratorBundle:DetallePartido d 
+                            $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+		                    													FROM limubacadministratorBundle:DetallePartido d
 		                    														WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 2');
 								$anotacion=$queryDetalleList->getResult();
-								
+
 								if(count($anotacion)<=0){//verificar
 									$detallePartido = new DetallePartido();
 									$detallePartido->setAnotaciones(2);
 									$detallePartido->setCantidad(1);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 											$auxFinder= $auxRepository->find(''.$idPartido);
 												$detallePartido->setIdPartido($auxFinder);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 											$auxFinder= $auxRepository->find(''.$x[0]["id"]);
-												$detallePartido->setIdJugador($auxFinder);	
+												$detallePartido->setIdJugador($auxFinder);
 
 									$doctrineManager-> persist($detallePartido);
                     				$doctrineManager -> flush();
@@ -429,23 +429,23 @@ class DefaultController extends Controller{
                                 $contadorB=0;
 
                                 $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
-                                $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad 
-		                    													FROM limubacadministratorBundle:DetallePartido d 
+                                $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+		                    													FROM limubacadministratorBundle:DetallePartido d
 		                    														WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 3');
 								$anotacion=$queryDetalleList->getResult();
-								
+
 								if(count($anotacion)<=0){//verificar
 									$detallePartido = new DetallePartido();
 									$detallePartido->setAnotaciones(3);
 									$detallePartido->setCantidad(1);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 											$auxFinder= $auxRepository->find(''.$idPartido);
 												$detallePartido->setIdPartido($auxFinder);
 
-										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador'); 
+										$auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
 											$auxFinder= $auxRepository->find(''.$x[0]["id"]);
-												$detallePartido->setIdJugador($auxFinder);	
+												$detallePartido->setIdJugador($auxFinder);
 
 									$doctrineManager-> persist($detallePartido);
                     				$doctrineManager -> flush();
@@ -460,7 +460,7 @@ class DefaultController extends Controller{
                  }
                }
             }
-             
+
 
                 $errors = $validator->validate($datos);
 
@@ -471,8 +471,8 @@ class DefaultController extends Controller{
             }
 
     	return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig',array('ListA'=>$List_A,'ListB'=>$List_B));
-    	
-    }  
+
+    }
 
    public function nombresEquiposAction(){
    	$request = $this->container->get('request');
@@ -481,218 +481,15 @@ class DefaultController extends Controller{
 	$doctrineManager= $this -> getDoctrine()->getManager();
 
 	$Equipos=json_encode($consultasManager->getEquipoByPartido($idPartido,$doctrineManager));
-	
+
 
 	//echo ($EquipoA);
-	
 
-	return new Response($Equipos); 
+
+	return new Response($Equipos);
 
    }
 
-
-    //Ends Hoja de anotacion
-
-
-	//Edgar
-	
-	public function equiposAction(){
-		//Agregando nuevo equipo
-		if(isset($_POST['NuevoEquipo'])){
-			$equipo = new Equipo();
-			$equipo->setNombre($_POST['NuevoEquipo']);
-			
-			$Manager = $this->getDoctrine()->getManager();
-			$Manager->persist($equipo);
-			$Manager->flush();
-			
-			$participacion = new ParticipanT();
-			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
-			$cat = $repositorio->find($_POST['category']);
-			$participacion->setIdCategoria($cat);
-			
-			$participacion->setIdEquipo($equipo);
-			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
-			$tor = $repositorio->find($_POST['torneo']);
-			$participacion->setIdTorneo($tor);
-			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
-			$ram = $repositorio->find($_POST['rama']);
-			$participacion->setIdRama($ram);
-			
-			$Manager->persist($participacion);
-			$Manager->flush();
-		}
-		
-		//Lista de Equipos
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-		$ListaEquipos = $repositorio->findAll();
-		
-		//Conseguir Categorias
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
-		$ListaCategorias = $repositorio->findAll();
-		
-		//Conseguir Torneos
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
-		$Torneos = $repositorio->findAll();
-		
-		//Conseguir Ramas
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
-		$Ramas = $repositorio->findAll();
-		
-    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('listEquip' =>$ListaEquipos,'Categorias'=>$ListaCategorias,'Torneos'=>$Torneos,'Ramas'=>$Ramas));
-    }
-	
-	public function equipoAction(){
-		
-		if(isset($_POST['accion'])){
-			switch($_POST['accion']){
-				case 'Nuevo':
-					$integra = new Integra();
-					$integra->setNoPlayera(intval($_POST['NoJugador']));
-					
-					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-					$equipo = $repositorio->find($_POST['opciones']);
-					$integra->setIdEquipo($equipo);
-					
-					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-					$jugador = $repositorio->find($_POST['idJugador']);
-					$integra->setIdJugador($jugador);
-					
-					$Manager = $this->getDoctrine()->getManager();
-					$Manager->persist($integra);
-					$Manager->flush();
-				break;
-			}
-		
-		}
-		
-		//Agregar o modificar capitan
-		if(isset($_POST['opciones']) and isset($_POST['idCapitan'])){
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-			$equipo = $repositorio->find($_POST['opciones']);
-			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			$Capi = $repositorio->find($_POST['idCapitan']);
-			
-			$equipo->setIdCapitan($Capi);
-			
-			$Manager = $this->getDoctrine()->getManager();
-			$Manager->persist($equipo);
-			$Manager->flush();
-		}
-		
-		//Agregar o modificar Representante
-		if(isset($_POST['opciones']) and isset($_POST['idRepresentante'])){
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-			$equipo = $repositorio->find($_POST['opciones']);
-			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			$Repre= $repositorio->find($_POST['idRepresentante']);
-
-			$equipo->setRepresentante($Repre);
-			
-			$Manager = $this->getDoctrine()->getManager();
-			$Manager->persist($equipo);
-			$Manager->flush();
-		}
-		
-		//Agregar o modificar Auxiliar
-		if(isset($_POST['opciones']) and isset($_POST['idAuxiliar'])){
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-			$equipo = $repositorio->find($_POST['opciones']);
-			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-			$Auxi= $repositorio->find($_POST['idAuxiliar']);
-			
-			$equipo->setAuxiliar($Auxi);
-			
-			$Manager = $this->getDoctrine()->getManager();
-			$Manager->persist($equipo);
-			$Manager->flush();
-		}
-		
-		//Llenado de los expacios
-		if(isset($_POST['opciones'])){
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-			$equipo = $repositorio->find($_POST['opciones']);
-			
-			//Capitan
-			if($equipo->getIdCapitan()==null){
-				$Capi = array( array(
-					'idJugador'=>0,
-					'nombre'=>"No Asignado",
-					'apPaterno'=>"",
-					'apMaterno'=>""
-				));
-			}else{
-			
-				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-				$query = $repositorio->createQueryBuilder('p')
-				->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
-				->where('p.idJugador = '.$equipo->getIdCapitan()->getIdJugador())
-				->getQuery();
-			
-				$Capi = $query->getResult();
-			}//end capi
-			
-			//Jugadores
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Integra");
-				$query = $repositorio->createQueryBuilder('i')
-				->select('IDENTITY(i.idJugador)','j.nombre','j.apPaterno','j.apMaterno','i.noPlayera')
-				->join('limubacadministratorBundle:Jugador', 'j', 'WITH' ,'j.idJugador = i.idJugador')
-				->where('i.idEquipo = '.$equipo->getIdEquipo())
-				->getQuery();
-			
-			$jugadores = $query->getResult();
-			//end Jugadores
-			
-			//Representante
-			if($equipo->getRepresentante()==null){
-				$Representante = array(array(
-					'idJugador'=>0,
-					'nombre'=>'No Asignado',
-					'apPaterno'=>"",
-					'apMaterno'=>""
-				));
-			}else{
-				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-				$query = $repositorio->createQueryBuilder('p')
-				->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
-				->where('p.idJugador = '.$equipo->getRepresentante()->getIdJugador())
-				->getQuery();
-			
-				$Representante = $query->getResult();
-			}//end Representante
-			
-			//Auxiliar
-			if($equipo->getAuxiliar()==null){
-				$Auxiliar = array(array(
-					'idJugador'=>0,
-					'nombre'=>'No Asignado',
-					'apPaterno'=>"",
-					'apMaterno'=>""
-				));
-			}else{
-				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-				$query = $repositorio->createQueryBuilder('p')
-				->select('p.idJugador','p.nombre','p.apPaterno','p.apMaterno')
-				->where('p.idJugador = '.$equipo->getAuxiliar()->getIdJugador())
-				->getQuery();
-			
-				$Auxiliar = $query->getResult();
-			}
-			
-		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar));
-		
-		}else{//si no esta definido el valor del equipo
-			
-			echo "cuatro";
-		}
-	}
-	//End Edgar
 
 	//-----------------------INICIO CONTROLADOR DE FAFI---------------------------------------------------
 		public function jugadoresAdminAction(){
@@ -729,14 +526,14 @@ class DefaultController extends Controller{
             ->getQuery();
         $act = $queryTotAct->getResult();
 
-        return $this->render('limubacadministratorBundle:administracion:jugadoresAdmin.html.twig', 
+        return $this->render('limubacadministratorBundle:administracion:jugadoresAdmin.html.twig',
             array('entities' => $entities, 'total' => $tot, 'hombres' => $hom, 'mujeres' => $muj, 'activo' => $act));
     }
 
     public function addjugadorAction(){
         $jugador = new Jugador();
         $form = $this->createForm(new JugadorType(), $jugador);
-        
+
         $request = $this->get('request');
         $form->handleRequest($request);
 
@@ -760,7 +557,7 @@ class DefaultController extends Controller{
                     $player -> setTelefono($out['telefono']);
                     $player -> setProfesion($out['profesion']);
 				        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Status');
-                        $category = $class_repository->findByStatus("Activo");	
+                        $category = $class_repository->findByStatus("Activo");
                     $player -> setIdStatus($category[0]);
                         $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
                        	$category = $class_repository->find($out['idGenero']);
@@ -781,7 +578,7 @@ class DefaultController extends Controller{
                     return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
                 }
                 else{
-                    return new SymfonyResponse('Algo Fallo!');   
+                    return new SymfonyResponse('Algo Fallo!');
                 }
             }
         }
@@ -791,7 +588,7 @@ class DefaultController extends Controller{
     public function updateAction($page){
         $url_to_parse = $_SERVER['REQUEST_URI'];
         $parsed_url = parse_url($url_to_parse);
-        
+
         if (!empty($_REQUEST['Search'])) {
             $sr = $_REQUEST['Search'];
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
@@ -810,7 +607,7 @@ class DefaultController extends Controller{
             $jugador = new Jugador();
             $form = $this->createForm(new JugadorAType(), $jugador);
             $ed = $_REQUEST['edit'][0];
-            
+
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
             $queryEdit = $repository->createQueryBuilder('e')
             ->select('e.idJugador','e.nombre','e.apPaterno','e.apMaterno','e.fNacimiento','e.correo','e.telefono','e.profesion','IDENTITY(e.idStatus)','IDENTITY(e.idGenero)','e.estatura','e.peso','IDENTITY(e.idTiposanguineo)','IDENTITY(e.idFoto)')
@@ -824,13 +621,13 @@ class DefaultController extends Controller{
             //$images = array();
 
             //$images[0] = base64_encode(stream_get_contents($resul[0]['foto']));
-            
+
             return $this->render('limubacadministratorBundle:administracion:edita.html.twig',array('form' => $form->createView(), 'edita' => $resul));
         }
         elseif (!empty($_REQUEST['foto'])) {
             $per = $_REQUEST['foto'];
             $idUserPics = $per[0];
-            
+
             return $this->render('limubacadministratorBundle:administracion:uploados.html.twig', array('person' => $per));
         }
         elseif (empty($parsed_url['query']) || empty($_REQUEST['Search'])) {
@@ -871,12 +668,12 @@ class DefaultController extends Controller{
             ->setParameter('word', $workerId)
             ->getQuery();
             $photo = $queryFotin->getResult();
-            
+
             if (empty($photo)){
                 throw $this->createNotFoundException('No se encontro el recurso solicitado.');
             }
             else{
-                $response = new \Symfony\Component\HttpFoundation\Response(stream_get_contents($photo[0]['foto']),200,array( 
+                $response = new \Symfony\Component\HttpFoundation\Response(stream_get_contents($photo[0]['foto']),200,array(
                     'Content-Type' => 'application/octet-stream',
                 ));
 
@@ -886,11 +683,11 @@ class DefaultController extends Controller{
                 });
 
                 $response->headers->set('Content-Type', 'image/jpeg');
-                
+
                 return $response;
             }
         }
-        
+
         $em = $this->get('doctrine')->getManager();
         $image_obj = $em->getRepository('limubacadministratorBundle:Fotos')->find('foto',$request->get('number'));
         return new Response(
@@ -898,7 +695,7 @@ class DefaultController extends Controller{
             Response::HTTP_OK,
             array('content-type' => 'image/jpg')
         );
-        
+
         /*
         -------------------------------------------------------------------------------------
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
@@ -914,7 +711,7 @@ class DefaultController extends Controller{
 
         */
     }
-	
+
     public function buscarAction(){
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
     }
@@ -951,7 +748,7 @@ class DefaultController extends Controller{
         $q = $queryAct->update('limubacadministratorBundle:Jugador', 'z')
             ->set('z.nombre', ':nom')
             ->set('z.apPaterno', ':app')
-            ->set('z.apMaterno', ':apm')    
+            ->set('z.apMaterno', ':apm')
             ->set('z.fNacimiento', ':fna')
             ->set('z.correo', ':cor')
             ->set('z.telefono', ':tel')
@@ -983,7 +780,7 @@ class DefaultController extends Controller{
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
     }
 
-	
+
 
     public function uploadosAction(Request $request){
         if (isset($_POST['submit'])) {
@@ -992,7 +789,7 @@ class DefaultController extends Controller{
             $status = "success";
             $message = '';
             $per = array(0 => $idjug);
-            
+
             if ($_FILES['img']['error'] == 0) {
                 $imageName = mysql_real_escape_string($_FILES['img']['name']);
                 $imageData = mysql_real_escape_string(file_get_contents($_FILES['img']['tmp_name']));
@@ -1015,7 +812,7 @@ class DefaultController extends Controller{
                     $em -> flush();
                     $pics -> getIdFoto();
 
-                    
+
                     $category = $pics->getIdFoto();
 
                     $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
@@ -1035,7 +832,7 @@ class DefaultController extends Controller{
                             ->delete()
                             ->where('d.idFoto = '.$resul1[0]['idFoto'])
                             ->getQuery();
-                        $entities = $queryDelete->getResult();    
+                        $entities = $queryDelete->getResult();
                     }
 
                     $status = "success";
@@ -1127,5 +924,219 @@ class DefaultController extends Controller{
     	return $this->render('limubacadministratorBundle:administracion:partidoTest.html.twig');
     }
     //FINAL CONTROLADOR TORNEO
+
+	//CONTROLADOR ROL DE JUEGOS
+	public function rolAction(){
+        return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig');
+    }
+	
+	public function addrolAction(){
+	$torn=0;
+	$cate=0;
+	$rama=0;
+	$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
+		$queryCuantEqui = $repository->createQueryBuilder('h')
+            ->select('count(h.idRegistro)')
+            ->where('h.idTorneo = :torn')
+			->andWhere('h.idCategoria = :cate')
+			->andWhere('h.idRama = :rama')
+			->setParameter('torn',$torn)
+			->setParameter('cate',$cate)
+			->setParameter('rama',$rama)
+            ->getQuery();
+        $n = $queryCuantEqui->getResult();
+
+		$queryEquis = $repository->createQueryBuilder('h')
+            ->select('h.idEquipo')
+            ->where('h.idTorneo = :torn')
+			->andWhere('h.idCategoria = :cate')
+			->andWhere('h.idRama = :rama')
+			->setParameter('torn',$torn)
+			->setParameter('cate',$cate)
+			->setParameter('rama',$rama)
+            ->getQuery();
+        $equipos = $queryEquis->getResult();
+		if($n%2==0){
+			$r=($n-1)*2;
+				for($i=0;$i<$n/2;$i++){
+					$p[$i][0]=$equipos[i];
+					$p2[$i][0]=$p[$i][0];
+				}
+				for($i=0;$i<$n/2;$i++){
+					$p[$i][1]=$equipos[i+$n/2];
+					$p2[$n/2-1-$i][1]=$p[$i][1];
+				}
+			}
+		else {
+			$r=$n*2;
+			$n++;
+				for($i=0;$i<$n/2;$i++){
+					$p[$i][0]=$equipos[i];
+					$p2[$i][0]=$p[$i][0];
+				}
+				for($i=0;$i<$n/2-1;$i++){
+					$p[$i][1]=$equipos[i+$n/2];
+					$p2[$n/2-1-$i][1]=$p[$i][1];
+				}
+				$p[$n/2-1][1]=0;
+				$p2[0][1]=0;
+		}
+		for($cont=1;$cont<=$r/2;$cont++){
+			for($c=0;$c<$n/2;$c++){
+				if($p[$c][0]!=0&&$p[$c][1]!=0){
+					//insert $p[$c][0]  vs  $p[$c][1] en la jornada cont
+					$partido = new Partido();
+					$partido -> setidTorneo($torn);
+					$partido -> setJornada($cont);
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($partido);
+                    $em -> flush();
+
+					$juegana = new Juegan();
+					$juegana -> setidEquipo($p[$c][0]);
+					$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+					$queryPartido = $repository->createQueryBuilder('h')
+						->select('max(h.idPartido)')
+						->getQuery();
+					$idpart =	$queryPartido->getResult();
+					$juegana -> setidPartido($idpart);
+					$juegana -> setside('A');
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($juegana);
+                    $em -> flush();
+
+					$jueganb = new Juegan();
+					$jueganb -> setidEquipo($p[$c][1]);
+					$jueganb -> setidPartido($idpart);
+					$jueganb -> setside('B');
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($jueganb);
+                    $em -> flush();
+
+				}
+			}
+			$j=2;
+			$t1=$p[1][0];
+			for($i=1;$i<$n-1;$i++){
+				if($i<$n/2-1){
+					$t2=$p[$j][0];
+					$p[j][0]=$t1;
+					$t1=$t2;
+					$j++;
+				}
+				else{
+					if($i==$n/2-1){
+						$j--;
+						$t2=$p[$j][1];
+						$p[$j][1]=$t1;
+						$t1=$t2;
+						$j--;
+					}
+					else{
+						$t2=$p[$j][1];
+						$p[$j][1]=$t1;
+						$t1=$t2;
+						$j--;
+					}
+				}
+			}
+			$p[1][0]=$t1;
+		}
+		for($cont=$r/2+1;$cont<=$r;$cont++){
+			for($c=0;$c<$n/2;$c++){
+				if($p2[$c][0]!=0&&$p2[$c][1]!=0) {
+					//insert $p2[$c][0]  vs  $p2[$c][1] en la jornada $cont
+					$partido = new Partido();
+					$partido -> setidTorneo($torn);
+					$partido -> setJornada($cont);
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($partido);
+                    $em -> flush();
+
+					$juegan1 = new Juegan();
+					$juegan1 -> setidEquipo($p2[$c][0]);
+					$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+					$queryPartido = $repository->createQueryBuilder('h')
+						->select('max(h.idPartido)')
+						->getQuery();
+					$idpart =	$queryPartido->getResult();
+					$juegan1 -> setidPartido($idpart);
+					$juegan1 -> setside('B');
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($juegan1);
+                    $em -> flush();
+
+					$juegan2 = new Juegan();
+					$juegan2 -> setidEquipo($p2[$c][1]);
+					$juegan2 -> setidPartido($idpart);
+					$juegan2 -> setside('A');
+					$em = $this->getDoctrine()->getManager();
+                    $em -> persist($juegan2);
+                    $em -> flush();
+				}
+			}
+			$j=2;
+			$t1=$p2[1][0];
+			for($i=1;$i<$n-1;$i++){
+				if($i<$n/2-1){
+					$t2=$p2[$j][0];
+					$p2[j][0]=$t1;
+					$t1=$t2;
+					$j++;
+				}
+				else{
+					if($i==$n/2-1){
+						$j--;
+						$t2=$p2[$j][1];
+						$p2[j][1]=$t1;
+						$t1=$t2;
+						$j--;
+					}
+					else{
+						$t2=$p2[$j][1];
+						$p2[j][1]=$t1;
+						$t1=$t2;
+						$j--;
+					}
+				}
+			}
+			$p2[1][0]=$t1;
+		}
+
+	}
+
+	public function actrolAction(){
+	$torn = 0;
+	$cate=0;
+	$rama=0;
+		$queryCuantEqui = $repository->createQueryBuilder('h')
+            ->select('count(h.idRegistro)')
+            ->where('h.idTorneo = :torn')
+			->andWhere('h.idCategoria = :cate')
+			->andWhere('h.idRama = :rama')
+			->setParameter('torn',$torn)
+			->setParameter('cate',$cate)
+			->setParameter('rama',$rama)
+            ->getQuery();
+        $n = $queryCuantEqui->getResult();
+		//$r=numero de jornadas ya jugada
+		//$cont=numero de la siguiente jornada
+		if($n%2==0){
+				$cont1=($n-1)*2;
+		}
+		else {
+				$cont1=$n*2;
+		}
+		if($n>16||$r>15){
+			//no se puede agregar mas equipos
+		}
+		else{
+			//falta...
+
+		}
+
+	}
+
+	//FINAL CONTROLADOR  ROL DE JUEGOS
 
 }
