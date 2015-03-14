@@ -1123,6 +1123,9 @@ class DefaultController extends Controller{
         return $this->render('limubacadministratorBundle:administracion:crearCategoria.html.twig');
     }
 
+    public function partidoTestAction(){
+    	return $this->render('limubacadministratorBundle:administracion:partidoTest.html.twig');
+    }
     //FINAL CONTROLADOR TORNEO
 
 }
