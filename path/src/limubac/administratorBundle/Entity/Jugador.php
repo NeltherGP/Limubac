@@ -76,6 +76,13 @@ class Jugador
     private $peso;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="curp", type="string", length=30, nullable=true)
+     */
+    private $curp;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_jugador", type="integer")
@@ -334,6 +341,29 @@ class Jugador
     }
 
     /**
+     * Set curp
+     *
+     * @param string $curp
+     * @return Jugador
+     */
+    public function setCurp($curp)
+    {
+        $this->curp = $curp;
+
+        return $this;
+    }
+
+    /**
+     * Get curp
+     *
+     * @return string 
+     */
+    public function getCurp()
+    {
+        return $this->curp;
+    }
+
+    /**
      * Get idJugador
      *
      * @return integer 
@@ -349,7 +379,7 @@ class Jugador
      * @param \limubac\administratorBundle\Entity\Fotos $idFoto
      * @return Jugador
      */
-    public function setidFoto(\limubac\administratorBundle\Entity\Fotos $idFoto = null)
+    public function setIdFoto(\limubac\administratorBundle\Entity\Fotos $idFoto = null)
     {
         $this->idFoto = $idFoto;
 
@@ -361,7 +391,7 @@ class Jugador
      *
      * @return \limubac\administratorBundle\Entity\Fotos 
      */
-    public function getidFoto()
+    public function getIdFoto()
     {
         return $this->idFoto;
     }

@@ -12,6 +12,11 @@
     </id>
     <field name="hInicio" type="time" column="h_inicio" nullable="false"/>
     <field name="hTermino" type="time" column="h_termino" nullable="false"/>
+    <field name="commited" type="boolean" column="commited" nullable="true"/>
+    <field name="primero" type="integer" column="primero" nullable="true"/>
+    <field name="segundo" type="integer" column="segundo" nullable="true"/>
+    <field name="tercero" type="integer" column="tercero" nullable="true"/>
+    <field name="cuarto" type="integer" column="cuarto" nullable="true"/>
     <many-to-one field="idSede" target-entity="Sede">
       <join-columns>
         <join-column name="id_sede" referenced-column-name="id_sede"/>
