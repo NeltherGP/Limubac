@@ -15,14 +15,14 @@ class Partido
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="h_inicio", type="time", nullable=false)
+     * @ORM\Column(name="h_inicio", type="time", nullable=true)
      */
     private $hInicio;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="h_termino", type="time", nullable=false)
+     * @ORM\Column(name="h_termino", type="time", nullable=true)
      */
     private $hTermino;
 

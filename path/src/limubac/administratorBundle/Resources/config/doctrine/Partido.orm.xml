@@ -10,8 +10,8 @@
     <id name="idPartido" type="integer" column="id_partido">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="hInicio" type="time" column="h_inicio" nullable="false"/>
-    <field name="hTermino" type="time" column="h_termino" nullable="false"/>
+    <field name="hInicio" type="time" column="h_inicio" nullable="true"/>
+    <field name="hTermino" type="time" column="h_termino" nullable="true"/>
     <field name="commited" type="boolean" column="commited" nullable="true"/>
     <field name="primero" type="integer" column="primero" nullable="true"/>
     <field name="segundo" type="integer" column="segundo" nullable="true"/>
