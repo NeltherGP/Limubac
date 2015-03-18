@@ -64,6 +64,13 @@ class Partido
     /**
      * @var integer
      *
+     * @ORM\Column(name="jornada", type="integer", nullable=true)
+     */
+    private $jornada;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id_partido", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -261,6 +268,29 @@ class Partido
     public function getCuarto()
     {
         return $this->cuarto;
+    }
+
+    /**
+     * Set jornada
+     *
+     * @param integer $jornada
+     * @return Partido
+     */
+    public function setJornada($jornada)
+    {
+        $this->jornada = $jornada;
+
+        return $this;
+    }
+
+    /**
+     * Get jornada
+     *
+     * @return integer 
+     */
+    public function getJornada()
+    {
+        return $this->jornada;
     }
 
     /**
