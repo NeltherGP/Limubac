@@ -11,8 +11,9 @@
     <id name="idFaltasEq" type="integer" column="id_faltas_eq">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="tiempo" type="integer" column="tiempo" nullable="false"/>
+    <field name="tiempo" type="integer" column="tiempo" nullable="true"/>
     <field name="descFalta" type="string" column="desc_falta" length="255" nullable="false"/>
+    <field name="cantidad" type="integer" column="cantidad" nullable="true"/>
     <many-to-one field="idFalta" target-entity="Falta">
       <join-columns>
         <join-column name="id_falta" referenced-column-name="id_falta"/>

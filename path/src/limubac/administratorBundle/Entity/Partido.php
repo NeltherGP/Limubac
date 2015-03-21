@@ -60,6 +60,41 @@ class Partido
     /**
      * @var integer
      *
+     * @ORM\Column(name="primero", type="integer", nullable=true)
+     */
+    private $primero;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="segundo", type="integer", nullable=true)
+     */
+    private $segundo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tercero", type="integer", nullable=true)
+     */
+    private $tercero;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cuarto", type="integer", nullable=true)
+     */
+    private $cuarto;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="jornada", type="integer", nullable=true)
+     */
+    private $jornada;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id_partido", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -252,6 +287,121 @@ class Partido
     {
         return $this->jornada;
     }
+    /**
+     * Set primero
+     *
+     * @param integer $primero
+     * @return Partido
+     */
+    public function setPrimero($primero)
+    {
+        $this->primero = $primero;
+
+        return $this;
+    }
+
+    /**
+     * Get primero
+     *
+     * @return integer 
+     */
+    public function getPrimero()
+    {
+        return $this->primero;
+    }
+
+    /**
+     * Set segundo
+     *
+     * @param integer $segundo
+     * @return Partido
+     */
+    public function setSegundo($segundo)
+    {
+        $this->segundo = $segundo;
+
+        return $this;
+    }
+
+    /**
+     * Get segundo
+     *
+     * @return integer 
+     */
+    public function getSegundo()
+    {
+        return $this->segundo;
+    }
+
+    /**
+     * Set tercero
+     *
+     * @param integer $tercero
+     * @return Partido
+     */
+    public function setTercero($tercero)
+    {
+        $this->tercero = $tercero;
+
+        return $this;
+    }
+
+    /**
+     * Get tercero
+     *
+     * @return integer 
+     */
+    public function getTercero()
+    {
+        return $this->tercero;
+    }
+
+    /**
+     * Set cuarto
+     *
+     * @param integer $cuarto
+     * @return Partido
+     */
+    public function setCuarto($cuarto)
+    {
+        $this->cuarto = $cuarto;
+
+        return $this;
+    }
+
+    /**
+     * Get cuarto
+     *
+     * @return integer 
+     */
+    public function getCuarto()
+    {
+        return $this->cuarto;
+    }
+
+    /**
+     * Set jornada
+     *
+     * @param integer $jornada
+     * @return Partido
+     */
+    public function setJornada($jornada)
+    {
+        $this->jornada = $jornada;
+
+        return $this;
+    }
+
+    /**
+     * Get jornada
+     *
+     * @return integer 
+     */
+    public function getJornada()
+    {
+        return $this->jornada;
+    }
+
     /**
      * Get idPartido
      *

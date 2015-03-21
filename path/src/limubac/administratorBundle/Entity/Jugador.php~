@@ -76,6 +76,13 @@ class Jugador
     private $peso;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="curp", type="string", length=30, nullable=true)
+     */
+    private $curp;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_jugador", type="integer")

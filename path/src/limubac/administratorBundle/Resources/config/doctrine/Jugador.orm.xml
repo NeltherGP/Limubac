@@ -20,6 +20,7 @@
     <field name="profesion" type="string" column="profesion" length="35" nullable="true"/>
     <field name="estatura" type="float" column="estatura" precision="10" scale="0" nullable="true"/>
     <field name="peso" type="float" column="peso" precision="10" scale="0" nullable="true"/>
+    <field name="curp" type="string" column="curp" length="30" nullable="true"/>
     <many-to-one field="idFoto" target-entity="Fotos">
       <join-columns>
         <join-column name="id_foto" referenced-column-name="id_foto"/>

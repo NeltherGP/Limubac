@@ -15,7 +15,7 @@ class FaltasEquipo
     /**
      * @var integer
      *
-     * @ORM\Column(name="tiempo", type="integer", nullable=false)
+     * @ORM\Column(name="tiempo", type="integer", nullable=true)
      */
     private $tiempo;
 
@@ -25,6 +25,13 @@ class FaltasEquipo
      * @ORM\Column(name="desc_falta", type="string", length=255, nullable=false)
      */
     private $descFalta;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad", type="integer", nullable=true)
+     */
+    private $cantidad;
 
     /**
      * @var integer
