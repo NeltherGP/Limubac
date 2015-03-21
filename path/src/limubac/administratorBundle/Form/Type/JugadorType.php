@@ -16,6 +16,7 @@ class JugadorType extends AbstractType{
 		$builder->add('fNacimiento','date', array('widget' => 'single_text','format' => 'yyyy-MM-dd',));
 		$builder->add('correo','email');
 		$builder->add('telefono','integer');
+    $builder->add('numero','integer');
 		$builder->add('profesion','text');
 		$builder->add('estatura','text');
 		$builder->add('peso','text');
