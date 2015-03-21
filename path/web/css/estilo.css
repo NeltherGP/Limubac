@@ -10,11 +10,11 @@
 }
 #equipos{
 	background-color: #CF000F;
-	
+
 }
 #hoja{
 	background-color:#26C281;
-	
+
 }
 #jugadores{
 	background-color:#19B5FE;
@@ -97,7 +97,7 @@ background-color: #003171;
 	text-align: left;
 }
 .bordes{
-	
+
 	padding: 5px;
 	border: 1px solid black;
 	border-radius: 4px;
@@ -106,7 +106,7 @@ background-color: #003171;
 }
 
 .bordesFaltas{
-	
+
 	padding: 5px;
 	border: 1px solid black;
 	border-radius: 4px;
@@ -143,6 +143,14 @@ background-color: #003171;
 	width:20px;
 }
 
+.AglinBoxB{
+	padding-left:0px;
+}
+
+//Estilos Manejo de errores Hoja de anotacion
+
+//END Estilos Manejo de errores Hoja de anotacion
+
 <<<<<<< HEAD
 =======
 /*-----------------------INICIO ESTILOS DE FAFI...NO TOCAR!!!!-----------------------*/
@@ -165,7 +173,7 @@ h3{
 	font-family: inherit;
 	font-weight: bold;
 	color: inherit;
-	text-rendering: optimizelegibility;	
+	text-rendering: optimizelegibility;
 }
 
 .btn {
@@ -368,7 +376,7 @@ padding-top: 80px;
 
 
 #submit {
-	display: none;	
+	display: none;
 }
 form .icon, form .submit {
 	width: 28px;
@@ -378,12 +386,12 @@ form .icon, form .submit {
 	position: absolute;
 	top: 0;
 	right: 0;
-	
+
 }
 form .submit {
 	background: #009bff;
 	cursor: pointer;
-	
+
 }
 form .icon:after, form .submit:after  {
 	content: '';
@@ -416,7 +424,7 @@ form #search {
 	outline: none;
 	position: absolute;
 	right: 35px;
-	
+
 <<<<<<< HEAD
 }
 =======

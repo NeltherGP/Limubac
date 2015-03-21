@@ -2,304 +2,332 @@
 
 {% block PageContent %}
 
+<form action="{{ path('limubacadministrator_hojaAnotaciones',{'idpartido':datosGenerales.0.idpartido})}}" method='POST' class="form-horizontal" role="form" id="formulario" >
 
-	<form action="{{ path('limubacadministrator_hojaAnotaciones') }}" method='POST' class="form-horizontal" role="form">
+	{#Encabezado primera parte#}
 
-      {#Encabezado primera parte#}
-  		<div class="bordes">
-        <div class="formAnotacion form-group">		
+	<div class="bordes">
+		<div class="formAnotacion form-group">
 
-          <div class="col-md-3">
+			<div class="col-md-3">
 
-            <input class="form-control" id="EqA" name="EqA" placeholder="Equipo A" Value="" alt="{{ path('limubacadministrator_nombresEquipos') }}" disabled>
+				<input class="form-control" id="EqA" name="EqA" placeholder="Equipo A" Value="{{datosGenerales.0.nombre}}" alt="{{ path('limubacadministrator_nombresEquipos')}}" disabled>
 
-          </div>
-          
-          <label id="VS" class="col-md-1 text-center">VS</label>
-          
-          <div class="col-md-3">
+			</div>
 
-            <input class="form-control" id="EqB" name="EqB" placeholder="Equipo B" Value="" disabled>
-          </div>
-          
-          <div class="col-md-2">
-            <input class="form-control" id="Rama" name="Rama" placeholder="Rama" value=""  disabled>
-          </div>
-          
-          <div class="col-md-3">
-            <input class="form-control" id="Categoria" name="Categoria" placeholder="Categoria" value="" disabled>
+			<label id="VS" class="col-md-1 text-center">VS</label>
 
-          </div>
+			<div class="col-md-3">
 
-    		</div>
-      </div>
-    </br>
+				<input class="form-control" id="EqB" name="EqB" placeholder="Equipo B" Value="{{datosGenerales.1.nombre}}" disabled>
+			</div>
 
-      {#Encabezado segunda parte #}
+			<div class="col-md-2">
+				<input class="form-control" id="Rama" name="Rama" placeholder="Rama" value="{{datosGenerales.0.rama}}"  disabled>
+			</div>
 
-    <div class="bordes">
-      <div class="formAnotacion form-group">
-          {#Fila 1#}
+			<div class="col-md-3">
+				<input class="form-control" id="Categoria" name="Categoria" placeholder="Categoria" value="{{datosGenerales.0.categoria}}" disabled>
 
-            <label for="Lugar" class="col-md-1 control-label text-center">Lugar: </label>
-            <div class="col-md-3">
+			</div>
 
-              <input class="form-control" id="Lugar" name="Lugar" placeholder="Lugar" value=""  disabled>
+		</div>
+	</div>
+</br>
 
-            </div>
+{#Encabezado segunda parte #}
 
-            <label for="Torneo" class="col-md-1 control-label text-center">Torneo: </label>
-            <div class="col-md-3">
+<div class="bordes">
+	<div class="formAnotacion form-group">
+		{#Fila 1#}
 
-              <input class="form-control" id="Torneo" name ="Torneo" placeholder="Torneo" value=""  disabled>
+		<label for="Lugar" class="col-md-1 control-label text-center">Lugar: </label>
+		<div class="col-md-3">
 
-            </div>
+			<input class="form-control" id="Lugar" name="Lugar" placeholder="Lugar" value="{{datosGenerales.0.lugar}}"  disabled>
 
-            <label for="1erjuez" class="col-md-1 control-label text-center">1er. Juez: </label>
-            <div class="col-md-3">
+		</div>
 
-              <input class="form-control" id="1erjuez" name="Juez1" value="" placeholder="1er. Juez">
+		<label for="Torneo" class="col-md-1 control-label text-center">Torneo: </label>
+		<div class="col-md-3">
 
-            </div>
-          {#End Fila 1#}
+			<input class="form-control" id="Torneo" name ="Torneo" placeholder="Torneo" value="{{datosGenerales.0.torneo}}" alt="" disabled>
 
-            <div class="clearfix visible-xs-block"></div>
+		</div>
 
-          {#Fila 2#}
+		<label for="1erjuez" class="col-md-1 control-label text-center">1er. Juez: </label>
+		<div class="col-md-3">
 
-            <label for="Fecha" name = "fecha" class="col-md-1 control-label text-center">Fecha: </label>
-            <div class="col-md-3 Fila2">
-              <input name = "Fecha"class="form-control" id="Fecha" placeholder="Fecha"  value=""  disabled>
-            </div>
+			<input class="form-control" id="1erjuez" name="Juez1" value="" placeholder="1er. Juez">
 
+		</div>
+		{#End Fila 1#}
 
-            <label for="Hora" name="hora" class="col-md-1 control-label text-center">Hora: </label>
-            <div class="col-md-3 Fila2">
-              <input class="form-control" name="Hora"id="Hora" placeholder="Hora"  value=""  disabled>
+		<div class="clearfix visible-xs-block"></div>
 
-            </div>
-          
-            <label for="2dojuez" name="juez2" class="col-md-1 control-label text-center">2dojuez: </label>
-            <div class="col-md-3 Fila2">
-              <input name="Juez2"class="form-control" id="2dojuez" placeholder="2do. Juez" value="" >
-            </div>
-          </div>
-        </div>
-        </br>
-        <div class="bordes col-md-6 form-group margen-bot">
-            <label class="text-center col-md-12">EQUIPO A</label>
-                <table class="table table-bordered" style="table-layout:fixed" >
-                  <thead>
-                    <tr>
-                      <th class = "text-center">Nombre</th>
-                      <th class = "text-center">Apellido Paterno</th>
-                      <th class = "text-center">Apellido Materno</th>
-                      <th class = "text-center">Asistencia</th>
-                       <th class="text-center faltascol">Faltas</th>
-                    </tr>
-                  </thead>
-                      <tbody>
-                        {% for jugador in ListA %}
-                            <tr>
-                                <td>{{jugador.nombre}}</td>
-                                <td>{{jugador.apPaterno}}</td>
-                                <td>{{jugador.apMaterno}}</td>
-                                <td>
-                                    <input type="checkbox" name="asistA[]" class="group2 text-center" value="{{jugador.idJugador}}">
-                                </td>
-                                <td>
-                                    <select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                      <option  value="0">-</option>
-                                      <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                    <select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                       <option  value="0">-</option>
-                                      <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                   <select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                       <option  value="0">-</option>
-                                      <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                    <select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                       <option  value="0">-</option>
-                                      <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                    <select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                       <option  value="0">-</option>
-                                      <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                </td> 
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            
-        </div>
-        
-        <div class="bordes col-md-6 form-group margen-bot">
-            <label class="text-center col-md-12">EQUIPO B</label>
-                <table class="table table-bordered" style="table-layout:fixed" >
-                  <thead>
-                    <tr>
-              
-                      <th class="text-center">Nombre</th>
-                      <th class="text-center">Apellido Paterno</th>
-                      <th class="text-center">Apellido Materno</th>
-                      <th class="text-center">Asistencia</th>
-                      <th class="text-center faltascol">Faltas </th>
-                    </tr>
-                  </thead
-                      <tbody>
-                        {% for jugador in ListB %}
-                            <tr>
-                                <td>{{jugador.nombre}}</td>
-                                <td>{{jugador.apPaterno}}</td>
-                                <td>{{jugador.apMaterno}}</td>
-                                <td>
-                                    <input type="checkbox" name="asistB[]" class="group2 text-center" value="{{jugador.idJugador}}">
-                                </td>
-                               <td>
-                                    <select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                       <option  value="0">-</option>
-                                      <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                    <select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                       <option  value="0">-</option>
-                                       <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                   <select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                       <option  value="0">-</option>
-                                       <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                    <select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                       <option  value="0">-</option>
-                                       <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                    <select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
-                                      <option  value="0">-</option> 
-                                      <option  value="5">F</option>
-                                      <option  value="2">F1</option>
-                                      <option  value="3">F2</option>
-                                      <option  value="4">T</option>
-                                      <option  value="1">D</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-        </div>
+		{#Fila 2#}
 
-         {#End Fila 2#}
-        <div class="col-md-12">
-            <div class="bordes col-md-3">
-             	{% for i in 1..30 %}
-                <div class="formAnotacion form-group">{#1#}
-                    <div class="col-md-4">
-                        <input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
-                    </div>
-                    <div class="col-md-1">
-                        <input class="boxMarcador"type="checkbox" id="inlineCheckbox{{ i }}" value="{{ i }}">
-                    </div>
-                     <label class="col-md-3 text-center ">{{ i }}</label>
-                    <div class="col-md-4">
-                        <input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
-                    </div>
-             </div>
-                {% endfor %}
-            </div>
-
-            <div class="bordes col-md-3">
-                {% for i in 31..60 %}
-                <div class="formAnotacion form-group">{#1#}
-                    <div class="col-md-4">
-                        <input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
-                    </div>
-                    <div class="col-md-1">
-                        <input class="boxMarcador"type="checkbox" id="inlineCheckbox{{ i }}" value="{{ i }}">
-                    </div>
-                     <label class="col-md-3 text-center ">{{ i }}</label>
-                    <div class="col-md-4">
-                        <input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
-                    </div>
-             </div>
-                {% endfor %}
-            </div>
-
-            <div class="bordes col-md-3">
-                {% for i in 61..90 %}
-                <div class="formAnotacion form-group">{#1#}
-                    <div class="col-md-4">
-                        <input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
-                    </div>
-                    <div class="col-md-1">
-                         <input class="boxMarcador"type="checkbox" id="inlineCheckbox{{ i }}" value="{{ i }}">
-                    </div>
-                     <label class="col-md-3 text-center ">{{ i }}</label>
-                    <div class="col-md-4">
-                        <input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
-                    </div>
-             </div>
-                {% endfor %}
-            </div>
-
-          <div class="bordes col-md-3">
-                {% for i in 91..120 %}
-                <div class="formAnotacion form-group">{#1#}
-                    <div class="col-md-4">
-                        <input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
-                    </div>
-                    <div class="col-md-1">
-                        <input class="boxMarcador"type="checkbox" id="inlineCheckbox{{ i }}" value="{{ i }}">
-                    </div>
-                     <label class="col-md-3 text-center ">{{ i }}</label>
-                    <div class="col-md-4">
-                        <input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
-                    </div>
-             </div>
-                {% endfor %}
-            </div>
-        </div>
+		<label for="Fecha" name = "fecha" class="col-md-1 control-label text-center">Fecha: </label>
+		<div class="col-md-3 Fila2">
+			<input name = "Fecha"class="form-control" id="Fecha" placeholder="Fecha"  value=""  disabled>
+		</div>
 
 
-      	</div>
-        <input type="submit" />
-         {#End marcador 1#}
-    </form>
+		<label for="Hora" name="hora" class="col-md-1 control-label text-center">Hora: </label>
+		<div class="col-md-3 Fila2">
+			<input class="form-control" name="Hora"id="Hora" placeholder="Hora"  value=""  disabled>
+
+		</div>
+
+		<label for="2dojuez" name="juez2" class="col-md-1 control-label text-center">2dojuez: </label>
+		<div class="col-md-3 Fila2">
+			<input name="Juez2"class="form-control" id="2dojuez" placeholder="2do. Juez" value="" >
+		</div>
+	</div>
+</div>
+</br>
+
+<div class="bordes col-md-6 form-group margen-bot">
+	{% if errores is defined %}
+		{% if errores.AsistenciaA != 0%}
+		<div class="col-md-12 alert alert-danger text-center" role="alert">Ups! Para un partido oficial debe haber mínimo 4 asistentes, verifica si marcaste bien la asistencia</div>
+		{% endif %}
+	{% endif %}
+	<label class="text-center col-md-12">EQUIPO A</label>
+	<table class="table table-bordered" style="table-layout:fixed" >
+		<thead>
+			<tr>
+				<th class = "text-center">Nombre</th>
+				<th class = "text-center">Apellido Paterno</th>
+				<th class = "text-center">Apellido Materno</th>
+				<th class = "text-center">Asistencia</th>
+				<th class="text-center faltascol">Faltas</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for jugador in ListA %}
+			<tr>
+				<td>{{jugador.nombre}}</td>
+				<td>{{jugador.apPaterno}}</td>
+				<td>{{jugador.apMaterno}}</td>
+				<td>
+					<input type="checkbox" name="asistA[]" class="group2 text-center" value="{{jugador.idJugador}}">
+				</td>
+				<td>
+					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+						<option  value="0">-</option>
+						<option  value="5">F</option>
+						<option  value="2">F1</option>
+						<option  value="3">F2</option>
+						<option  value="4">T</option>
+						<option  value="1">D</option>
+					</select>
+					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+						<option  value="0">-</option>
+						<option  value="5">F</option>
+						<option  value="2">F1</option>
+						<option  value="3">F2</option>
+						<option  value="4">T</option>
+						<option  value="1">D</option>
+					</select>
+					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+						<option  value="0">-</option>
+						<option  value="5">F</option>
+						<option  value="2">F1</option>
+						<option  value="3">F2</option>
+						<option  value="4">T</option>
+						<option  value="1">D</option>
+					</select>
+					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+						<option  value="0">-</option>
+						<option  value="5">F</option>
+						<option  value="2">F1</option>
+						<option  value="3">F2</option>
+						<option  value="4">T</option>
+						<option  value="1">D</option>
+					</select>
+					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+						<option  value="0">-</option>
+						<option  value="5">F</option>
+						<option  value="2">F1</option>
+						<option  value="3">F2</option>
+						<option  value="4">T</option>
+						<option  value="1">D</option>
+					</select>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class="bordes col-md-6 form-group margen-bot">
+	{% if errores is defined %}
+		{% if errores.AsistenciaB != 0%}
+		<div class="col-md-12 alert alert-danger text-center" role="alert">Ups! Para un partido oficial debe haber mínimo 4 asistentes, verifica si marcaste bien la asistencia</div>
+		{% endif %}
+	{% endif %}
+	<label class="text-center col-md-12">EQUIPO B</label>
+	<table class="table table-bordered" style="table-layout:fixed" >
+		<thead>
+			<tr>
+
+				<th class="text-center">Nombre</th>
+				<th class="text-center">Apellido Paterno</th>
+				<th class="text-center">Apellido Materno</th>
+				<th class="text-center">Asistencia</th>
+				<th class="text-center faltascol">Faltas </th>
+			</tr>
+			</thead
+			<tbody>
+				{% for jugador in ListB %}
+				<tr>
+					<td>{{jugador.nombre}}</td>
+					<td>{{jugador.apPaterno}}</td>
+					<td>{{jugador.apMaterno}}</td>
+					<td>
+						<input type="checkbox" name="asistB[]" class="group2 text-center" value="{{jugador.idJugador}}">
+					</td>
+					<td>
+						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+							<option  value="0">-</option>
+							<option  value="5">F</option>
+							<option  value="2">F1</option>
+							<option  value="3">F2</option>
+							<option  value="4">T</option>
+							<option  value="1">D</option>
+						</select>
+						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+							<option  value="0">-</option>
+							<option  value="5">F</option>
+							<option  value="2">F1</option>
+							<option  value="3">F2</option>
+							<option  value="4">T</option>
+							<option  value="1">D</option>
+						</select>
+						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+							<option  value="0">-</option>
+							<option  value="5">F</option>
+							<option  value="2">F1</option>
+							<option  value="3">F2</option>
+							<option  value="4">T</option>
+							<option  value="1">D</option>
+						</select>
+						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+							<option  value="0">-</option>
+							<option  value="5">F</option>
+							<option  value="2">F1</option>
+							<option  value="3">F2</option>
+							<option  value="4">T</option>
+							<option  value="1">D</option>
+						</select>
+						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
+							<option  value="0">-</option>
+							<option  value="5">F</option>
+							<option  value="2">F1</option>
+							<option  value="3">F2</option>
+							<option  value="4">T</option>
+							<option  value="1">D</option>
+						</select>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	{#End Fila 2#}
+	<div class="col-md-12">
+		{% if errores is defined %}
+		{% if errores.Playera!= 0%}
+		<div class="col-md-12 alert alert-danger text-center" role="alert">Ups! Parece que un numero de playera es incorrecto</div>
+		{% endif %}
+		{% endif %}
+
+		<div class="bordes col-md-3">
+			{% for i in 1..30 %}
+			<div class="formAnotacion form-group">{#1#}
+				<div class="col-md-4">
+					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
+				</div>
+				<div class="col-md-1 AglinBoxA">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}" name="MarcadorCuartoA[]">
+				</div>
+				<label class="col-md-2 text-center ">{{ i }}</label>
+				<div class="col-md-1 AglinBoxB">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxB{{ i }}" value="{{ i }}"  name="MarcadorCuartoB[]">
+				</div>
+				<div class="col-md-4">
+					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+		<div class="bordes col-md-3">
+			{% for i in 31..60 %}
+			<div class="formAnotacion form-group">{#1#}
+				<div class="col-md-4">
+					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
+				</div>
+				<div class="col-md-1 AglinBoxA">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}" name="MarcadorCuartoA[]">
+				</div>
+				<label class="col-md-2 text-center ">{{ i }}</label>
+				<div class="col-md-1 AglinBoxB">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxB{{ i }}" value="{{ i }}" name="MarcadorCuartoB[]">
+				</div>
+				<div class="col-md-4">
+					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+		<div class="bordes col-md-3">
+			{% for i in 61..90 %}
+			<div class="formAnotacion form-group">{#1#}
+				<div class="col-md-4">
+					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
+				</div>
+				<div class="col-md-1 AglinBoxA">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}"  name="MarcadorCuartoA[]">
+				</div>
+				<label class="col-md-2 text-center ">{{ i }}</label>
+				<div class="col-md-1 AglinBoxB">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxB{{ i }}" value="{{ i }}" name="MarcadorCuartoB[]">
+				</div>
+				<div class="col-md-4">
+					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+		<div class="bordes col-md-3">
+			{% for i in 91..120 %}
+			<div class="formAnotacion form-group">{#1#}
+				<div class="col-md-4">
+					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
+				</div>
+				<div class="col-md-1 AglinBoxA">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}"  name="MarcadorCuartoA[]">
+				</div>
+				<label class="col-md-2 text-center ">{{ i }}</label>
+				<div class="col-md-1 AglinBoxB">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxB{{ i }}" value="{{ i }}" name="MarcadorCuartoB[]">
+				</div>
+				<div class="col-md-4">
+					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+
+</div>
+<input type="submit" />
+{#End marcador 1#}
+</form>
 {% endblock %}

@@ -3,12 +3,12 @@ limubacadministrator_homepage:
     defaults: { _controller: limubacadministratorBundle:Default:admin}
 
 limubacadministrator_hojaAnotaciones:
-    path:     /hojaAnotaciones
-    defaults: { _controller: limubacadministratorBundle:Default:hojaAnotaciones}
+    path:     /hojaAnotaciones/{idpartido}
+    defaults: { _controller: limubacadministratorBundle:HojaAnotaciones:hojaAnotaciones,idpartido:0}
+
 limubacadministrator_nombresEquipos:
     path:     /nombresEquipos
-    defaults: { _controller: limubacadministratorBundle:Default:nombresEquipos}
-
+    defaults: { _controller: limubacadministratorBundle:HojaAnotaciones:nombresEquipos}
 
 limubacadministrator_equipos:
     path:     /equipos

@@ -19,7 +19,7 @@
 			      </button>
 		      {#logo#}
 
-		      	<a class="navbar-brand" href="#" ><img id="logo" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>    
+		      	<a class="navbar-brand" href="#" ><img id="logo" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -50,7 +50,7 @@
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
-		
+
 		{% block sidebar%}
 
 		<div id="wrapper">
@@ -63,11 +63,14 @@
 		                </li>
 		                <li>
 		                </br></br></br></br></br>
-		                    <a href="{{url('limubacadministrator_hojaAnotaciones')}}">Hoja de anotaciones</a>
+		                    <a href="#">Hoja de anotaciones</a>
 		                </li>
 		                <li>
 		                    <a href="#">Jugadores</a>
 		                </li>
+										<li>
+												<a href="{{url('limubacadministrator_partidos')}}">Partidos</a>
+										</li>
 		                <li>
 		                    <a href="{{url('limubacadministrator_equipos')}}">Equipos</a>
 		                </li>
@@ -80,7 +83,7 @@
 		                <li>
 		                    <a href="#">Avisos</a>
 		                </li>
-						<li>
+										<li>
 		                    <a href="{{url('limubacadministrator_rol')}}">Rol</a>
 		                </li>
 		            </ul>
@@ -108,7 +111,7 @@
              $('#flechita').attr("class","glyphicon glyphicon-chevron-right");
         }
 
-        
+
     });
     </script>
 

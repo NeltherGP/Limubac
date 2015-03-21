@@ -1,6 +1,6 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     www.mcflylabs.com
+      database_host:     www.mcflylabs.com
     database_port:     '3306'
     database_name:     mcflylab_limubactest1
     database_user:     mcfly_nelther

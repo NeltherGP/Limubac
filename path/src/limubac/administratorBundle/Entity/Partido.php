@@ -1,9 +1,6 @@
 <?php
-
 namespace limubac\administratorBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Partido
  *
@@ -15,24 +12,51 @@ class Partido
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="h_inicio", type="time", nullable=false)
+     * @ORM\Column(name="h_inicio", type="time", nullable=true)
      */
     private $hInicio;
-
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="h_termino", type="time", nullable=false)
+     * @ORM\Column(name="h_termino", type="time", nullable=true)
      */
     private $hTermino;
-
     /**
      * @var boolean
      *
      * @ORM\Column(name="commited", type="boolean", nullable=true)
      */
     private $commited;
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="primero", type="integer", nullable=true)
+     */
+    private $primero;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="segundo", type="integer", nullable=true)
+     */
+    private $segundo;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tercero", type="integer", nullable=true)
+     */
+    private $tercero;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cuarto", type="integer", nullable=true)
+     */
+    private $cuarto;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="jornada", type="integer", nullable=true)
+     */
+    private $jornada;
     /**
      * @var integer
      *
@@ -41,7 +65,6 @@ class Partido
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idPartido;
-
     /**
      * @var \limubac\administratorBundle\Entity\Sede
      *
@@ -51,7 +74,6 @@ class Partido
      * })
      */
     private $idSede;
-
     /**
      * @var \limubac\administratorBundle\Entity\Arbitran
      *
@@ -61,7 +83,6 @@ class Partido
      * })
      */
     private $idArbitran;
-
     /**
      * @var \limubac\administratorBundle\Entity\Torneo
      *
@@ -71,9 +92,6 @@ class Partido
      * })
      */
     private $idTorneo;
-
-
-
     /**
      * Set hInicio
      *
@@ -83,20 +101,17 @@ class Partido
     public function setHInicio($hInicio)
     {
         $this->hInicio = $hInicio;
-
         return $this;
     }
-
     /**
      * Get hInicio
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getHInicio()
     {
         return $this->hInicio;
     }
-
     /**
      * Set hTermino
      *
@@ -106,20 +121,17 @@ class Partido
     public function setHTermino($hTermino)
     {
         $this->hTermino = $hTermino;
-
         return $this;
     }
-
     /**
      * Get hTermino
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getHTermino()
     {
         return $this->hTermino;
     }
-
     /**
      * Set commited
      *
@@ -129,30 +141,126 @@ class Partido
     public function setCommited($commited)
     {
         $this->commited = $commited;
-
         return $this;
     }
-
     /**
      * Get commited
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCommited()
     {
         return $this->commited;
     }
-
+    /**
+     * Set primero
+     *
+     * @param integer $primero
+     * @return Partido
+     */
+    public function setPrimero($primero)
+    {
+        $this->primero = $primero;
+        return $this;
+    }
+    /**
+     * Get primero
+     *
+     * @return integer
+     */
+    public function getPrimero()
+    {
+        return $this->primero;
+    }
+    /**
+     * Set segundo
+     *
+     * @param integer $segundo
+     * @return Partido
+     */
+    public function setSegundo($segundo)
+    {
+        $this->segundo = $segundo;
+        return $this;
+    }
+    /**
+     * Get segundo
+     *
+     * @return integer
+     */
+    public function getSegundo()
+    {
+        return $this->segundo;
+    }
+    /**
+     * Set tercero
+     *
+     * @param integer $tercero
+     * @return Partido
+     */
+    public function setTercero($tercero)
+    {
+        $this->tercero = $tercero;
+        return $this;
+    }
+    /**
+     * Get tercero
+     *
+     * @return integer
+     */
+    public function getTercero()
+    {
+        return $this->tercero;
+    }
+    /**
+     * Set cuarto
+     *
+     * @param integer $cuarto
+     * @return Partido
+     */
+    public function setCuarto($cuarto)
+    {
+        $this->cuarto = $cuarto;
+        return $this;
+    }
+    /**
+     * Get cuarto
+     *
+     * @return integer
+     */
+    public function getCuarto()
+    {
+        return $this->cuarto;
+    }
+    /**
+     * Set jornada
+     *
+     * @param integer $jornada
+     * @return Partido
+     */
+    public function setJornada($jornada)
+    {
+        $this->jornada = $jornada;
+        return $this;
+    }
+    /**
+     * Get jornada
+     *
+     * @return integer
+     */
+    public function getJornada()
+    {
+        return $this->jornada;
+    }
     /**
      * Get idPartido
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdPartido()
     {
         return $this->idPartido;
     }
-
     /**
      * Set idSede
      *
@@ -162,20 +270,17 @@ class Partido
     public function setIdSede(\limubac\administratorBundle\Entity\Sede $idSede = null)
     {
         $this->idSede = $idSede;
-
         return $this;
     }
-
     /**
      * Get idSede
      *
-     * @return \limubac\administratorBundle\Entity\Sede 
+     * @return \limubac\administratorBundle\Entity\Sede
      */
     public function getIdSede()
     {
         return $this->idSede;
     }
-
     /**
      * Set idArbitran
      *
@@ -185,20 +290,17 @@ class Partido
     public function setIdArbitran(\limubac\administratorBundle\Entity\Arbitran $idArbitran = null)
     {
         $this->idArbitran = $idArbitran;
-
         return $this;
     }
-
     /**
      * Get idArbitran
      *
-     * @return \limubac\administratorBundle\Entity\Arbitran 
+     * @return \limubac\administratorBundle\Entity\Arbitran
      */
     public function getIdArbitran()
     {
         return $this->idArbitran;
     }
-
     /**
      * Set idTorneo
      *
@@ -208,14 +310,12 @@ class Partido
     public function setIdTorneo(\limubac\administratorBundle\Entity\Torneo $idTorneo = null)
     {
         $this->idTorneo = $idTorneo;
-
         return $this;
     }
-
     /**
      * Get idTorneo
      *
-     * @return \limubac\administratorBundle\Entity\Torneo 
+     * @return \limubac\administratorBundle\Entity\Torneo
      */
     public function getIdTorneo()
     {
