@@ -95,3 +95,7 @@ limubacadministrator_partidos:
 limubacadministrator_addrol:
     path:     /addrol
     defaults: { _controller: limubacadministratorBundle:Default:addrol}
+
+limubacadministrator_rolhecho:
+    path:     /rolhecho
+    defaults: { _controller: limubacadministratorBundle:Default:rolhecho}
