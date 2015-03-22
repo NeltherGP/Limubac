@@ -75,7 +75,7 @@ limubacadministrator_rol:
 
 limubacadministrator_partidos:
     path:     /partidos
-    defaults: { _controller: limubacadministratorBundle:Default:partidoTest}
+    defaults: { _controller: limubacadministratorBundle:Partidos:partidoTest}
 
 
 limubacadministrator_addrol:

@@ -1,0 +1,28 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+
+	<div class="bordes">
+		 <table class="table table-bordered" style="table-layout:fixed" >
+                  <thead>
+                    <tr>
+                      <th class = "text-center">#Partido</th>
+                      <th class = "text-center">Equipo A</th>
+                      <th class = "text-center">Equipo B</th>
+                      <th class = "text-center">Hoja Anotacion</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+										{% for partido in listaPartidos%}
+                  	<tr>
+
+                  		<td>{{partido.0.idPartido}}</td>
+                  		<td>{{partido.0.nombre}}</td>
+                  		<td>{{partido.1.nombre}}</td>
+                  		<td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button">Cargar Anotaciones</a></td>
+
+                  	</tr>
+									   {% endfor %}
+                  </tbody>
+	</div>
+{% endblock %}
