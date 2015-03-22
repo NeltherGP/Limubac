@@ -18,7 +18,6 @@ limubacadministrator_equipo:
     path:     /equipo
     defaults: { _controller: limubacadministratorBundle:Equipos:equipo}
 
-
 limubacadministrator_jugadoresAdmin:
     path:     /jugadoresAdmin
     defaults: { _controller: limubacadministratorBundle:Default:jugadoresAdmin}
@@ -76,7 +75,6 @@ limubacadministrator_rol:
 limubacadministrator_partidos:
     path:     /partidos
     defaults: { _controller: limubacadministratorBundle:Default:partidoTest}
-
 
 limubacadministrator_addrol:
     path:     /addrol

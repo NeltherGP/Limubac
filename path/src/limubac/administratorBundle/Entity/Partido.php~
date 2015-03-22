@@ -71,6 +71,20 @@ class Partido
     /**
      * @var integer
      *
+     * @ORM\Column(name="rama", type="integer", nullable=true)
+     */
+    private $rama;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="categoria", type="integer", nullable=true)
+     */
+    private $categoria;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id_partido", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
