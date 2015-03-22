@@ -18,6 +18,8 @@
     <field name="tercero" type="integer" column="tercero" nullable="true"/>
     <field name="cuarto" type="integer" column="cuarto" nullable="true"/>
     <field name="jornada" type="integer" column="jornada" nullable="true"/>
+    <field name="rama" type="integer" column="rama" nullable="true"/>
+    <field name="categoria" type="integer" column="categoria" nullable="true"/>
     <many-to-one field="idSede" target-entity="Sede">
       <join-columns>
         <join-column name="id_sede" referenced-column-name="id_sede"/>

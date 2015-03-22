@@ -85,6 +85,13 @@ class Jugador
     /**
      * @var integer
      *
+     * @ORM\Column(name="numero", type="integer", nullable=true)
+     */
+    private $numero;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id_jugador", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -361,6 +368,29 @@ class Jugador
     public function getCurp()
     {
         return $this->curp;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param integer $numero
+     * @return Jugador
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return integer 
+     */
+    public function getNumero()
+    {
+        return $this->numero;
     }
 
     /**

@@ -85,6 +85,13 @@ class Jugador
     /**
      * @var integer
      *
+     * @ORM\Column(name="numero", type="integer", nullable=true)
+     */
+    private $numero;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id_jugador", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
