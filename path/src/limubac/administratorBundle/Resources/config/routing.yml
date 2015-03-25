@@ -86,7 +86,7 @@ limubacadministrator_editCategoria:
 
 limubacadministrator_rol:
     path:     /rol
-    defaults: { _controller: limubacadministratorBundle:Default:rol}
+    defaults: { _controller: limubacadministratorBundle:Rol:rol}
 
 limubacadministrator_partidos:
     path:     /partidos
@@ -94,8 +94,8 @@ limubacadministrator_partidos:
 
 limubacadministrator_addrol:
     path:     /addrol
-    defaults: { _controller: limubacadministratorBundle:Default:addrol}
+    defaults: { _controller: limubacadministratorBundle:Rol:addrol}
 
 limubacadministrator_rolhecho:
     path:     /rolhecho
-    defaults: { _controller: limubacadministratorBundle:Default:rolhecho}
+    defaults: { _controller: limubacadministratorBundle:Rol:rolhecho}
