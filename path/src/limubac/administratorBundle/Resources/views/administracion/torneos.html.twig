@@ -38,6 +38,7 @@
                   <th>Fecha de Termino</th>
                   <th>Costo</th>
                   <th>Editar</th>
+                  <th>Rol</th>
                 </tr>
               </thead>
               <tbody>
@@ -53,6 +54,11 @@
                         <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{{entitie.idTorneo}}'>
                           <i class="glyphicon-pencil glyphicon"></i>
                         </button>
+                      </div>  
+                    </td>
+                    <td>
+                      <div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                        <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_rol')}}"><i class="glyphicon glyphicon-list-alt" value ='{{entitie.idTorneo}}'></i></a>
                       </div>  
                     </td>
                   </tr>
