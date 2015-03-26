@@ -42,9 +42,6 @@ class HojaAnotacionesController extends Controller{
 
     $datosGenerales = $consultasManager->getEquipoByPartido($idPartido,$doctrineManager);
 
-
-
-
     if($request->getMethod() == 'POST')//si se envia el formulario
     {
       $datos = new hojaAnotacion();
@@ -174,7 +171,60 @@ class HojaAnotacionesController extends Controller{
         }
       }
       //END FALTAS
-      $datos->setPuntos(array_values((array_slice($_POST, 6,119))));
+
+      //Marcador por cuartos
+
+      if(isset($_POST['MarcadorCuartoA'])){
+        $marcadorCuartoA=$_POST['MarcadorCuartoA'];
+      }
+      if(isset($_POST['MarcadorCuartoB'])){
+        $marcadorCuartoB=$_POST['MarcadorCuartoB'];
+      }
+
+      if(!empty($marcadorCuartoA)&&(!count($marcadorCuartoA)<=4)){
+        for ($i=0; $i<count($marcadorCuartoA); $i++) {
+          switch ($i) {
+            case 0:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$marcadorCuartoA[$i],$doctrineManager);
+              break;
+            case 1:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$marcadorCuartoA[$i],$doctrineManager);
+              break;
+            case 2:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$marcadorCuartoA[$i],$doctrineManager);
+              break;
+            case 3:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$marcadorCuartoA[$i],$doctrineManager);
+              break;
+          }
+        }
+      }else{
+        echo("error con los marcadores de cuartos A");
+      }
+
+      if(!empty($marcadorCuartoB)&&(!count($marcadorCuartoB)<=4)){
+        for ($i=0; $i<count($marcadorCuartoB); $i++) {
+          switch ($i) {
+            case 0:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$marcadorCuartoB[$i],$doctrineManager);
+              break;
+            case 1:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$marcadorCuartoB[$i],$doctrineManager);
+              break;
+            case 2:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$marcadorCuartoB[$i],$doctrineManager);
+              break;
+            case 3:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$marcadorCuartoB[$i],$doctrineManager);
+              break;
+          }
+        }
+      }else{
+        echo("error con los marcadores de cuartos B");
+      }
+
+      //END Marcador por cuartos
+      $datos->setPuntos(array_values((array_slice($_POST, 8,119))));
 
       $puntos = $datos->getPuntos();
       $puntosA=array();
