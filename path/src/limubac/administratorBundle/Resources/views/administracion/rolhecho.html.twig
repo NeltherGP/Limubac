@@ -1,0 +1,33 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+
+
+	<form class="form-horizontal" role="form">
+
+    <div class="row-fluid">
+      <div class="col-md-12 borBox wellDark btn-dashboard">
+        <div class="formAnotacion form-group">
+          <h3 class="col-md-7">rol creado</h3>
+          <div class="btn-group sharp pull-right">
+            <table class="table table-bordered" >
+              <tbody>
+					{% for rol in rols %}
+                  <tr>
+                    <td> {{rol}} </td>
+                  </tr>
+				 {% endfor %}
+				 <tr>
+                    <td> 
+						<a class="btn btn-primary btn-info" href="{{url('limubacadministrator_addrol')}}"><i class="glyphicon-plus glyphicon"></i> Crear Nuevo Rol</a>
+					</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+{% endblock %}

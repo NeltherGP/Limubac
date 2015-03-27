@@ -74,6 +74,17 @@ class ConsultasAnotaciones{
 		$Updated = $consulta->execute();
 	}
 
+	function isCommitedPartido($idPartido,$manager){
+		$consulta=$manager->createQuery("SELECT * from limubacadministratorBundle:Partido p where p.commited=1 and idPartido=".$idPartido);
+	}
+
+	function MarcadoresCuartosPartidoById($idPartido,$numCuarto,$marcador,$manager){// agregar side y cambiar de tabla ^^
+		//considerar tiempos extra
+		$consulta= $manager->createQuery("UPDATE limubacadministratorBundle:Partido p set p.".$numCuarto." = " . $marcador.
+		"WHERE p.idPartido=".$idPartido);
+		$Updated = $consulta->execute();
+	}
+
 
 }
 

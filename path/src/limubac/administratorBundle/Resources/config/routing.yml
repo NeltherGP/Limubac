@@ -68,15 +68,34 @@ limubacadministrator_crearCategoria:
     path:     /crearCategoria
     defaults: { _controller: limubacadministratorBundle:Default:crearCategoria}
 
+limubacadministrator_acTorneo:
+    path:     /acTorneo
+    defaults: { _controller: limubacadministratorBundle:Default:acTorneo}
+
+limubacadministrator_editTorneo:
+    path:     /editTorneo
+    defaults: { _controller: limubacadministratorBundle:Default:editTorneo}
+
+limubacadministrator_acCategoria:
+    path:     /acCategoria
+    defaults: { _controller: limubacadministratorBundle:Default:acCategoria}
+    
+limubacadministrator_editCategoria:
+    path:     /editCategoria
+    defaults: { _controller: limubacadministratorBundle:Default:editCategoria}
+
 limubacadministrator_rol:
     path:     /rol
-    defaults: { _controller: limubacadministratorBundle:Default:rol}
+    defaults: { _controller: limubacadministratorBundle:Rol:rol}
 
 limubacadministrator_partidos:
     path:     /partidos
-    defaults: { _controller: limubacadministratorBundle:Default:partidoTest}
+    defaults: { _controller: limubacadministratorBundle:Partidos:partidoTest}
 
 limubacadministrator_addrol:
     path:     /addrol
-    defaults: { _controller: limubacadministratorBundle:Default:addrol}
+    defaults: { _controller: limubacadministratorBundle:Rol:addrol}
 
+limubacadministrator_rolhecho:
+    path:     /rolhecho
+    defaults: { _controller: limubacadministratorBundle:Rol:rolhecho}
