@@ -1,5 +1,34 @@
 <?php
 //CONTROLADOR ROL DE JUEGOS
+namespace limubac\administratorBundle\Controller;
+		use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+		use limubac\administratorBundle\claseForm\hojaAnotacion;
+		use limubac\administratorBundle\consultas\ConsultasAnotaciones;
+		use Symfony\Component\HttpFoundation\Response;
+		use Symfony\Component\HttpFoundation\Request;
+		use limubac\administratorBundle\Entity\Equipo;
+		use limubac\administratorBundle\Entity\Torneo;
+		use limubac\administratorBundle\Entity\Categoria;
+		use limubac\administratorBundle\Entity\ParticipanT;
+		use limubac\administratorBundle\Entity\Integra;
+		use limubac\administratorBundle\Entity\Jugador;
+		use limubac\administratorBundle\Entity\Partido;
+		use limubac\administratorBundle\Entity\Juegan;
+		use limubac\administratorBundle\Entity\TipoSanguineo;
+		use limubac\administratorBundle\Entity\DetallePartido;
+		use limubac\administratorBundle\Entity\FaltasEquipo;
+		use limubac\administratorBundle\Entity\Faltas;
+		use limubac\administratorBundle\Entity\Asistencia;
+		use limubac\administratorBundle\Form\Type\JugadorType;
+		use limubac\administratorBundle\Form\Type\JugadorAType;
+		use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+		use Symfony\Component\Validator\Constraints\DateTime;
+        use limubac\administratorBundle\Form\Type\TorneoType;
+        use limubac\administratorBundle\Form\Type\CategoriaType;
+
+
+
+class RolController extends Controller{
 	public function rolAction(){
         return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>" "));
     }
@@ -281,5 +310,7 @@
 	}
 	
 	//FINAL CONTROLADOR  ROL DE JUEGOS
+	
+}
 	
 ?>
