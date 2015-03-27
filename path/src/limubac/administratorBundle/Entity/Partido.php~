@@ -36,34 +36,6 @@ class Partido
     /**
      * @var integer
      *
-     * @ORM\Column(name="primero", type="integer", nullable=true)
-     */
-    private $primero;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="segundo", type="integer", nullable=true)
-     */
-    private $segundo;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="tercero", type="integer", nullable=true)
-     */
-    private $tercero;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="cuarto", type="integer", nullable=true)
-     */
-    private $cuarto;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="jornada", type="integer", nullable=true)
      */
     private $jornada;
@@ -81,6 +53,13 @@ class Partido
      * @ORM\Column(name="categoria", type="integer", nullable=true)
      */
     private $categoria;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estatus", type="integer", nullable=true)
+     */
+    private $estatus;
 
     /**
      * @var integer

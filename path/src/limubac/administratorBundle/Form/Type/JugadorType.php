@@ -66,4 +66,4 @@ class JugadorType extends AbstractType{
     ));
     }*/
 }
-?>
+?> 

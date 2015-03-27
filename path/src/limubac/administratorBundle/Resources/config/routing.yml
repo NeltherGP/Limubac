@@ -79,3 +79,4 @@ limubacadministrator_partidos:
 limubacadministrator_addrol:
     path:     /addrol
     defaults: { _controller: limubacadministratorBundle:Default:addrol}
+

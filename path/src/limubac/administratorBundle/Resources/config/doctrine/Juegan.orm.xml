@@ -11,6 +11,11 @@
     </id>
     <field name="resultado" type="integer" column="resultado" nullable="false"/>
     <field name="side" type="string" column="side" length="1" nullable="true"/>
+    <field name="primero" type="integer" column="primero" nullable="true"/>
+    <field name="segundo" type="integer" column="segundo" nullable="true"/>
+    <field name="tercero" type="integer" column="tercero" nullable="true"/>
+    <field name="cuarto" type="integer" column="cuarto" nullable="true"/>
+    <field name="complementario" type="integer" column="complementario" nullable="true"/>
     <many-to-one field="idEquipo" target-entity="Equipo">
       <join-columns>
         <join-column name="id_equipo" referenced-column-name="id_equipo"/>

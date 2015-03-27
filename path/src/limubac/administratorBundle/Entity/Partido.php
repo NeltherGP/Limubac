@@ -36,34 +36,6 @@ class Partido
     /**
      * @var integer
      *
-     * @ORM\Column(name="primero", type="integer", nullable=true)
-     */
-    private $primero;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="segundo", type="integer", nullable=true)
-     */
-    private $segundo;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="tercero", type="integer", nullable=true)
-     */
-    private $tercero;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="cuarto", type="integer", nullable=true)
-     */
-    private $cuarto;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="jornada", type="integer", nullable=true)
      */
     private $jornada;
@@ -81,6 +53,13 @@ class Partido
      * @ORM\Column(name="categoria", type="integer", nullable=true)
      */
     private $categoria;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estatus", type="integer", nullable=true)
+     */
+    private $estatus;
 
     /**
      * @var integer
@@ -193,98 +172,6 @@ class Partido
     }
 
     /**
-     * Set primero
-     *
-     * @param integer $primero
-     * @return Partido
-     */
-    public function setPrimero($primero)
-    {
-        $this->primero = $primero;
-
-        return $this;
-    }
-
-    /**
-     * Get primero
-     *
-     * @return integer 
-     */
-    public function getPrimero()
-    {
-        return $this->primero;
-    }
-
-    /**
-     * Set segundo
-     *
-     * @param integer $segundo
-     * @return Partido
-     */
-    public function setSegundo($segundo)
-    {
-        $this->segundo = $segundo;
-
-        return $this;
-    }
-
-    /**
-     * Get segundo
-     *
-     * @return integer 
-     */
-    public function getSegundo()
-    {
-        return $this->segundo;
-    }
-
-    /**
-     * Set tercero
-     *
-     * @param integer $tercero
-     * @return Partido
-     */
-    public function setTercero($tercero)
-    {
-        $this->tercero = $tercero;
-
-        return $this;
-    }
-
-    /**
-     * Get tercero
-     *
-     * @return integer 
-     */
-    public function getTercero()
-    {
-        return $this->tercero;
-    }
-
-    /**
-     * Set cuarto
-     *
-     * @param integer $cuarto
-     * @return Partido
-     */
-    public function setCuarto($cuarto)
-    {
-        $this->cuarto = $cuarto;
-
-        return $this;
-    }
-
-    /**
-     * Get cuarto
-     *
-     * @return integer 
-     */
-    public function getCuarto()
-    {
-        return $this->cuarto;
-    }
-
-    /**
      * Set jornada
      *
      * @param integer $jornada
@@ -351,6 +238,29 @@ class Partido
     public function getCategoria()
     {
         return $this->categoria;
+    }
+
+    /**
+     * Set estatus
+     *
+     * @param integer $estatus
+     * @return Partido
+     */
+    public function setEstatus($estatus)
+    {
+        $this->estatus = $estatus;
+
+        return $this;
+    }
+
+    /**
+     * Get estatus
+     *
+     * @return integer 
+     */
+    public function getEstatus()
+    {
+        return $this->estatus;
     }
 
     /**
