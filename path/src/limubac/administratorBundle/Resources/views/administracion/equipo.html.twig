@@ -1,6 +1,14 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
+  {% block documentReady %}
+  <script>
+    $(document).ready(function(){
+      $("[rel=tooltip]").tooltip({ placement: 'right'});
+    });
+  </script>
+  {% endblock documentReady %}
+  
 	<div class="row-fluid">
      	<div class="col-md-12 borBox well btn-dashboard">			
         <div class="formAnotacion form-group">
@@ -47,12 +55,22 @@
 			{% endfor%}
 		</div>
 		<div class="col-md-6 well">	
-			<div class="formAnotacion form-group row">
-				<div class"col-md-6 tLeft">
-					<h1>Agregar</h1>
-				</div>
-			</div>
-			<br>
+			<form class="form-horizontal" role="form" >
+    
+    <div class="row-fluid">
+      <div class="page-header">
+        <h1>Jugadores <small>Unete a la LIMUBAC</small>
+        </h1>
+      </div>
+
+
+      <div class="row-fluid">
+        
+        <div class="col-md-7">
+          <div class="form sharp vertical">
+            <h6>Debes llenar todos los campos marcados con un asterisco</h6>
+            
+            <br>
             {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
               {{form_widget(form.nombre, {'attr': {'placeholder': 'Nombre'|trans}} )}}<font color="red"> *</font><br>
               {{form_widget(form.apPaterno, {'attr': {'placeholder': 'Apellido paterno'|trans}} )}}<font color="red"> *</font><br>
@@ -67,12 +85,24 @@
               <font color:#999>Genero: </font>{{form_widget(form.idGenero, {'attr': {'placeholder': 'Genero'|trans}} )}}<font color="red"> *</font>
               <br>
               {{form_widget(form.estatura, {'attr': {'placeholder': 'Estatura'|trans}} )}}<font color="red"> *</font><br>
+			  {{form_widget(form.numero, {'attr': {'placeholder': 'No. Camiseta'|trans}} )}}<font color="red"> *</font><br>
               {{form_widget(form.peso, {'attr': {'placeholder': 'Peso'|trans}} )}}<font color="red"> *</font><br>
               <font color:#999>Tipo sanguineo: </font>{{form_widget(form.idTiposanguineo, {'attr': {'placeholder': 'Tipo Sanguineo'|trans}} )}}<font color="red"> * </font>
               <br>
              {# {{form_widget(form., {'attr': {'placeholder': 'Foto'|trans}} )}}<font color="red"> *</font><br> #}
+			 <input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
             {{form_end(form)}}
-			  <button class="btn btn-large btn-success sharp sp" type="submit" name="accion" value="Nuevo"><i class="glyphicon-ok glyphicon"></i> Agregar</button>
-		</div>
+          </div>
+        </div>
+        <div class="col-md-2 tRight">
+		
+          <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Salvar" name="jugador[Salvar]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
+          
+        </div>
+      </div>
+    </div>
+	<input type="hidden" name="opciones" value={{NoEquipo}}>
+
+  </form>
 	</div>	
 {% endblock %}
