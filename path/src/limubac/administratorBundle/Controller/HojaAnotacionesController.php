@@ -185,16 +185,19 @@ class HojaAnotacionesController extends Controller{
         for ($i=0; $i<count($marcadorCuartoA); $i++) {
           switch ($i) {
             case 0:
-                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$marcadorCuartoA[$i],$doctrineManager);
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$marcadorCuartoA[$i],"A",$doctrineManager);
               break;
             case 1:
-                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$marcadorCuartoA[$i],$doctrineManager);
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$marcadorCuartoA[$i],"A",$doctrineManager);
               break;
             case 2:
-                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$marcadorCuartoA[$i],$doctrineManager);
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$marcadorCuartoA[$i],"A",$doctrineManager);
               break;
             case 3:
-                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$marcadorCuartoA[$i],$doctrineManager);
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$marcadorCuartoA[$i],"A",$doctrineManager);
+              break;
+            case 4:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"complementario",$marcadorCuartoB[$i],"A",$doctrineManager);
               break;
           }
         }
@@ -206,16 +209,19 @@ class HojaAnotacionesController extends Controller{
         for ($i=0; $i<count($marcadorCuartoB); $i++) {
           switch ($i) {
             case 0:
-                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$marcadorCuartoB[$i],$doctrineManager);
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$marcadorCuartoB[$i],"B",$doctrineManager);
               break;
             case 1:
-                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$marcadorCuartoB[$i],$doctrineManager);
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$marcadorCuartoB[$i],"B",$doctrineManager);
               break;
             case 2:
-                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$marcadorCuartoB[$i],$doctrineManager);
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$marcadorCuartoB[$i],"B",$doctrineManager);
               break;
             case 3:
-                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$marcadorCuartoB[$i],$doctrineManager);
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$marcadorCuartoB[$i],"B",$doctrineManager);
+              break;
+            case 4:
+                $consultasManager->MarcadoresCuartosPartidoById($idPartido,"complementario",$marcadorCuartoB[$i],"B",$doctrineManager);
               break;
           }
         }

@@ -78,10 +78,10 @@ class ConsultasAnotaciones{
 		$consulta=$manager->createQuery("SELECT * from limubacadministratorBundle:Partido p where p.commited=1 and idPartido=".$idPartido);
 	}
 
-	function MarcadoresCuartosPartidoById($idPartido,$numCuarto,$marcador,$manager){// agregar side y cambiar de tabla ^^
+	function MarcadoresCuartosPartidoById($idPartido,$numCuarto,$marcador, $side,$manager){// agregar side y cambiar de tabla ^^
 		//considerar tiempos extra
-		$consulta= $manager->createQuery("UPDATE limubacadministratorBundle:Partido p set p.".$numCuarto." = " . $marcador.
-		"WHERE p.idPartido=".$idPartido);
+		$consulta= $manager->createQuery("UPDATE limubacadministratorBundle:Juegan j set j.".$numCuarto." = " . $marcador.
+		"WHERE j.idPartido=".$idPartido . "and j.side =  '". $side ."'");
 		$Updated = $consulta->execute();
 	}
 
