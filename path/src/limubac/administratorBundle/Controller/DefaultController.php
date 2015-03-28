@@ -977,6 +977,7 @@ class DefaultController extends Controller{
     }
 
     public function acTorneoAction(){
+	//print_r($_REQUEST);
         if(!empty($_REQUEST['edit'])){
             $torneo = new Torneo();
             $form = $this->createForm(new TorneoType(), $torneo);
@@ -992,7 +993,21 @@ class DefaultController extends Controller{
             //print_r($resul);
             
             return $this->render('limubacadministratorBundle:administracion:acTorneo.html.twig',array('form' => $form->createView(), 'edita' => $resul));
-        }
+        }else if(!empty($_REQUEST['rol'])){
+			$idtorn = array($_REQUEST['rol'][0]);
+			//select * from participan_t where id_torneo = 1 GROUP BY id_rama 
+			$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
+			$queryCategorias = $repository->createQueryBuilder('h')
+				->select('e.idCategoria,e.nombre')
+				->join('limubacadministratorBundle:Categoria', 'e', 'WITH' ,'e.idCategoria = h.idCategoria')
+				->where('h.idTorneo = :torn')
+				->groupBy('h.idCategoria')
+				->setParameter('torn',$idtorn[0])
+				->getQuery();
+			$n1 = $queryCategorias->getResult();			
+			//print_r($n1);
+			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1));
+		}
     }
 
     public function editTorneoAction(){
