@@ -29,6 +29,8 @@ class PartidosController extends Controller{
     $aux=0;
     $listPartidos2=array();
 
+    //print_r($listPartidos1);
+
     for($i=1; $i<count($listPartidos1);){
       for($j=0; $j<2; $j++){
         $listPartidos2[$aux][]=$listPartidos1[$i];
