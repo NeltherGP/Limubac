@@ -1,25 +1,25 @@
-{% extends 'limubacadministratorBundle:default:header.html.twig'%}
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
 	<form action="{{ path('limubacadministrator_hojaAnotaciones') }}" method="GET"  class="form-horizontal" role="form">
       {#Encabezado primera parte#}
   		<div class="bordes">
-        <div class="formAnotacion form-group">		
-    			
+        <div class="formAnotacion form-group">
+
           <div class="col-md-3">
             <input class="form-control" id="EqA" name="EqA" placeholder="Equipo A">
           </div>
-          
+
           <label id="VS" class="col-md-1 text-center">VS</label>
-          
+
           <div class="col-md-3">
             <input class="form-control" id="Eqb" placeholder="Equipo B">
           </div>
-          
+
           <div class="col-md-2">
             <input class="form-control" id="Rama" placeholder="Rama">
           </div>
-          
+
           <div class="col-md-3">
             <input class="form-control" id="Categoria" placeholder="Categoria">
           </div>
@@ -61,7 +61,7 @@
             <div class="col-md-3 Fila2">
               <input class="form-control" id="Hora" placeholder="Hora">
             </div>
-          
+
             <label for="2dojuez" class="col-md-1 control-label text-center">2dojuez: </label>
             <div class="col-md-3 Fila2">
               <input class="form-control" id="2dojuez" placeholder="2do. Juez">
@@ -84,8 +84,8 @@
 
           <div class="formAnotacion form-group ">
               <label class="col-md-1"></label>
-              <div class="col-md-4 bordesFaltas">           
-                  
+              <div class="col-md-4 bordesFaltas">
+
                   <label class="col-md-4 control-label  ">Faltas 1T: </label>
 
                   <div class="col-md-4">
@@ -99,13 +99,13 @@
               </div>
              <label class="col-md-1"></label>
 
-              <div class="col-md-4 bordesFaltas">           
+              <div class="col-md-4 bordesFaltas">
                   <label class="col-md-4 control-label  ">Faltas 2T: </label>
 
                   <div class="col-md-4">
                     <input class="form-control" id="Faltas2t1" placeholder="1er">
                   </div>
-                  
+
                   <div class="col-md-4">
                     <input class="form-control" id="Faltas2t2" placeholder="2do">
                   </div>
@@ -135,7 +135,7 @@
                 <div class="col-md-1 margen-top">
                   <input class="form-control" id="numFaltas" placeholder="#Faltas">
                 </div>
-                
+
                 <button class="btn btn-primary col-md-1 margen-top añadirF" type="button">Añadir</button><div class="col-md-1 margen-top" style="height: 46px;"></div>
 
             </div>
@@ -146,7 +146,7 @@
            {#Control anotaciones por jugador#}
 
            <div id="jugadorAnotador">
-               <div id="jugadorAnotacion">              
+               <div id="jugadorAnotacion">
                   <div class="col-md-5 margen-top">
                     <input class="form-control" id="nombreAnotacion" placholder="Nombre">
                   </div>

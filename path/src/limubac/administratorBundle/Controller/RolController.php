@@ -2,10 +2,6 @@
 //CONTROLADOR ROL DE JUEGOS
 namespace limubac\administratorBundle\Controller;
 		use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-		use limubac\administratorBundle\claseForm\hojaAnotacion;
-		use limubac\administratorBundle\consultas\ConsultasAnotaciones;
-		use Symfony\Component\HttpFoundation\Response;
-		use Symfony\Component\HttpFoundation\Request;
 		use limubac\administratorBundle\Entity\Equipo;
 		use limubac\administratorBundle\Entity\Torneo;
 		use limubac\administratorBundle\Entity\Categoria;
@@ -23,21 +19,16 @@ namespace limubac\administratorBundle\Controller;
 		use limubac\administratorBundle\Form\Type\JugadorAType;
 		use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 		use Symfony\Component\Validator\Constraints\DateTime;
-        use limubac\administratorBundle\Form\Type\TorneoType;
-        use limubac\administratorBundle\Form\Type\CategoriaType;
 
 
 
 class RolController extends Controller{
-	public function rolAction(){
-        return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>" "));
-    }
 	
-	public function addrolAction(){
-	//select * from participan_t where id_torneo = 1 GROUP BY id_rama 
-	$torn=1;
-	$cate=1;
-	$rama=1;
+	public function addrolAction(){ 
+	if($_REQUEST['rol'][0]!=0&&$_REQUEST['categoria'][0]!=0&&$_REQUEST['rama'][0]!=0){
+	$torn=$_REQUEST['rol'][0];
+	$cate=$_REQUEST['categoria'][0];
+	$rama=$_REQUEST['rama'][0];
 	$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
 			$queryPartido = $repository->createQueryBuilder('h')
 				->select('max(h.jornada)')
@@ -252,9 +243,11 @@ class RolController extends Controller{
 		}
 		return $this->redirect($this->generateUrl('limubacadministrator_rolhecho'));
 	}
+	else return $this->redirect($this->generateUrl('limubacadministrator_homepage'));
+	}
 	
 	public function rolhechoAction(){
-		$roles= array("ya quedo");
+		$roles= array("Se agrego una semana de partidos al Rol");
 		return $this->render('limubacadministratorBundle:administracion:rolhecho.html.twig',array('rols'=>$roles));
 	}
 
