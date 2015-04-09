@@ -79,14 +79,14 @@ limubacadministrator_editTorneo:
 limubacadministrator_acCategoria:
     path:     /acCategoria
     defaults: { _controller: limubacadministratorBundle:Default:acCategoria}
-    
+
 limubacadministrator_editCategoria:
     path:     /editCategoria
     defaults: { _controller: limubacadministratorBundle:Default:editCategoria}
 
 limubacadministrator_partidos:
-    path:     /partidos
-    defaults: { _controller: limubacadministratorBundle:Partidos:partidoTest}
+    path:     /partidos/{idtorneo}/{idpartido}
+    defaults: { _controller: limubacadministratorBundle:Partidos:partidoTest,idtorneo:0,idpartido:0}
 
 limubacadministrator_addrol:
     path:     /addrol
@@ -95,3 +95,14 @@ limubacadministrator_addrol:
 limubacadministrator_rolhecho:
     path:     /rolhecho
     defaults: { _controller: limubacadministratorBundle:Rol:rolhecho}
+limubacadministrator_completarinfopartido:
+  path: /completarinfo/{idpartido}
+  defaults: { _controller: limubacadministratorBundle:CompletarInfoPartido:completarinfopartido,idpartido:0}
+
+limubacadministrator_completarInfoPartidoPost:
+  path: /completarInfoPartidoPost/{idpartido}
+  defaults: { _controller: limubacadministratorBundle:CompletarInfoPartido:completarinfopartidoPost,idpartido:0}
+
+limubacadministrator_selectTorneo:
+  path: /seleccionarTorneo
+  defaults: { _controller:limubacadministratorBundle:SelectTorneo:seleccionarTorneo }

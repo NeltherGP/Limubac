@@ -156,6 +156,7 @@ background-color: #003171;
 /*-----------------------INICIO ESTILOS DE FAFI...NO TOCAR!!!!-----------------------*/
 
 >>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
+
 h1{
 	font-size: 30px;
 	line-height: 36px;
@@ -244,6 +245,8 @@ margin-bottom: 40px;
 
 .btn-success {
 margin-left: 18px;
+height:35px;
+font-size:20px;
 background-color: #5bb75b;
 background-image: -ms-linear-gradient(top,#62c462,#51a351);
 background-image: -webkit-gradient(linear,0 0,0 100%,from(#62c462),to(#51a351));
@@ -425,10 +428,8 @@ form #search {
 	position: absolute;
 	right: 35px;
 
-<<<<<<< HEAD
-}
-=======
+
 }
 
+}
 /*-----------------------FINAL ESTILOS DE FAFI...NO TOCAR!!!!------------------------*/
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a

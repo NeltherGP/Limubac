@@ -19,15 +19,27 @@ use limubac\administratorBundle\Entity\Asistencia;
 
 class PartidosController extends Controller{
 
-  public function partidoTestAction(){
-    $idTorneo=1;
+  public function partidoTestAction($idpartido,$idtorneo){
+    $idTorneo=$idtorneo;
+    echo($idpartido);
     $consultasManager = new ConsultasPartidos();
     $request = $this->getRequest();
     $doctrineManager= $this -> getDoctrine()->getManager();
 
     $listPartidos1=$consultasManager->listPartidosByTorneo($idTorneo,$doctrineManager);
+    $listPartidosCompletos=$consultasManager->listPartidosCompletos($doctrineManager);
+
+
+    foreach ($listPartidosCompletos as $id => $value) {
+      $listPartidosCompletos2[]=$value['idPartido'];
+    }
+    print_r($listPartidosCompletos2);
     $aux=0;
     $listPartidos2=array();
+
+    //Ventana emergente
+    $listSede=$consultasManager->listCanchas($doctrineManager);
+    $listArbitros=$consultasManager->listArbitros($doctrineManager);
 
     //print_r($listPartidos1);
 
@@ -44,7 +56,7 @@ class PartidosController extends Controller{
 
     // print_r($listPartidos2);
     //print_r($listPartidos1);
-    return $this->render('limubacadministratorBundle:administracion:partidoTest.html.twig',array('listaPartidos'=>$listPartidos2));
+    return $this->render('limubacadministratorBundle:administracion:partidoTest.html.twig',array('listaPartidos'=>$listPartidos2,'listSede'=>$listSede,'listArbitros'=>$listArbitros,'listPartidosCompletos'=>$listPartidosCompletos2));
   }
 }
 ?>

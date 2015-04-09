@@ -1,7 +1,7 @@
-{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+ {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
-
+<script src="{{asset('js/funciones.js')}}"></script>
 <form action="{{ path('limubacadministrator_hojaAnotaciones',{'idpartido':datosGenerales.0.idpartido})}}" method='POST' class="form-horizontal" role="form" id="formulario" >
 
 	{#Encabezado primera parte#}
@@ -90,15 +90,15 @@
 	<div class="formAnotacion form-group" style="padding-left:100px">
 		<label  name="normal" class="col-md-1 control-label text-center">NORMAL </label>
 		<div class="col-md-3">
-	  	<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+	  	<input type="radio" name="estatus" id="inlineRadio1" value="1">
 		</div>
 		<label  name="normal" class="col-md-1 control-label text-center">DEFAULT</label>
 		<div class="col-md-3">
-	  	<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+	  	<input type="radio" name="estatus" id="inlineRadio1" value="2">
 		</div>
 		<label  name="normal" class="col-md-1 control-label text-center">EN MESA</label>
 		<div class="col-md-3">
-	  	<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+	  	<input type="radio" name="estatus" id="inlineRadio1" value="3">
 		</div>
 	</div>
 </div>
@@ -208,43 +208,43 @@
 					<td>
 						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 							<option  value="0">-</option>
-							<option  value="5">F</option>
-							<option  value="2">F1</option>
-							<option  value="3">F2</option>
-							<option  value="4">T</option>
-							<option  value="1">D</option>
+							<option  value="5">P1</option>
+							<option  value="2">P2</option>
+							<option  value="3">P3</option>
+							<option  value="4">T1</option>
+							<option  value="1">D2</option>
 						</select>
 						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 							<option  value="0">-</option>
-							<option  value="5">F</option>
-							<option  value="2">F1</option>
-							<option  value="3">F2</option>
-							<option  value="4">T</option>
-							<option  value="1">D</option>
+							<option  value="5">P1</option>
+							<option  value="2">P2</option>
+							<option  value="3">P3</option>
+							<option  value="4">T1</option>
+							<option  value="1">D2</option>
 						</select>
 						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 							<option  value="0">-</option>
-							<option  value="5">F</option>
-							<option  value="2">F1</option>
-							<option  value="3">F2</option>
-							<option  value="4">T</option>
-							<option  value="1">D</option>
+							<option  value="5">P1</option>
+							<option  value="2">P2</option>
+							<option  value="3">P3</option>
+							<option  value="4">T1</option>
+							<option  value="1">D2</option>
 						</select>
 						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 							<option  value="0">-</option>
-							<option  value="5">F</option>
-							<option  value="2">F1</option>
-							<option  value="3">F2</option>
-							<option  value="4">T</option>
-							<option  value="1">D</option>
+							<option  value="5">P1</option>
+							<option  value="2">P2</option>
+							<option  value="3">P3</option>
+							<option  value="4">T1</option>
+							<option  value="1">D2</option>
 						</select>
 						<select name="faltasB[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 							<option  value="0">-</option>
-							<option  value="5">F</option>
-							<option  value="2">F1</option>
-							<option  value="3">F2</option>
-							<option  value="4">T</option>
-							<option  value="1">D</option>
+							<option  value="5">P1</option>
+							<option  value="2">P2</option>
+							<option  value="3">P3</option>
+							<option  value="4">T1</option>
+							<option  value="1">D2</option>
 						</select>
 					</td>
 				</tr>
@@ -342,9 +342,38 @@
 		</div>
 	</div>
 
+	<div class="bordes col-md-12" style="margin-top: 20px">
+		<label for="primero" class="col-md-1 control-label text-center">Primero: </label>
+		<div class="col-md-2">
 
-</div>
-<input type="submit" />
+			<input class="form-control" id="primero" name="primero" placeholder="" value="">
+
+		</div>
+
+		<label for="segundo" class="col-md-1 control-label text-center">Segundo: </label>
+		<div class="col-md-2">
+
+			<input class="form-control" id="segundo" name="segundo" placeholder="" value="">
+
+		</div>
+
+		<label for="tercero" class="col-md-1 control-label text-center">Tercero: </label>
+		<div class="col-md-2">
+			<input class="form-control" id="tercero" name="tercero" placeholder="" value="">
+		</div>
+		<label for="tercero" class="col-md-1 control-label text-center">Cuarto </label>
+		<div class="col-md-2">
+			<input class="form-control" id="cuarto" name="cuarto" placeholder="" value="">
+		</div>
+	</div>
+
+	<div class=col-md-12>
+	<div class="col-md-3 col-md-offset-9">
+	<input class=" btn btn-success btn-lg" type="submit" />
+	</div>
+	</div>
+
+
 {#End marcador 1#}
 </form>
 {% endblock %}

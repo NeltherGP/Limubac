@@ -1,5 +1,11 @@
-$(document).ready(function  () {
+var primero=0;
+var segundo=0;
+var tercero=0;
+var cuarto=0;
+var complementario=0;
 
+$(document).ready(function  () {
+	selectTorneoPartidos();
 });
 
 function get_equipos(){
@@ -25,3 +31,29 @@ function getIdTorneo(){
   $("#formulario").attr("action","{{path('limubacadministrator_hojaAnotaciones',{'idpartido':"+url2+"})}}");
 
 }
+
+function formCompletar(id){//Este metodo no es generico debe mejorarse
+	$("#formulariocompletar").attr("action","/limubac/path/web/app_dev.php/completarInfoPartidoPost/"+id);
+
+}
+
+function selectTorneoPartidos(){
+	$('#SelectTorneo').modal({backdrop: 'static', keyboard: false});
+	$('#SelectTorneo').modal();
+	$('#SelectTorneo').modal({show: true});
+}
+/*
+function checkboxColor(valor){
+	var aux,aux1;
+	if(primero>valor){
+		aux=primero;
+		primero=valor;
+		complementario=tercero;
+		tercero=segundo;
+		segundo=aux;
+	}else{
+		if(segundo>valor){
+			aux=
+		}
+	}
+}*/
