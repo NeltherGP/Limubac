@@ -151,11 +151,9 @@ background-color: #003171;
 
 //END Estilos Manejo de errores Hoja de anotacion
 
-<<<<<<< HEAD
-=======
 /*-----------------------INICIO ESTILOS DE FAFI...NO TOCAR!!!!-----------------------*/
 
->>>>>>> 8c2aed5897ddbab7c5d9cb85b2a21a6bda38710a
+
 
 h1{
 	font-size: 30px;
@@ -433,3 +431,13 @@ form #search {
 
 }
 /*-----------------------FINAL ESTILOS DE FAFI...NO TOCAR!!!!------------------------*/
+
+/*------------------Estilos Equipo----------*/
+
+#DivCentrado{
+   position:absolute;
+   margin: 0 auto;
+   left: 0;
+   right: 0;
+   width:200px;
+}

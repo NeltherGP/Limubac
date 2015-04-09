@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Partido
  *
- * @ORM\Table(name="partido", indexes={@ORM\Index(name="id_torneo", columns={"id_torneo", "id_arbitran", "id_sede"}), @ORM\Index(name="id_arbitran", columns={"id_arbitran"}), @ORM\Index(name="id_sede", columns={"id_sede"}), @ORM\Index(name="IDX_4E79750B5ADCD613", columns={"id_torneo"})})
+ * @ORM\Table(name="partido", indexes={@ORM\Index(name="id_torneo", columns={"id_torneo", "id_arbitran", "id_sede"}), @ORM\Index(name="id_arbitran", columns={"id_arbitran"}), @ORM\Index(name="id_sede", columns={"id_sede"}), @ORM\Index(name="partido_ibfk_4", columns={"id_estatus"}), @ORM\Index(name="IDX_4E79750B5ADCD613", columns={"id_torneo"})})
  * @ORM\Entity
  */
 class Partido
@@ -57,18 +57,21 @@ class Partido
     /**
      * @var integer
      *
-     * @ORM\Column(name="estatus", type="integer", nullable=true)
-     */
-    private $estatus;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="id_partido", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idPartido;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Estatus
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Estatus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_estatus", referencedColumnName="id_estatus")
+     * })
+     */
+    private $idEstatus;
 
     /**
      * @var \limubac\administratorBundle\Entity\Sede
