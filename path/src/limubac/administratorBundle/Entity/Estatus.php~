@@ -1,0 +1,32 @@
+<?php
+
+namespace limubac\administratorBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Estatus
+ *
+ * @ORM\Table(name="estatus")
+ * @ORM\Entity
+ */
+class Estatus
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=35, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_estatus", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idEstatus;
+
+
+}
