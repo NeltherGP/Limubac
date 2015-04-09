@@ -5,6 +5,7 @@
       <index name="id_torneo" columns="id_torneo,id_arbitran,id_sede"/>
       <index name="id_arbitran" columns="id_arbitran"/>
       <index name="id_sede" columns="id_sede"/>
+      <index name="partido_ibfk_4" columns="id_estatus"/>
       <index name="IDX_4E79750B5ADCD613" columns="id_torneo"/>
     </indexes>
     <id name="idPartido" type="integer" column="id_partido">
@@ -16,7 +17,11 @@
     <field name="jornada" type="integer" column="jornada" nullable="true"/>
     <field name="rama" type="integer" column="rama" nullable="true"/>
     <field name="categoria" type="integer" column="categoria" nullable="true"/>
-    <field name="estatus" type="integer" column="estatus" nullable="true"/>
+    <many-to-one field="idEstatus" target-entity="Estatus">
+      <join-columns>
+        <join-column name="id_estatus" referenced-column-name="id_estatus"/>
+      </join-columns>
+    </many-to-one>
     <many-to-one field="idSede" target-entity="Sede">
       <join-columns>
         <join-column name="id_sede" referenced-column-name="id_sede"/>

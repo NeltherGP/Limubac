@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Partido
  *
- * @ORM\Table(name="partido", indexes={@ORM\Index(name="id_torneo", columns={"id_torneo", "id_arbitran", "id_sede"}), @ORM\Index(name="id_arbitran", columns={"id_arbitran"}), @ORM\Index(name="id_sede", columns={"id_sede"}), @ORM\Index(name="IDX_4E79750B5ADCD613", columns={"id_torneo"})})
+ * @ORM\Table(name="partido", indexes={@ORM\Index(name="id_torneo", columns={"id_torneo", "id_arbitran", "id_sede"}), @ORM\Index(name="id_arbitran", columns={"id_arbitran"}), @ORM\Index(name="id_sede", columns={"id_sede"}), @ORM\Index(name="partido_ibfk_4", columns={"id_estatus"}), @ORM\Index(name="IDX_4E79750B5ADCD613", columns={"id_torneo"})})
  * @ORM\Entity
  */
 class Partido
@@ -57,18 +57,21 @@ class Partido
     /**
      * @var integer
      *
-     * @ORM\Column(name="estatus", type="integer", nullable=true)
-     */
-    private $estatus;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="id_partido", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idPartido;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Estatus
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Estatus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_estatus", referencedColumnName="id_estatus")
+     * })
+     */
+    private $idEstatus;
 
     /**
      * @var \limubac\administratorBundle\Entity\Sede
@@ -241,29 +244,6 @@ class Partido
     }
 
     /**
-     * Set estatus
-     *
-     * @param integer $estatus
-     * @return Partido
-     */
-    public function setEstatus($estatus)
-    {
-        $this->estatus = $estatus;
-
-        return $this;
-    }
-
-    /**
-     * Get estatus
-     *
-     * @return integer 
-     */
-    public function getEstatus()
-    {
-        return $this->estatus;
-    }
-
-    /**
      * Get idPartido
      *
      * @return integer 
@@ -271,6 +251,29 @@ class Partido
     public function getIdPartido()
     {
         return $this->idPartido;
+    }
+
+    /**
+     * Set idEstatus
+     *
+     * @param \limubac\administratorBundle\Entity\Estatus $idEstatus
+     * @return Partido
+     */
+    public function setIdEstatus(\limubac\administratorBundle\Entity\Estatus $idEstatus = null)
+    {
+        $this->idEstatus = $idEstatus;
+
+        return $this;
+    }
+
+    /**
+     * Get idEstatus
+     *
+     * @return \limubac\administratorBundle\Entity\Estatus 
+     */
+    public function getIdEstatus()
+    {
+        return $this->idEstatus;
     }
 
     /**
