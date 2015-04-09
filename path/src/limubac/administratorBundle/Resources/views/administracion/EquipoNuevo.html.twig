@@ -1,0 +1,38 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+<form action="../app_dev.php/equipo" method="POST">
+	<div class="col-md-12 well">
+		<h1>Nombre Del equipo</h1>
+		<input class="form-control" name="NuevoEquipo" placeholder="Nombre del nuevo equipo">
+	</div>
+	<div class="col-md-12 well">
+		<h1>Categoria del Equipo</h1>
+		{% set indice = 0 %}
+		{% for Categoria in 0..Categorias|length/3 %}
+			<div class="row">
+				{% for i in 0..2%}
+					{% if indice+i < Categorias|length %}
+						<input type="radio" name="Categoria" value={{Categorias[indice+i].idCategoria}}> {{Categorias[indice+i].nombre}}
+					{% endif%}
+				{% endfor%}
+			</div>
+			{% set indice = (indice +3)%}
+		{% endfor %}
+	</div>
+	
+	<div class="col-md-12 well row">
+		<h1>Rama del equipo</h1>
+		<div class="col-md-5">
+			<input type="radio" name="rama" value=1> 1
+		</div>
+		<div class="col-md-5">
+			<input type="radio" name="rama" value=2> 2
+		</div>
+	</div>
+<input type="hidden" name="opciones" value="">
+	<div class="col-md-12 well row">
+		<button type="summit" class="btn btn-primary btn-lg">Continuar con el registro</button>
+	</div>
+</form>	
+{% endblock %}

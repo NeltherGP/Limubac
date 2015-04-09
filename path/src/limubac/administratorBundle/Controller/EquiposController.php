@@ -25,6 +25,30 @@ namespace limubac\administratorBundle\Controller;
 class EquiposController extends Controller{
 		
 	public function equiposAction(){
+		
+		//Lista de Equipos
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+		$ListaEquipos = $repositorio->findAll();
+		
+		//Conseguir Torneos
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
+		$Torneos = $repositorio->findAll();
+		
+		//Conseguir Ramas
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
+		$Ramas = $repositorio->findAll();
+		
+    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('listEquip' =>$ListaEquipos,'Torneos'=>$Torneos,'Ramas'=>$Ramas));
+    }
+	
+	public function equipoAction(){
+		$Mensaje = null;
+		$jugador = new Jugador();
+        $form = $this->createForm(new JugadorType(), $jugador);
+
+        $request = $this->get('request');
+        $form->handleRequest($request);
+		
 		//Agregando nuevo equipo
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();
@@ -37,14 +61,15 @@ class EquiposController extends Controller{
 			$participacion = new ParticipanT();
 			
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
-			$cat = $repositorio->find($_POST['category']);
+			$cat = $repositorio->find($_POST['Categoria']);
 			$participacion->setIdCategoria($cat);
 			
 			$participacion->setIdEquipo($equipo);
 			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
+			/**$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
 			$tor = $repositorio->find($_POST['torneo']);
 			$participacion->setIdTorneo($tor);
+			*/
 			
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
 			$ram = $repositorio->find($_POST['rama']);
@@ -52,35 +77,9 @@ class EquiposController extends Controller{
 			
 			$Manager->persist($participacion);
 			$Manager->flush();
+			$_REQUEST['opciones'] = $equipo->getIdEquipo();
 		}
 		
-		//Lista de Equipos
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-		$ListaEquipos = $repositorio->findAll();
-		
-		//Conseguir Categorias
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
-		$ListaCategorias = $repositorio->findAll();
-		
-		//Conseguir Torneos
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
-		$Torneos = $repositorio->findAll();
-		
-		//Conseguir Ramas
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
-		$Ramas = $repositorio->findAll();
-		
-    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('listEquip' =>$ListaEquipos,'Categorias'=>$ListaCategorias,'Torneos'=>$Torneos,'Ramas'=>$Ramas));
-    }
-	
-	public function equipoAction(){
-		$Mensaje = null;
-		$jugador = new Jugador();
-        $form = $this->createForm(new JugadorType(), $jugador);
-
-        $request = $this->get('request');
-        $form->handleRequest($request);
-
         if ($request->getMethod() == 'GET') {
             $url_to_parse = $_SERVER['REQUEST_URI'];
             $parsed_url = parse_url($url_to_parse);
@@ -118,22 +117,30 @@ class EquiposController extends Controller{
                     $em = $this->getDoctrine()->getManager();
                     $em -> persist($player);
                     $em -> flush();
+					//Fin de agregar jugador
+					
+					
 					
 					//Agregar Al equipo
-					$integra = new Integra();
-					$integra->setNoPlayera(intval($out['numero']));
+					
 					
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 					$equipo = $repositorio->find($_REQUEST['opciones']);
-					$integra->setIdEquipo($equipo);
+					if(Restringe($equipo,$player)){
+						//si cumple las condiciones se inscribira al jugador al equipo
+						$integra = new Integra();
+						$integra->setNoPlayera(intval($out['numero']));
+						$integra->setIdEquipo($equipo);
+						$integra->setIdJugador($player);
 					
-					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
-					$jugador = $repositorio->find($player->getIdJugador());
-					$integra->setIdJugador($jugador);
+						$Manager = $this->getDoctrine()->getManager();
+						$Manager->persist($integra);
+						$Manager->flush();
+					}else{
+						$Mensaje ="El jugador no cumple con los requerimientos para pertenecer al equipo";
+					}
 					
-					$Manager = $this->getDoctrine()->getManager();
-					$Manager->persist($integra);
-					$Manager->flush();
+					
 					//Fin Agregar Al Equipo
 					
 					
@@ -271,5 +278,45 @@ class EquiposController extends Controller{
 
 	}
 	
-}				
+	public function equipoNuevoAction(){
+		//Conseguir Categorias
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
+		$Categorias = $repositorio->findAll();
+		
+		return $this->render('limubacadministratorBundle:administracion:equipoNuevo.html.twig',array('Categorias'=>$Categorias));
+	}
+
+	//definido un jugador y un equipo averigua si es apto para inscribirlo
+	private function Restringe($equipo,$Jugador){
+		
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
+		$query = $repositorio->createQueryBuilder('p')
+			->select('p.idCategoria')
+			->where('p.idEquipo ='.$equipo->getIdEquipo())
+			->getQuery();
+		$Participan = $query->getResult();
+		
+		switch($Participan->getIdCategoria()){//Las categorias estan en la tabla categoria de la base de datos
+			case 1: //Primera Fuerza
+				
+				break;
+			case 2: //Segunda Fuerza
+				break;
+			case 3: //Tercera Fuerza
+				
+				break;
+			case 4: //Estudiantil
+				break;
+			case 5: //Femenil
+				break;
+			case 6: //Maxibasket
+				break;
+			case 7: //Femenil
+				break;
+			case 8: //Maxibasket
+				break;
+		}
+		return true;
+	}
+}	
 ?>
