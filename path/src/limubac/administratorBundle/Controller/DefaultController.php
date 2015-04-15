@@ -1007,7 +1007,37 @@ class DefaultController extends Controller{
 			$n1 = $queryCategorias->getResult();			
 			//print_r($n1);
 			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1));
-		}
+		}else if(!empty($_REQUEST['ver'])){
+            $idtor = array($_REQUEST['ver'][0]);
+                /*SELECT  e.nombre AS equipo, c.nombre AS categoria, r.nombre AS rama
+                FROM participan_t p 
+                INNER JOIN equipo e  ON p.id_equipo=e.id_equipo
+                INNER JOIN categoria c  ON p.id_categoria=c.id_categoria
+                INNER JOIN rama_equipo r ON p.id_rama=r.id_rama
+                WHERE p.id_torneo=6;*/
+            
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
+            $queryEdit = $repository->createQueryBuilder('p')
+            ->select('e.nombre AS equipo','c.nombre AS categoria','r.nombre AS rama','t.nombre AS torneo')
+            ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'p.idEquipo = e.idEquipo')
+            ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'p.idCategoria = c.idCategoria')
+            ->join('limubacadministratorBundle:RamaEquipo', 'r', 'WITH' ,'p.idRama = r.idRama')
+            ->join('limubacadministratorBundle:Torneo', 't', 'WITH' ,'p.idTorneo = t.idTorneo')
+            ->where('p.idTorneo = :word')
+            ->orderBy('categoria')
+            ->setParameter('word', $idtor[0])
+            ->getQuery();
+            $resul = $queryEdit->getResult();
+            //print_r($resul);
+            
+            if(!empty($resul)){
+                return $this->render('limubacadministratorBundle:administracion:participan.html.twig',array( 'ver' => $resul));
+            }else{
+                return $this->redirect('limubacadministratorBundle:administracion:torneos.html.twig');
+            }
+
+
+        }
     }
 
     public function editTorneoAction(){

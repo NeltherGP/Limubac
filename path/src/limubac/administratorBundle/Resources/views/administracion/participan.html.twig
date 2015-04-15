@@ -1,0 +1,56 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+
+  <form class="form-horizontal" role="form" action="../app_dev.php/acCategoria">
+    <div class="row-fluid">
+      <div class="col-md-12 borBox well btn-dashboard">     
+        <div class="formAnotacion form-group">
+          <div class="col-md-6 tLeft" >
+            <h1>Participan</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-md-12 borBox wellDark btn-dashboard">
+        <div class="formAnotacion form-group">
+          <h3 class="col-md-7">{{ ver[0]['torneo'] }}</h3>
+          <div class="btn-group sharp pull-right">
+            <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_torneos')}}"><i class="glyphicon-plus glyphicon"></i> Torneos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+        <div class="formAnotacion form-group col-md-12" style="padding-left:0px; padding-right:0px;">
+          <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+            <table class="table table-bordered" >
+              <thead>
+                <tr>
+                  <th>Equipo</th>
+                  <th>Categoria</th>
+                  <th>Rama</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for verr in ver %}
+                  <tr>
+                    <td> {{verr.equipo}} </td>
+                    <td> {{verr.categoria}} </td>
+                    <td> {{verr.rama}} </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+{% endblock %}
