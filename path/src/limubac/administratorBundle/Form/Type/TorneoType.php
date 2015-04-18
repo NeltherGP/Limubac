@@ -11,7 +11,7 @@ class TorneoType extends AbstractType{
 	public function buildForm(FormBuilderInterface $builder, array $options){
 		$builder->add('idTorneo', 'hidden');
 		$builder->add('nombre','text');
-		$builder->add('costo','money');
+		$builder->add('costo','money',array("currency" => 'MXN'));
 		$builder->add('fInicio','date', array('widget' => 'single_text','format' => 'yyyy-MM-dd',));
 		$builder->add('fTermino','date', array('widget' => 'single_text','format' => 'yyyy-MM-dd',));
 	}

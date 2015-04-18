@@ -13,7 +13,15 @@ class CategoriaType extends AbstractType{
 		$builder->add('nombre','text');
 		$builder->add('edad','integer');
 		$builder->add('limiteEquipo','integer');
-		$builder->add('refEdad','integer');
+		$builder->add('refEdad','choice', array(
+			'choices' => array(
+				1 => 'Mayor >',
+				0 => 'Menor <'),
+			'attr' => array('style' => 'width:158px'),
+			'multiple' => false,
+			'expanded' => false,
+			'required' => true,
+			));
 	}
 
 	public function getName(){

@@ -1133,7 +1133,7 @@ class DefaultController extends Controller{
             
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Categoria');
             $queryEdit = $repository->createQueryBuilder('e')
-            ->select('e.idCategoria','e.nombre','e.edad','e.limiteEquipo')
+            ->select('e.idCategoria','e.nombre','e.edad','e.limiteEquipo','e.refEdad')
             ->where('e.idCategoria = :word')
             ->setParameter('word', $ed)
             ->getQuery();

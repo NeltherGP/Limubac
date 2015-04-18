@@ -8,7 +8,7 @@
       <div class="col-md-12 borBox well btn-dashboard">     
         <div class="formAnotacion form-group">
           <div class="col-md-6 tLeft" >
-            <h1>Crear Categoria</h1>
+            <h1>Editar Categoria</h1>
           </div>
         </div>
       </div>
@@ -20,19 +20,19 @@
 
             {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
               {{form_widget(form.idCategoria, {value : edita[0]['idCategoria']} ) }}
-              {{form_widget(form.nombre, {value : edita[0]['nombre']} )}}<font color="red"> *</font>
-              <br>
-              {{form_widget(form.limiteEquipo, {value : edita[0]['limiteEquipo']} )}}<font color="red"> *</font>
-              <br>
-              {{form_widget(form.edad, {value : edita[0]['edad']} )}}<font color="red"> *</font>
-              <br>
-              <!--{{form_widget(form.refEdad, {'attr': {'placeholder': 'Referencia de Edad'|trans}} )}}<font color="red"> *</font><br>-->
+              <h3>Nombre:</h3>{{form_widget(form.nombre, {value : edita[0]['nombre']} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Limite de Equipos:</h3>{{form_widget(form.limiteEquipo, {value : edita[0]['limiteEquipo']} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Edad:</h3>{{form_widget(form.edad, {value : edita[0]['edad']} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Referencia de Edad:</h3>{{form_widget(form.refEdad, {value : edita[0]['refEdad']} )}}<font color="red"> *</font>
             {{form_end(form)}}
     </div>
 
     <div class="col-md-2 tRight">
-          <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Editar" name="jugador[{{edita[0]['nombre']}}]"><i class="glyphicon-ok glyphicon"></i> Actualizar</button>
-        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_categorias')}}"><i class="glyphicon glyphicon-remove"></i>Cancelar</a>
+      <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Editar" name="jugador[{{edita[0]['nombre']}}]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
+      <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_categorias')}}"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
     </div>
   </div>
   </form>
