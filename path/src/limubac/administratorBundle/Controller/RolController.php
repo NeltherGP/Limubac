@@ -177,6 +177,8 @@ class RolController extends Controller{
                         $torneo = $class_repository->find($torn);
 					$partido -> setidTorneo($torneo);
 					$partido -> setJornada($cont);
+					$partido -> setCategoria($cate);
+					$partido -> setRama($rama);
 					$em = $this->getDoctrine()->getManager();
                     $em -> persist($partido);
                     $em -> flush();
@@ -243,63 +245,34 @@ class RolController extends Controller{
 		}
 		return $this->redirect($this->generateUrl('limubacadministrator_rolhecho'));
 	}
-	else return $this->redirect($this->generateUrl('limubacadministrator_homepage'));
+	else {
+		$idtorn = array($_REQUEST['rol'][0]);
+			//select * from participan_t where id_torneo = 1 GROUP BY id_rama 
+			$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
+			$queryCategorias = $repository->createQueryBuilder('h')
+				->select('e.idCategoria,e.nombre')
+				->join('limubacadministratorBundle:Categoria', 'e', 'WITH' ,'e.idCategoria = h.idCategoria')
+				->where('h.idTorneo = :torn')
+				->groupBy('h.idCategoria')
+				->setParameter('torn',$idtorn[0])
+				->getQuery();
+			$n1 = $queryCategorias->getResult();			
+			//print_r($n1);
+			$queryRamas = $repository->createQueryBuilder('l')
+				->select('o.idRama,o.nombre')
+				->join('limubacadministratorBundle:RamaEquipo', 'o', 'WITH' ,'o.idRama = l.idRama')
+				->where('l.idTorneo = :torn')
+				->groupBy('l.idRama')
+				->setParameter('torn',$idtorn[0])
+				->getQuery();
+			$n2 = $queryRamas->getResult()
+			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1,'ramas'=>$n2));	
+	}
 	}
 	
 	public function rolhechoAction(){
 		$roles= array("Se agrego una semana de partidos al Rol");
 		return $this->render('limubacadministratorBundle:administracion:rolhecho.html.twig',array('rols'=>$roles));
-	}
-
-	public function actrolAction(){
-	$torn = 1;
-	$cate=1;
-	$rama=1;
-		$queryCuantEqui = $repository->createQueryBuilder('h')
-            ->select('count(h.idRegistro)')
-            ->where('h.idTorneo = :torn')
-			->andWhere('h.idCategoria = :cate')
-			->andWhere('h.idRama = :rama')
-			->setParameter('torn',$torn)
-			->setParameter('cate',$cate)
-			->setParameter('rama',$rama)
-            ->getQuery();
-        $n = $queryCuantEqui->getResult(); 
-		//$r=numero de jornadas ya jugada
-		$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
-			$queryPartido = $repository->createQueryBuilder('h')
-				->select('max(h.jornada)')
-				->where('h.commited = true')
-				->getQuery();
-		$jornada =	$queryPartido->getResult();
-		$r=$jornada[0][1];
-		//$cont=numero de la siguiente jornada
-		$cont = $r+1;
-		if($n%2==0){
-				$cont1=($n-1)*2; 
-		}
-		else {
-				$cont1=$n*2;
-		}
-		if($n>16||$r>15){
-			//no se puede agregar mas equipos
-		}
-		else{
-			//falta...
-			$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
-			$queryEquis = $repository->createQueryBuilder('k')
-				->select('k.idPartido')
-				->where('k.idTorneo = :torn')
-				->andWhere('k.commited = true')
-				->setParameter('torn',$torn)
-				->getQuery();
-			$partidos = $queryEquis->getResult();
-			
-			
-			
-			
-		}
-		
 	}
 	
 	//FINAL CONTROLADOR  ROL DE JUEGOS
