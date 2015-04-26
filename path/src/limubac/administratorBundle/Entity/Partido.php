@@ -68,7 +68,7 @@ class Partido
      *
      * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Estatus")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_estatus", referencedColumnName="id_estatus")
+     *   @ORM\JoinColumn(name="id_Estatus", referencedColumnName="id_Estatus")
      * })
      */
     private $idEstatus;
@@ -121,7 +121,7 @@ class Partido
     /**
      * Get hInicio
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getHInicio()
     {
@@ -144,7 +144,7 @@ class Partido
     /**
      * Get hTermino
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getHTermino()
     {
@@ -167,7 +167,7 @@ class Partido
     /**
      * Get commited
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCommited()
     {
@@ -190,7 +190,7 @@ class Partido
     /**
      * Get jornada
      *
-     * @return integer 
+     * @return integer
      */
     public function getJornada()
     {
@@ -213,7 +213,7 @@ class Partido
     /**
      * Get rama
      *
-     * @return integer 
+     * @return integer
      */
     public function getRama()
     {
@@ -236,7 +236,7 @@ class Partido
     /**
      * Get categoria
      *
-     * @return integer 
+     * @return integer
      */
     public function getCategoria()
     {
@@ -246,7 +246,7 @@ class Partido
     /**
      * Get idPartido
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdPartido()
     {
@@ -269,7 +269,7 @@ class Partido
     /**
      * Get idEstatus
      *
-     * @return \limubac\administratorBundle\Entity\Estatus 
+     * @return \limubac\administratorBundle\Entity\Estatus
      */
     public function getIdEstatus()
     {
@@ -292,7 +292,7 @@ class Partido
     /**
      * Get idSede
      *
-     * @return \limubac\administratorBundle\Entity\Sede 
+     * @return \limubac\administratorBundle\Entity\Sede
      */
     public function getIdSede()
     {
@@ -315,7 +315,7 @@ class Partido
     /**
      * Get idArbitran
      *
-     * @return \limubac\administratorBundle\Entity\Arbitran 
+     * @return \limubac\administratorBundle\Entity\Arbitran
      */
     public function getIdArbitran()
     {
@@ -338,7 +338,7 @@ class Partido
     /**
      * Get idTorneo
      *
-     * @return \limubac\administratorBundle\Entity\Torneo 
+     * @return \limubac\administratorBundle\Entity\Torneo
      */
     public function getIdTorneo()
     {

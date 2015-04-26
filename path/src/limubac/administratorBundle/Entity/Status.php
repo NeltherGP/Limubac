@@ -46,7 +46,7 @@ class Status
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -56,7 +56,7 @@ class Status
     /**
      * Get idStatus
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdStatus()
     {

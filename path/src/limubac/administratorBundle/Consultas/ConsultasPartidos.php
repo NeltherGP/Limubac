@@ -4,13 +4,13 @@ namespace limubac\administratorBundle\consultas;
 
 class ConsultasPartidos{
 
-  function listPartidosByTorneo($idTorneo,$manager){
+  function listPartidosByTorneo($idTorneo,$manager,$jornada){
 
-  		$consulta = $manager ->createQuery('SELECT pa.idPartido, e.nombre, j.side from limubacadministratorBundle:Equipo e
+  		$consulta = $manager ->createQuery('SELECT pa.idPartido, e.nombre, j.side, pa.jornada, IDENTITY(pa.idTorneo) as torneo, j.resultado, j.primero, j.segundo, j.tercero, j.cuarto from limubacadministratorBundle:Equipo e
   											    join  limubacadministratorBundle:Juegan j with e.idEquipo=j.idEquipo
-  											        join limubacadministratorBundle:ParticipanT p with p.idEquipo=e.idEquipo
+
   											                    join limubacadministratorBundle:Partido pa with pa.idPartido=j.idPartido
-  											            where pa.idTorneo='.$idTorneo);
+  											            where pa.idTorneo='.$idTorneo . 'AND pa.jornada= '.$jornada);
 
   		return $list=$consulta->getResult();
   }
@@ -49,6 +49,13 @@ class ConsultasPartidos{
     $consulta=$manager->createQuery('SELECT T.nombre, T.idTorneo from limubacadministratorBundle:Torneo T ');
     return $consulta->getResult();
   }
+
+  function getCantidadJornadasbyTorneo($idTorneo,$manager){
+    $consulta=$manager->createQuery('SELECT MAX(p.jornada) from limubacadministratorBundle:Partido p where p.idTorneo='.$idTorneo);
+
+    return $consulta->getResult();
+  }
+
 
 
 

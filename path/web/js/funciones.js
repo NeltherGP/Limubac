@@ -39,7 +39,6 @@ function formCompletar(id){//Este metodo no es generico debe mejorarse
 
 function selectTorneoPartidos(){
 	$('#SelectTorneo').modal({backdrop: 'static', keyboard: false});
-	$('#SelectTorneo').modal();
 	$('#SelectTorneo').modal({show: true});
 }
 /*

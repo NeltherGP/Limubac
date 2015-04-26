@@ -1,4 +1,4 @@
- {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
 <script src="{{asset('js/funciones.js')}}"></script>
@@ -101,6 +101,19 @@
 	  	<input type="radio" name="estatus" id="inlineRadio1" value="3">
 		</div>
 	</div>
+  <div class="formAnotacion form-group"></br>
+    <div class="bordes col-md-6 col-md-offset-5">
+      <label  class="col-md-12 text-center">SELECCIONA EQUIPO GANADOR</label>
+      <label  class="col-md-1 col-md-offset-2 control-label text-center">A</label>
+  		<div class="col-md-3">
+  	  	<input type="radio" name="Ganador" id="Ganador" value="A">
+  		</div>
+      <label  name="normal" class="col-md-1 control-label text-center">B</label>
+  		<div class="col-md-3">
+  	  	<input type="radio" name="Ganador" id="Ganador" value="B">
+  		</div>
+    </div>
+</div>
 </div>
 </br>
 
@@ -342,28 +355,62 @@
 		</div>
 	</div>
 
-	<div class="bordes col-md-12" style="margin-top: 20px">
+	<div class="bordes col-md-6" style="margin-top: 20px">
+    <label for="primero" class="col-md-12  text-center">Equipo A</label>
 		<label for="primero" class="col-md-1 control-label text-center">Primero: </label>
 		<div class="col-md-2">
 
-			<input class="form-control" id="primero" name="primero" placeholder="" value="">
+			<input class="form-control" id="primero" name="primeroA" placeholder="" value="">
 
 		</div>
 
 		<label for="segundo" class="col-md-1 control-label text-center">Segundo: </label>
 		<div class="col-md-2">
 
-			<input class="form-control" id="segundo" name="segundo" placeholder="" value="">
+			<input class="form-control" id="segundo" name="segundoA" placeholder="" value="">
 
 		</div>
 
 		<label for="tercero" class="col-md-1 control-label text-center">Tercero: </label>
 		<div class="col-md-2">
-			<input class="form-control" id="tercero" name="tercero" placeholder="" value="">
+			<input class="form-control" id="tercero" name="terceroA" placeholder="" value="">
 		</div>
 		<label for="tercero" class="col-md-1 control-label text-center">Cuarto </label>
 		<div class="col-md-2">
-			<input class="form-control" id="cuarto" name="cuarto" placeholder="" value="">
+			<input class="form-control" id="cuarto" name="cuartoA" placeholder="" value="">
+		</div>
+    <label for="tercero" class="col-md-1 control-label text-center">Complementario </label>
+		<div class="col-md-2">
+			<input class="form-control" id="cuarto" name="ComlpementarioA" placeholder="" value="">
+		</div>
+	</div>
+  <div class="bordes col-md-6" style="margin-top: 20px">
+    <label for="primero" class="col-md-12 text-center">Equipo B</label>
+		<label for="primero" class="col-md-1 control-label text-center">Primero: </label>
+		<div class="col-md-2">
+
+			<input class="form-control" id="primero" name="primeroB" placeholder="" value="">
+
+		</div>
+
+		<label for="segundo" class="col-md-1 control-label text-center">Segundo: </label>
+		<div class="col-md-2">
+
+			<input class="form-control" id="segundo" name="segundoB" placeholder="" value="">
+
+		</div>
+
+		<label for="tercero" class="col-md-1 control-label text-center">Tercero: </label>
+		<div class="col-md-2">
+			<input class="form-control" id="tercero" name="terceroB" placeholder="" value="">
+		</div>
+		<label for="tercero" class="col-md-1 control-label text-center">Cuarto </label>
+		<div class="col-md-2">
+			<input class="form-control" id="cuarto" name="cuartoB" placeholder="" value="">
+		</div>
+    <label for="tercero" class="col-md-1 control-label text-center">Complementario </label>
+		<div class="col-md-2">
+			<input class="form-control" id="cuarto" name="ComlpementarioB" placeholder="" value="">
 		</div>
 	</div>
 

@@ -19,21 +19,21 @@ use limubac\administratorBundle\Entity\Asistencia;
 
 class PartidosController extends Controller{
 
-  public function partidoTestAction($idpartido,$idtorneo){
+  public function partidoTestAction($idpartido,$idtorneo,$jornada){
     $idTorneo=$idtorneo;
-    echo($idpartido);
     $consultasManager = new ConsultasPartidos();
     $request = $this->getRequest();
     $doctrineManager= $this -> getDoctrine()->getManager();
 
-    $listPartidos1=$consultasManager->listPartidosByTorneo($idTorneo,$doctrineManager);
-    $listPartidosCompletos=$consultasManager->listPartidosCompletos($doctrineManager);
+    $listPartidos1=$consultasManager->listPartidosByTorneo($idTorneo,$doctrineManager,$jornada);
 
+    $listPartidosCompletos=$consultasManager->listPartidosCompletos($doctrineManager);
+    $cantidadJornada=$consultasManager->getCantidadJornadasbyTorneo($idtorneo,$doctrineManager);
 
     foreach ($listPartidosCompletos as $id => $value) {
       $listPartidosCompletos2[]=$value['idPartido'];
     }
-    print_r($listPartidosCompletos2);
+    //print_r($listPartidosCompletos2);
     $aux=0;
     $listPartidos2=array();
 
@@ -43,7 +43,7 @@ class PartidosController extends Controller{
 
     //print_r($listPartidos1);
 
-    for($i=1; $i<count($listPartidos1);){
+    for($i=0; $i<count($listPartidos1)-1;){
       for($j=0; $j<2; $j++){
         $listPartidos2[$aux][]=$listPartidos1[$i];
         $i++;
@@ -54,9 +54,9 @@ class PartidosController extends Controller{
 
     //array_push($listPartidos2,$listPartidos1);
 
-    // print_r($listPartidos2);
+
     //print_r($listPartidos1);
-    return $this->render('limubacadministratorBundle:administracion:partidoTest.html.twig',array('listaPartidos'=>$listPartidos2,'listSede'=>$listSede,'listArbitros'=>$listArbitros,'listPartidosCompletos'=>$listPartidosCompletos2));
+    return $this->render('limubacadministratorBundle:administracion:partidoTest.html.twig',array('listaPartidos'=>$listPartidos2,'listSede'=>$listSede,'listArbitros'=>$listArbitros,'listPartidosCompletos'=>$listPartidosCompletos2,'cantidadJornadas'=>$cantidadJornada[0][1],'jornada'=>$jornada));
   }
 }
 ?>

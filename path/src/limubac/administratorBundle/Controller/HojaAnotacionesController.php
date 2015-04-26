@@ -45,6 +45,7 @@ class HojaAnotacionesController extends Controller{
 
     if($request->getMethod() == 'POST')//si se envia el formulario
     {
+    //print_r($_POST);
       $datos = new hojaAnotacion();
 
       $validator = $this->get('validator');
@@ -62,6 +63,61 @@ class HojaAnotacionesController extends Controller{
       $datos->setJuez1($_POST["Juez1"]);
       $datos->setJuez2($_POST["Juez2"]);
 
+      //MARCADORES POR CUARTO
+      if(isset($_POST['primeroA'])){
+        $primero=$_POST['primeroA'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$primero, "A",$doctrineManager);
+      }
+      if(isset($_POST['segundoA'])){
+        $segundo=$_POST['segundoA'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$segundo, "A",$doctrineManager);
+      }
+      if(isset($_POST['terceroA'])){
+        $tercero=$_POST['terceroA'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$tercero, "A",$doctrineManager);
+      }
+      if(isset($_POST['cuartoA'])){
+        $cuarto=$_POST['cuartoA'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$cuarto, "A",$doctrineManager);
+      }
+      if(isset($_POST['complementarioA'])){
+        $complementario=$_POST['complementarioA'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"complementario",$complementario, "A",$doctrineManager);
+      }
+
+      if(isset($_POST['primeroB'])){
+        $primero=$_POST['primeroB'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$primero, "B",$doctrineManager);
+      }
+      if(isset($_POST['segundoB'])){
+        $segundo=$_POST['segundoB'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$segundo, "B",$doctrineManager);
+      }
+      if(isset($_POST['terceroB'])){
+        $tercero=$_POST['terceroB'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$tercero, "B",$doctrineManager);
+      }
+      if(isset($_POST['cuartoB'])){
+        $cuarto=$_POST['cuartoB'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$cuarto, "B",$doctrineManager);
+      }
+      if(isset($_POST['complementarioB'])){
+        $complementario=$_POST['complementarioB'];
+        $consultasManager->MarcadoresCuartosPartidoById($idPartido,"complementario",$complementario, "B",$doctrineManager);
+      }
+      //END MARCADORES POR CUARTO
+
+      //ESTATUS PARTIDO
+      if(isset($_POST['estatus'])){
+        $estatus=$_POST['estatus'];
+      }
+
+      if(isset($_POST['Ganador'])){
+        $Ganador=$_POST['Ganador'];
+      }
+      //END ESTATUS PARTIDO
+
+
       //TOMAR ASISTENCIA
 
       if(isset($_POST['asistA'])){
@@ -72,7 +128,7 @@ class HojaAnotacionesController extends Controller{
         $assistB=$_POST['asistB'];
       }
 
-      if(!empty($assistA)&&(!count($assistA<4))){
+      if(!empty($assistA)&&(!(count($assistA)<4))){
 
         foreach ($assistA as $a) {
           $asistencia = new Asistencia();
@@ -92,7 +148,7 @@ class HojaAnotacionesController extends Controller{
         $Errores['General']=1;
       }
 
-      if(!empty($assistB)&&(!count($assistB)<4)){
+      if(!empty($assistB)&&(!(count($assistB)<4))){
         foreach ($assistB as $a) {
           $asistencia = new Asistencia();
           $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
@@ -174,7 +230,7 @@ class HojaAnotacionesController extends Controller{
       //END FALTAS
 
       //Marcador por cuartos
-
+/*
       if(isset($_POST['MarcadorCuartoA'])){
         $marcadorCuartoA=$_POST['MarcadorCuartoA'];
       }
@@ -228,72 +284,41 @@ class HojaAnotacionesController extends Controller{
         }
       }else{
         echo("error con los marcadores de cuartos B");
-      }
+      }*/
 
       //END Marcador por cuartos
-      $datos->setPuntos(array_values((array_slice($_POST, 8,119))));
+      switch ($estatus) {
+        case 1:
+          $datos->setPuntos(array_values((array_slice($_POST, 8,119))));
 
-      $puntos = $datos->getPuntos();
-      $puntosA=array();
-      $puntosB=array();
+          $puntos = $datos->getPuntos();
+          $puntosA=array();
+          $puntosB=array();
 
-      if(!empty($puntos)){
-        // print_r($puntos);
-        for ($j=0; $j < count($puntos); $j++) { //VALIDAR NUMEROS DE PLAYERA
+          if(!empty($puntos)){
+            // print_r($puntos);
+            for ($j=0; $j < count($puntos); $j++) { //VALIDAR NUMEROS DE PLAYERA
 
-          if(preg_match("/^([0-9])*([0-9])*$/",$puntos[$j])) {
+              if(preg_match("/^([0-9])*([0-9])*$/",$puntos[$j])) {
 
-            if(($j%2)==0){
-              $puntosA[]=$puntos[$j];
-            }else{
-              $puntosB[]=$puntos[$j];
+                if(($j%2)==0){
+                  $puntosA[]=$puntos[$j];
+                }else{
+                  $puntosB[]=$puntos[$j];
+                }
+              }else{
+                $Errores['Playera']=1;
+                $Errores['General']=1;
+                break;
+              }
+
             }
-          }else{
-            $Errores['Playera']=1;
-            $Errores['General']=1;
-            break;
-          }
-
-        }
-      if($Errores['General']!=1){
-        for ($i=0; $i < count($puntosA); $i++) {
-          if($i==0 && $puntosA[$i]!=''){//ANOTACION DE UN PUNTO
-            $marcadorA++;
-            $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
-
-            $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
-            FROM limubacadministratorBundle:DetallePartido d
-            WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
-            $anotacion=$queryDetalleList->getResult();
-
-            if(count($anotacion)<=0){//verificar
-              $detallePartido = new DetallePartido();
-              $detallePartido->setAnotaciones(1);
-              $detallePartido->setCantidad(1);
-
-              $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
-              $auxFinder= $auxRepository->find(''.$idPartido);
-              $detallePartido->setIdPartido($auxFinder);
-
-              $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
-              $auxFinder= $auxRepository->find(''.$x[0]["id"]);
-              $detallePartido->setIdJugador($auxFinder);
-
-              $doctrineManager-> persist($detallePartido);
-              $doctrineManager -> flush();
-
-            }else{
-              $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,1,1,$doctrineManager);
-            }
-
-          }else{
-            if($puntosA[$i]==''){//BRINCOS, ESPACIOS EN BLANCO
-              $contadorA++;
-
-            }else{
-              if($contadorA==0){
-                $marcadorA=$marcadorA+1;//ANOTACION DE UN PUNTO
+          if($Errores['General']!=1){
+            for ($i=0; $i < count($puntosA); $i++) {
+              if($i==0 && $puntosA[$i]!=''){//ANOTACION DE UN PUNTO
+                $marcadorA++;
                 $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
+
                 $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
                 FROM limubacadministratorBundle:DetallePartido d
                 WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
@@ -320,47 +345,21 @@ class HojaAnotacionesController extends Controller{
                 }
 
               }else{
-                if($contadorA==1){
-                  $marcadorA=$marcadorA+2;//ANOTACION DE DOS PUNTOS
-                  $contadorA=0;
-                  $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
-                  $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
-                  FROM limubacadministratorBundle:DetallePartido d
-                  WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 2');
-                  $anotacion=$queryDetalleList->getResult();
+                if($puntosA[$i]==''){//BRINCOS, ESPACIOS EN BLANCO
+                  $contadorA++;
 
-                  if(count($anotacion)<=0){//verificar
-                    $detallePartido = new DetallePartido();
-                    $detallePartido->setAnotaciones(2);
-                    $detallePartido->setCantidad(1);
-
-                    $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
-                    $auxFinder= $auxRepository->find(''.$idPartido);
-                    $detallePartido->setIdPartido($auxFinder);
-
-                    $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
-                    $auxFinder= $auxRepository->find(''.$x[0]["id"]);
-                    $detallePartido->setIdJugador($auxFinder);
-
-                    $doctrineManager-> persist($detallePartido);
-                    $doctrineManager -> flush();
-
-                  }else{
-                    $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,2,1,$doctrineManager);
-                  }
                 }else{
-                  if($contadorA==2){
-                    $marcadorA=$marcadorA+3;//ANOTACION DE TRES PUTO
-                    $contadorA=0;
+                  if($contadorA==0){
+                    $marcadorA=$marcadorA+1;//ANOTACION DE UN PUNTO
                     $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
                     $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
                     FROM limubacadministratorBundle:DetallePartido d
-                    WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 3');
+                    WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
                     $anotacion=$queryDetalleList->getResult();
 
                     if(count($anotacion)<=0){//verificar
                       $detallePartido = new DetallePartido();
-                      $detallePartido->setAnotaciones(3);
+                      $detallePartido->setAnotaciones(1);
                       $detallePartido->setCantidad(1);
 
                       $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
@@ -375,52 +374,79 @@ class HojaAnotacionesController extends Controller{
                       $doctrineManager -> flush();
 
                     }else{
-                      $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,2,1,$doctrineManager);
+                      $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,1,1,$doctrineManager);
                     }
 
+                  }else{
+                    if($contadorA==1){
+                      $marcadorA=$marcadorA+2;//ANOTACION DE DOS PUNTOS
+                      $contadorA=0;
+                      $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
+                      $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+                      FROM limubacadministratorBundle:DetallePartido d
+                      WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 2');
+                      $anotacion=$queryDetalleList->getResult();
+
+                      if(count($anotacion)<=0){//verificar
+                        $detallePartido = new DetallePartido();
+                        $detallePartido->setAnotaciones(2);
+                        $detallePartido->setCantidad(1);
+
+                        $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+                        $auxFinder= $auxRepository->find(''.$idPartido);
+                        $detallePartido->setIdPartido($auxFinder);
+
+                        $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+                        $auxFinder= $auxRepository->find(''.$x[0]["id"]);
+                        $detallePartido->setIdJugador($auxFinder);
+
+                        $doctrineManager-> persist($detallePartido);
+                        $doctrineManager -> flush();
+                      }else{
+                        $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,2,1,$doctrineManager);
+                      }
+                    }else{
+                      if($contadorA==2){
+                        $marcadorA=$marcadorA+3;//ANOTACION DE TRES PUTO
+                        $contadorA=0;
+                        $x=$consultasManager->getIdJugadorByPlayera($puntosA[$i],'A',$doctrineManager);
+                        $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+                        FROM limubacadministratorBundle:DetallePartido d
+                        WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 3');
+                        $anotacion=$queryDetalleList->getResult();
+
+                        if(count($anotacion)<=0){//verificar
+                          $detallePartido = new DetallePartido();
+                          $detallePartido->setAnotaciones(3);
+                          $detallePartido->setCantidad(1);
+
+                          $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+                          $auxFinder= $auxRepository->find(''.$idPartido);
+                          $detallePartido->setIdPartido($auxFinder);
+
+                          $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+                          $auxFinder= $auxRepository->find(''.$x[0]["id"]);
+                          $detallePartido->setIdJugador($auxFinder);
+
+                          $doctrineManager-> persist($detallePartido);
+                          $doctrineManager -> flush();
+
+                        }else{
+                          $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,2,1,$doctrineManager);
+                        }
+
+                      }
+                    }
                   }
                 }
               }
             }
-          }
-        }
+            $consultasManager->updateResultadoByPartido($idPartido,"A",$marcadorA,$doctrineManager);
 
-        for ($i=0; $i < count($puntosB); $i++) {
-          if($i==0 && $puntosB[$i]!=''){
-            $marcadorB++;
-            $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
 
-            $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
-            FROM limubacadministratorBundle:DetallePartido d
-            WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
-            $anotacion=$queryDetalleList->getResult();
-
-            if(count($anotacion)<=0){//verificar
-              $detallePartido = new DetallePartido();
-              $detallePartido->setAnotaciones(1);
-              $detallePartido->setCantidad(1);
-
-              $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
-              $auxFinder= $auxRepository->find(''.$idPartido);
-              $detallePartido->setIdPartido($auxFinder);
-
-              $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
-              $auxFinder= $auxRepository->find(''.$x[0]["id"]);
-              $detallePartido->setIdJugador($auxFinder);
-
-              $doctrineManager-> persist($detallePartido);
-              $doctrineManager -> flush();
-
-            }else{
-              $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,1,1,$doctrineManager);
-            }
-          }else{
-            if($puntosB[$i]==''){
-              $contadorB++;
-
-            }else{
-              if($contadorB==0){
-                $marcadorB=$marcadorB+1;
+            for ($i=0; $i < count($puntosB); $i++) {
+              if($i==0 && $puntosB[$i]!=''){
+                $marcadorB++;
                 $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
 
                 $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
@@ -448,48 +474,22 @@ class HojaAnotacionesController extends Controller{
                   $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,1,1,$doctrineManager);
                 }
               }else{
-                if($contadorB==1){
-                  $marcadorB=$marcadorB+2;
-                  $contadorB=0;
-                  $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
-                  $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
-                  FROM limubacadministratorBundle:DetallePartido d
-                  WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 2');
-                  $anotacion=$queryDetalleList->getResult();
+                if($puntosB[$i]==''){
+                  $contadorB++;
 
-                  if(count($anotacion)<=0){//verificar
-                    $detallePartido = new DetallePartido();
-                    $detallePartido->setAnotaciones(2);
-                    $detallePartido->setCantidad(1);
-
-                    $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
-                    $auxFinder= $auxRepository->find(''.$idPartido);
-                    $detallePartido->setIdPartido($auxFinder);
-
-                    $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
-                    $auxFinder= $auxRepository->find(''.$x[0]["id"]);
-                    $detallePartido->setIdJugador($auxFinder);
-
-                    $doctrineManager-> persist($detallePartido);
-                    $doctrineManager -> flush();
-
-                  }else{
-                    $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,2,1,$doctrineManager);
-                  }
                 }else{
-                  if($contadorB==2){
-                    $marcadorB=$marcadorB+3;
-                    $contadorB=0;
-
+                  if($contadorB==0){
+                    $marcadorB=$marcadorB+1;
                     $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
+
                     $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
                     FROM limubacadministratorBundle:DetallePartido d
-                    WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 3');
+                    WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
                     $anotacion=$queryDetalleList->getResult();
 
                     if(count($anotacion)<=0){//verificar
                       $detallePartido = new DetallePartido();
-                      $detallePartido->setAnotaciones(3);
+                      $detallePartido->setAnotaciones(1);
                       $detallePartido->setCantidad(1);
 
                       $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
@@ -504,24 +504,107 @@ class HojaAnotacionesController extends Controller{
                       $doctrineManager -> flush();
 
                     }else{
-                      $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,2,1,$doctrineManager);
+                      $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,1,1,$doctrineManager);
+                    }
+                  }else{
+                    if($contadorB==1){
+                      $marcadorB=$marcadorB+2;
+                      $contadorB=0;
+                      $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
+                      $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+                      FROM limubacadministratorBundle:DetallePartido d
+                      WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 2');
+                      $anotacion=$queryDetalleList->getResult();
+
+                      if(count($anotacion)<=0){//verificar
+                        $detallePartido = new DetallePartido();
+                        $detallePartido->setAnotaciones(2);
+                        $detallePartido->setCantidad(1);
+
+                        $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+                        $auxFinder= $auxRepository->find(''.$idPartido);
+                        $detallePartido->setIdPartido($auxFinder);
+
+                        $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+                        $auxFinder= $auxRepository->find(''.$x[0]["id"]);
+                        $detallePartido->setIdJugador($auxFinder);
+
+                        $doctrineManager-> persist($detallePartido);
+                        $doctrineManager -> flush();
+
+                      }else{
+                        $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,2,1,$doctrineManager);
+                      }
+                    }else{
+                      if($contadorB==2){
+                        $marcadorB=$marcadorB+3;
+                        $contadorB=0;
+
+                        $x=$consultasManager->getIdJugadorByPlayera($puntosB[$i],'B',$doctrineManager);
+                        $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
+                        FROM limubacadministratorBundle:DetallePartido d
+                        WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 3');
+                        $anotacion=$queryDetalleList->getResult();
+
+                        if(count($anotacion)<=0){//verificar
+                          $detallePartido = new DetallePartido();
+                          $detallePartido->setAnotaciones(3);
+                          $detallePartido->setCantidad(1);
+
+                          $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+                          $auxFinder= $auxRepository->find(''.$idPartido);
+                          $detallePartido->setIdPartido($auxFinder);
+
+                          $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+                          $auxFinder= $auxRepository->find(''.$x[0]["id"]);
+                          $detallePartido->setIdJugador($auxFinder);
+
+                          $doctrineManager-> persist($detallePartido);
+                          $doctrineManager -> flush();
+
+                        }else{
+                          $consultasManager->updateCantidadAnotacion($x[0]["id"],$idPartido,2,1,$doctrineManager);
+                        }
+                      }
                     }
                   }
                 }
               }
             }
-          }
-        }
-        $consultasManager->commitPartidoById($idPartido,$doctrineManager); //todo salio bien aqui debes redireccionar
-      }else{
-        //Algo salio mal, aqui debes recargar la pagina mostrando al usuario los errores
-        print_r($Errores);
-        return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig',array('ListA'=>$List_A,'ListB'=>$List_B,'datosGenerales'=>$datosGenerales,'errores'=>$Errores));
-      }
+            $consultasManager->updateResultadoByPartido($idPartido,"B",$marcadorB,$doctrineManager);
 
-    }else{
-      //No Hubo anotaciones
-    }
+            $consultasManager->commitPartidoById($idPartido,$doctrineManager); //todo salio bien aqui debes redireccionar
+          }else{
+            //Algo salio mal, aqui debes recargar la pagina mostrando al usuario los errores
+            print_r($Errores);
+            return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig',array('ListA'=>$List_A,'ListB'=>$List_B,'datosGenerales'=>$datosGenerales,'errores'=>$Errores));
+          }
+
+        }else{
+          //No Hubo anotaciones
+        }
+      break;
+
+      case 2:
+        if($Ganador=="A"){
+          $consultasManager->updateResultadoByPartido($idPartido,"A",20,$doctrineManager);
+          $consultasManager->updateResultadoByPartido($idPartido,"B",0,$doctrineManager);
+        }else{
+          $consultasManager->updateResultadoByPartido($idPartido,"B",20,$doctrineManager);
+          $consultasManager->updateResultadoByPartido($idPartido,"A",0,$doctrineManager);
+        }
+      break;
+      case 3:
+      if($Ganador=="A"){
+        $consultasManager->updateResultadoByPartido($idPartido,"A",20,$doctrineManager);
+        $consultasManager->updateResultadoByPartido($idPartido,"B",1,$doctrineManager);
+      }else{
+        $consultasManager->updateResultadoByPartido($idPartido,"B",20,$doctrineManager);
+        $consultasManager->updateResultadoByPartido($idPartido,"A",1,$doctrineManager);
+      }
+      break;
+
+      }
       //
       //
       // $errors = $validator->validate($datos);
@@ -539,13 +622,9 @@ class HojaAnotacionesController extends Controller{
     $idPartido=0;
     $consultasManager = new ConsultasAnotaciones();
     $doctrineManager= $this -> getDoctrine()->getManager();
-
     $Equipos=json_encode($consultasManager->getEquipoByPartido($idPartido,$doctrineManager));
-
     return new Response($Equipos);
-
   }
-
 
 }
 ?>

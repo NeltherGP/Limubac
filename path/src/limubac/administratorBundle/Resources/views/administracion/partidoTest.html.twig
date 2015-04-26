@@ -1,7 +1,14 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
-
 {% block PageContent %}
 <script src="{{asset('js/funciones.js')}}"></script>
+<label>Seleccionar jornada</label>
+<nav>
+  <ul class="pagination pagination-lg">
+    {% for i in 1.. cantidadJornadas %}
+    <li class="{% if i != jornada %} disable {% else %} active {% endif %}"><a  href="{{path('limubacadministrator_partidos',{'idtorneo':listaPartidos.0.0.0.torneo,'jornada': i})}}" >{{i}}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
 <div class="bordes">
 		 <table class="table table-bordered" style="table-layout:fixed" >
                   <thead>
@@ -14,25 +21,28 @@
                     </tr>
                   </thead>
                   <tbody>
+
 										{% for partido in listaPartidos%}
-                  	<tr>
 
-                  		<td>{{partido.0.idPartido}}</td>
-                  		<td>{{partido.0.nombre}}</td>
-                  		<td>{{partido.1.nombre}}</td>
+                      	<tr>
 
-											{% if partido.0.idPartido  in listPartidosCompletos %}
-                  		<td>
-												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}})" disabled>Completo</button>
-											</td>
-											{% else %}
-											<td>
-												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}})">Completar</button>
-											</td>
-											{% endif %}
-											<td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button">Cargar Anotaciones</a></td>
+                      		<td>{{partido.0.idPartido}}</td>
+                      		<td>{{partido.0.nombre}}</td>
+                      		<td>{{partido.1.nombre}}</td>
 
-                  	</tr>
+    											{% if partido.0.idPartido  in listPartidosCompletos %}
+                      		<td>
+    												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}})" disabled>Completo</button>
+    											</td>
+    											{% else %}
+    											<td>
+    												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}})">Completar</button>
+    											</td>
+    											{% endif %}
+    											<td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button">Cargar Anotaciones</a></td>
+
+                      	</tr>
+
 									   {% endfor %}
                   </tbody>
 </div>
