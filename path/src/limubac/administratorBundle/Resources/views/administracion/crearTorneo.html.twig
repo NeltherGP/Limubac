@@ -43,19 +43,19 @@
           </div>
       </form>-->
             {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
-              {{form_widget(form.nombre, {'attr': {'placeholder': 'Nombre'|trans}} )}}<font color="red"> *</font>
-              <br>
-              {{form_widget(form.fInicio)}}
-              <br>
-              {{form_widget(form.fTermino)}}
-              <br>
-              {{form_widget(form.costo, {'attr': {'placeholder': 'Costo'|trans}} )}}<font color="red"> *</font><br>
+              <h3>Nombre:</h3>{{form_widget(form.nombre, {'attr': {'placeholder': 'Nombre'|trans}} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Fecha de Inicio:</h3>{{form_widget(form.fInicio)}}
+              <br><br>
+              <h3>Fecha de termino:</h3>{{form_widget(form.fTermino)}}
+              <br><br>
+              <h3>Costo:</h3>{{form_widget(form.costo, {'attr': {'placeholder': 'Costo'|trans}} )}}<font color="red"> *</font><br>
             {{form_end(form)}}
     </div>
 
         <div class="col-md-2 tRight">
           <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Salvar" name="jugador[Salvar]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
-        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_torneos')}}"><i class="glyphicon glyphicon-remove"></i>Cancelar</a>
+        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_torneos')}}"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
     </div>
   </div>
 </form>

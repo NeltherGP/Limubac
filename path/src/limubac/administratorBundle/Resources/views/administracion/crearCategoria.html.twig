@@ -14,37 +14,22 @@
       </div>
     </div>
 
-  <div class="row-fluid">  
+  <div class="row-fluid">
     <div class="col-md-7">
-      <!--<form class="form-horizontal">
-        <div class="control-group">
-          <label class="control-label" for="inputNombre">Nombre</label>
-          <div class="controls">
-            <input type="text" id="inputNombre" placeholder="Nombre">
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label" for="inputEdad">Edad</label>
-          <div class="controls">
-            <input type="text" id="inputEdad" placeholder="Edad">
-          </div>
-        </div>
-      </form>-->
-
             {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
-              {{form_widget(form.nombre, {'attr': {'placeholder': 'Nombre'|trans}} )}}<font color="red"> *</font>
-              <br>
-              {{form_widget(form.limiteEquipo, {'attr': {'placeholder': 'Limite de Equipos'|trans}} )}}<font color="red"> *</font>
-              <br>
-              {{form_widget(form.edad, {'attr': {'placeholder': 'Edad'|trans}} )}}<font color="red"> *</font>
-              <br>
-              {{form_widget(form.refEdad, {'attr': {'placeholder': 'Referencia de Edad'|trans}} )}}<font color="red"> *</font><br>
+              <h3>Nombre:</h3>{{form_widget(form.nombre, {'attr': {'placeholder': 'Nombre'|trans}} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Limite de Equipos:</h3>{{form_widget(form.limiteEquipo, {'attr': {'placeholder': 'Limite de Equipos'|trans}} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Edad:</h3>{{form_widget(form.edad, {'attr': {'placeholder': 'Edad'|trans}} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Referencia de Edad:</h3>{{form_widget(form.refEdad, {'attr': {'placeholder': 'Referencia de Edad'|trans}} )}}<font color="red"> *</font><br>
             {{form_end(form)}}
     </div>
 
         <div class="col-md-2 tRight">
           <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Salvar" name="jugador[Salvar]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
-        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_categorias')}}"><i class="glyphicon glyphicon-remove"></i>Cancelar</a>
+        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_categorias')}}"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
     </div>
   </div>
   </form>

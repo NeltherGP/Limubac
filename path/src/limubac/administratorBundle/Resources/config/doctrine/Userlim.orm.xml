@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\Userlim" table="userlim">
     <id name="usuariolim" type="string" column="usuariolim" length="255"/>
-    <id name="contrasenalim" type="integer" column="contrasenalim"/>
-    <id name="correolim" type="integer" column="correolim"/>
+    <id name="correolim" type="string" column="correolim" length="255"/>
+    <id name="contrasenalim" type="string" column="contrasenalim" length="255"/>
   </entity>
 </doctrine-mapping>

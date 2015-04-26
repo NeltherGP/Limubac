@@ -8,22 +8,22 @@
     <div class="row-fluid">
       <div class="col-md-12 borBox wellDark btn-dashboard">
         <div class="formRol form-group">
-          <h3 class="col-md-7">Accion</h3>
-			<select name=categoria[]'>
-				<option value='0' selected>Elige una categoria:</option>
+          <h3 class="col-md-3">Accion</h3>
+			<select name='categoria[]' width="200" style="width: 200px">
+				<option value='0' selected>Categoria:</option>
 				{% for categ in categs %}
-				<option value='{{categ.idCategoria}}'> {{categ.nombre}}</option>
+				<option value='{{categ.idCategoria}}'>{{categ.nombre}}</option>
 				{% endfor %}
 			</select>
-			<select name='rama[]'>
-				<option value='0' selected>Elige una rama:</option>
-				<option value='1'> Varonil</option>
-				<option value='2'> Femenil</option>
+			<select name='rama[]' width="200" style="width: 200px">
+				<option value='0' selected>Rama:</option>
+				{% for rama in ramas %}
+				<option value='{{rama.idRama}}'>{{rama.nombre}}</option>
+				{% endfor %}
 			</select>
           <div class="btn-group sharp pull-right">
             {% for rol in rols %}
-            <button class="btn btn-mini btn-success" type='submit' name='rol[]' value ='{{rol}}'></i> Crear Nuevo Rol {{rol}}</button>
-			<!--<a class="btn btn-primary btn-info" href="#"><i class="glyphicon-eye-open glyphicon"></i> checar/editar Rol</a>-->
+            <button class="btn btn-mini btn-success" type='submit' name='rol[]' value ='{{rol}}'></i> Crear nuevo Rol</button>
 			{% endfor %}
           </div>
         </div>

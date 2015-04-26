@@ -76,6 +76,10 @@ limubacadministrator_acTorneo:
     path:     /acTorneo
     defaults: { _controller: limubacadministratorBundle:Default:acTorneo}
 
+limubacadministrator_acTorneo:
+    path:     /participan
+    defaults: { _controller: limubacadministratorBundle:Default:participan}
+
 limubacadministrator_editTorneo:
     path:     /editTorneo
     defaults: { _controller: limubacadministratorBundle:Default:editTorneo}

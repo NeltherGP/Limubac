@@ -1006,7 +1006,15 @@ class DefaultController extends Controller{
 				->getQuery();
 			$n1 = $queryCategorias->getResult();			
 			//print_r($n1);
-			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1));
+			$queryRamas = $repository->createQueryBuilder('l')
+				->select('o.idRama,o.nombre')
+				->join('limubacadministratorBundle:RamaEquipo', 'o', 'WITH' ,'o.idRama = l.idRama')
+				->where('l.idTorneo = :torn')
+				->groupBy('l.idRama')
+				->setParameter('torn',$idtorn[0])
+				->getQuery();
+			$n2 = $queryRamas->getResult();
+			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1,'ramas'=>$n2));
 		}
     }
 

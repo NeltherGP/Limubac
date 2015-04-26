@@ -22,22 +22,22 @@ class Userlim
     private $usuariolim;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="contrasenalim", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $contrasenalim;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="correolim", type="integer")
+     * @ORM\Column(name="correolim", type="string", length=255)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $correolim;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contrasenalim", type="string", length=255)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $contrasenalim;
 
 
 
@@ -65,32 +65,9 @@ class Userlim
     }
 
     /**
-     * Set contrasenalim
-     *
-     * @param integer $contrasenalim
-     * @return Userlim
-     */
-    public function setContrasenalim($contrasenalim)
-    {
-        $this->contrasenalim = $contrasenalim;
-
-        return $this;
-    }
-
-    /**
-     * Get contrasenalim
-     *
-     * @return integer 
-     */
-    public function getContrasenalim()
-    {
-        return $this->contrasenalim;
-    }
-
-    /**
      * Set correolim
      *
-     * @param integer $correolim
+     * @param string $correolim
      * @return Userlim
      */
     public function setCorreolim($correolim)
@@ -103,10 +80,33 @@ class Userlim
     /**
      * Get correolim
      *
-     * @return integer 
+     * @return string 
      */
     public function getCorreolim()
     {
         return $this->correolim;
+    }
+
+    /**
+     * Set contrasenalim
+     *
+     * @param string $contrasenalim
+     * @return Userlim
+     */
+    public function setContrasenalim($contrasenalim)
+    {
+        $this->contrasenalim = $contrasenalim;
+
+        return $this;
+    }
+
+    /**
+     * Get contrasenalim
+     *
+     * @return string 
+     */
+    public function getContrasenalim()
+    {
+        return $this->contrasenalim;
     }
 }
