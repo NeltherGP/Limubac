@@ -25,6 +25,7 @@ namespace limubac\administratorBundle\Controller;
 class RolController extends Controller{
 	
 	public function addrolAction(){ 
+	$contJ=1;
 	if($_REQUEST['rol'][0]!=0&&$_REQUEST['categoria'][0]!=0&&$_REQUEST['rama'][0]!=0){
 	$torn=$_REQUEST['rol'][0];
 	$cate=$_REQUEST['categoria'][0];
@@ -96,11 +97,25 @@ class RolController extends Controller{
 			for($c=0;$c<$n/2;$c++){
 				if($p[$c][0]!=0&&$p[$c][1]!=0){
 					//insert $p[$c][0]  vs  $p[$c][1] en la jornada cont
+					if($cont<10){
+						$claveJ="J0{$cont}_";
+					}else {
+						$claveJ="J{$cont}_";
+					}
+					if($contJ<10){
+						$claveJ.="0".$contJ;
+					}else {
+						$claveJ.=$contJ;
+					}
+					$contJ++;
 					$partido = new Partido();
 						$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
                         $torneo = $class_repository->find($torn);
 					$partido -> setIdTorneo($torneo);
 					$partido -> setJornada($cont);
+					$partido -> setCategoria($cate);
+					$partido -> setRama($rama);
+					//$partido -> setClavep($claveJ);
 					$em = $this->getDoctrine()->getManager();
                     $em -> persist($partido);
                     $em -> flush();
@@ -172,6 +187,17 @@ class RolController extends Controller{
 
 				if($p2[$c][0]!=0&&$p2[$c][1]!=0) {
 					//insert $p2[$c][0]  vs  $p2[$c][1] en la jornada $cont
+					if($cont<10){
+						$claveJ="J0{$cont}_";
+					}else {
+						$claveJ="J{$cont}_";
+					}
+					if($contJ<10){
+						$claveJ.="0".$contJ;
+					}else {
+						$claveJ.=$contJ;
+					}
+					$contJ++;
 					$partido = new Partido();
 						$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
                         $torneo = $class_repository->find($torn);
@@ -179,6 +205,7 @@ class RolController extends Controller{
 					$partido -> setJornada($cont);
 					$partido -> setCategoria($cate);
 					$partido -> setRama($rama);
+					//$partido -> setClavep($claveJ);
 					$em = $this->getDoctrine()->getManager();
                     $em -> persist($partido);
                     $em -> flush();
@@ -243,9 +270,10 @@ class RolController extends Controller{
 			}
 			$p2[1][0]=$t1;
 		}
-		return $this->redirect($this->generateUrl('limubacadministrator_rolhecho'));
+		//return $this->redirect($this->generateUrl('limubacadministrator_rolhecho'));
 	}
-	else {
+	return $this->redirect($this->generateUrl('limubacadministrator_rolhecho'));
+	/*else {
 		$idtorn = array($_REQUEST['rol'][0]);
 			//select * from participan_t where id_torneo = 1 GROUP BY id_rama 
 			$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
@@ -267,7 +295,7 @@ class RolController extends Controller{
 				->getQuery();
 			$n2 = $queryRamas->getResult()
 			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1,'ramas'=>$n2));	
-	}
+	}*/
 	}
 	
 	public function rolhechoAction(){
