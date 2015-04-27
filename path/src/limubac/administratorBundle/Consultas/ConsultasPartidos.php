@@ -15,10 +15,28 @@ class ConsultasPartidos{
   		return $list=$consulta->getResult();
   }
   
+  function listEquiposByTorneo($idTorneo,$manager){
+
+  		$consulta = $manager ->createQuery("SELECT  e.nombre AS equipo, c.nombre AS categoria
+                FROM participan_t p 
+                INNER JOIN equipo e  ON p.id_equipo=e.id_equipo
+                INNER JOIN torneo t  ON p.id_torneo=t.id_torneo
+				INNER JOIN categoria c  ON p.id_categoria=c.id_categoria
+                WHERE p.id_torneo={$idTorneo}
+				ORDER BY c.id_categoria");
+
+  		return $list=$consulta->getResult();
+  }
+  
   function estadisticasEquipo($idTorneo,$idEquipo,$manager){
 	$pfe=PFequipo($idTorneo,$idEquipo,$manager);
 	$pce=PCequipo($idTorneo,$idEquipo,$manager);
-	//$pj=consulta de jesus;
+	$consulta = $manager ->createQuery("SELECT COUNT(id_partido)
+		FROM juegan j
+		INNER JOIN partido p ON j.id_partido=p.id_partido
+		WHERE j.id_equipo={$idEquipo} and p.id_torneo={$idTorneo}");
+				
+	$pj=$consulta->getResult();
 	$pg=0;
 	$pp=0;
 	for($par=0;$par<$pj;$par++){
