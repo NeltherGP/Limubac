@@ -147,10 +147,34 @@ background-color: #003171;
 	padding-left:0px;
 }
 
-//Estilos Manejo de errores Hoja de anotacion
+/*//Estilos Manejo de errores Hoja de anotacion
 
 //END Estilos Manejo de errores Hoja de anotacion
+//overview estilos*/
 
+#overviewcontent{
+	background-color:whitesmoke;
+	padding-left:20px;
+	padding-right:20px;
+	margin-bottom:20px;
+	border-top:1px solid #be9d53;
+	border-bottom:1px solid #be9d53;
+}
+
+#tablaOverview{
+	margin-top:20px;
+	background-color:white;
+}
+
+.scoreWinner{
+	font-size:large;
+	color:#a90b33;
+	font-weight:bold;
+}
+.scoreLooser{
+	font-size:large;
+	font-weight:bold;
+}
 /*-----------------------INICIO ESTILOS DE FAFI...NO TOCAR!!!!-----------------------*/
 
 
