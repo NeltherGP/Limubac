@@ -1,0 +1,217 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='col-md-6'>
+      <h2>Seleccionar jornada</h2>
+      <nav style="margin-bottom:25px;">
+        <ul class="pagination pagination-lg">
+          {% for i in 1.. cantidadJornadas %}
+          <li class="{% if i != jornada %} disable {% else %} active {% endif %}"><a  href="{{path('limubacadministrator_overview',{'idtorneo':listaPartidos.0.0.0.torneo,'jornada': i})}}" >{{i}}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+      {% for partido in listaPartidos %}
+      <div id='overviewcontent' class="row">
+      <div class="table-responsive">
+      <table id='tablaOverview' class="table  table-bordered text-center " style="table-layout:fixed" >
+                   <thead>
+                     <tr>
+                       <th class = "text-center">Equipo</th>
+                       <th class = "text-center">1</th>
+                       <th class = "text-center">2</th>
+ 											<th class= "text-center">3</th>
+                       <th class = "text-center">4</th>
+                       <th class = "text-center">Score</th>
+                     </tr>
+                   </thead>
+                   <tbody style='text-transform: uppercase;'>
+                     <tr class='{% if partido.0.resultado > 0%} {% if partido.0.resultado > partido.1.resultado %}
+
+                            {% else %}
+
+                            {% endif %} {% endif %}'>
+                       <td>
+                         <p>{{partido.0.nombre}}</p>
+                       </td>
+                       <td>
+                         {% if partido.0.primero > 0%}
+                         {{partido.0.resultado}}
+                         {% else %}
+                          -
+                         {% endif %}
+                       </td>
+                       <td>
+                         {% if partido.0.segundo > 0%}
+                         {{partido.0.segundo}}
+                         {% else %}
+                          -
+                         {% endif %}
+                       </td>
+                       <td>
+                         {% if partido.0.tercero > 0%}
+                         {{partido.0.tercero}}
+                         {% else %}
+                          -
+                         {% endif %}
+                       </td>
+                       <td>
+                         {% if partido.0.cuarto > 0%}
+                         {{partido.0.cuarto}}
+                         {% else %}
+                          -
+                         {% endif %}
+                       </td>
+                       <td class='
+                       {% if partido.1.resultado > 0%} {% if partido.0.resultado > partido.1.resultado %}
+                                scoreWinner
+                              {% else %}
+                                scoreLooser
+                              {% endif %} {% endif %}'>
+                         {% if partido.0.resultado > 0%}
+                         {{partido.0.resultado}}
+                         {% else %}
+                          -
+                         {% endif %}
+                       </td>
+                     </tr>
+                     <tr>
+                       <td>
+                         {{partido.1.nombre}}
+                       </td>
+                       <td>
+                         {{partido.1.primero}}
+                       </td>
+                       <td>
+                         {{partido.1.segundo}}
+                       </td>
+                       <td>
+                         {{partido.1.tercero}}
+                       </td>
+                       <td>
+                         {{partido.1.cuarto}}
+                       </td>
+                       <td class='
+                       {% if partido.1.resultado > 0%} {% if partido.1.resultado > partido.0.resultado %}
+                                scoreWinner
+                              {% else %}
+                                scoreLooser
+                              {% endif %} {% endif %}'>
+
+                         {% if partido.1.resultado > 0%}
+                         {{partido.1.resultado}}
+                         {% else %}
+                          -
+                         {% endif %}
+                       </td>
+                     </tr>
+
+                   </tbody>
+      </table>  </div></div>
+      {% endfor %}
+    </div>
+    <div class="col-md-6">
+    <div class="row" style="padding-left:20px;">
+      <div class="jumbotron col-md-12" style="padding-top:0px; padding-bottom:30px;">
+        <h2>Estadisticas</h2>
+        <div class="row" style="margin-left:0px;">
+          <div class="col-md-4">
+            <div class="row StatLabel">
+            <label class="label label-warning" style="font-size:100%">PJ=</label ><label class="label label-default" style="font-size:100%">Partidos Jugados</label></div>
+            <div class="row StatLabel">
+            <label class="label label-warning" style="font-size:100%">PG=</label ><label class="label label-default" style="font-size:100%">Partidos Ganados</label></div>
+          </div>
+          <div class="col-md-4">
+            <div class="row StatLabel">
+            <label class="label label-warning" style="font-size:100%">PP=</label ><label class="label label-default" style="font-size:100%">Partidos Perdidos</label></div>
+            <div class="row StatLabel">
+            <label class="label label-warning" style="font-size:100%">PF=</label ><label class="label label-default" style="font-size:100%">Puntos a Favor</label></div>
+          </div>
+          <div class="col-md-4">
+            <div class="row StatLabel">
+            <label class="label label-warning" style="font-size:100%">PC=</label ><label class="label label-default" style="font-size:100%">Puntos en Contra</label></div>
+            <div class="row StatLabel">
+            <label class="label label-warning" style="font-size:100%">PF=</label ><label class="label label-default" style="font-size:100%">Diferencia de Puntos</label></div>
+          </div>
+          <div class="row" style="padding-top:70px;">
+              <div class="col-md-4 col-md-offset-2">
+              <label class="label label-success" style="font-size:100%">Partido Ganado: 3PTS</label ></div>
+              <div class="col-md-4">
+              <label class="label label-danger" style="font-size:100%">Partido Perdido: 1PT</label ></div>
+          </div>
+        </div>
+
+      </div>
+      <div class='col-md-12' style="background-color:rgb(238, 238, 238); padding-top:15px;">
+      <table class="table  table-bordered table-striped  tablastats">
+        <thead>
+          <tr>
+            <th>
+              Equipo
+            </th>
+            <th>
+              Categoria
+            </th>
+            <th>
+              PJ
+            </th>
+            <th>
+              PG
+            </th>
+            <th>
+              PP
+            </th>
+            <th>
+              PF
+            </th>
+            <th>
+              PC
+            </th>
+            <th>
+              DIF
+            </th>
+            <th>
+              TOTAL
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for eq in listStats %}
+          <tr>
+            <td>
+              {{eq.equipo}}
+            </td>
+            <td>
+              {{eq.categoria}}
+            </td>
+            <td>
+              {{eq.stats.pj}}
+            </td>
+            <td>
+              {{eq.stats.pg}}
+            </td>
+            <td>
+              {{eq.stats.pp}}
+            </td>
+            <td>
+              {{eq.stats.pf}}
+            </td>
+            <td>
+              {{eq.stats.pc}}
+            </td>
+            <td>
+              {{eq.stats.dif}}
+            </td>
+            <td>
+              {{eq.stats.total}}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

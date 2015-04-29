@@ -1,0 +1,37 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+{% block PageContent %}
+<script src="{{asset('js/funciones.js')}}"></script>
+{#//Modal seleccionar torneo#}
+<div class="modal fade" id="SelectTorneo" tabindex="-1" role="dialog" aria-labelledby="myModalLabelSelectTorneo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabelSelectTorneo">Seleccionar Torneo</h4>
+      </div>
+      <div class="modal-body">
+				<div class="container-fluid">
+          <table class="table table-bordered" style="table-layout:fixed" >
+            <thead>
+              <tr>
+                <th class = "text-center">Torneo</th>
+                <th class = "text-center">Partidos</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for torneo in listTorneos%}
+                <tr>
+                  <td>{{torneo.nombre}}</td>
+                  <td><a class="btn btn-default" href="{{path('limubacadministrator_partidos',{'idpartido':0,'idtorneo':torneo.idTorneo})}}" role="button">Ver</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+				</div>
+			</div>
+      <div class="modal-footer">
+        <a href="{{path('limubacadministrator_homepage')}}" class="btn btn-danger btn-lg" role="button">Salir</a>
+      </div>
+		</div>
+	</div>
+</div>
+{% endblock %}
