@@ -14,31 +14,43 @@ class ConsultasPartidos{
 
   		return $list=$consulta->getResult();
   }
-  
+
   function listEquiposByTorneo($idTorneo,$manager){
 
   		$consulta = $manager ->createQuery("SELECT  e.nombre AS equipo, c.nombre AS categoria
-                FROM participan_t p 
-                INNER JOIN equipo e  ON p.id_equipo=e.id_equipo
-                INNER JOIN torneo t  ON p.id_torneo=t.id_torneo
-				INNER JOIN categoria c  ON p.id_categoria=c.id_categoria
-                WHERE p.id_torneo={$idTorneo}
-				ORDER BY c.id_categoria");
+                FROM limubacadministratorBundle:ParticipanT p
+                INNER JOIN limubacadministratorBundle:Equipo e  WITH p.idEquipo=e.idEquipo
+                INNER JOIN limubacadministratorBundle:Torneo t  WITH p.idTorneo=t.idTorneo
+				INNER JOIN limubacadministratorBundle:Categoria c  WITH p.idCategoria=c.idCategoria
+                WHERE p.idTorneo={$idTorneo}
+				ORDER BY c.idCategoria");
 
   		return $list=$consulta->getResult();
   }
-  
+
+  function listEqCategoriaByTorneo($idTorneo,$manager){
+    $consulta = $manager ->createQuery("SELECT  e.idEquipo, e.nombre AS equipo, c.nombre AS categoria
+                FROM limubacadministratorBundle:ParticipanT p
+                INNER JOIN limubacadministratorBundle:Equipo e  WITH p.idEquipo=e.idEquipo
+                INNER JOIN limubacadministratorBundle:Torneo t  WITH p.idTorneo=t.idTorneo
+		            INNER JOIN limubacadministratorBundle:Categoria c  WITH p.idCategoria=c.idCategoria
+                WHERE p.idTorneo={$idTorneo}");
+    return $consulta->getResult();
+  }
+
   function estadisticasEquipo($idTorneo,$idEquipo,$manager){
-	$pfe=PFequipo($idTorneo,$idEquipo,$manager);
-	$pce=PCequipo($idTorneo,$idEquipo,$manager);
-	$consulta = $manager ->createQuery("SELECT COUNT(id_partido)
-		FROM juegan j
-		INNER JOIN partido p ON j.id_partido=p.id_partido
-		WHERE j.id_equipo={$idEquipo} and p.id_torneo={$idTorneo}");
-				
+	$pfe=$this->PFequipo($idTorneo,$idEquipo,$manager);
+	$pce=$this->PCequipo($idTorneo,$idEquipo,$manager);
+	$consulta = $manager ->createQuery("SELECT COUNT(j.idPartido)
+		FROM limubacadministratorBundle:Juegan j
+		INNER JOIN limubacadministratorBundle:Partido p WITH j.idPartido=p.idPartido
+		WHERE j.idEquipo={$idEquipo} and p.idTorneo={$idTorneo}");
+
 	$pj=$consulta->getResult();
+  $pj=$pj[0][1];
 	$pg=0;
 	$pp=0;
+
 	for($par=0;$par<$pj;$par++){
 		if($pfe[$par]>$pce[$par])$pg++;
 		else $pp++;
@@ -46,35 +58,35 @@ class ConsultasPartidos{
 	$pf=0;
 	$pc=0;
 	for($par=0;$par<$pj;$par++){
-		$pf+=$pfe[$par];
-		$pc-=$pce[$par];
+		$pf+=$pfe[$par]['resultado'];
+		$pc-=$pce[$par]['resultado'];
 	}
 	$dif=$pf+$pc;
 	$total=($pg*3)+($pp);
-	
+
 	$lista=array('pj'=>$pj,'pg'=>$pg,'pp'=>$pp,'pf'=>$pf,'pc'=>$pc,'dif'=>$dif,'total'=>$total);
-	
+
 	return $lista;
-  
+
   }
-  
+
   function PFequipo($idTorneo,$idEquipo,$manager){
-			$consulta = $manager ->createQuery("select j.resultado from juegan j 
-				join partido p on p.id_partido=j.id_partido
-				where j.id_equipo={$idEquipo}
-				and p.id_torneo={$idTorneo}");
-				
+			$consulta = $manager ->createQuery("select j.resultado from limubacadministratorBundle:Juegan j
+				join limubacadministratorBundle:Partido p with p.idPartido=j.idPartido
+				where j.idEquipo={$idEquipo}
+				and p.idTorneo={$idTorneo}");
+
 			return $list=$consulta->getResult();
 	}
   function PCequipo($idTorneo,$idEquipo,$manager){
-			$consulta = $manager ->createQuery("select k.resultado from (select p.id_partido from juegan j 
-				join partido p on p.id_partido=j.id_partido
-				where j.id_equipo={$idEquipo}
-				and p.id_torneo={$idTorneo}) AS pa,juegan k
-				join partido pr on pr.id_partido=k.id_partido
-				where pa.id_partido=pr.id_partido
-				and not k.id_equipo={$idEquipo}");
-				
+    			$consulta = $manager ->createQuery("select k.resultado from limubacadministratorBundle:Juegan k
+          				join limubacadministratorBundle:Partido pr with pr.idPartido=k.idPartido
+          				where pr.idPartido in (select p.idPartido from limubacadministratorBundle:Juegan j
+          				join limubacadministratorBundle:Partido p with p.idPartido=j.idPartido
+          				where j.idEquipo={$idEquipo}
+          				and p.idTorneo={$idTorneo})
+          				and not k.idEquipo={$idEquipo}");
+
 			return $list=$consulta->getResult();
 	}
 

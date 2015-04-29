@@ -165,7 +165,10 @@ background-color: #003171;
 	margin-top:20px;
 	background-color:white;
 }
-
+.tablastats{
+	margin-top:20px;
+	background-color:white;
+}
 .scoreWinner{
 	font-size:large;
 	color:#a90b33;
@@ -174,6 +177,9 @@ background-color: #003171;
 .scoreLooser{
 	font-size:large;
 	font-weight:bold;
+}
+.StatLabel{
+	margin-bottom:15px
 }
 /*-----------------------INICIO ESTILOS DE FAFI...NO TOCAR!!!!-----------------------*/
 
