@@ -459,6 +459,11 @@ form #search {
 
 }
 
+.TFtable tr:nth-child(odd){
+	background: #b8d1f3;
+}
+.TFtable tr:nth-child(odd){
+	background: #FFFFFF;
 }
 /*-----------------------FINAL ESTILOS DE FAFI...NO TOCAR!!!!------------------------*/
 

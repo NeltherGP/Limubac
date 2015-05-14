@@ -24,37 +24,27 @@ limubacadministrator_equipoNuevo:
 
 limubacadministrator_jugadoresAdmin:
     path:     /jugadoresAdmin
-    defaults: { _controller: limubacadministratorBundle:Default:jugadoresAdmin}
+    defaults: { _controller: limubacadministratorBundle:Jugadores:jugadoresAdmin}
 
 limubacadministrator_addjugador:
     path:     /addjugador
-    defaults: { _controller: limubacadministratorBundle:Default:addjugador}
-
-limubacadministrator_upload:
-    path:     /upload
-    defaults: { _controller: limubacadministratorBundle:Upload:upload}
+    defaults: { _controller: limubacadministratorBundle:Jugadores:addjugador}
 
 limubacadministrator_uploados:
     path:     /uploados
-    defaults: { _controller: limubacadministratorBundle:Default:uploados}
+    defaults: { _controller: limubacadministratorBundle:Jugadores:uploados}
 
 limubacadministrator_update:
     path:     /update/{page}
-    defaults: { _controller: limubacadministratorBundle:Default:update, page: 0}
+    defaults: { _controller: limubacadministratorBundle:Jugadores:update, page: 0}
 
 limubacadministrator_buscar:
     path:     /buscar/{page}
-    defaults: { _controller: limubacadministratorBundle:Default:buscar, page: 0}
+    defaults: { _controller: limubacadministratorBundle:Jugadores:buscar, page: 0}
 
 limubacadministrator_editar:
     path:     /editar
-    defaults: { _controller: limubacadministratorBundle:Default:editar}
-
-limubacadministrator_photo:
-    path:     /photo/{number}
-    defaults: { _controller: limubacadministratorBundle:Default:photo}
-    requirements:
-        number: \d+
+    defaults: { _controller: limubacadministratorBundle:Jugadores:editar}
 
 limubacadministrator_torneos:
     path:     /torneos
@@ -118,3 +108,11 @@ limubacadministrator_selectTorneo:
 limubacadministrator_overview:
   path: /overview/{idtorneo}/{idpartido}/{jornada}
   defaults: {_controller:limubacadministratorBundle:overview:overviewPartidos,idtorneo:0,idpartido:0,jornada:1}
+
+limubacadministrator_finanzas:
+    path:     /finanzas
+    defaults: { _controller: limubacadministratorBundle:Default:finanzas}
+
+limubacadministrator_actfin:
+    path:     /actfin
+    defaults: { _controller: limubacadministratorBundle:Default:actfin}
