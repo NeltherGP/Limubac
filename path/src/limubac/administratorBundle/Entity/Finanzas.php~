@@ -1,0 +1,129 @@
+<?php
+
+namespace limubac\administratorBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Finanzas
+ *
+ * @ORM\Table(name="finanzas", indexes={@ORM\Index(name="finanzas_ibfk_1", columns={"id_torneo"}), @ORM\Index(name="finanzas_ibfk_2", columns={"id_equipo"})})
+ * @ORM\Entity
+ */
+class Finanzas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="inscripcion", type="integer", nullable=false)
+     */
+    private $inscripcion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="h_dia", type="integer", nullable=false)
+     */
+    private $hDia;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="h_mes", type="integer", nullable=false)
+     */
+    private $hMes;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="h_anio", type="integer", nullable=false)
+     */
+    private $hAnio;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cuenta", type="integer", nullable=false)
+     */
+    private $cuenta;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="manejo", type="integer", nullable=false)
+     */
+    private $manejo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enero", type="integer", nullable=false)
+     */
+    private $enero;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="febrero", type="integer", nullable=false)
+     */
+    private $febrero;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="marzo", type="integer", nullable=false)
+     */
+    private $marzo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="abril", type="integer", nullable=false)
+     */
+    private $abril;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="mayo", type="integer", nullable=false)
+     */
+    private $mayo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="junio", type="integer", nullable=false)
+     */
+    private $junio;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_finanzas", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idFinanzas;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Equipo
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Equipo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_equipo", referencedColumnName="id_equipo")
+     * })
+     */
+    private $idEquipo;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Torneo
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Torneo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_torneo", referencedColumnName="id_torneo")
+     * })
+     */
+    private $idTorneo;
+
+
+}
