@@ -20,11 +20,11 @@ class Finanzas
     private $inscripcion;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="h_dia", type="integer", nullable=false)
+     * @ORM\Column(name="dia", type="string", length=255, nullable=false)
      */
-    private $hDia;
+    private $dia;
 
     /**
      * @var string

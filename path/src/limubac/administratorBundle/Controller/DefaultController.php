@@ -792,7 +792,7 @@ class DefaultController extends Controller{
     	elseif (!empty($_REQUEST['sel'])) {
     	 	$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Finanzas');
             $queryEdit = $repository->createQueryBuilder('f')
-            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.hDia','f.hMes','f.hAnio','f.cuenta','f.manejo','f.enero','f.febrero','f.marzo','f.abril','f.mayo','f.junio')
+            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.hDia','f.hora','f.monto','f.cuenta','f.manejo','f.enero','f.febrero','f.marzo','f.abril','f.mayo','f.junio')
             ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'f.idEquipo = e.idEquipo')
             ->join('limubacadministratorBundle:ParticipanT', 'p', 'WITH' ,'p.idEquipo = f.idEquipo')
             ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'p.idCategoria = c.idCategoria')

@@ -182,13 +182,13 @@
                       {% else %}
                         <td bgcolor="#FFAD33">$ {{entitie.hDia}} </td>
                       {% endif %}
-                      {% if entitie.hMes == 0 %}
+                      {% if entitie.hora == 0 %}
                         <td bgcolor="#FFAD33"></td>
                       {% else %}
                         <td bgcolor="#FFAD33">$ {{entitie.hMes}} </td>
                       {% endif %}
                       <!--<td bgcolor="#FFAD33"> {{entitie.hDia}} {#{entitie.fNacimiento|date('Y-m-d')}#} </td>-->
-                      {% if entitie.hAnio == 0 %}
+                      {% if entitie.monto == 0 %}
                         <td bgcolor="#FFAD33"></td>
                       {% else %}
                         <td bgcolor="#FFAD33">$ {{entitie.hAnio}} </td>
@@ -197,9 +197,12 @@
 
                       {% if entitie.cuenta == 0 %}
                         <td bgcolor="#FFFF66"> N/A</td>
-                        <td bgcolor="#FFFF66"> N/A</td>
                       {% else %}
                         <td bgcolor="#FFFF66">$ {{entitie.cuenta}} </td>
+                      {% endif %}
+                      {% if entitie.manejo == 0 %}
+                        <td bgcolor="#FFFF66"> N/A</td>
+                      {% else %}
                         <td bgcolor="#FFFF66">$ {{entitie.manejo}} </td>
                       {% endif %}
 

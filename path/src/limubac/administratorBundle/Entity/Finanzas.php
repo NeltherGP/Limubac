@@ -20,11 +20,11 @@ class Finanzas
     private $inscripcion;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="h_dia", type="integer", nullable=false)
+     * @ORM\Column(name="dia", type="string", length=255, nullable=false)
      */
-    private $hDia;
+    private $dia;
 
     /**
      * @var string
@@ -151,26 +151,26 @@ class Finanzas
     }
 
     /**
-     * Set hDia
+     * Set dia
      *
-     * @param integer $hDia
+     * @param string $dia
      * @return Finanzas
      */
-    public function setHDia($hDia)
+    public function setDia($dia)
     {
-        $this->hDia = $hDia;
+        $this->dia = $dia;
 
         return $this;
     }
 
     /**
-     * Get hDia
+     * Get dia
      *
-     * @return integer 
+     * @return string 
      */
-    public function getHDia()
+    public function getDia()
     {
-        return $this->hDia;
+        return $this->dia;
     }
 
     /**

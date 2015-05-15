@@ -9,7 +9,7 @@
       <generator strategy="IDENTITY"/>
     </id>
     <field name="inscripcion" type="integer" column="inscripcion" nullable="false"/>
-    <field name="hDia" type="integer" column="h_dia" nullable="false"/>
+    <field name="dia" type="string" column="dia" length="255" nullable="false"/>
     <field name="hora" type="string" column="hora" length="11" nullable="false"/>
     <field name="monto" type="integer" column="monto" nullable="false"/>
     <field name="cuenta" type="integer" column="cuenta" nullable="false"/>
