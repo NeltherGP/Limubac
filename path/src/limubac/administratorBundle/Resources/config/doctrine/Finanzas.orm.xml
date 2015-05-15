@@ -10,10 +10,10 @@
     </id>
     <field name="inscripcion" type="integer" column="inscripcion" nullable="false"/>
     <field name="hDia" type="integer" column="h_dia" nullable="false"/>
-    <field name="hMes" type="integer" column="h_mes" nullable="false"/>
-    <field name="hAnio" type="integer" column="h_anio" nullable="false"/>
+    <field name="hora" type="string" column="hora" length="11" nullable="false"/>
+    <field name="monto" type="integer" column="monto" nullable="false"/>
     <field name="cuenta" type="integer" column="cuenta" nullable="false"/>
-    <field name="manejo" type="integer" column="manejo" nullable="false"/>
+    <field name="manejo" type="string" column="manejo" length="255" nullable="false"/>
     <field name="enero" type="integer" column="enero" nullable="false"/>
     <field name="febrero" type="integer" column="febrero" nullable="false"/>
     <field name="marzo" type="integer" column="marzo" nullable="false"/>

@@ -27,18 +27,18 @@ class Finanzas
     private $hDia;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="h_mes", type="integer", nullable=false)
+     * @ORM\Column(name="hora", type="string", length=11, nullable=false)
      */
-    private $hMes;
+    private $hora;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="h_anio", type="integer", nullable=false)
+     * @ORM\Column(name="monto", type="integer", nullable=false)
      */
-    private $hAnio;
+    private $monto;
 
     /**
      * @var integer
@@ -48,9 +48,9 @@ class Finanzas
     private $cuenta;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="manejo", type="integer", nullable=false)
+     * @ORM\Column(name="manejo", type="string", length=255, nullable=false)
      */
     private $manejo;
 
@@ -174,49 +174,49 @@ class Finanzas
     }
 
     /**
-     * Set hMes
+     * Set hora
      *
-     * @param integer $hMes
+     * @param string $hora
      * @return Finanzas
      */
-    public function setHMes($hMes)
+    public function setHora($hora)
     {
-        $this->hMes = $hMes;
+        $this->hora = $hora;
 
         return $this;
     }
 
     /**
-     * Get hMes
+     * Get hora
      *
-     * @return integer 
+     * @return string 
      */
-    public function getHMes()
+    public function getHora()
     {
-        return $this->hMes;
+        return $this->hora;
     }
 
     /**
-     * Set hAnio
+     * Set monto
      *
-     * @param integer $hAnio
+     * @param integer $monto
      * @return Finanzas
      */
-    public function setHAnio($hAnio)
+    public function setMonto($monto)
     {
-        $this->hAnio = $hAnio;
+        $this->monto = $monto;
 
         return $this;
     }
 
     /**
-     * Get hAnio
+     * Get monto
      *
      * @return integer 
      */
-    public function getHAnio()
+    public function getMonto()
     {
-        return $this->hAnio;
+        return $this->monto;
     }
 
     /**
@@ -245,7 +245,7 @@ class Finanzas
     /**
      * Set manejo
      *
-     * @param integer $manejo
+     * @param string $manejo
      * @return Finanzas
      */
     public function setManejo($manejo)
@@ -258,7 +258,7 @@ class Finanzas
     /**
      * Get manejo
      *
-     * @return integer 
+     * @return string 
      */
     public function getManejo()
     {

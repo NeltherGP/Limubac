@@ -27,18 +27,18 @@ class Finanzas
     private $hDia;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="h_mes", type="integer", nullable=false)
+     * @ORM\Column(name="hora", type="string", length=11, nullable=false)
      */
-    private $hMes;
+    private $hora;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="h_anio", type="integer", nullable=false)
+     * @ORM\Column(name="monto", type="integer", nullable=false)
      */
-    private $hAnio;
+    private $monto;
 
     /**
      * @var integer
@@ -48,9 +48,9 @@ class Finanzas
     private $cuenta;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="manejo", type="integer", nullable=false)
+     * @ORM\Column(name="manejo", type="string", length=255, nullable=false)
      */
     private $manejo;
 

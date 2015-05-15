@@ -12,6 +12,7 @@ namespace limubac\administratorBundle\Controller;
 		use limubac\administratorBundle\Entity\ParticipanT;
 		use limubac\administratorBundle\Entity\Integra;
 		use limubac\administratorBundle\Entity\Jugador;
+		use limubac\administratorBundle\Entity\Finanzas;
 		use limubac\administratorBundle\Entity\Partido;
 		use limubac\administratorBundle\Entity\Juegan;
 		use limubac\administratorBundle\Entity\TipoSanguineo;
@@ -789,14 +790,15 @@ class DefaultController extends Controller{
     	 	return $this->redirect($this->generateUrl('limubacadministrator_finanzas'));
     	}
     	elseif (!empty($_REQUEST['sel'])) {
-    	 	$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
-            $queryEdit = $repository->createQueryBuilder('p')
-            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria')
-            ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'p.idEquipo = e.idEquipo')
+    	 	$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Finanzas');
+            $queryEdit = $repository->createQueryBuilder('f')
+            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.hDia','f.hMes','f.hAnio','f.cuenta','f.manejo','f.enero','f.febrero','f.marzo','f.abril','f.mayo','f.junio')
+            ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'f.idEquipo = e.idEquipo')
+            ->join('limubacadministratorBundle:ParticipanT', 'p', 'WITH' ,'p.idEquipo = f.idEquipo')
             ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'p.idCategoria = c.idCategoria')
-            ->where('p.idTorneo = :word')
+            ->where('f.idTorneo = :word AND p.idTorneo = :word')
             ->setParameter('word', $_REQUEST['sel'])
-            ->orderBy('equipo')
+            ->orderBy('categoria')
             ->getQuery();
         	$resul = $queryEdit->getResult();
 
@@ -808,16 +810,3 @@ class DefaultController extends Controller{
     }
     //****************************FINAL CONTRALADOR FINANZAS****************************
 }
-
-/*
-Array ( 
-	[0] => Array ( [ide] => 1 [nombre] => invierno2014 ) 
-	[1] => Array ( [ide] => 3 [nombre] => preuba1 ) 
-	[2] => Array ( [ide] => 7 [nombre] => prue21 ) 
-	[3] => Array ( [ide] => 4 [nombre] => prue76 ) 
-	[4] => Array ( [ide] => 5 [nombre] => torne50 ) 
-	[5] => Array ( [ide] => 8 [nombre] => TorneoBeta ) 
-	[6] => Array ( [ide] => 6 [nombre] => torneofrki ) 
-	[7] => Array ( [ide] => 2 [nombre] => verano2015 ) 
-	)
-*/

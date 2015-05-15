@@ -138,49 +138,101 @@
               <table class="table table-bordered TFtable">
                 <thead>
                   <tr>
-                    <td bgcolor="#85ADFF" rowspan="2"><b>#</b></td>
-                    <td bgcolor="#85ADFF" colspan="2"><b>Datos</b></td>
-                    <td bgcolor="#85E085" ><b>Pago inscripción<b></td>
-                    <td bgcolor="#FFAD33" colspan="3"><b>Compra horario<b></td>
-                    <td bgcolor="#FFFF66" colspan="2"><b>Fianza<b></td>
-                    <td bgcolor="#D65CFF" colspan="6"><b>Cooperaciones<b></td>
+                    <!--<td bgcolor="#6A8ACC" rowspan="2"><b>#</b></td>-->
+                    <td bgcolor="#6A8ACC" colspan="2"><b>Datos</b></td>
+                    <td bgcolor="#6AB36A" ><b>Pago inscripción<b></td>
+                    <td bgcolor="#CC8A29" colspan="3"><b>Compra horario<b></td>
+                    <td bgcolor="#CCCC52" colspan="2"><b>Fianza<b></td>
+                    <td bgcolor="#AB4ACC" colspan="6"><b>Cooperaciones<b></td>
                     <td rowspan="2"><b>Editar</b></td>
                   </tr>
                   <tr>
-                    <th bgcolor="#85ADFF">Nombre</th>
-                    <th bgcolor="#85ADFF">Categoria</th>
-                    <th bgcolor="#85E085">Inscripción</th>
-                    <th bgcolor="#FFAD33">Día</th>
-                    <th bgcolor="#FFAD33">Mes</th>
-                    <th bgcolor="#FFAD33">Año</th>
-                    <th bgcolor="#FFFF66">A cuenta</th>
-                    <th bgcolor="#FFFF66">Manejo</th>
-                    <th bgcolor="#D65CFF">Enero</th>
-                    <th bgcolor="#D65CFF">Febrero</th>
-                    <th bgcolor="#D65CFF">Marzo</th>
-                    <th bgcolor="#D65CFF">Abril</th>
-                    <th bgcolor="#D65CFF">Mayo</th>
-                    <th bgcolor="#D65CFF">Junio</th>
+                    <th bgcolor="#6A8ACC">Nombre</th>
+                    <th bgcolor="#6A8ACC">Categoria</th>
+                    <th bgcolor="#6AB36A">Inscripción</th>
+                    <th bgcolor="#CC8A29">Día</th>
+                    <th bgcolor="#CC8A29">Hora</th>
+                    <th bgcolor="#CC8A29">Monto</th>
+                    <th bgcolor="#CCCC52">A cuenta</th>
+                    <th bgcolor="#CCCC52">Manejo</th>
+                    <th bgcolor="#AB4ACC">Enero</th>
+                    <th bgcolor="#AB4ACC">Febrero</th>
+                    <th bgcolor="#AB4ACC">Marzo</th>
+                    <th bgcolor="#AB4ACC">Abril</th>
+                    <th bgcolor="#AB4ACC">Mayo</th>
+                    <th bgcolor="#AB4ACC">Junio</th>
                   </tr>
                 </thead>
                 <tbody class="TFtable">
                   {% for entitie in query %}
                     <tr>
-                      <td bgcolor="#85ADFF"> {{entitie.ide}} </td>
+                      <!--<td bgcolor="#85ADFF"> {{entitie.ide}} </td>-->
                       <td bgcolor="#85ADFF"> {{entitie.equipo}} </td>
                       <td bgcolor="#85ADFF"> {{entitie.categoria}} </td>
-                      <td bgcolor="#85E085"></td>
-                      <td bgcolor="#FFAD33"> {#{entitie.fNacimiento|date('Y-m-d')}#} </td>
-                      <td bgcolor="#FFAD33"></td>
-                      <td bgcolor="#FFAD33"></td>
-                      <td bgcolor="#FFFF66"></td>
-                      <td bgcolor="#FFFF66"></td>
-                      <td bgcolor="#D65CFF"></td>
-                      <td bgcolor="#D65CFF"></td>
-                      <td bgcolor="#D65CFF"></td>
-                      <td bgcolor="#D65CFF"></td>
-                      <td bgcolor="#D65CFF"></td>
-                      <td bgcolor="#D65CFF"></td>
+                      {% if entitie.inscripcion == 0 %}
+                        <td bgcolor="#85E085">N/A </td>
+                      {% else %}
+                        <td bgcolor="#85E085">$ {{entitie.inscripcion}} </td>
+                      {% endif %}
+
+
+
+                      {% if entitie.hDia == 0 %}
+                        <td bgcolor="#FFAD33"></td>
+                      {% else %}
+                        <td bgcolor="#FFAD33">$ {{entitie.hDia}} </td>
+                      {% endif %}
+                      {% if entitie.hMes == 0 %}
+                        <td bgcolor="#FFAD33"></td>
+                      {% else %}
+                        <td bgcolor="#FFAD33">$ {{entitie.hMes}} </td>
+                      {% endif %}
+                      <!--<td bgcolor="#FFAD33"> {{entitie.hDia}} {#{entitie.fNacimiento|date('Y-m-d')}#} </td>-->
+                      {% if entitie.hAnio == 0 %}
+                        <td bgcolor="#FFAD33"></td>
+                      {% else %}
+                        <td bgcolor="#FFAD33">$ {{entitie.hAnio}} </td>
+                      {% endif %}
+
+
+                      {% if entitie.cuenta == 0 %}
+                        <td bgcolor="#FFFF66"> N/A</td>
+                        <td bgcolor="#FFFF66"> N/A</td>
+                      {% else %}
+                        <td bgcolor="#FFFF66">$ {{entitie.cuenta}} </td>
+                        <td bgcolor="#FFFF66">$ {{entitie.manejo}} </td>
+                      {% endif %}
+
+                      {% if entitie.enero == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.enero}} </td>
+                      {% endif %}                      
+                      {% if entitie.febrero == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.febrero}} </td>
+                      {% endif %}
+                      {% if entitie.marzo == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.marzo}} </td>
+                      {% endif %}
+                      {% if entitie.abril == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.abril}} </td>
+                      {% endif %}
+                      {% if entitie.mayo == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.mayo}} </td>
+                      {% endif %}
+                      {% if entitie.junio == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.junio}} </td>
+                      {% endif %}s
                       <td>
                         <div class="btn-group sharp" data-toggle="radio" style="width: 50px"  text-align:"center">
                           <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{#{entitie.idJugador}#}'>
