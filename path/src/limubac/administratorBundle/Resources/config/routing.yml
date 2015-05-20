@@ -14,6 +14,10 @@ limubacadministrator_equipos:
     path:     /equipos
     defaults: { _controller: limubacadministratorBundle:Equipos:equipos}
 
+limubacadministrator_editarEquipo:
+    path:     /editarEquipo
+    defaults: { _controller: limubacadministratorBundle:Equipos:editarEquipo}
+
 limubacadministrator_equipo:
     path:     /equipo
     defaults: { _controller: limubacadministratorBundle:Equipos:equipo}
