@@ -116,3 +116,7 @@ limubacadministrator_finanzas:
 limubacadministrator_actfin:
     path:     /actfin
     defaults: { _controller: limubacadministratorBundle:Default:actfin}
+
+limubacadministrator_editfin:
+    path:     /editfin
+    defaults: { _controller: limubacadministratorBundle:Default:editfin}

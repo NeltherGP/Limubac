@@ -7,51 +7,7 @@
         <div class="formAnotacion form-group">
           <div class="col-md-9 tLeft">
           </div>
-          <div class="col-md-3 tRight" style="margin-bottom:20px">
-            <form class="search" action="../app_dev.php/actfin">
-              <input class="btn btn-primary btn-info" id="submit" value="" type="submit">
-              <label for="submit" class="submit"></label>
-              <a href="javascript: void(0)" class="icon"></a>
-              <input type="search" name="Search" id="search" placeholder="Buscar nombre...">
-            </form>
-            {% block javascripts %}
-              <script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-              <script type="text/javascript">
-                $(".icon").click(function() {
-                    var icon = $(this),
-                    input = icon.parent().find("#search"),
-                    submit = icon.parent().find(".submit"),
-                    is_submit_clicked = false;
-
-                  input.animate({
-                    "width": "165px",
-                    "padding": "10px",
-                    "opacity": 1
-                    }, 300, function() {
-                    input.focus();
-                  });
-
-                  submit.mousedown(function() {
-                    is_submit_clicked = true;
-                  });
-
-                  input.blur(function() {
-                    if(!input.val() && !is_submit_clicked) {
-                      input.animate({
-                        "width": "0",
-                        "padding": "0",
-                        "opacity": 0
-                      }, 200);
-                  
-                      // Get the icon back
-                      icon.fadeIn(200);
-                    };
-                  });
-                });
-
-                $('.basic').fancySelect();
-              </script>
-            {% endblock javascripts %}
+          <div class="col-md-3 tRight" style="margin-bottom:20px">  
           </div>
         </div>
       </div>
@@ -66,32 +22,31 @@
             <h1>Finanzas</h1>
             <font color="#0066FF">
               <h3>
-                {{fondo}}
-               Fondo restante</h3>
+                {{ingresos[0][1]}} Ingresos</h3>
             </font>
           </div>
           <div class="col-md-2 tRight">
             <font color="green">
               <h1> 
-                {{ingresos}}
+                {{inscritos[0][1]}}
               </h1>
-              <h3>Ingresos</h3>
+              <h3>Inscritos</h3>
             </font>
           </div> 
           <div class="col-md-2 tRight">
             <font color="red">
               <h1>
-                {{egresos}}
+                {{pendientes[0][1]}}
               </h1>
-              <h3>Egresos</h3>
+              <h3>Pendientes</h3>
             </font>
           </div> 
           <div class="col-md-2 tRight">
             <font color="#FFCC00">
               <h1>
-                {{pendientes}}
+                0
               </h1>
-              <h3>Pendientes</h3>
+              <h3>Nada</h3>
             </font>
           </div>
         </div>
@@ -177,33 +132,30 @@
 
 
 
-                      {% if entitie.hDia == 0 %}
+                      {% if entitie.dia == null %}
                         <td bgcolor="#FFAD33"></td>
                       {% else %}
-                        <td bgcolor="#FFAD33">$ {{entitie.hDia}} </td>
+                        <td bgcolor="#FFAD33"> {{entitie.dia}} </td>
                       {% endif %}
                       {% if entitie.hora == 0 %}
                         <td bgcolor="#FFAD33"></td>
                       {% else %}
-                        <td bgcolor="#FFAD33">$ {{entitie.hMes}} </td>
+                        <td bgcolor="#FFAD33"> {{entitie.hora}} </td>
                       {% endif %}
-                      <!--<td bgcolor="#FFAD33"> {{entitie.hDia}} {#{entitie.fNacimiento|date('Y-m-d')}#} </td>-->
+                      <!--<td bgcolor="#FFAD33"> {{entitie.dia}} {#{entitie.fNacimiento|date('Y-m-d')}#} </td>-->
                       {% if entitie.monto == 0 %}
                         <td bgcolor="#FFAD33"></td>
                       {% else %}
-                        <td bgcolor="#FFAD33">$ {{entitie.hAnio}} </td>
+                        <td bgcolor="#FFAD33">$ {{entitie.monto}} </td>
                       {% endif %}
 
 
                       {% if entitie.cuenta == 0 %}
                         <td bgcolor="#FFFF66"> N/A</td>
-                      {% else %}
-                        <td bgcolor="#FFFF66">$ {{entitie.cuenta}} </td>
-                      {% endif %}
-                      {% if entitie.manejo == 0 %}
                         <td bgcolor="#FFFF66"> N/A</td>
                       {% else %}
-                        <td bgcolor="#FFFF66">$ {{entitie.manejo}} </td>
+                        <td bgcolor="#FFFF66">$ {{entitie.cuenta}} </td>
+                        <td bgcolor="#FFFF66"> {{entitie.manejo}} </td>
                       {% endif %}
 
                       {% if entitie.enero == 0 %}
@@ -235,10 +187,10 @@
                         <td bgcolor="#D65CFF">N/A</td>
                       {% else %}
                         <td bgcolor="#D65CFF">$ {{entitie.junio}} </td>
-                      {% endif %}s
+                      {% endif %}
                       <td>
                         <div class="btn-group sharp" data-toggle="radio" style="width: 50px"  text-align:"center">
-                          <button class="btn btn-mini btn-success" type='submit' name='edit[]' value ='{#{entitie.idJugador}#}'>
+                          <button class="btn btn-mini btn-success" type='submit' name='edit' value ='{{entitie.ide}}'>
                             <i class="glyphicon-pencil glyphicon"></i>
                           </button>
                           <!--<button class="btn btn-mini btn-success" type='submit' name='foto[]' value ='{#{entitie.idJugador}#}'>
