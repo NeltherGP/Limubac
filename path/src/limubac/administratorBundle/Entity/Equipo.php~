@@ -20,6 +20,13 @@ class Equipo
     private $nombre;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="registrado", type="boolean", nullable=false)
+     */
+    private $registrado;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_equipo", type="integer")
