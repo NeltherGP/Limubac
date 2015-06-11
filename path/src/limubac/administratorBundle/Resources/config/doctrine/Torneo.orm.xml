@@ -8,5 +8,6 @@
     <field name="costo" type="float" column="costo" precision="10" scale="0" nullable="false"/>
     <field name="fInicio" type="date" column="f_inicio" nullable="false"/>
     <field name="fTermino" type="date" column="f_termino" nullable="false"/>
+    <field name="inscripcionAbierta" type="boolean" column="inscripcion_abierta" nullable="false"/>
   </entity>
 </doctrine-mapping>
