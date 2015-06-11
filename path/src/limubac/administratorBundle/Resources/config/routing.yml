@@ -118,3 +118,8 @@ limubacadministrator_selectTorneo:
 limubacadministrator_overview:
   path: /overview/{idtorneo}/{idpartido}/{jornada}
   defaults: {_controller:limubacadministratorBundle:overview:overviewPartidos,idtorneo:0,idpartido:0,jornada:1}
+
+limubacadministrator_sessions:
+  path: /sesiones
+  defaults: { _controller: limubacadministratorBundle:sessions:sex}
+  
