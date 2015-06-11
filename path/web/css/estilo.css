@@ -459,6 +459,26 @@ form #search {
 
 }
 
+.TFtable tr:nth-child(odd){
+	background: #b8d1f3;
+}
+.TFtable tr:nth-child(odd){
+	background: #FFFFFF;
+}
+
+h4 {
+font-size: 14px;
+	color: #000;
+	text-transform: uppercase;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    height: 18px>
+}
+
+h5 {
+font-size: 11px;
+color: #fff;
+text-transform: uppercase;
 }
 /*-----------------------FINAL ESTILOS DE FAFI...NO TOCAR!!!!------------------------*/
 
@@ -471,3 +491,5 @@ form #search {
    right: 0;
    width:200px;
 }
+
+

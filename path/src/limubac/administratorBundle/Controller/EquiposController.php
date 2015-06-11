@@ -38,7 +38,41 @@ class EquiposController extends Controller{
 		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
 		$Ramas = $repositorio->findAll();
 		
-    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('listEquip' =>$ListaEquipos,'Torneos'=>$Torneos,'Ramas'=>$Ramas));
+		//Editando Equipo
+		if(isset($_REQUEST['editarEquipo'])){
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
+			$Participan = $repositorio->find($_REQUEST['editarEquipo']);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
+			$Rama =$repositorio->find($_REQUEST['rama']);
+			$Participan->setIdRama($Rama);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
+			$Categoria =$repositorio->find($_REQUEST['Categoria']);
+			$Participan->setIdCategoria($Categoria);
+			
+			$Manager = $this->getDoctrine()->getManager();
+			$Manager->persist($Participan);
+			$Manager->flush();
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$Equipo = $repositorio->find($_REQUEST['opciones']);
+			
+			$Equipo->setNombre($_REQUEST['NuevoEquipo']);
+			$Manager->persist($Equipo);
+			$Manager->flush();
+			
+		}
+		
+		//Cantidad Jugadores en un equipo
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Integra");
+		$query = $repositorio->createQueryBuilder('i')
+				->select('IDENTITY(i.idEquipo)','count(i.idEquipo)')
+				->groupBy('i.idEquipo')
+				->getQuery();
+			$jugadores = $query->getResult();
+		//print_r($jugadores);
+    	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('Jugadores'=>$jugadores,'listEquip' =>$ListaEquipos,'Torneos'=>$Torneos,'Ramas'=>$Ramas));
     }
 	
 	public function equipoAction(){
@@ -79,6 +113,7 @@ class EquiposController extends Controller{
 			$Manager->flush();
 			$_REQUEST['opciones'] = $equipo->getIdEquipo();
 		}
+		
 		
         if ($request->getMethod() == 'GET') {
             $url_to_parse = $_SERVER['REQUEST_URI'];
@@ -140,10 +175,7 @@ class EquiposController extends Controller{
 						$Mensaje ="El jugador no cumple con los requerimientos para pertenecer al equipo";
 					}
 					
-					
 					//Fin Agregar Al Equipo
-					
-					
                 }
                 else{
                     return new SymfonyResponse('Algo Fallo!');
@@ -202,6 +234,7 @@ class EquiposController extends Controller{
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$equipo = $repositorio->find($_REQUEST['opciones']);
 			
+			
 			//Capitan
 			if($equipo->getIdCapitan()==null){
 				$Capi = array( array(
@@ -230,6 +263,7 @@ class EquiposController extends Controller{
 				->getQuery();
 			
 			$jugadores = $query->getResult();
+			
 			//end Jugadores
 			
 			//Representante
@@ -284,6 +318,28 @@ class EquiposController extends Controller{
 		$Categorias = $repositorio->findAll();
 		
 		return $this->render('limubacadministratorBundle:administracion:equipoNuevo.html.twig',array('Categorias'=>$Categorias));
+	}
+	
+	public function editarEquipoAction(){
+		//Conseguir Categorias
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
+		$Categorias = $repositorio->findAll();
+		
+		
+		//Conseguir Equipo
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+		$Equipo = $repositorio->find($_REQUEST['opciones']);
+		
+		//Conseguir ParticipanT
+		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
+		$query = $repositorio->createQueryBuilder('p')
+				->select('p.idRegistro','IDENTITY(p.idRama)','IDENTITY(p.idCategoria)')
+				->where('p.idEquipo = '.$Equipo->getIdEquipo())
+				->getQuery();
+			
+		$Participan= $query->getResult();
+		var_dump($Participan);
+		return $this->render('limubacadministratorBundle:administracion:editarEquipo.html.twig',array('Participan'=>$Participan,'Equipo'=>$Equipo,'Categorias'=>$Categorias));
 	}
 
 	//definido un jugador y un equipo averigua si es apto para inscribirlo

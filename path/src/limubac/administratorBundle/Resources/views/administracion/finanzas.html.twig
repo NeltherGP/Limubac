@@ -1,0 +1,211 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+
+    <div class="row-fluid">
+      <div class="col-md-12" style="padding-left:0px; padding-right:0px; margin-bottom:20px">
+        <div class="formAnotacion form-group">
+          <div class="col-md-9 tLeft">
+          </div>
+          <div class="col-md-3 tRight" style="margin-bottom:20px">  
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <form class="form-horizontal" role="form" action="../app_dev.php/actfin">
+    <div class="row-fluid">
+      <div class="col-md-12 borBox well btn-dashboard">     
+        <div class="formAnotacion form-group">
+          <div class="col-md-6 tLeft" >
+            <h1>Finanzas</h1>
+            <font color="#0066FF">
+              <h3>
+                {{ingresos[0][1]}} Ingresos</h3>
+            </font>
+          </div>
+          <div class="col-md-2 tRight">
+            <font color="green">
+              <h1> 
+                {{inscritos[0][1]}}
+              </h1>
+              <h3>Inscritos</h3>
+            </font>
+          </div> 
+          <div class="col-md-2 tRight">
+            <font color="red">
+              <h1>
+                {{pendientes[0][1]}}
+              </h1>
+              <h3>Pendientes</h3>
+            </font>
+          </div> 
+          <div class="col-md-2 tRight">
+            <font color="#FFCC00">
+              <h1>
+                0
+              </h1>
+              <h3>Nada</h3>
+            </font>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-md-12 borBox wellDark btn-dashboard" style="height: 52.66666674613952px">
+        <div class="formAnotacion form-group">
+          <div  class="col-md-9">
+            <h3>Selecciona Torneo</h3>
+          </div>
+          <div class="btn-group sharp col-md-2">
+            <select class="form-control" name="sel">
+              <option value="default">Selecciona torneo…</option>
+              {% for tor in torneos %}
+                <option value=" {{tor.ide}} " >{{tor.nombre}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="btn-group sharp col-md-1">
+            <button class="btn btn-primary btn-info" type='submit' name='ac'>
+              <i class="glyphicon glyphicon-th-list"></i> Mostrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+        <div class="formAnotacion form-group col-md-12" style="padding-left:0px; padding-right:0px;">
+          <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+            {% if query is empty %}
+              <div class="row-fluid">
+                <div class="col-md-12" style="text-align:center;">
+                  <div class="formAnotacion form-group" >
+                    <h3 class="col-md-12">Seleccione un torneo.</h3><br>
+                    <strong>Seleccionar un torneo mostrara las finanzas de los equipos inscritos en ese torneo.</strong>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <table class="table table-bordered TFtable">
+                <thead>
+                  <tr>
+                    <!--<td bgcolor="#6A8ACC" rowspan="2"><b>#</b></td>-->
+                    <td bgcolor="#6A8ACC" colspan="2"><b>Datos</b></td>
+                    <td bgcolor="#6AB36A" ><b>Pago inscripción<b></td>
+                    <td bgcolor="#CC8A29" colspan="3"><b>Compra horario<b></td>
+                    <td bgcolor="#CCCC52" colspan="2"><b>Fianza<b></td>
+                    <td bgcolor="#AB4ACC" colspan="6"><b>Cooperaciones<b></td>
+                    <td rowspan="2"><b>Editar</b></td>
+                  </tr>
+                  <tr>
+                    <th bgcolor="#6A8ACC">Nombre</th>
+                    <th bgcolor="#6A8ACC">Categoria</th>
+                    <th bgcolor="#6AB36A">Inscripción</th>
+                    <th bgcolor="#CC8A29">Día</th>
+                    <th bgcolor="#CC8A29">Hora</th>
+                    <th bgcolor="#CC8A29">Monto</th>
+                    <th bgcolor="#CCCC52">A cuenta</th>
+                    <th bgcolor="#CCCC52">Manejo</th>
+                    <th bgcolor="#AB4ACC">Enero</th>
+                    <th bgcolor="#AB4ACC">Febrero</th>
+                    <th bgcolor="#AB4ACC">Marzo</th>
+                    <th bgcolor="#AB4ACC">Abril</th>
+                    <th bgcolor="#AB4ACC">Mayo</th>
+                    <th bgcolor="#AB4ACC">Junio</th>
+                  </tr>
+                </thead>
+                <tbody class="TFtable">
+                  {% for entitie in query %}
+                    <tr>
+                      <!--<td bgcolor="#85ADFF"> {{entitie.ide}} </td>-->
+                      <td bgcolor="#85ADFF"> {{entitie.equipo}} </td>
+                      <td bgcolor="#85ADFF"> {{entitie.categoria}} </td>
+                      {% if entitie.inscripcion == 0 %}
+                        <td bgcolor="#85E085">N/A </td>
+                      {% else %}
+                        <td bgcolor="#85E085">$ {{entitie.inscripcion}} </td>
+                      {% endif %}
+
+
+
+                      {% if entitie.dia == null %}
+                        <td bgcolor="#FFAD33"></td>
+                      {% else %}
+                        <td bgcolor="#FFAD33"> {{entitie.dia}} </td>
+                      {% endif %}
+                      {% if entitie.hora == 0 %}
+                        <td bgcolor="#FFAD33"></td>
+                      {% else %}
+                        <td bgcolor="#FFAD33"> {{entitie.hora}} </td>
+                      {% endif %}
+                      <!--<td bgcolor="#FFAD33"> {{entitie.dia}} {#{entitie.fNacimiento|date('Y-m-d')}#} </td>-->
+                      {% if entitie.monto == 0 %}
+                        <td bgcolor="#FFAD33"></td>
+                      {% else %}
+                        <td bgcolor="#FFAD33">$ {{entitie.monto}} </td>
+                      {% endif %}
+
+
+                      {% if entitie.cuenta == 0 %}
+                        <td bgcolor="#FFFF66"> N/A</td>
+                        <td bgcolor="#FFFF66"> N/A</td>
+                      {% else %}
+                        <td bgcolor="#FFFF66">$ {{entitie.cuenta}} </td>
+                        <td bgcolor="#FFFF66"> {{entitie.manejo}} </td>
+                      {% endif %}
+
+                      {% if entitie.enero == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.enero}} </td>
+                      {% endif %}                      
+                      {% if entitie.febrero == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.febrero}} </td>
+                      {% endif %}
+                      {% if entitie.marzo == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.marzo}} </td>
+                      {% endif %}
+                      {% if entitie.abril == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.abril}} </td>
+                      {% endif %}
+                      {% if entitie.mayo == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.mayo}} </td>
+                      {% endif %}
+                      {% if entitie.junio == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.junio}} </td>
+                      {% endif %}
+                      <td>
+                        <div class="btn-group sharp" data-toggle="radio" style="width: 50px"  text-align:"center">
+                          <button class="btn btn-mini btn-success" type='submit' name='edit' value ='{{entitie.ide}}'>
+                            <i class="glyphicon-pencil glyphicon"></i>
+                          </button>
+                          <!--<button class="btn btn-mini btn-success" type='submit' name='foto[]' value ='{#{entitie.idJugador}#}'>
+                            <i class="glyphicon-camera glyphicon"></i>
+                          </button>-->
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

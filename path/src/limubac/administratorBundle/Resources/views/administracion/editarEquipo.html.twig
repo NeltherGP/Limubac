@@ -1,0 +1,54 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+<form action="../app_dev.php/equipos" method="POST">
+	<div class="col-md-12 well">
+		<h1>Nombre Del equipo</h1>
+		<input class="form-control" name="NuevoEquipo" value={{Equipo.nombre}}>
+	</div>
+	<div class="col-md-12 well">
+		<h1>Categoria del Equipo</h1>
+		{% set indice = 0 %}
+		{% for Categoria in 0..Categorias|length/3 %}
+			<div class="row">
+				{% for i in 0..2%}
+					{% if indice+i < Categorias|length %}
+						<input type="radio" 
+						{% if Categorias[indice+i].idCategoria == Participan[0][2] %}
+							checked="checked"
+						{% endif %}
+						name="Categoria"  value={{Categorias[indice+i].idCategoria}}> {{Categorias[indice+i].nombre}}
+						
+					{% endif%}
+				{% endfor%}
+			</div>
+			{% set indice = (indice +3)%}
+		{% endfor %}
+	</div>
+	
+	<div class="col-md-12 well row">
+		<h1>Rama del equipo</h1>
+		<div class="col-md-5">
+			<input type="radio" name="rama" value=1 
+			{%if Participan[0][1]==1%}
+				checked="checked"
+			{% endif %}
+			> Varonil
+			
+		</div>
+		<div class="col-md-5">
+			<input type="radio" name="rama" value=2
+			{%if Participan[0][1]==2%}
+				checked="checked"
+			{% endif %}
+			> Femenil
+		</div>
+	</div>
+<input type="hidden" name="opciones" value={{Equipo.idEquipo}}>
+<input type="hidden" name="editarEquipo" value={{Participan[0].idRegistro}}>
+
+	<div class="col-md-12 well row">
+		<button type="summit" class="btn btn-primary btn-info">Actualizar Equipo</button>
+	</div>
+</form>	
+{% endblock %}
