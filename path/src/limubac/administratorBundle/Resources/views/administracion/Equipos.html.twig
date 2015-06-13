@@ -24,9 +24,9 @@
 											<button type="submit" class="btn btn-primary btn-info col-md-12">Agregar Jugadores</button>
 										</form>
 										
-										<form class="form-horizontal" role="form" action="../app_dev.php/equipo" method="post">
-											<input type="hidden" value={{equipo.idEquipo}} name="opciones">
-											<button type="submit" class="btn btn-primary btn-info col-md-12"
+										<form class="form-horizontal" role="form" action="../app_dev.php/equipoATorneo" method="post">
+											<input type="hidden" value={{equipo.idEquipo}} name="Registro">
+											<button type="submit" 
 											{% set positivo =0%}
 											{% for numero in Jugadores %} 
 												{% if numero[1]== equipo.idEquipo %}
@@ -40,8 +40,7 @@
 												disabled="disabled" 
 											{% endif %}
 											
-											
-											>Registrar Torneo</button>
+											class="btn btn-primary btn-info col-md-12">Registrar Torneo</button>
 										</form>
 									</div>
 									

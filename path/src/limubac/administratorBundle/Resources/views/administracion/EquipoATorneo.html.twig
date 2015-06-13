@@ -1,0 +1,29 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+	<div class="row col-md-12">
+		<form class="form-horizontal" role="form" action="../app_dev.php/equipos" method="post"">
+		{% set indice = 0 %}
+		{% if Torneos|length>3 %}
+		{% for Torneo in 0..Torneos|length/3 %}
+			<div class="row">
+				{% for i in 0..2%}
+					{% if indice+i < Torneos|length %}
+						<input type="radio" name="Torneo"  value={{Torneos[indice+i].idTorneo}}> {{Torneos[indice+i].nombre}}
+					{% endif%}
+				{% endfor%}
+			</div>
+			{% set indice = (indice +3)%}
+		{% endfor %}
+		{% else %}
+			<div class="row">
+				{% for i in 0..Torneos|length-1%}
+						<input type="radio" name="Torneo"  value={{Torneos[i].idTorneo}}> {{Torneos[i].nombre}}
+				{% endfor%}
+			</div>
+		{% endif%}
+		<input type="hidden" name="idEquipo" value="{{equipo}}">
+		<button type="submit" class="btn btn-primary btn-info col-md-12">Registrar al Torneo</button>
+		</form>
+	</div>
+{% endblock %}
