@@ -548,7 +548,7 @@ class DefaultController extends Controller{
 
                     $tor -> setCosto($out['torneo']['costo']);
 
-                    $tor -> setInscripcionAbierta($out['torneo']['inscripcionAbierta']);
+                    $tor -> setInscripcionAbierta("1");
 
                     $em = $this->getDoctrine()->getManager();
                     $em -> persist($tor);
