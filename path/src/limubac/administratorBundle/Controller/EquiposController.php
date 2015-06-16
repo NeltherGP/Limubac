@@ -22,6 +22,8 @@ namespace limubac\administratorBundle\Controller;
 		use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 		use Symfony\Component\Validator\Constraints\DateTime;
 
+	include 'funcionesExtras.php';	
+		
 class EquiposController extends Controller{
 		
 	public function equiposAction(){
@@ -30,7 +32,7 @@ class EquiposController extends Controller{
 		
 		if(isset($_REQUEST['Torneo'])){ //valor del torneo al que se reitrara el equipo
 			$Manager = $this->getDoctrine()->getManager();
-			echo "Torneo: ".$_REQUEST['Torneo']."   equipo: ".$_REQUEST['idEquipo']."<br>";
+			//echo "Torneo: ".$_REQUEST['Torneo']."   equipo: ".$_REQUEST['idEquipo']."<br>";
 			$Participan = new ParticipanT();
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
 			$query = $repositorio->createQueryBuilder('p')
@@ -44,10 +46,13 @@ class EquiposController extends Controller{
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
 			$Torneo = $repositorio->find($_REQUEST['Torneo']);		
 			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$equipo = $repositorio->find($_REQUEST['idEquipo']);	
 			
-			
+			$equipo->setRegistrado(true);
 			$Participan->setIdTorneo($Torneo);
 			$Manager->persist($Participan);
+			$Manager->persist($Torneo);
 			$Manager->flush();
 			
 			
@@ -114,7 +119,7 @@ class EquiposController extends Controller{
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();
 			$equipo->setNombre($_POST['NuevoEquipo']);
-			
+			$equipo->setRegistrado(false);
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($equipo);
 			$Manager->flush();
@@ -141,6 +146,17 @@ class EquiposController extends Controller{
 			$_REQUEST['opciones'] = $equipo->getIdEquipo();
 		}
 		
+		//Modificando Jugador 
+		if(isset($_REQUEST['opciones']) && isset($_REQUEST['NoJugador']) && isset($_REQUEST['idJugador'])){
+			$Manager = $this->getDoctrine()->getManager();
+			$query = $Manager->createQuery("UPDATE limubac\administratorBundle\Entity\Integra as i SET i.noPlayera=".$_REQUEST['NoJugador']." where i.idEquipo='".$_REQUEST['opciones']."' and i.idJugador='".$_REQUEST['idJugador']."'");
+			$query->getResult();
+			 
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$jugador = $repositorio->find($_REQUEST['idJugador']);
+			
+			//de aqui sigue fafi
+		}
 		
         if ($request->getMethod() == 'GET') {
             $url_to_parse = $_SERVER['REQUEST_URI'];
@@ -181,14 +197,10 @@ class EquiposController extends Controller{
                     $em -> flush();
 					//Fin de agregar jugador
 					
-					
-					
 					//Agregar Al equipo
-					
-					
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 					$equipo = $repositorio->find($_REQUEST['opciones']);
-					if(Restringe($equipo,$player)){
+					if(restringe($equipo,$player,$this)){
 						//si cumple las condiciones se inscribira al jugador al equipo
 						$integra = new Integra();
 						$integra->setNoPlayera(intval($out['numero']));
@@ -386,37 +398,6 @@ class EquiposController extends Controller{
 		return $this->render('limubacadministratorBundle:administracion:equipoATorneo.html.twig',array('Torneos'=>$Torneos,'equipo'=>$_REQUEST['Registro']));
 	}
 	
-	//definido un jugador y un equipo averigua si es apto para inscribirlo
-	private function Restringe($equipo,$Jugador){
-		
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
-		$query = $repositorio->createQueryBuilder('p')
-			->select('p.idCategoria')
-			->where('p.idEquipo ='.$equipo->getIdEquipo())
-			->getQuery();
-		$Participan = $query->getResult();
-		
-		switch($Participan->getIdCategoria()){//Las categorias estan en la tabla categoria de la base de datos
-			case 1: //Primera Fuerza
-				
-				break;
-			case 2: //Segunda Fuerza
-				break;
-			case 3: //Tercera Fuerza
-				
-				break;
-			case 4: //Estudiantil
-				break;
-			case 5: //Femenil
-				break;
-			case 6: //Maxibasket
-				break;
-			case 7: //Femenil
-				break;
-			case 8: //Maxibasket
-				break;
-		}
-		return true;
-	}
+	
 }	
 ?>
