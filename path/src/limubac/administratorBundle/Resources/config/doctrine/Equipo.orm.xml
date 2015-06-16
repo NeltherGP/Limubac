@@ -11,6 +11,7 @@
       <generator strategy="IDENTITY"/>
     </id>
     <field name="nombre" type="string" column="nombre" length="35" nullable="false"/>
+    <field name="registrado" type="boolean" column="registrado" nullable="false"/>
     <many-to-one field="auxiliar" target-entity="Jugador">
       <join-columns>
         <join-column name="auxiliar" referenced-column-name="id_jugador"/>

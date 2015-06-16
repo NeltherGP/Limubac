@@ -26,6 +26,10 @@ limubacadministrator_equipoNuevo:
     path:     /equipoNuevo
     defaults: { _controller: limubacadministratorBundle:Equipos:equipoNuevo}
 
+limubacadministrator_equipoATorneo:
+    path:     /equipoATorneo
+    defaults: { _controller: limubacadministratorBundle:Equipos:equipoATorneo}
+
 limubacadministrator_jugadoresAdmin:
     path:     /jugadoresAdmin
     defaults: { _controller: limubacadministratorBundle:Jugadores:jugadoresAdmin}
