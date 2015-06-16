@@ -14,6 +14,7 @@ class TorneoType extends AbstractType{
 		$builder->add('costo','money',array("currency" => 'MXN'));
 		$builder->add('fInicio','date', array('widget' => 'single_text','format' => 'yyyy-MM-dd',));
 		$builder->add('fTermino','date', array('widget' => 'single_text','format' => 'yyyy-MM-dd',));
+		$builder->add('inscripcionAbierta','integer');
 	}
 
 	public function getName(){

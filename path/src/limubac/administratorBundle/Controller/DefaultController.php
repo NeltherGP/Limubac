@@ -511,7 +511,7 @@ class DefaultController extends Controller{
        
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
         $queryTorneos = $repository->createQueryBuilder('t')
-            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo','t.inscripcionAbierta')
+            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo')
             ->orderBy('t.idTorneo', 'DESC')
             ->getQuery();
         $entities = $queryTorneos->getResult();
@@ -547,6 +547,8 @@ class DefaultController extends Controller{
                     $tor -> setFTermino(new \DateTime($fn));
 
                     $tor -> setCosto($out['torneo']['costo']);
+
+                    $tor -> setInscripcionAbierta($out['torneo']['inscripcionAbierta']);
 
                     $em = $this->getDoctrine()->getManager();
                     $em -> persist($tor);
