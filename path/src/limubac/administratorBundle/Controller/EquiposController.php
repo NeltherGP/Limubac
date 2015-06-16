@@ -30,7 +30,7 @@ class EquiposController extends Controller{
 		
 		if(isset($_REQUEST['Torneo'])){ //valor del torneo al que se reitrara el equipo
 			$Manager = $this->getDoctrine()->getManager();
-			echo "Torneo: ".$_REQUEST['Torneo']."   equipo: ".$_REQUEST['idEquipo']."<br>";
+			//echo "Torneo: ".$_REQUEST['Torneo']."   equipo: ".$_REQUEST['idEquipo']."<br>";
 			$Participan = new ParticipanT();
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
 			$query = $repositorio->createQueryBuilder('p')
@@ -44,10 +44,13 @@ class EquiposController extends Controller{
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
 			$Torneo = $repositorio->find($_REQUEST['Torneo']);		
 			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+			$equipo = $repositorio->find($_REQUEST['idEquipo']);	
 			
-			
+			$equipo->setRegistrado(true);
 			$Participan->setIdTorneo($Torneo);
 			$Manager->persist($Participan);
+			$Manager->persist($Torneo);
 			$Manager->flush();
 			
 			
@@ -141,6 +144,17 @@ class EquiposController extends Controller{
 			$_REQUEST['opciones'] = $equipo->getIdEquipo();
 		}
 		
+		//Modificando Jugador 
+		if(isset($_REQUEST['opciones']) && isset($_REQUEST['NoJugador']) && isset($_REQUEST['idJugador'])){
+			$Manager = $this->getDoctrine()->getManager();
+			$query = $Manager->createQuery("UPDATE limubac\administratorBundle\Entity\Integra as i SET i.noPlayera=".$_REQUEST['NoJugador']." where i.idEquipo='".$_REQUEST['opciones']."' and i.idJugador='".$_REQUEST['idJugador']."'");
+			$query->getResult();
+			 
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
+			$jugador = $repositorio->find($_REQUEST['idJugador']);
+			
+			//de aqui sigue fafi
+		}
 		
         if ($request->getMethod() == 'GET') {
             $url_to_parse = $_SERVER['REQUEST_URI'];

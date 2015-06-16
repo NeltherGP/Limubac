@@ -14,6 +14,7 @@
 										<H3 value="{{equipo.idEquipo}}">{{equipo.nombre}}</H3>
 									</div>
 									<div class="col-md-6">
+									{% if equipo.registrado==0 %}
 										<form class="form-horizontal" role="form" action="../app_dev.php/editarEquipo" method="post">
 											<input type="hidden" value={{equipo.idEquipo}} name="opciones">
 											<button type="submit" class="btn btn-primary btn-info col-md-12">Editar</button>
@@ -42,6 +43,18 @@
 											
 											class="btn btn-primary btn-info col-md-12">Registrar Torneo</button>
 										</form>
+										{% else %}
+											<form class="form-horizontal" role="form" action="../app_dev.php/equipo" method="post">
+												<input type="hidden" value={{equipo.idEquipo}} name="opciones">
+												<button type="submit" class="btn btn-primary btn-info col-md-12">Ver Equipo</button>
+											</form>
+											<form class="form-horizontal" role="form" action="../app_dev.php/equipo" method="post">
+												<input type="hidden" value={{equipo.idEquipo}} name="opciones">
+												<button type="submit" class="btn btn-primary btn-info col-md-12">Solicitar Modificacion</button>
+											</form>
+											
+										
+										{% endif %}
 									</div>
 									
 									
