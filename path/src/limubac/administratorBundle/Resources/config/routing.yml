@@ -119,6 +119,10 @@ limubacadministrator_sessions:
   defaults: { _controller: limubacadministratorBundle:sessions:sex}
 
 
+limubacadministrator_sesiones:
+  path: /sesion
+  defaults: { _controller: limubacadministratorBundle:sesiones}
+
 limubacadministrator_finanzas:
     path:     /finanzas
     defaults: { _controller: limubacadministratorBundle:Default:finanzas}
