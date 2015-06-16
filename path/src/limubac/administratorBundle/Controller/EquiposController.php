@@ -22,6 +22,8 @@ namespace limubac\administratorBundle\Controller;
 		use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 		use Symfony\Component\Validator\Constraints\DateTime;
 
+	include 'funcionesExtras.php';	
+		
 class EquiposController extends Controller{
 		
 	public function equiposAction(){
@@ -117,7 +119,7 @@ class EquiposController extends Controller{
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();
 			$equipo->setNombre($_POST['NuevoEquipo']);
-			
+			$equipo->setRegistrado(false);
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($equipo);
 			$Manager->flush();
@@ -195,14 +197,10 @@ class EquiposController extends Controller{
                     $em -> flush();
 					//Fin de agregar jugador
 					
-					
-					
 					//Agregar Al equipo
-					
-					
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 					$equipo = $repositorio->find($_REQUEST['opciones']);
-					if(Restringe($equipo,$player)){
+					if(restringe($equipo,$player,$this)){
 						//si cumple las condiciones se inscribira al jugador al equipo
 						$integra = new Integra();
 						$integra->setNoPlayera(intval($out['numero']));
@@ -400,37 +398,6 @@ class EquiposController extends Controller{
 		return $this->render('limubacadministratorBundle:administracion:equipoATorneo.html.twig',array('Torneos'=>$Torneos,'equipo'=>$_REQUEST['Registro']));
 	}
 	
-	//definido un jugador y un equipo averigua si es apto para inscribirlo
-	private function Restringe($equipo,$Jugador){
-		
-		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
-		$query = $repositorio->createQueryBuilder('p')
-			->select('p.idCategoria')
-			->where('p.idEquipo ='.$equipo->getIdEquipo())
-			->getQuery();
-		$Participan = $query->getResult();
-		
-		switch($Participan->getIdCategoria()){//Las categorias estan en la tabla categoria de la base de datos
-			case 1: //Primera Fuerza
-				
-				break;
-			case 2: //Segunda Fuerza
-				break;
-			case 3: //Tercera Fuerza
-				
-				break;
-			case 4: //Estudiantil
-				break;
-			case 5: //Femenil
-				break;
-			case 6: //Maxibasket
-				break;
-			case 7: //Femenil
-				break;
-			case 8: //Maxibasket
-				break;
-		}
-		return true;
-	}
+	
 }	
 ?>
