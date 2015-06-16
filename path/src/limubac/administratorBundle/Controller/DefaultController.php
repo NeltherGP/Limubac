@@ -508,9 +508,10 @@ class DefaultController extends Controller{
             ->getQuery();
         $entities = $queryTorneos->getResult();
 */
+       
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
         $queryTorneos = $repository->createQueryBuilder('t')
-            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo')
+            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo','t.inscripcionAbierta')
             ->orderBy('t.idTorneo', 'DESC')
             ->getQuery();
         $entities = $queryTorneos->getResult();
