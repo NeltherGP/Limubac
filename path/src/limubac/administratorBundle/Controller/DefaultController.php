@@ -28,7 +28,6 @@ namespace limubac\administratorBundle\Controller;
         use limubac\administratorBundle\Form\Type\CategoriaType;
 
 
-
 class DefaultController extends Controller{
 
 	public function indexAction($name){
@@ -752,6 +751,8 @@ class DefaultController extends Controller{
     }
 
     //FINAL CONTROLADOR TORNEO
+
+
     //****************************INICIO CONTRALADOR FINANZAS****************************
     public function finanzasAction(){
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
@@ -793,6 +794,9 @@ class DefaultController extends Controller{
 
     	 	return $this->render('limubacadministratorBundle:administracion:editaFinanzas.html.twig', array('query' => $resul));
     	}
+    	elseif (!empty($_REQUEST['pdf'])) {
+			
+    	}
     	elseif (!empty($_REQUEST['sel'])) {
     	 	$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Finanzas');
             $queryEdit = $repository->createQueryBuilder('f')
@@ -832,7 +836,7 @@ class DefaultController extends Controller{
 
     	 	return $this->render('limubacadministratorBundle:administracion:finanzas.html.twig', array('ingresos' => $ing, 'inscritos' => $ins, 'pendientes' => $pen, 'query' => $resul, 'torneos' => $resultor));
     	}
-    	elseif (empty($parsed_url['query']) || empty($_REQUEST['Search'])) {
+    	elseif (empty($_REQUEST['pdf']) || empty($_REQUEST['sel'])) {
             return $this->redirect($this->generateUrl('limubacadministrator_finanzas'));
         }
     }

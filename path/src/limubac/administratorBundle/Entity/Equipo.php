@@ -20,6 +20,13 @@ class Equipo
     private $nombre;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="registrado", type="boolean", nullable=false)
+     */
+    private $registrado;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_equipo", type="integer")
@@ -81,6 +88,29 @@ class Equipo
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set registrado
+     *
+     * @param boolean $registrado
+     * @return Equipo
+     */
+    public function setRegistrado($registrado)
+    {
+        $this->registrado = $registrado;
+
+        return $this;
+    }
+
+    /**
+     * Get registrado
+     *
+     * @return boolean 
+     */
+    public function getRegistrado()
+    {
+        return $this->registrado;
     }
 
     /**

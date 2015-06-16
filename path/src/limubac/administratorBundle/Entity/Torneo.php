@@ -41,6 +41,13 @@ class Torneo
     private $fTermino;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="inscripcion_abierta", type="boolean", nullable=false)
+     */
+    private $inscripcionAbierta;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_torneo", type="integer")
@@ -141,6 +148,29 @@ class Torneo
     public function getFTermino()
     {
         return $this->fTermino;
+    }
+
+    /**
+     * Set inscripcionAbierta
+     *
+     * @param boolean $inscripcionAbierta
+     * @return Torneo
+     */
+    public function setInscripcionAbierta($inscripcionAbierta)
+    {
+        $this->inscripcionAbierta = $inscripcionAbierta;
+
+        return $this;
+    }
+
+    /**
+     * Get inscripcionAbierta
+     *
+     * @return boolean 
+     */
+    public function getInscripcionAbierta()
+    {
+        return $this->inscripcionAbierta;
     }
 
     /**

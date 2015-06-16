@@ -41,6 +41,13 @@ class Torneo
     private $fTermino;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="inscripcion_abierta", type="boolean", nullable=false)
+     */
+    private $inscripcionAbierta;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_torneo", type="integer")

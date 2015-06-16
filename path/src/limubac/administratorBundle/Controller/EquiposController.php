@@ -26,6 +26,33 @@ class EquiposController extends Controller{
 		
 	public function equiposAction(){
 		
+		//Registrar a Torneo
+		
+		if(isset($_REQUEST['Torneo'])){ //valor del torneo al que se reitrara el equipo
+			$Manager = $this->getDoctrine()->getManager();
+			echo "Torneo: ".$_REQUEST['Torneo']."   equipo: ".$_REQUEST['idEquipo']."<br>";
+			$Participan = new ParticipanT();
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
+			$query = $repositorio->createQueryBuilder('p')
+				->select('p.idRegistro')
+				->where('p.idEquipo = '.$_REQUEST['idEquipo'])
+				->getQuery();
+			$temp = $query->getResult();
+			$Participan = $repositorio->find($temp[0]['idRegistro']);
+			
+			//var_dump($Participan);
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
+			$Torneo = $repositorio->find($_REQUEST['Torneo']);		
+			
+			
+			
+			$Participan->setIdTorneo($Torneo);
+			$Manager->persist($Participan);
+			$Manager->flush();
+			
+			
+		}
+		
 		//Lista de Equipos
 		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 		$ListaEquipos = $repositorio->findAll();
@@ -334,14 +361,31 @@ class EquiposController extends Controller{
 		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
 		$query = $repositorio->createQueryBuilder('p')
 				->select('p.idRegistro','IDENTITY(p.idRama)','IDENTITY(p.idCategoria)')
-				->where('p.idEquipo = '.$Equipo->getIdEquipo())
+				->where('p.idEquipo = '.$Equipo->getIdEquipo() )
 				->getQuery();
 			
 		$Participan= $query->getResult();
-		var_dump($Participan);
+		//var_dump($Participan);
 		return $this->render('limubacadministratorBundle:administracion:editarEquipo.html.twig',array('Participan'=>$Participan,'Equipo'=>$Equipo,'Categorias'=>$Categorias));
 	}
-
+	
+	public function equipoATorneoAction(){
+		//Registrar en torneo
+		if(isset($_REQUEST['Registro'])){//id del equipo
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
+			$query = $repositorio->createQueryBuilder('t')
+				->select('t.idTorneo','t.nombre','t.costo','t.fInicio','t.fTermino')
+				->where('t.inscripcionAbierta = 1')
+				->getQuery();
+			$Torneos= $query->getResult();
+		}else{
+			echo "<script type='text/javascript'>alert('No Deberias estar aqui!!');</script>";
+			return $this->render('limubacadministratorBundle:administracion:admin.html.twig');
+		}
+		//var_dump($Torneos);
+		return $this->render('limubacadministratorBundle:administracion:equipoATorneo.html.twig',array('Torneos'=>$Torneos,'equipo'=>$_REQUEST['Registro']));
+	}
+	
 	//definido un jugador y un equipo averigua si es apto para inscribirlo
 	private function Restringe($equipo,$Jugador){
 		
