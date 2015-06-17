@@ -21,6 +21,7 @@ namespace limubac\administratorBundle\Controller;
 		use limubac\administratorBundle\Form\Type\JugadorAType;
 		use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 		use Symfony\Component\Validator\Constraints\DateTime;
+        use limubac\administratorBundle\tcpdf\finanzas;
 
 class FinanzasController extends Controller{
     //****************************INICIO CONTRALADOR FINANZAS****************************
@@ -52,7 +53,7 @@ class FinanzasController extends Controller{
         if (!empty($_REQUEST['edit'])) {
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Finanzas');
             $queryEdit = $repository->createQueryBuilder('f')
-            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.dia','f.hora','f.monto','f.cuenta','f.manejo','f.enero','f.febrero','f.marzo','f.abril','f.mayo','f.junio')
+            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.dia','f.hora','f.monto','f.cuenta','f.manejo','f.mes1','f.mes2','f.mes3','f.mes4','f.mes5','f.mes6','f.mes7')
             ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'f.idEquipo = e.idEquipo')
             ->join('limubacadministratorBundle:ParticipanT', 'p', 'WITH' ,'p.idEquipo = f.idEquipo')
             ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'p.idCategoria = c.idCategoria')
@@ -65,12 +66,12 @@ class FinanzasController extends Controller{
             return $this->render('limubacadministratorBundle:administracion:editaFinanzas.html.twig', array('query' => $resul));
         }
         elseif (!empty($_REQUEST['pdf'])) {
-            
+            $pdf = new finanzas();
         }
         elseif (!empty($_REQUEST['sel'])) {
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Finanzas');
             $queryEdit = $repository->createQueryBuilder('f')
-            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.dia','f.hora','f.monto','f.cuenta','f.manejo','f.enero','f.febrero','f.marzo','f.abril','f.mayo','f.junio')
+            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.dia','f.hora','f.monto','f.cuenta','f.manejo','f.mes1','f.mes2','f.mes3','f.mes4','f.mes5','f.mes6','f.mes7')
             ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'f.idEquipo = e.idEquipo')
             ->join('limubacadministratorBundle:ParticipanT', 'p', 'WITH' ,'p.idEquipo = f.idEquipo')
             ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'p.idCategoria = c.idCategoria')
@@ -81,7 +82,7 @@ class FinanzasController extends Controller{
             $resul = $queryEdit->getResult();
 
             $queryIngresos = $repository->createQueryBuilder('i')
-            ->select('sum(i.inscripcion + i.cuenta + i.enero + i.febrero + i.marzo + i.abril + i.mayo + i.junio)')
+            ->select('sum(i.inscripcion + i.cuenta + i.mes1 + i.mes2 + i.mes3 + i.mes4 + i.mes5 + i.mes6 + i.mes7)')
             ->join('limubacadministratorBundle:ParticipanT', 'p', 'WITH' ,'p.idEquipo = i.idEquipo')
             ->where('i.idTorneo = :word AND  p.idTorneo = :word')
             ->setParameter('word', $_REQUEST['sel'])
@@ -123,12 +124,13 @@ class FinanzasController extends Controller{
             ->set('f.monto', ':mnt')
             ->set('f.cuenta', ':cnt')
             ->set('f.manejo', ':mnj')
-            ->set('f.enero', ':ene')
-            ->set('f.febrero', ':feb')
-            ->set('f.marzo', ':mar')
-            ->set('f.abril', ':abr')
-            ->set('f.mayo', ':may')
-            ->set('f.junio', ':jun')
+            ->set('f.mes1', ':mes1')
+            ->set('f.mes2', ':mes2')
+            ->set('f.mes3', ':mes3')
+            ->set('f.mes4', ':mes4')
+            ->set('f.mes5', ':mes5')
+            ->set('f.mes6', ':mes6')
+            ->set('f.mes7', ':mes7')
             ->where('f.idFinanzas= :idc')
             ->setParameter('ins', $_REQUEST['inscripcion'])
             ->setParameter('dia', $_REQUEST['dia'])
@@ -136,12 +138,13 @@ class FinanzasController extends Controller{
             ->setParameter('mnt', $_REQUEST['monto'])
             ->setParameter('cnt', $_REQUEST['acuenta'])
             ->setParameter('mnj', $_REQUEST['manejo'])
-            ->setParameter('ene', $_REQUEST['enero'])
-            ->setParameter('feb', $_REQUEST['febrero'])
-            ->setParameter('mar', $_REQUEST['marzo'])
-            ->setParameter('abr', $_REQUEST['abril'])
-            ->setParameter('may', $_REQUEST['mayo'])
-            ->setParameter('jun', $_REQUEST['junio'])
+            ->setParameter('mes1', $_REQUEST['mes1'])
+            ->setParameter('mes2', $_REQUEST['mes2'])
+            ->setParameter('mes3', $_REQUEST['mes3'])
+            ->setParameter('mes4', $_REQUEST['mes4'])
+            ->setParameter('mes5', $_REQUEST['mes5'])
+            ->setParameter('mes6', $_REQUEST['mes6'])
+            ->setParameter('mes7', $_REQUEST['mes7'])
             ->setParameter('idc', $_REQUEST['ides'])
             ->getQuery();
         $res = $qu->execute();

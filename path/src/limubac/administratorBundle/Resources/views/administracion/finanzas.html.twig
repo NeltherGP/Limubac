@@ -103,7 +103,7 @@
                     <td bgcolor="#6AB36A" ><b>Pago inscripción<b></td>
                     <td bgcolor="#CC8A29" colspan="3"><b>Compra horario<b></td>
                     <td bgcolor="#CCCC52" colspan="2"><b>Fianza<b></td>
-                    <td bgcolor="#AB4ACC" colspan="6"><b>Cooperaciones<b></td>
+                    <td bgcolor="#AB4ACC" colspan="7"><b>Cooperaciones<b></td>
                     <td rowspan="2"><b>Editar</b></td>
                   </tr>
                   <tr>
@@ -115,12 +115,13 @@
                     <th bgcolor="#CC8A29">Monto</th>
                     <th bgcolor="#CCCC52">A cuenta</th>
                     <th bgcolor="#CCCC52">Manejo</th>
-                    <th bgcolor="#AB4ACC">Enero</th>
-                    <th bgcolor="#AB4ACC">Febrero</th>
-                    <th bgcolor="#AB4ACC">Marzo</th>
-                    <th bgcolor="#AB4ACC">Abril</th>
-                    <th bgcolor="#AB4ACC">Mayo</th>
-                    <th bgcolor="#AB4ACC">Junio</th>
+                    <th bgcolor="#AB4ACC">Mes 1</th>
+                    <th bgcolor="#AB4ACC">Mes 2</th>
+                    <th bgcolor="#AB4ACC">Mes 3</th>
+                    <th bgcolor="#AB4ACC">Mes 4</th>
+                    <th bgcolor="#AB4ACC">Mes 5</th>
+                    <th bgcolor="#AB4ACC">Mes 6</th>
+                    <th bgcolor="#AB4ACC">Mes 7</th>
                   </tr>
                 </thead>
                 <tbody class="TFtable">
@@ -163,35 +164,40 @@
                         <td bgcolor="#FFFF66"> {{entitie.manejo}} </td>
                       {% endif %}
 
-                      {% if entitie.enero == 0 %}
+                      {% if entitie.mes1 == 0 %}
                         <td bgcolor="#D65CFF">N/A</td>
                       {% else %}
-                        <td bgcolor="#D65CFF">$ {{entitie.enero}} </td>
+                        <td bgcolor="#D65CFF">$ {{entitie.mes1}} </td>
                       {% endif %}                      
-                      {% if entitie.febrero == 0 %}
+                      {% if entitie.mes2 == 0 %}
                         <td bgcolor="#D65CFF">N/A</td>
                       {% else %}
-                        <td bgcolor="#D65CFF">$ {{entitie.febrero}} </td>
+                        <td bgcolor="#D65CFF">$ {{entitie.mes2}} </td>
                       {% endif %}
-                      {% if entitie.marzo == 0 %}
+                      {% if entitie.mes3 == 0 %}
                         <td bgcolor="#D65CFF">N/A</td>
                       {% else %}
-                        <td bgcolor="#D65CFF">$ {{entitie.marzo}} </td>
+                        <td bgcolor="#D65CFF">$ {{entitie.mes3}} </td>
                       {% endif %}
-                      {% if entitie.abril == 0 %}
+                      {% if entitie.mes4 == 0 %}
                         <td bgcolor="#D65CFF">N/A</td>
                       {% else %}
-                        <td bgcolor="#D65CFF">$ {{entitie.abril}} </td>
+                        <td bgcolor="#D65CFF">$ {{entitie.mes4}} </td>
                       {% endif %}
-                      {% if entitie.mayo == 0 %}
+                      {% if entitie.mes5 == 0 %}
                         <td bgcolor="#D65CFF">N/A</td>
                       {% else %}
-                        <td bgcolor="#D65CFF">$ {{entitie.mayo}} </td>
+                        <td bgcolor="#D65CFF">$ {{entitie.mes5}} </td>
                       {% endif %}
-                      {% if entitie.junio == 0 %}
+                      {% if entitie.mes6 == 0 %}
                         <td bgcolor="#D65CFF">N/A</td>
                       {% else %}
-                        <td bgcolor="#D65CFF">$ {{entitie.junio}} </td>
+                        <td bgcolor="#D65CFF">$ {{entitie.mes6}} </td>
+                      {% endif %}
+                      {% if entitie.mes7 == 0 %}
+                        <td bgcolor="#D65CFF">N/A</td>
+                      {% else %}
+                        <td bgcolor="#D65CFF">$ {{entitie.mes7}} </td>
                       {% endif %}
                       <td>
                         <div class="btn-group sharp" data-toggle="radio" style="width: 50px"  text-align:"center">
