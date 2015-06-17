@@ -511,7 +511,7 @@ class DefaultController extends Controller{
        
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
         $queryTorneos = $repository->createQueryBuilder('t')
-            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo')
+            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo','t.inscripcionAbierta')
             ->orderBy('t.idTorneo', 'DESC')
             ->getQuery();
         $entities = $queryTorneos->getResult();
@@ -596,6 +596,19 @@ class DefaultController extends Controller{
 			$n1 = $queryCategorias->getResult();			
 			//print_r($n1);
 			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1));
+		}else if(!empty($_REQUEST['noInsc'])){
+            $idtoor = $_REQUEST['noInsc'][0];
+            
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+	        $queryAct = $repository->createQueryBuilder('z');
+	        $q = $queryAct->update('limubacadministratorBundle:Torneo', 'z')
+	            ->set('z.inscripcionAbierta', '0')   
+	            ->where('z.idTorneo= :idt')
+	            ->setParameter('idt', $idtoor[0])
+	            ->getQuery();
+	        $resul = $q->execute();
+
+	        return $this->redirect($this->generateUrl('limubacadministrator_torneos'));
 		}else if(!empty($_REQUEST['ver'])){
             $idtor = array($_REQUEST['ver'][0]);
                 /*SELECT  e.nombre AS equipo, c.nombre AS categoria, r.nombre AS rama
