@@ -596,8 +596,16 @@ class DefaultController extends Controller{
 				->getQuery();
 			$n1 = $queryCategorias->getResult();			
 			//print_r($n1);
-
-			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1));
+$queryRamas = $repository->createQueryBuilder('l')
+				->select('o.idRama,o.nombre')
+				->join('limubacadministratorBundle:Equipo','ez','WITH','l.idEquipo = ez.idEquipo')
+				->join('limubacadministratorBundle:RamaEquipo', 'o', 'WITH' ,'o.idRama = ez.idRama')
+				->where('l.idTorneo = :torn')
+				->groupBy('ez.idRama')
+				->setParameter('torn',$idtorn[0])
+				->getQuery();
+			$n2 = $queryRamas->getResult();
+			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1,'ramas'=>$n2));
 		}else if(!empty($_REQUEST['noInsc'])){
             $idtoor = $_REQUEST['noInsc'][0];
             
@@ -612,16 +620,7 @@ class DefaultController extends Controller{
 
 	        return $this->redirect($this->generateUrl('limubacadministrator_torneos'));
 
-			$queryRamas = $repository->createQueryBuilder('l')
-				->select('o.idRama,o.nombre')
-				->join('limubacadministratorBundle:Equipo','ez','WITH','l.idEquipo = ez.idEquipo')
-				->join('limubacadministratorBundle:RamaEquipo', 'o', 'WITH' ,'o.idRama = ez.idRama')
-				->where('l.idTorneo = :torn')
-				->groupBy('ez.idRama')
-				->setParameter('torn',$idtorn[0])
-				->getQuery();
-			$n2 = $queryRamas->getResult();
-			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1,'ramas'=>$n2));
+			
 
 		}else if(!empty($_REQUEST['ver'])){
             $idtor = array($_REQUEST['ver'][0]);
