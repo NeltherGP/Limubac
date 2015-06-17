@@ -33,29 +33,29 @@ class EquiposController extends Controller{
 		if(isset($_REQUEST['Torneo'])){ //valor del torneo al que se reitrara el equipo
 			$Manager = $this->getDoctrine()->getManager();
 			//echo "Torneo: ".$_REQUEST['Torneo']."   equipo: ".$_REQUEST['idEquipo']."<br>";
-			$Participan = new ParticipanT();
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
-			$query = $repositorio->createQueryBuilder('p')
-				->select('p.idRegistro')
-				->where('p.idEquipo = '.$_REQUEST['idEquipo'])
-				->getQuery();
-			$temp = $query->getResult();
-			$Participan = $repositorio->find($temp[0]['idRegistro']);
-			
-			//var_dump($Participan);
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
-			$Torneo = $repositorio->find($_REQUEST['Torneo']);		
 			
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-			$equipo = $repositorio->find($_REQUEST['idEquipo']);	
+			$equipo = $repositorio->find($_REQUEST['idEquipo']);
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
+			$Torneo = $repositorio->find($_REQUEST['Torneo']);
 			
-			$equipo->setRegistrado(true);
-			$Participan->setIdTorneo($Torneo);
-			$Manager->persist($Participan);
-			$Manager->persist($Torneo);
-			$Manager->flush();
-			
-			
+			//Restricciones
+			if(restringe($equipo,$Torneo,$this)){
+				$Participan = new ParticipanT();
+				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
+				$query = $repositorio->createQueryBuilder('p')
+					->select('p.idRegistro')
+					->where('p.idEquipo = '.$_REQUEST['idEquipo'])
+					->getQuery();
+				$temp = $query->getResult();
+				$Participan = $repositorio->find($temp[0]['idRegistro']);
+
+				$equipo->setRegistrado(true);
+				$Participan->setIdTorneo($Torneo);
+				$Manager->persist($Participan);
+				$Manager->persist($Torneo);
+				$Manager->flush();
+			}
 		}
 		
 		//Lista de Equipos
@@ -120,29 +120,17 @@ class EquiposController extends Controller{
 			$equipo = new Equipo();
 			$equipo->setNombre($_POST['NuevoEquipo']);
 			$equipo->setRegistrado(false);
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
+			$cat = $repositorio->find($_POST['Categoria']);
+			$equipo->setIdCategoria($cat);
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
+			$ram = $repositorio->find($_POST['rama']);
+			$equipo->setIdRama($ram);
+			
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($equipo);
 			$Manager->flush();
-			
-			$participacion = new ParticipanT();
-			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
-			$cat = $repositorio->find($_POST['Categoria']);
-			$participacion->setIdCategoria($cat);
-			
-			$participacion->setIdEquipo($equipo);
-			
-			/**$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Torneo");
-			$tor = $repositorio->find($_POST['torneo']);
-			$participacion->setIdTorneo($tor);
-			*/
-			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
-			$ram = $repositorio->find($_POST['rama']);
-			$participacion->setIdRama($ram);
-			
-			$Manager->persist($participacion);
-			$Manager->flush();
+
 			$_REQUEST['opciones'] = $equipo->getIdEquipo();
 		}
 		
@@ -200,8 +188,8 @@ class EquiposController extends Controller{
 					//Agregar Al equipo
 					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 					$equipo = $repositorio->find($_REQUEST['opciones']);
-					if(restringe($equipo,$player,$this)){
-						//si cumple las condiciones se inscribira al jugador al equipo
+					
+						//Agregando el jugador al equipo
 						$integra = new Integra();
 						$integra->setNoPlayera(intval($out['numero']));
 						$integra->setIdEquipo($equipo);
@@ -210,9 +198,7 @@ class EquiposController extends Controller{
 						$Manager = $this->getDoctrine()->getManager();
 						$Manager->persist($integra);
 						$Manager->flush();
-					}else{
-						$Mensaje ="El jugador no cumple con los requerimientos para pertenecer al equipo";
-					}
+					
 					
 					//Fin Agregar Al Equipo
                 }
