@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Integra
  *
- * @ORM\Table(name="integra", indexes={@ORM\Index(name="id_jugador", columns={"id_jugador", "id_equipo"}), @ORM\Index(name="id_equipo", columns={"id_equipo"}), @ORM\Index(name="IDX_DB326E438CE0C668", columns={"id_jugador"})})
+ * @ORM\Table(name="integra", indexes={@ORM\Index(name="id_jugador", columns={"id_jugador", "id_equipo"}), @ORM\Index(name="id_equipo", columns={"id_equipo"}), @ORM\Index(name="integra_ibfk_3", columns={"id_torneo"}), @ORM\Index(name="IDX_DB326E438CE0C668", columns={"id_jugador"})})
  * @ORM\Entity
  */
 class Integra
@@ -22,6 +22,18 @@ class Integra
     private $noPlayera;
 
     /**
+     * @var \limubac\administratorBundle\Entity\Jugador
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_jugador", referencedColumnName="id_jugador")
+     * })
+     */
+    private $idJugador;
+
+    /**
      * @var \limubac\administratorBundle\Entity\Equipo
      *
      * @ORM\Id
@@ -34,16 +46,14 @@ class Integra
     private $idEquipo;
 
     /**
-     * @var \limubac\administratorBundle\Entity\Jugador
+     * @var \limubac\administratorBundle\Entity\Torneo
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Torneo")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_jugador", referencedColumnName="id_jugador")
+     *   @ORM\JoinColumn(name="id_torneo", referencedColumnName="id_torneo")
      * })
      */
-    private $idJugador;
+    private $idTorneo;
 
 
 
@@ -71,6 +81,29 @@ class Integra
     }
 
     /**
+     * Set idJugador
+     *
+     * @param \limubac\administratorBundle\Entity\Jugador $idJugador
+     * @return Integra
+     */
+    public function setIdJugador(\limubac\administratorBundle\Entity\Jugador $idJugador)
+    {
+        $this->idJugador = $idJugador;
+
+        return $this;
+    }
+
+    /**
+     * Get idJugador
+     *
+     * @return \limubac\administratorBundle\Entity\Jugador 
+     */
+    public function getIdJugador()
+    {
+        return $this->idJugador;
+    }
+
+    /**
      * Set idEquipo
      *
      * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
@@ -94,25 +127,25 @@ class Integra
     }
 
     /**
-     * Set idJugador
+     * Set idTorneo
      *
-     * @param \limubac\administratorBundle\Entity\Jugador $idJugador
+     * @param \limubac\administratorBundle\Entity\Torneo $idTorneo
      * @return Integra
      */
-    public function setIdJugador(\limubac\administratorBundle\Entity\Jugador $idJugador)
+    public function setIdTorneo(\limubac\administratorBundle\Entity\Torneo $idTorneo = null)
     {
-        $this->idJugador = $idJugador;
+        $this->idTorneo = $idTorneo;
 
         return $this;
     }
 
     /**
-     * Get idJugador
+     * Get idTorneo
      *
-     * @return \limubac\administratorBundle\Entity\Jugador 
+     * @return \limubac\administratorBundle\Entity\Torneo 
      */
-    public function getIdJugador()
+    public function getIdTorneo()
     {
-        return $this->idJugador;
+        return $this->idTorneo;
     }
 }

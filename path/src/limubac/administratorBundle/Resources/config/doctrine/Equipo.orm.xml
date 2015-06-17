@@ -5,6 +5,8 @@
       <index name="id_capitan" columns="id_capitan,representante,auxiliar"/>
       <index name="representante" columns="representante"/>
       <index name="auxiliar" columns="auxiliar"/>
+      <index name="equipo_ibfk_4" columns="id_rama"/>
+      <index name="equipo_ibfk_5" columns="id_categoria"/>
       <index name="IDX_C49C530BEF72FA" columns="id_capitan"/>
     </indexes>
     <id name="idEquipo" type="integer" column="id_equipo">
@@ -12,6 +14,16 @@
     </id>
     <field name="nombre" type="string" column="nombre" length="35" nullable="false"/>
     <field name="registrado" type="boolean" column="registrado" nullable="false"/>
+    <many-to-one field="idCategoria" target-entity="Categoria">
+      <join-columns>
+        <join-column name="id_categoria" referenced-column-name="id_categoria"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idRama" target-entity="RamaEquipo">
+      <join-columns>
+        <join-column name="id_rama" referenced-column-name="id_rama"/>
+      </join-columns>
+    </many-to-one>
     <many-to-one field="auxiliar" target-entity="Jugador">
       <join-columns>
         <join-column name="auxiliar" referenced-column-name="id_jugador"/>

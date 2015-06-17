@@ -57,44 +57,51 @@ class Finanzas
     /**
      * @var integer
      *
-     * @ORM\Column(name="enero", type="integer", nullable=false)
+     * @ORM\Column(name="mes_1", type="integer", nullable=false)
      */
-    private $enero;
+    private $mes1;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="febrero", type="integer", nullable=false)
+     * @ORM\Column(name="mes_2", type="integer", nullable=false)
      */
-    private $febrero;
+    private $mes2;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="marzo", type="integer", nullable=false)
+     * @ORM\Column(name="mes_3", type="integer", nullable=false)
      */
-    private $marzo;
+    private $mes3;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="abril", type="integer", nullable=false)
+     * @ORM\Column(name="mes_4", type="integer", nullable=false)
      */
-    private $abril;
+    private $mes4;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="mayo", type="integer", nullable=false)
+     * @ORM\Column(name="mes_5", type="integer", nullable=false)
      */
-    private $mayo;
+    private $mes5;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="junio", type="integer", nullable=false)
+     * @ORM\Column(name="mes_6", type="integer", nullable=false)
      */
-    private $junio;
+    private $mes6;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="mes_7", type="integer", nullable=false)
+     */
+    private $mes7;
 
     /**
      * @var integer
@@ -266,141 +273,164 @@ class Finanzas
     }
 
     /**
-     * Set enero
+     * Set mes1
      *
-     * @param integer $enero
+     * @param integer $mes1
      * @return Finanzas
      */
-    public function setEnero($enero)
+    public function setMes1($mes1)
     {
-        $this->enero = $enero;
+        $this->mes1 = $mes1;
 
         return $this;
     }
 
     /**
-     * Get enero
+     * Get mes1
      *
      * @return integer 
      */
-    public function getEnero()
+    public function getMes1()
     {
-        return $this->enero;
+        return $this->mes1;
     }
 
     /**
-     * Set febrero
+     * Set mes2
      *
-     * @param integer $febrero
+     * @param integer $mes2
      * @return Finanzas
      */
-    public function setFebrero($febrero)
+    public function setMes2($mes2)
     {
-        $this->febrero = $febrero;
+        $this->mes2 = $mes2;
 
         return $this;
     }
 
     /**
-     * Get febrero
+     * Get mes2
      *
      * @return integer 
      */
-    public function getFebrero()
+    public function getMes2()
     {
-        return $this->febrero;
+        return $this->mes2;
     }
 
     /**
-     * Set marzo
+     * Set mes3
      *
-     * @param integer $marzo
+     * @param integer $mes3
      * @return Finanzas
      */
-    public function setMarzo($marzo)
+    public function setMes3($mes3)
     {
-        $this->marzo = $marzo;
+        $this->mes3 = $mes3;
 
         return $this;
     }
 
     /**
-     * Get marzo
+     * Get mes3
      *
      * @return integer 
      */
-    public function getMarzo()
+    public function getMes3()
     {
-        return $this->marzo;
+        return $this->mes3;
     }
 
     /**
-     * Set abril
+     * Set mes4
      *
-     * @param integer $abril
+     * @param integer $mes4
      * @return Finanzas
      */
-    public function setAbril($abril)
+    public function setMes4($mes4)
     {
-        $this->abril = $abril;
+        $this->mes4 = $mes4;
 
         return $this;
     }
 
     /**
-     * Get abril
+     * Get mes4
      *
      * @return integer 
      */
-    public function getAbril()
+    public function getMes4()
     {
-        return $this->abril;
+        return $this->mes4;
     }
 
     /**
-     * Set mayo
+     * Set mes5
      *
-     * @param integer $mayo
+     * @param integer $mes5
      * @return Finanzas
      */
-    public function setMayo($mayo)
+    public function setMes5($mes5)
     {
-        $this->mayo = $mayo;
+        $this->mes5 = $mes5;
 
         return $this;
     }
 
     /**
-     * Get mayo
+     * Get mes5
      *
      * @return integer 
      */
-    public function getMayo()
+    public function getMes5()
     {
-        return $this->mayo;
+        return $this->mes5;
     }
 
     /**
-     * Set junio
+     * Set mes6
      *
-     * @param integer $junio
+     * @param integer $mes6
      * @return Finanzas
      */
-    public function setJunio($junio)
+    public function setMes6($mes6)
     {
-        $this->junio = $junio;
+        $this->mes6 = $mes6;
 
         return $this;
     }
 
     /**
-     * Get junio
+     * Get mes6
      *
      * @return integer 
      */
-    public function getJunio()
+    public function getMes6()
     {
-        return $this->junio;
+        return $this->mes6;
+    }
+
+    /**
+     * Set mes7
+     *
+     * @param integer $mes7
+     * @return Finanzas
+     */
+    public function setMes7($mes7)
+    {
+        $this->mes7 = $mes7;
+
+        return $this;
+    }
+
+    /**
+     * Get mes7
+     *
+     * @return integer 
+     */
+    public function getMes7()
+    {
+        return $this->mes7;
     }
 
     /**

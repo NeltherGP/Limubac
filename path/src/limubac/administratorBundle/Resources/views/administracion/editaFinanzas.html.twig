@@ -26,12 +26,13 @@
           <h4> Monto: </h4><br>
           <h4> A cuenta: </h4>
           <h4> Manejo: </h4><br>
-          <h4> Enero: </h4>
-          <h4> Febero: </h4>
-          <h4> Marzo: </h4>
-          <h4> Abil: </h4>
-          <h4> Mayo: </h4>
-          <h4> Junio: </h4>
+          <h4> Mes 1: </h4>
+          <h4> Mes 2: </h4>
+          <h4> Mes 3: </h4>
+          <h4> Mes 4: </h4>
+          <h4> Mes 5: </h4>
+          <h4> Mes 6: </h4>
+          <h4> Mes 7: </h4>
         </div>
         <div class="col-md-8">
           <div class="form sharp vertical">
@@ -46,12 +47,13 @@
                 <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="monto" value="{{query[0]['monto']}}"><br><br>
                 <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="acuenta" value="{{query[0]['cuenta']}}"><br>
                 <input type="text" name="manejo" value="{{query[0]['manejo']}}"><br><br>
-                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="enero" value="{{query[0]['enero']}}"><br>
-                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="febrero" value="{{query[0]['febrero']}}"><br>
-                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="marzo" value="{{query[0]['marzo']}}"><br>
-                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="abril" value="{{query[0]['abril']}}"><br>
-                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mayo" value="{{query[0]['mayo']}}"><br>
-                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="junio" value="{{query[0]['junio']}}"><br>
+                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mes1" value="{{query[0]['mes1']}}"><br>
+                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mes2" value="{{query[0]['mes2']}}"><br>
+                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mes3" value="{{query[0]['mes3']}}"><br>
+                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mes4" value="{{query[0]['mes4']}}"><br>
+                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mes5" value="{{query[0]['mes5']}}"><br>
+                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mes6" value="{{query[0]['mes6']}}"><br>
+                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mes7" value="{{query[0]['mes7']}}"><br>
                 <input type="hidden" name="ides" value="{{query[0]['ide']}}"><br>
               </form>
               {% block javascripts %}

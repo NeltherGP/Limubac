@@ -123,14 +123,18 @@ limubacadministrator_sessions:
   defaults: { _controller: limubacadministratorBundle:sessions:sex}
 
 
+limubacadministrator_sesiones:
+  path: /sesion
+  defaults: { _controller: limubacadministratorBundle:sesiones}
+
 limubacadministrator_finanzas:
     path:     /finanzas
-    defaults: { _controller: limubacadministratorBundle:Default:finanzas}
+    defaults: { _controller: limubacadministratorBundle:Finanzas:finanzas}
 
 limubacadministrator_actfin:
     path:     /actfin
-    defaults: { _controller: limubacadministratorBundle:Default:actfin}
+    defaults: { _controller: limubacadministratorBundle:Finanzas:actfin}
 
 limubacadministrator_editfin:
     path:     /editfin
-    defaults: { _controller: limubacadministratorBundle:Default:editfin}
+    defaults: { _controller: limubacadministratorBundle:Finanzas:editfin}
