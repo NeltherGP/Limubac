@@ -41,7 +41,7 @@ class HojaAnotacionesController extends Controller{
     $List_B=$consultasManager->listJugadoresEquipo('B',$idPartido,$doctrineManager);
 
     $datosGenerales = $consultasManager->getEquipoByPartido($idPartido,$doctrineManager);
-    //print_r($datosGenerales);
+    print_r($datosGenerales);
 
     if($request->getMethod() == 'POST')//si se envia el formulario
     {
