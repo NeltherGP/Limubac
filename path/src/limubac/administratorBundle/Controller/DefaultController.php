@@ -26,6 +26,7 @@ namespace limubac\administratorBundle\Controller;
 		use Symfony\Component\Validator\Constraints\DateTime;
         use limubac\administratorBundle\Form\Type\TorneoType;
         use limubac\administratorBundle\Form\Type\CategoriaType;
+        use limubac\administratorBundle\Form\Type\TorneoBType;
 
 
 class DefaultController extends Controller{
@@ -569,12 +570,12 @@ class DefaultController extends Controller{
 	//print_r($_REQUEST);
         if(!empty($_REQUEST['edit'])){
             $torneo = new Torneo();
-            $form = $this->createForm(new TorneoType(), $torneo);
+            $form = $this->createForm(new TorneoBType(), $torneo);
             $ed = $_REQUEST['edit'][0];
             
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
             $queryEdit = $repository->createQueryBuilder('e')
-            ->select('e.idTorneo','e.nombre','e.fInicio','e.fTermino','e.costo')
+            ->select('e.idTorneo','e.nombre','e.fInicio','e.fTermino','e.costo','inscripcionAbierta')
             ->where('e.idTorneo = :word')
             ->setParameter('word', $ed)
             ->getQuery();
@@ -608,20 +609,42 @@ $queryRamas = $repository->createQueryBuilder('l')
 			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1,'ramas'=>$n2));
 		}else if(!empty($_REQUEST['noInsc'])){
             $idtoor = $_REQUEST['noInsc'][0];
-            
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
 	        $queryAct = $repository->createQueryBuilder('z');
 	        $q = $queryAct->update('limubacadministratorBundle:Torneo', 'z')
 	            ->set('z.inscripcionAbierta', '0')   
 	            ->where('z.idTorneo= :idt')
-	            ->setParameter('idt', $idtoor[0])
+	            ->setParameter('idt', $idtoor)
 	            ->getQuery();
 	        $resul = $q->execute();
 
-	        return $this->redirect($this->generateUrl('limubacadministrator_torneos'));
+		$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+        $queryTorneos = $repository->createQueryBuilder('t')
+            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo','t.inscripcionAbierta')
+            ->orderBy('t.idTorneo', 'DESC')
+            ->getQuery();
+        $entities = $queryTorneos->getResult();
 
-			
+	        return $this->render('limubacadministratorBundle:administracion:torneos.html.twig',array('entities' => $entities));
+	    }else if(!empty($_REQUEST['insc'])){
+            $idtooor = $_REQUEST['insc'][0];
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+	        $queryAct = $repository->createQueryBuilder('z');
+	        $q = $queryAct->update('limubacadministratorBundle:Torneo', 'z')
+	            ->set('z.inscripcionAbierta', '1')   
+	            ->where('z.idTorneo= :idt')
+	            ->setParameter('idt', $idtooor)
+	            ->getQuery();
+	        $resul = $q->execute();
 
+		$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+        $queryTorneos = $repository->createQueryBuilder('t')
+            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo','t.inscripcionAbierta')
+            ->orderBy('t.idTorneo', 'DESC')
+            ->getQuery();
+        $entities = $queryTorneos->getResult();
+
+	        return $this->render('limubacadministratorBundle:administracion:torneos.html.twig',array('entities' => $entities));			
 		}else if(!empty($_REQUEST['ver'])){
             $idtor = array($_REQUEST['ver'][0]);
                 /*SELECT  e.nombre AS equipo, c.nombre AS categoria, r.nombre AS rama
@@ -635,8 +658,8 @@ $queryRamas = $repository->createQueryBuilder('l')
             $queryEdit = $repository->createQueryBuilder('p')
             ->select('e.nombre AS equipo','c.nombre AS categoria','r.nombre AS rama','t.nombre AS torneo')
             ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'p.idEquipo = e.idEquipo')
-            ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'p.idCategoria = c.idCategoria')
-            ->join('limubacadministratorBundle:RamaEquipo', 'r', 'WITH' ,'p.idRama = r.idRama')
+            ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'e.idCategoria = c.idCategoria')
+            ->join('limubacadministratorBundle:RamaEquipo', 'r', 'WITH' ,'e.idRama = r.idRama')
             ->join('limubacadministratorBundle:Torneo', 't', 'WITH' ,'p.idTorneo = t.idTorneo')
             ->where('p.idTorneo = :word')
             ->orderBy('categoria')
@@ -664,7 +687,6 @@ $queryRamas = $repository->createQueryBuilder('l')
         $fnt = $upt['fTermino'];
         $dt = date_create_from_format('Y-m-d', $fnt);
 
-        //print_r($resul[0]['idFoto']);
 
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
         $queryAct = $repository->createQueryBuilder('z');

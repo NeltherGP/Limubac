@@ -14,7 +14,15 @@ class TorneoType extends AbstractType{
 		$builder->add('costo','money',array("currency" => 'MXN'));
 		$builder->add('fInicio','date', array('widget' => 'single_text','format' => 'yyyy-MM-dd',));
 		$builder->add('fTermino','date', array('widget' => 'single_text','format' => 'yyyy-MM-dd',));
-		//$builder->add('inscripcionAbierta','integer');
+		$builder->add('inscripcionAbierta','choice', array(
+			'choices' => array(
+				1 => 'Abierta',
+				0 => 'Cerrada'),
+			'attr' => array('style' => 'width:158px'),
+			'multiple' => false,
+			'expanded' => false,
+			'required' => true,
+			));
 	}
 
 	public function getName(){
