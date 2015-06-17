@@ -570,12 +570,12 @@ class DefaultController extends Controller{
 	//print_r($_REQUEST);
         if(!empty($_REQUEST['edit'])){
             $torneo = new Torneo();
-            $form = $this->createForm(new TorneoBType(), $torneo);
+            $form = $this->createForm(new TorneoType(), $torneo);
             $ed = $_REQUEST['edit'][0];
             
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
             $queryEdit = $repository->createQueryBuilder('e')
-            ->select('e.idTorneo','e.nombre','e.fInicio','e.fTermino','e.costo','inscripcionAbierta')
+            ->select('e.idTorneo','e.nombre','e.fInicio','e.fTermino','e.costo')
             ->where('e.idTorneo = :word')
             ->setParameter('word', $ed)
             ->getQuery();
@@ -770,7 +770,7 @@ $queryRamas = $repository->createQueryBuilder('l')
             
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Categoria');
             $queryEdit = $repository->createQueryBuilder('e')
-            ->select('e.idCategoria','e.nombre','e.edad','e.limiteEquipo')
+            ->select('e.idCategoria','e.nombre','e.edad','e.limiteEquipo','e.refEdad')
             ->where('e.idCategoria = :word')
             ->setParameter('word', $ed)
             ->getQuery();
@@ -790,11 +790,13 @@ $queryRamas = $repository->createQueryBuilder('l')
             ->set('z.nombre', ':nom')   
             ->set('z.edad', ':edd')
             ->set('z.limiteEquipo', ':lme')
+            ->set('z.refEdad', ':red')
             ->where('z.idCategoria= :idc')
             ->setParameter('idc', $upt['idCategoria'])
             ->setParameter('nom', $upt['nombre'])
             ->setParameter('edd', $upt['edad'])
             ->setParameter('lme', $upt['limiteEquipo'])
+            ->setParameter('red', $upt['refEdad'])
             ->getQuery();
         $resul = $q->execute();
 
