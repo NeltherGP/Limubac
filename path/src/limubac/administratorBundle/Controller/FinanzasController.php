@@ -66,7 +66,7 @@ class FinanzasController extends Controller{
             return $this->render('limubacadministratorBundle:administracion:editaFinanzas.html.twig', array('query' => $resul));
         }
         elseif (!empty($_REQUEST['pdf'])) {
-            $pdf = new finanzas();
+            //$pdf = new finanzas();
         }
         elseif (!empty($_REQUEST['sel'])) {
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Finanzas');
