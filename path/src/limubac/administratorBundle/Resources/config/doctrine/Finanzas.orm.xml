@@ -14,12 +14,13 @@
     <field name="monto" type="integer" column="monto" nullable="false"/>
     <field name="cuenta" type="integer" column="cuenta" nullable="false"/>
     <field name="manejo" type="string" column="manejo" length="255" nullable="false"/>
-    <field name="enero" type="integer" column="enero" nullable="false"/>
-    <field name="febrero" type="integer" column="febrero" nullable="false"/>
-    <field name="marzo" type="integer" column="marzo" nullable="false"/>
-    <field name="abril" type="integer" column="abril" nullable="false"/>
-    <field name="mayo" type="integer" column="mayo" nullable="false"/>
-    <field name="junio" type="integer" column="junio" nullable="false"/>
+    <field name="mes1" type="integer" column="mes_1" nullable="false"/>
+    <field name="mes2" type="integer" column="mes_2" nullable="false"/>
+    <field name="mes3" type="integer" column="mes_3" nullable="false"/>
+    <field name="mes4" type="integer" column="mes_4" nullable="false"/>
+    <field name="mes5" type="integer" column="mes_5" nullable="false"/>
+    <field name="mes6" type="integer" column="mes_6" nullable="false"/>
+    <field name="mes7" type="integer" column="mes_7" nullable="false"/>
     <many-to-one field="idEquipo" target-entity="Equipo">
       <join-columns>
         <join-column name="id_equipo" referenced-column-name="id_equipo"/>
