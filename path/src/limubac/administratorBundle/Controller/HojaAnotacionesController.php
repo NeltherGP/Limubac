@@ -139,7 +139,6 @@ class HojaAnotacionesController extends Controller{
           $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
           $auxFinder= $auxRepository->find($a);
           $asistencia->setIdJugador($auxFinder);
-
           $doctrineManager-> persist($asistencia);
           $doctrineManager-> flush();
         }

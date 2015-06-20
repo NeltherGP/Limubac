@@ -21,7 +21,7 @@ class ConsultasPartidos{
                 FROM limubacadministratorBundle:ParticipanT p
                 INNER JOIN limubacadministratorBundle:Equipo e  WITH p.idEquipo=e.idEquipo
                 INNER JOIN limubacadministratorBundle:Torneo t  WITH p.idTorneo=t.idTorneo
-				INNER JOIN limubacadministratorBundle:Categoria c  WITH p.idCategoria=c.idCategoria
+				INNER JOIN limubacadministratorBundle:Categoria c  WITH e.idCategoria=c.idCategoria
                 WHERE p.idTorneo={$idTorneo}
 				ORDER BY c.idCategoria");
 
@@ -33,7 +33,7 @@ class ConsultasPartidos{
                 FROM limubacadministratorBundle:ParticipanT p
                 INNER JOIN limubacadministratorBundle:Equipo e  WITH p.idEquipo=e.idEquipo
                 INNER JOIN limubacadministratorBundle:Torneo t  WITH p.idTorneo=t.idTorneo
-		            INNER JOIN limubacadministratorBundle:Categoria c  WITH p.idCategoria=c.idCategoria
+		            INNER JOIN limubacadministratorBundle:Categoria c  WITH e.idCategoria=c.idCategoria
                 WHERE p.idTorneo={$idTorneo}");
     return $consulta->getResult();
   }
@@ -63,7 +63,7 @@ class ConsultasPartidos{
 	}
 	$dif=$pf+$pc;
 	$total=($pg*3)+($pp);
-	
+
 
 	$lista=array('pj'=>$pj,'pg'=>$pg,'pp'=>$pp,'pf'=>$pf,'pc'=>$pc,'dif'=>$dif,'total'=>$total);
 

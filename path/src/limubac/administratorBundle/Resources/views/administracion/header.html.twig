@@ -1,9 +1,5 @@
-
-
 {% extends '::base.html.twig' %}
 
-
-{% extends '::base.html.twig' %}
 {#% block stylesheets %}
 {{parent()}}
 
@@ -47,28 +43,10 @@
 		      	</ul>
 
 			    <ul class="nav navbar-nav navbar-right">
-<<<<<<< HEAD
-			        <li><a href="#">Link</a></li>
-			        <li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-
-			        	<ul class="dropdown-menu" role="menu">
-				            <li><a href="#">Action</a></li>
-				            <li><a href="#">Another action</a></li>
-				            <li><a href="#">Something else here</a></li>
-				            <li class="divider"></li>
-				            <li><a href="#">Separated link</a></li>
-			          </ul>
-			        </li>
-=======
-
 
                         {% for flashMessage in app.session.getflashBag.get('name') %}
                            <li><a href="{{url('limubacadministrator_sessions')}}"> {{ flashMessage }} </a></li>
 						{% endfor %}
-
-
->>>>>>> f0ca02fe85b0e50d55b1e38d73aad2e2d2fe5e46
 			    </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
@@ -121,8 +99,6 @@
         }else{
              $('#flechita').attr("class","glyphicon glyphicon-chevron-right");
         }
-
-
     });
     </script>
 

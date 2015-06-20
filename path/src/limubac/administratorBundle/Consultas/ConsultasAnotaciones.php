@@ -23,8 +23,8 @@ class ConsultasAnotaciones{
 		$consulta = $manager ->createQuery('SELECT e.nombre, j.side, r.nombre as rama, c.nombre as categoria, s.nombre as lugar, t.nombre as torneo, IDENTITY(j.idPartido) as idpartido from limubacadministratorBundle:Equipo e
 		join  limubacadministratorBundle:Juegan j with e.idEquipo=j.idEquipo
 		join limubacadministratorBundle:ParticipanT p with p.idEquipo=e.idEquipo
-		join limubacadministratorBundle:RamaEquipo r with r.idRama = p.idRama
-		join limubacadministratorBundle:Categoria c with c.idCategoria=p.idCategoria
+		join limubacadministratorBundle:RamaEquipo r with r.idRama = e.idRama
+		join limubacadministratorBundle:Categoria c with c.idCategoria=e.idCategoria
 		join limubacadministratorBundle:Partido pa with pa.idPartido=j.idPartido
 		join limubacadministratorBundle:Sede s with s.idSede=pa.idSede
 		join limubacadministratorBundle:Torneo t with t.idTorneo=pa.idTorneo
