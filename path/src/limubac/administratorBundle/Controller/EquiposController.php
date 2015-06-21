@@ -21,6 +21,7 @@ namespace limubac\administratorBundle\Controller;
 		use limubac\administratorBundle\Form\Type\JugadorAType;
 		use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 		use Symfony\Component\Validator\Constraints\DateTime;
+		use limubac\administratorBundle\Entity\Fotos;
 
 	include 'funcionesExtras.php';	
 		
@@ -108,7 +109,11 @@ class EquiposController extends Controller{
 		//print_r($jugadores);
     	return $this->render('limubacadministratorBundle:administracion:equipos.html.twig', array('Jugadores'=>$jugadores,'listEquip' =>$ListaEquipos,'Torneos'=>$Torneos,'Ramas'=>$Ramas));
     }
-	
+
+	protected function getUploadDir(){
+		return '\upload\images/';
+	}
+
 	public function equipoAction(){
 		$resuly ="";
 		$nj="";
@@ -118,12 +123,6 @@ class EquiposController extends Controller{
 
         $request = $this->get('request');
         $form->handleRequest($request);
-		
-        //Agregar fotografia
-        if (isset($_POST['fotosup'])) {
-        	$idjug = isset($_POST['idJugador']);
-        	print_r($idjug);
-        }
 
 		//Agregando nuevo equipo
 		if(isset($_POST['NuevoEquipo'])){
@@ -166,8 +165,102 @@ class EquiposController extends Controller{
             $nj = $_REQUEST['NoJugador'];
 
 		}
+
+		//Agregar fotografia
+        if (isset($_POST['fotosup'])) {
+	   		$dir = __DIR__.$this->getUploadDir();
+			$validextensions = array("jpeg", "jpg", "png");
+			$temporary = explode(".", $_FILES["file"]["name"]);
+			$file_extension = end($temporary);
+
+			if ((($_FILES["file"]["type"] == "image/png") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/jpeg")
+			) && ($_FILES["file"]["size"] < 300000)//Approx. 100kb files can be uploaded.
+			&& in_array($file_extension, $validextensions)) {
+						
+				if ($_FILES["file"]["error"] > 0) {
+					echo "Return Code: " . $_FILES["file"]["error"] . "<br/><br/>";
+				}else{
+					if (file_exists($dir. $_FILES["file"]["name"])) {
+						echo $_FILES["file"]["name"] . " <b> ya existe.</b> ";
+					}else{
+						//validar foto
+						$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+	                    $queryEdit = $repository->createQueryBuilder('f')
+	                        ->select('f.idFoto','f.foto','f.nombre')
+	                        ->where('f.nombre = :word')
+	                        ->setParameter('word', "foto_".$_REQUEST['idi'])
+	                        ->getQuery();
+	                    $resul1 = $queryEdit->getResult();
+
+	                    if (count($resul1) >= 1) {
+							$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+					        $queryAct = $repository->createQueryBuilder('o');
+					        $q = $queryAct->update('limubacadministratorBundle:Fotos', 'o')
+					            ->set('o.foto', ':fot')
+					            ->where('o.idFoto= :idf')
+					            ->setParameter('idf', $resul1[0]['idFoto'])
+					            ->setParameter('fot', $_FILES["file"]["name"])
+					            ->getQuery();
+					        $resul = $q->execute();
+
+					        echo "<span>Imagen subida exitosamente...!!</span><br/>";
+							echo "<br/><b>Nombre de la imagen:</b> " . $_FILES["file"]["name"] . "<br>";
+							echo "<b>Tipo:</b> " . $_FILES["file"]["type"] . "<br>";
+							echo "<b>Tamano:</b> " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+							//echo "<b>Temp file:</b> " . $_FILES["file"]["tmp_name"] . "<br>";
+
+							move_uploaded_file($_FILES["file"]["tmp_name"], $dir . $_FILES["file"]["name"]);
+							//$imgFullpath = $dir . $_FILES["file"]["name"];
+							//echo "<b>Stored in:</b><a href = '$imgFullpath' target='_blank'> " .$imgFullpath.'<a>';
+
+					        $path = $dir.$resul1[0]['foto'];
+							unlink($path);
+	                    }else{
+	                    	//insertar url de imagen en base de datos
+							$foto = new Fotos();
+							$foto -> setFoto($_FILES["file"]["name"]);
+							$foto -> setNombre("foto_".$_REQUEST['idi']);
+
+							$em = $this ->getDoctrine() ->getManager();
+							$em -> persist($foto);
+							$em -> flush();
+
+							$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+					        $queryAct = $repository->createQueryBuilder('z');
+					        $q = $queryAct->update('limubacadministratorBundle:Jugador', 'z')
+					            ->set('z.idFoto', ':fot')
+					            ->where('z.idJugador= :idj')
+					            ->setParameter('idj', $_REQUEST['idi'])
+					            ->setParameter('fot', $foto ->getIdFoto())
+					            ->getQuery();
+					        $resul = $q->execute();
+
+					        echo "<span>Imagen subida exitosamente...!!</span><br/>";
+							echo "<br/><b>Nombre de la imagen:</b> " . $_FILES["file"]["name"] . "<br>";
+							echo "<b>Tipo:</b> " . $_FILES["file"]["type"] . "<br>";
+							echo "<b>Tamano:</b> " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+							//echo "<b>Temp file:</b> " . $_FILES["file"]["tmp_name"] . "<br>";
+
+							move_uploaded_file($_FILES["file"]["tmp_name"], $dir . $_FILES["file"]["name"]);
+							//$imgFullpath = $dir . $_FILES["file"]["name"];
+							//echo "<b>Stored in:</b><a href = '$imgFullpath' target='_blank'> " .$imgFullpath.'<a>';
+	                    }
+
+				        return $this->redirect($this->generateUrl('limubacadministrator_equipo',array('opciones'=>$_REQUEST['equipoi'])));
+					}
+				}
+			}else{
+				echo "<span>***Invalid file Size or Type***<span>";
+			}
+		}
+		//fin de fotografia
 		
-        if ($request->getMethod() == 'GET') {
+		//Borrar campos
+		if (isset($_REQUEST['borrar'])) {
+			return $this->redirect($this->generateUrl('limubacadministrator_equipo',array('opciones'=>$_REQUEST['equipoid'])));
+		}
+
+        if (isset($_REQUEST['jugador'])) {
             $url_to_parse = $_SERVER['REQUEST_URI'];
             $parsed_url = parse_url($url_to_parse);
             if (empty($parsed_url['query'])) {

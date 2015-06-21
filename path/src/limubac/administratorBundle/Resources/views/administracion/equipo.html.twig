@@ -147,9 +147,49 @@
 	              {{form_widget(form.peso, {value : res[0]['peso']} )}}<br>
 	              <font color:#999>Tipo sanguineo: </font>{{form_widget(form.idTiposanguineo, {value : res[0][3]} )}}
 	              <br>
+	              {% if res[0][4] != null %}
+	              	<h6>Este jugador ya tiene una fotografia asociada</h6>
+	              {% else %}
+	              	<h6>Ingresa fotografia de jugador</h6>
+	              {% endif %}
 	             {# {{form_widget(form., {'attr': {'placeholder': 'Foto'|trans}} )}}<font color="red"> *</font><br> #}
 				 <input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
 	            {{form_end(form)}}
+
+	            <!--Inicio ingreso de fotografia-->
+		          	<div id="mainform">
+						<div id="innerdiv">
+							<!-- Required Div Starts Here -->
+							<div id="formdiv">
+								<br>
+								<h3>Ingresa fotografia</h3>
+								<div id="detail">
+									<b>Nota:</b>
+									<ul>
+									<li>Seleccione un archivo .</li>
+									<li>Formatos admitidos- <b>imagenes(jpeg,jpg,png).</b></li>
+									<li>Debe pesar menos de 300kb.</li>
+									</ul>
+								</div>
+								<form action="" enctype="multipart/form-data" id="form" method="post" name="form">
+									<div id="upload">
+										<input id="file" name="file" type="file">
+										<input id="idi" name="idi" type="hidden" value="{{res[0]['idJugador']}}">
+										<input id="equipoi" name="equipoi" type="hidden" value="{{equipo.idEquipo}}">
+									</div>
+									<br>
+									<button class="btn btn-primary btn-info" type="submit" id="fotosup" name="fotosup"><i class="glyphicon-ok glyphicon"></i> Subir fotografia</button>
+								</form>
+							</div>
+							<div id="clear"></div>
+							<div id="preview">
+								<img id="previewimg" src=""><img id="deleteimg" src="/limubac/path/web/delete.png">
+							</div>
+							<div id="message">
+							</div>
+						</div>
+					</div>
+		          <!--Fin ingreso de fotografia-->
 	        {% else %}
 	        	{{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
 	              {{form_widget(form.nombre, {'attr': {'placeholder':'Nombre'|trans}} )}}<font color="red"> *</font><br>
@@ -173,45 +213,16 @@
 	            {{form_end(form)}}
 	        {% endif %}
           </div>
-
-          <!--Inicio ingreso de fotografia-->
-          	<div id="mainform">
-				<div id="innerdiv">
-					<!-- Required Div Starts Here -->
-					<div id="formdiv">
-						<br>
-						<h3>Ingresa fotografia</h3>
-						<div id="detail">
-							<b>Nota:</b>
-							<ul>
-							<li>Seleccione un archivo .</li>
-							<li>Formatos admitidos- <b>imagenes(jpeg,jpg,png).</b></li>
-							<li>Debe pesar menos de 100kb.</li>
-							</ul>
-						</div>
-						<form action="" enctype="multipart/form-data" id="form" method="post" name="form">
-							<div id="upload">
-								<input id="file" name="file" type="file">
-							</div>
-							<br>
-							<button type="submit" id="fotosup" name="fotosup"><i class="glyphicon-ok glyphicon"></i> Subir</button>
-						</form>
-					</div>
-					<div id="clear"></div>
-					<div id="preview">
-						<img id="previewimg" src=""><img id="deleteimg" src="/limubac/path/web/delete.png">
-					</div>
-					<div id="message">
-					</div>
-				</div>
-			</div>
-          <!--Fin ingreso de fotografia-->
-
         </div>
         <div class="col-md-5 tRight">
           <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Salvar" name="jugador[Salvar]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
-          <p class="btn btn-large btn-danger sharp sp" onclick="myFunction()" id="jugador_Borrar" name="jugador[Borrar]" style="margin-left: 18px;"><i class="glyphicon-remove glyphicon"></i> Borrar campos</p>
 
+
+            <form action="" id="form" method="post" name="form">						
+				<input id="equipoid" name="equipoid" type="hidden" value="{{equipo.idEquipo}}">
+					
+				<button class="btn btn-large btn-danger sharp sp" type="submit" id="jugador_Borrar" name="borrar" style="margin-left: 18px;"><i class="glyphicon-remove glyphicon"></i> Borrar campos</button>				
+			</form>
         </div>
       </div>
     </div>
