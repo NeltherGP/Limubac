@@ -108,6 +108,8 @@ class EquiposController extends Controller{
     }
 	
 	public function equipoAction(){
+		$resul ="";
+		$nj="";
 		$Mensaje = null;
 		$jugador = new Jugador();
         $form = $this->createForm(new JugadorType(), $jugador);
@@ -115,6 +117,12 @@ class EquiposController extends Controller{
         $request = $this->get('request');
         $form->handleRequest($request);
 		
+        //Agregar fotografia
+        if (isset($_POST['fotosup'])) {
+        	$idjug = isset($_POST['idJugador']);
+        	print_r($idjug);
+        }
+
 		//Agregando nuevo equipo
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();
@@ -155,7 +163,18 @@ class EquiposController extends Controller{
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Jugador");
 			$jugador = $repositorio->find($_REQUEST['idJugador']);
 			
-			//de aqui sigue fafi
+			//--------------------------------------de aqui sigue fafi
+
+			$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+            $queryEdit = $repository->createQueryBuilder('e')
+            ->select('e.idJugador','e.nombre','e.apPaterno','e.apMaterno','e.fNacimiento','e.correo','e.telefono','e.profesion','IDENTITY(e.idStatus)','IDENTITY(e.idGenero)','e.estatura','e.peso','IDENTITY(e.idTiposanguineo)','IDENTITY(e.idFoto)')
+            //->join('limubacadministratorBundle:Fotos', 'fot', 'WITH' ,'fot.idFoto = e.idFoto')
+            ->where('e.idJugador = :word')
+            ->setParameter('word', $_REQUEST['idJugador'])
+            ->getQuery();
+            $resul = $queryEdit->getResult();
+            $nj = $_REQUEST['NoJugador'];
+
 		}
 		
         if ($request->getMethod() == 'GET') {
@@ -341,7 +360,7 @@ class EquiposController extends Controller{
 				$Auxiliar = $query->getResult();
 			}
 			
-		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('form' => $form->createView(),'equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar,'mensaje'=>$Mensaje,'NoEquipo'=>$_REQUEST['opciones']));
+		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('form' => $form->createView(),'equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar,'mensaje'=>$Mensaje,'NoEquipo'=>$_REQUEST['opciones'],'res'=>$resul, 'nj' => $nj));
 		
 		}else{//si no esta definido el valor del equipo
 			

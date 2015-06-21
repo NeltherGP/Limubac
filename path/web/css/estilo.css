@@ -480,6 +480,26 @@ font-size: 11px;
 color: #fff;
 text-transform: uppercase;
 }
+
+
+/* Above is to load Google Fonts in our page.*/
+#preview{
+height:180px;
+width:180px;
+text-align:center;
+margin:20px;
+display:none
+}
+
+#previewimg{
+height:140px;
+width:140px;
+float:left;
+padding:8px;
+border:1px solid #e4d3c3;
+margin-bottom:5px
+}
+
 /*-----------------------FINAL ESTILOS DE FAFI...NO TOCAR!!!!------------------------*/
 
 /*------------------Estilos Equipo----------*/
