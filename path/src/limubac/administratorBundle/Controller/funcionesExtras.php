@@ -43,7 +43,7 @@ with i.idJugador = j.idJugador where i.idEquipo='.$equipo->getIdEquipo().' and j
 				$resultado = $query->getResult();
 				
 				//echo 'Select IDENTITY(i.idJugador) FROM limubacadministratorBundle:Integra i join limubacadministratorBundle:Jugador j 
-with i.idJugador = j.idJugador where i.idEquipo='.$equipo->getIdEquipo().' and j.fNacimiento<'.$dia."-".$mes."-".($year-22);
+//with i.idJugador = j.idJugador where i.idEquipo='.$equipo->getIdEquipo().' and j.fNacimiento<'.$dia."-".$mes."-".($year-22);
 				
 				if(count($resultado)>0){
 					echo "<script type='text/javascript'>alert('No puede Registrarse el equipo debido a que tienes al menos un jugador mayor de 22 años');</script>";
