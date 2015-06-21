@@ -174,6 +174,14 @@ class EquiposController extends Controller{
             else{
                 $out = $_REQUEST['jugador'];
                 if (is_array($out) && !empty($out)) {
+                		$fn = $out['fNacimiento'];
+                    	$dt = date_create_from_format('Y-m-d', $fn);
+                    $nom = strtoupper (substr($out['nombre'],0,1));
+                	$app = strtoupper (substr($out['apPaterno'],0,2));
+                	$apm = strtoupper (substr($out['apMaterno'],0,1));
+                	$ani = substr($fn,2,2);
+                	$mes = substr($fn,5,2);
+                	$dia = substr($fn,8,2);
                     $player = new Jugador();
                     $player -> setNombre($out['nombre']);
                     $player -> setApPaterno($out['apPaterno']);
@@ -189,12 +197,20 @@ class EquiposController extends Controller{
                     $player -> setIdStatus($category[0]);
                         $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
                        	$category = $class_repository->find($out['idGenero']);
+                       	if ($out['idGenero'] == 1)
+                       		$sex = "H";
+                       	elseif ($out['idGenero'] == 2)
+                       		$sex = "F";
+                       	else
+                       		$sex = "G";
                     $player -> setIdGenero($category);
                     $player -> setEstatura($out['estatura']);
                     $player -> setPeso($out['peso']);
                         $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:TipoSanguineo');
                         $category = $class_repository->find($out['idTiposanguineo']);
                     $player -> setIdTiposanguineo($category);
+                    $curp = $app.$apm.$nom.$ani.$mes.$dia.$sex;
+                    $player -> setCurp($curp);
                         //$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
                         //$category = $class_repository->find($out['idFoto']);
                     //$player -> setIdFoto($category);
