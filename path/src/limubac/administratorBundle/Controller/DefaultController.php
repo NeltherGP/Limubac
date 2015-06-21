@@ -26,6 +26,7 @@ namespace limubac\administratorBundle\Controller;
 		use Symfony\Component\Validator\Constraints\DateTime;
         use limubac\administratorBundle\Form\Type\TorneoType;
         use limubac\administratorBundle\Form\Type\CategoriaType;
+        use limubac\administratorBundle\Form\Type\TorneoBType;
 
 
 class DefaultController extends Controller{
@@ -511,7 +512,7 @@ class DefaultController extends Controller{
        
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
         $queryTorneos = $repository->createQueryBuilder('t')
-            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo')
+            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo','t.inscripcionAbierta')
             ->orderBy('t.idTorneo', 'DESC')
             ->getQuery();
         $entities = $queryTorneos->getResult();
@@ -588,14 +589,62 @@ class DefaultController extends Controller{
 			$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
 			$queryCategorias = $repository->createQueryBuilder('h')
 				->select('e.idCategoria,e.nombre')
-				->join('limubacadministratorBundle:Categoria', 'e', 'WITH' ,'e.idCategoria = h.idCategoria')
+				->join('limubacadministratorBundle:Equipo','eq','WITH','h.idEquipo = eq.idEquipo')
+				->join('limubacadministratorBundle:Categoria', 'e', 'WITH' ,'e.idCategoria = eq.idCategoria')
 				->where('h.idTorneo = :torn')
-				->groupBy('h.idCategoria')
+				->groupBy('eq.idCategoria')
 				->setParameter('torn',$idtorn[0])
 				->getQuery();
 			$n1 = $queryCategorias->getResult();			
 			//print_r($n1);
-			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1));
+$queryRamas = $repository->createQueryBuilder('l')
+				->select('o.idRama,o.nombre')
+				->join('limubacadministratorBundle:Equipo','ez','WITH','l.idEquipo = ez.idEquipo')
+				->join('limubacadministratorBundle:RamaEquipo', 'o', 'WITH' ,'o.idRama = ez.idRama')
+				->where('l.idTorneo = :torn')
+				->groupBy('ez.idRama')
+				->setParameter('torn',$idtorn[0])
+				->getQuery();
+			$n2 = $queryRamas->getResult();
+			return $this->render('limubacadministratorBundle:administracion:roldejuego.html.twig',array('rols'=>$idtorn,'categs'=>$n1,'ramas'=>$n2));
+		}else if(!empty($_REQUEST['noInsc'])){
+            $idtoor = $_REQUEST['noInsc'][0];
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+	        $queryAct = $repository->createQueryBuilder('z');
+	        $q = $queryAct->update('limubacadministratorBundle:Torneo', 'z')
+	            ->set('z.inscripcionAbierta', '0')   
+	            ->where('z.idTorneo= :idt')
+	            ->setParameter('idt', $idtoor)
+	            ->getQuery();
+	        $resul = $q->execute();
+
+		$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+        $queryTorneos = $repository->createQueryBuilder('t')
+            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo','t.inscripcionAbierta')
+            ->orderBy('t.idTorneo', 'DESC')
+            ->getQuery();
+        $entities = $queryTorneos->getResult();
+
+	        return $this->render('limubacadministratorBundle:administracion:torneos.html.twig',array('entities' => $entities));
+	    }else if(!empty($_REQUEST['insc'])){
+            $idtooor = $_REQUEST['insc'][0];
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+	        $queryAct = $repository->createQueryBuilder('z');
+	        $q = $queryAct->update('limubacadministratorBundle:Torneo', 'z')
+	            ->set('z.inscripcionAbierta', '1')   
+	            ->where('z.idTorneo= :idt')
+	            ->setParameter('idt', $idtooor)
+	            ->getQuery();
+	        $resul = $q->execute();
+
+		$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+        $queryTorneos = $repository->createQueryBuilder('t')
+            ->select('t.idTorneo','t.nombre','t.fInicio','t.fTermino','t.costo','t.inscripcionAbierta')
+            ->orderBy('t.idTorneo', 'DESC')
+            ->getQuery();
+        $entities = $queryTorneos->getResult();
+
+	        return $this->render('limubacadministratorBundle:administracion:torneos.html.twig',array('entities' => $entities));			
 		}else if(!empty($_REQUEST['ver'])){
             $idtor = array($_REQUEST['ver'][0]);
                 /*SELECT  e.nombre AS equipo, c.nombre AS categoria, r.nombre AS rama
@@ -609,8 +658,8 @@ class DefaultController extends Controller{
             $queryEdit = $repository->createQueryBuilder('p')
             ->select('e.nombre AS equipo','c.nombre AS categoria','r.nombre AS rama','t.nombre AS torneo')
             ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'p.idEquipo = e.idEquipo')
-            ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'p.idCategoria = c.idCategoria')
-            ->join('limubacadministratorBundle:RamaEquipo', 'r', 'WITH' ,'p.idRama = r.idRama')
+            ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'e.idCategoria = c.idCategoria')
+            ->join('limubacadministratorBundle:RamaEquipo', 'r', 'WITH' ,'e.idRama = r.idRama')
             ->join('limubacadministratorBundle:Torneo', 't', 'WITH' ,'p.idTorneo = t.idTorneo')
             ->where('p.idTorneo = :word')
             ->orderBy('categoria')
@@ -638,7 +687,6 @@ class DefaultController extends Controller{
         $fnt = $upt['fTermino'];
         $dt = date_create_from_format('Y-m-d', $fnt);
 
-        //print_r($resul[0]['idFoto']);
 
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
         $queryAct = $repository->createQueryBuilder('z');
@@ -722,7 +770,7 @@ class DefaultController extends Controller{
             
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Categoria');
             $queryEdit = $repository->createQueryBuilder('e')
-            ->select('e.idCategoria','e.nombre','e.edad','e.limiteEquipo')
+            ->select('e.idCategoria','e.nombre','e.edad','e.limiteEquipo','e.refEdad')
             ->where('e.idCategoria = :word')
             ->setParameter('word', $ed)
             ->getQuery();
@@ -742,11 +790,13 @@ class DefaultController extends Controller{
             ->set('z.nombre', ':nom')   
             ->set('z.edad', ':edd')
             ->set('z.limiteEquipo', ':lme')
+            ->set('z.refEdad', ':red')
             ->where('z.idCategoria= :idc')
             ->setParameter('idc', $upt['idCategoria'])
             ->setParameter('nom', $upt['nombre'])
             ->setParameter('edd', $upt['edad'])
             ->setParameter('lme', $upt['limiteEquipo'])
+            ->setParameter('red', $upt['refEdad'])
             ->getQuery();
         $resul = $q->execute();
 
