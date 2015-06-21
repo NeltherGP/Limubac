@@ -75,13 +75,7 @@ class EquiposController extends Controller{
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
 			$Participan = $repositorio->find($_REQUEST['editarEquipo']);
 			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
-			$Rama =$repositorio->find($_REQUEST['rama']);
-			$Participan->setIdRama($Rama);
 			
-			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
-			$Categoria =$repositorio->find($_REQUEST['Categoria']);
-			$Participan->setIdCategoria($Categoria);
 			
 			$Manager = $this->getDoctrine()->getManager();
 			$Manager->persist($Participan);
@@ -89,6 +83,14 @@ class EquiposController extends Controller{
 			
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
 			$Equipo = $repositorio->find($_REQUEST['opciones']);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:RamaEquipo");
+			$Rama =$repositorio->find($_REQUEST['rama']);
+			$Equipo->setIdRama($Rama);
+			
+			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Categoria");
+			$Categoria =$repositorio->find($_REQUEST['Categoria']);
+			$Equipo->setIdCategoria($Categoria);
 			
 			$Equipo->setNombre($_REQUEST['NuevoEquipo']);
 			$Manager->persist($Equipo);
@@ -393,7 +395,7 @@ class EquiposController extends Controller{
 		//Conseguir ParticipanT
 		$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
 		$query = $repositorio->createQueryBuilder('p')
-				->select('p.idRegistro','IDENTITY(p.idRama)','IDENTITY(p.idCategoria)')
+				->select('p.idRegistro')
 				->where('p.idEquipo = '.$Equipo->getIdEquipo() )
 				->getQuery();
 			
