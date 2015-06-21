@@ -14,7 +14,7 @@
 				{% for i in 0..2%}
 					{% if indice+i < Categorias|length %}
 						<input type="radio" 
-						{% if Categorias[indice+i].idCategoria == Participan[0][2] %}
+						{% if Categorias[indice+i].idCategoria == Equipo.idCategoria.idCategoria %}
 							checked="checked"
 						{% endif %}
 						name="Categoria"  value={{Categorias[indice+i].idCategoria}}> {{Categorias[indice+i].nombre}}
@@ -30,7 +30,7 @@
 		<h1>Rama del equipo</h1>
 		<div class="col-md-5">
 			<input type="radio" name="rama" value=1 
-			{%if Participan[0][1]==1%}
+			{%if Equipo.idRama.idRama==1%}
 				checked="checked"
 			{% endif %}
 			> Varonil
@@ -38,7 +38,7 @@
 		</div>
 		<div class="col-md-5">
 			<input type="radio" name="rama" value=2
-			{%if Participan[0][1]==2%}
+			{%if Equipo.idRama.idRama==2%}
 				checked="checked"
 			{% endif %}
 			> Femenil
