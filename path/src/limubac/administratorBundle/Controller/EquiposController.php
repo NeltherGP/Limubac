@@ -108,7 +108,7 @@ class EquiposController extends Controller{
     }
 	
 	public function equipoAction(){
-		$resul ="";
+		$resuly ="";
 		$nj="";
 		$Mensaje = null;
 		$jugador = new Jugador();
@@ -160,7 +160,7 @@ class EquiposController extends Controller{
             ->where('e.idJugador = :word')
             ->setParameter('word', $_REQUEST['idJugador'])
             ->getQuery();
-            $resul = $queryEdit->getResult();
+            $resuly = $queryEdit->getResult();
             $nj = $_REQUEST['NoJugador'];
 
 		}
@@ -174,6 +174,7 @@ class EquiposController extends Controller{
             else{
                 $out = $_REQUEST['jugador'];
                 if (is_array($out) && !empty($out)) {
+                	//Genera el curp
                 		$fn = $out['fNacimiento'];
                     	$dt = date_create_from_format('Y-m-d', $fn);
                     $nom = strtoupper (substr($out['nombre'],0,1));
@@ -182,47 +183,62 @@ class EquiposController extends Controller{
                 	$ani = substr($fn,2,2);
                 	$mes = substr($fn,5,2);
                 	$dia = substr($fn,8,2);
-                    $player = new Jugador();
-                    $player -> setNombre($out['nombre']);
-                    $player -> setApPaterno($out['apPaterno']);
-                    $player -> setApMaterno($out['apMaterno']);
-                    $fn = $out['fNacimiento'];
-                    $dt = date_create_from_format('Y-m-d', $fn);
-                    $player -> setFNacimiento(new \DateTime($fn));
-                    $player -> setCorreo($out['correo']);
-                    $player -> setTelefono($out['telefono']);
-                    $player -> setProfesion($out['profesion']);
-				        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Status');
-                        $category = $class_repository->findByStatus("Activo");
-                    $player -> setIdStatus($category[0]);
-                        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
-                       	$category = $class_repository->find($out['idGenero']);
-                       	if ($out['idGenero'] == 1)
-                       		$sex = "H";
-                       	elseif ($out['idGenero'] == 2)
-                       		$sex = "F";
-                       	else
-                       		$sex = "G";
-                    $player -> setIdGenero($category);
-                    $player -> setEstatura($out['estatura']);
-                    $player -> setPeso($out['peso']);
-                        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:TipoSanguineo');
-                        $category = $class_repository->find($out['idTiposanguineo']);
-                    $player -> setIdTiposanguineo($category);
+                	if ($out['idGenero'] == 1)
+                      	$sex = "H";
+                   	elseif ($out['idGenero'] == 2)
+                   		$sex = "F";
+                   	else
+                   		$sex = "G";
                     $curp = $app.$apm.$nom.$ani.$mes.$dia.$sex;
-                    $player -> setCurp($curp);
-                        //$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
-                        //$category = $class_repository->find($out['idFoto']);
-                    //$player -> setIdFoto($category);
 
-                    $em = $this->getDoctrine()->getManager();
-                    $em -> persist($player);
-                    $em -> flush();
-					//Fin de agregar jugador
-					
-					//Agregar Al equipo
-					$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
-					$equipo = $repositorio->find($_REQUEST['opciones']);
+                   	//Buscar coincidencias
+                    $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+		            $queryEdit = $repository->createQueryBuilder('e')
+		            ->select('e.idJugador','e.nombre','e.apPaterno','e.apMaterno','e.fNacimiento','e.correo','e.telefono','e.profesion','IDENTITY(e.idStatus)','IDENTITY(e.idGenero)','e.estatura','e.peso','IDENTITY(e.idTiposanguineo)','IDENTITY(e.idFoto)', 'e.curp')
+		            //->join('limubacadministratorBundle:Fotos', 'fot', 'WITH' ,'fot.idFoto = e.idFoto')
+		            ->where('e.curp = :word OR e.idJugador = :wordd')
+		            ->setParameter('word', $curp)
+		            ->setParameter('wordd', $out['idJugador'])
+		            ->getQuery();
+		            $resul = $queryEdit->getResult();
+
+                    //Validacion de actualizacion o insercion
+                    if (count($resul) == 0){
+                    	//Inicio de agregar jugador
+                    	$player = new Jugador();
+	                    $player -> setNombre($out['nombre']);
+	                    $player -> setApPaterno($out['apPaterno']);
+	                    $player -> setApMaterno($out['apMaterno']);
+	                    $fn = $out['fNacimiento'];
+	                    $dt = date_create_from_format('Y-m-d', $fn);
+	                    $player -> setFNacimiento(new \DateTime($fn));
+	                    $player -> setCorreo($out['correo']);
+	                    $player -> setTelefono($out['telefono']);
+	                    $player -> setProfesion($out['profesion']);
+					        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Status');
+	                        $category = $class_repository->findByStatus("Activo");
+	                    $player -> setIdStatus($category[0]);
+	                        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
+	                       	$category = $class_repository->find($out['idGenero']);
+	                    $player -> setIdGenero($category);
+	                    $player -> setEstatura($out['estatura']);
+	                    $player -> setPeso($out['peso']);
+	                        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:TipoSanguineo');
+	                        $category = $class_repository->find($out['idTiposanguineo']);
+	                    $player -> setIdTiposanguineo($category);
+	                    $player -> setCurp($curp);
+	                        //$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+	                        //$category = $class_repository->find($out['idFoto']);
+	                    //$player -> setIdFoto($category);
+
+	                    $em = $this->getDoctrine()->getManager();
+	                    $em -> persist($player);
+	                    $em -> flush();
+						//Fin de agregar jugador
+
+						//Agregar Al equipo
+						$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:Equipo");
+						$equipo = $repositorio->find($_REQUEST['opciones']);
 					
 						//Agregando el jugador al equipo
 						$integra = new Integra();
@@ -232,10 +248,55 @@ class EquiposController extends Controller{
 					
 						$Manager = $this->getDoctrine()->getManager();
 						$Manager->persist($integra);
-						$Manager->flush();
+						$Manager-> flush();
 					
 					
 					//Fin Agregar Al Equipo
+                    }else{
+                    	//Inicio de actualizar jugadores
+                    	$fn = $out['fNacimiento'];
+
+        				$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Genero');
+				        $category2 = $class_repository->find($out['idGenero']);
+
+				        $class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:TipoSanguineo');
+				        $category3 = $class_repository->find($out['idTiposanguineo']);
+
+                    	$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+				        $queryAct = $repository->createQueryBuilder('z');
+				        $q = $queryAct->update('limubacadministratorBundle:Jugador', 'z')
+				            ->set('z.nombre', ':nom')
+				            ->set('z.apPaterno', ':app')
+				            ->set('z.apMaterno', ':apm')
+				            ->set('z.fNacimiento', ':fna')
+				            ->set('z.correo', ':cor')
+				            ->set('z.telefono', ':tel')
+				            ->set('z.profesion', ':pro')
+				            ->set('z.idGenero', ':ige')
+				            ->set('z.estatura', ':est')
+				            ->set('z.peso', ':pes')
+				            ->set('z.idTiposanguineo', ':iti')
+				            ->set('z.curp', ':crp')
+				            //->set('z.idFoto', ':fot')
+				            ->where('z.idJugador= :idj')
+				            ->setParameter('idj', $out['idJugador'])
+				            ->setParameter('nom', $out['nombre'])
+				            ->setParameter('app', $out['apPaterno'])
+				            ->setParameter('apm', $out['apMaterno'])
+				            ->setParameter('fna', new \DateTime($fn))
+				            ->setParameter('cor', $out['correo'])
+				            ->setParameter('tel', $out['telefono'])
+				            ->setParameter('pro', $out['profesion'])
+				            ->setParameter('ige', $category2)
+				            ->setParameter('est', $out['estatura'])
+				            ->setParameter('pes', $out['peso'])
+				            ->setParameter('iti', $category3)
+				            ->setParameter('crp', $curp)
+				            //->setParameter('fot', $resul[0]['idFoto'])
+				            ->getQuery();
+				        $resul = $q->execute();
+				        //Fin de actualizar jugadores
+                    }
                 }
                 else{
                     return new SymfonyResponse('Algo Fallo!');
@@ -361,8 +422,7 @@ class EquiposController extends Controller{
 			
 				$Auxiliar = $query->getResult();
 			}
-			
-		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('form' => $form->createView(),'equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar,'mensaje'=>$Mensaje,'NoEquipo'=>$_REQUEST['opciones'],'res'=>$resul, 'nj' => $nj));
+		return $this->render('limubacadministratorBundle:administracion:equipo.html.twig',array('form' => $form->createView(),'equipo'=>$equipo,'jugadores'=>$jugadores,'capitan'=>$Capi,'representante'=>$Representante,'auxiliar'=>$Auxiliar,'mensaje'=>$Mensaje,'NoEquipo'=>$_REQUEST['opciones'],'res'=>$resuly, 'nj' => $nj));
 		
 		}else{//si no esta definido el valor del equipo
 			

@@ -129,6 +129,7 @@
             <br>	
             {% if res != null %}
 	            {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+	              {{form_widget(form.idJugador, {value : res[0]['idJugador']} )}}
 	              {{form_widget(form.nombre, {value : res[0]['nombre']} )}}<font color="red"> *</font><br>
 	              {{form_widget(form.apPaterno, {value : res[0]['apPaterno']} )}}<font color="red"> *</font><br>
 	              {{form_widget(form.apMaterno, {value : res[0]['apMaterno']} )}}<font color="red"> *</font><br>
