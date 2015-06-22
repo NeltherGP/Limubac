@@ -168,7 +168,8 @@ class EquiposController extends Controller{
 
 		//Agregar fotografia
         if (isset($_POST['fotosup'])) {
-	   		$dir = __DIR__.$this->getUploadDir();
+	   		$dir = __DIR__.'/../../../../web/upload/images/';
+
 			$validextensions = array("jpeg", "jpg", "png");
 			$temporary = explode(".", $_FILES["file"]["name"]);
 			$file_extension = end($temporary);
