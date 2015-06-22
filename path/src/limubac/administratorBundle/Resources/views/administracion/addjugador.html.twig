@@ -12,7 +12,7 @@
     
     <div class="row-fluid">
       <div class="page-header">
-        <h1>Jugadores <small>Unete a la LIMUBAC</small>
+        <h1>Jugadores <small>Registra jugador a la LIMUBAC</small>
         </h1>
       </div>
 
@@ -32,17 +32,17 @@
               {{form_widget(form.apPaterno, {'attr': {'placeholder': 'Apellido paterno'|trans}} )}}<font color="red"> *</font><br>
               {{form_widget(form.apMaterno, {'attr': {'placeholder': 'Apellido materno'|trans}} )}}<font color="red"> *</font><br>
               <br>
-              {{form_widget(form.fNacimiento)}}
+              {{form_widget(form.fNacimiento)}}<font color="red"> *</font>
               <br>
               {{form_widget(form.correo, {'attr': {'placeholder': 'Correo'|trans}} )}}<font color="red"> *</font><br>
               {{form_widget(form.telefono, {'attr': {'placeholder': 'Telefono'|trans}} )}}<font color="red"> *</font><br>
-              {{form_widget(form.profesion, {'attr': {'placeholder': 'Profesion'|trans}} )}}<font color="red"> *</font><br>
+              {{form_widget(form.profesion, {'attr': {'placeholder': 'Profesion'|trans}} )}}<br>
               <br>
               <font color:#999>Genero: </font>{{form_widget(form.idGenero, {'attr': {'placeholder': 'Genero'|trans}} )}}<font color="red"> *</font>
               <br>
-              {{form_widget(form.estatura, {'attr': {'placeholder': 'Estatura'|trans}} )}}<font color="red"> *</font><br>
-              {{form_widget(form.peso, {'attr': {'placeholder': 'Peso'|trans}} )}}<font color="red"> *</font><br>
-              <font color:#999>Tipo sanguineo: </font>{{form_widget(form.idTiposanguineo, {'attr': {'placeholder': 'Tipo Sanguineo'|trans}} )}}<font color="red"> * </font>
+              {{form_widget(form.estatura, {'attr': {'placeholder': 'Estatura'|trans}} )}}<br>
+              {{form_widget(form.peso, {'attr': {'placeholder': 'Peso'|trans}} )}}<br>
+              <font color:#999>Tipo sanguineo: </font>{{form_widget(form.idTiposanguineo, {'attr': {'placeholder': 'Tipo Sanguineo'|trans}} )}}
               <br>
              {# {{form_widget(form., {'attr': {'placeholder': 'Foto'|trans}} )}}<font color="red"> *</font><br> #}
             {{form_end(form)}}

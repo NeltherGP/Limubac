@@ -155,18 +155,20 @@ class JugadoresController extends Controller{
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
             $queryEdit = $repository->createQueryBuilder('e')
             ->select('e.idJugador','e.nombre','e.apPaterno','e.apMaterno','e.fNacimiento','e.correo','e.telefono','e.profesion','IDENTITY(e.idStatus)','IDENTITY(e.idGenero)','e.estatura','e.peso','IDENTITY(e.idTiposanguineo)','IDENTITY(e.idFoto)')
-            //->join('limubacadministratorBundle:Fotos', 'fot', 'WITH' ,'fot.idFoto = e.idFoto')
             ->where('e.idJugador = :word')
             ->setParameter('word', $ed)
             ->getQuery();
             $resul = $queryEdit->getResult();
-            //print_r($resul);
 
-            //$images = array();
+            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
+            $queryEdit = $repository->createQueryBuilder('h')
+            ->select('h.idFoto','h.foto','h.nombre')
+            ->where('h.idFoto = :word')
+            ->setParameter('word', $resul[0][4])
+            ->getQuery();
+            $resulpho = $queryEdit->getResult();
 
-            //$images[0] = base64_encode(stream_get_contents($resul[0]['foto']));
-
-            return $this->render('limubacadministratorBundle:administracion:edita.html.twig',array('form' => $form->createView(), 'edita' => $resul));
+            return $this->render('limubacadministratorBundle:administracion:edita.html.twig',array('form' => $form->createView(), 'edita' => $resul, 'photo' => $resulpho));
         }
         elseif (!empty($_REQUEST['foto'])) {
             $per = $_REQUEST['foto'];
@@ -247,75 +249,6 @@ class JugadoresController extends Controller{
         return $this->redirect($this->generateUrl('limubacadministrator_jugadoresAdmin'));
     }
 
-    public function uploadosAction(Request $request){
-        if (isset($_POST['submit'])) {
-            $pics = new Fotos();
-            $idjug = $_REQUEST['id'];
-            $status = "success";
-            $message = '';
-            $per = array(0 => $idjug);
-
-            if ($_FILES['img']['error'] == 0) {
-                $imageName = mysql_real_escape_string($_FILES['img']['name']);
-                $imageData = mysql_real_escape_string(file_get_contents($_FILES['img']['tmp_name']));
-                $imageType = mysql_real_escape_string($_FILES['img']['type']);
-
-                if (substr($imageType,0,5) == "image") {
-                    $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
-                    $queryEdit = $repository->createQueryBuilder('e')
-                        ->select('e.idFoto','e.nombre')
-                        ->where('e.nombre = :word')
-                        ->setParameter('word', $idjug)
-                        ->getQuery();
-                    $resul1 = $queryEdit->getResult();
-
-                    $pics -> setNombre($idjug);
-                    $pics -> setFoto($imageData);
-
-                    $em = $this->getDoctrine()->getManager();
-                    $em -> persist($pics);
-                    $em -> flush();
-                    $pics -> getIdFoto();
-
-
-                    $category = $pics->getIdFoto();
-
-                    $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
-                    $queryAct = $repository->createQueryBuilder('f');
-                    $q = $queryAct->update('limubacadministratorBundle:Jugador', 'f')
-                        ->set('f.idFoto', ':fot')
-                        ->where('f.idJugador= :idj')
-                        ->setParameter('fot', $category)
-                        ->setParameter('idj', $idjug)
-                        ->getQuery();
-                    $resul = $q->execute();
-                    $per = array(0 => $idjug);
-
-                    if (is_array($resul1) and !empty($resul1)) {
-                        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Fotos');
-                        $queryDelete = $repository->createQueryBuilder('d')
-                            ->delete()
-                            ->where('d.idFoto = '.$resul1[0]['idFoto'])
-                            ->getQuery();
-                        $entities = $queryDelete->getResult();
-                    }
-
-                    $status = "success";
-                    $message = "Imagen guardada correctamente";
-                }
-                else{
-                    $status = "failed";
-                    $message = "Solo se permiten imagenes.<br>Intentalo de nuevo con un archivo valido.";
-                }
-            }
-            else{
-                echo('Formato invalido');
-                $status = "failed";
-                $message = "Solo se permiten imagenes en formato JPG.<br>Intentalo de nuevo con un archivo valido.";
-            }
-            return $this->render('limubacadministratorBundle:administracion:uploados.html.twig',array('status'=>$status,'message'=>$message, 'person' => $per));
-        }
-    }
 
 //-----------------------FINAL CONTROLADRO DE FAFI---------------------------------------------------
 }

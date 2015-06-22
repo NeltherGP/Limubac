@@ -39,14 +39,38 @@ join limubacadministratorBundle:ParticipanT p with i.idEquipo = p.idEquipo where
 				$mes = date("m");
 				$year= date("Y");
 				$query =$em->createQuery('Select IDENTITY(i.idJugador) FROM limubacadministratorBundle:Integra i join limubacadministratorBundle:Jugador j 
-with i.idJugador = j.idJugador where i.idEquipo='.$equipo->getIdEquipo().' and j.fNacimiento<'.$dia."-".$mes."-".($year-22));
+with i.idJugador = j.idJugador where i.id='.$equipo->getIdEquipo().' and j.fNacimiento<'.$dia."-".$mes."-".($year-22));
 				$resultado = $query->getResult();
 				
 				//echo 'Select IDENTITY(i.idJugador) FROM limubacadministratorBundle:Integra i join limubacadministratorBundle:Jugador j 
-with i.idJugador = j.idJugador where i.idEquipo='.$equipo->getIdEquipo().' and j.fNacimiento<'.$dia."-".$mes."-".($year-22);
+//with i.idJugador = j.idJugador where i.idEquipo='.$equipo->getIdEquipo().' and j.fNacimiento<'.$dia."-".$mes."-".($year-22);
 				
 				if(count($resultado)>0){
 					echo "<script type='text/javascript'>alert('No puede Registrarse el equipo debido a que tienes al menos un jugador mayor de 22 años');</script>";
+					return false;
+				}
+				
+			break;
+			case 5://Femenil
+				$query =$em->createQuery('Select IDENTITY(i.idJugador) FROM limubacadministratorBundle:Integra i join limubacadministratorBundle:Jugador j 
+with i.idJugador = j.idJugador where i.idEquipo='.$equipo->getIdEquipo()." and j.idGenero=1");
+				$resultado = $query->getResult();
+				
+				if(count($resultado)>0){//Si hay al menos un hombre en el equipo
+					echo "<script type='text/javascript'>alert('No puede Registrarse el equipo debido a que tienes al menos un hombre en el equipo');</script>";
+					return false;
+				}
+			break;
+			case 6://Unicamente mayores de 35 años
+				$dia = date("d");
+				$mes = date("m");
+				$year= date("Y");
+				$query =$em->createQuery('Select IDENTITY(i.idJugador) FROM limubacadministratorBundle:Integra i join limubacadministratorBundle:Jugador j 
+with i.idJugador = j.idJugador where i.idEquipo='.$equipo->getIdEquipo()." and j.fNacimiento>".$dia."-".$mes."-".($year-35));
+				$resultado = $query->getResult();
+				
+				if(count($resultado)>0){
+					echo "<script type='text/javascript'>alert('No puede Registrarse el equipo debido a que tienes al menos un jugador menor de 35 años');</script>";
 					return false;
 				}
 				

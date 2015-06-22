@@ -6,8 +6,45 @@
     $(document).ready(function(){
       $("[rel=tooltip]").tooltip({ placement: 'right'});
     });
+
+     function myFunction() {
+ 	   document.getElementById('nombre').value = '';
+     }
+
+
+    $(document).ready(function() {
+		// Function for Preview Image.
+		$(function() {
+			$(":file").change(function() {
+				if (this.files && this.files[0]) {
+					var reader = new FileReader();
+					reader.onload = imageIsLoaded;
+					reader.readAsDataURL(this.files[0]);
+				}
+			});
+		});
+
+		function imageIsLoaded(e) {
+			$('#message').css("display", "none");
+			$('#preview').css("display", "block");
+			$('#previewimg').attr('src', e.target.result);
+		};
+
+		// Function for Deleting Preview Image.
+		$("#deleteimg").click(function() {
+			$('#preview').css("display", "none");
+			$('#file').val("");
+		});
+
+		// Function for Displaying Details of Uploaded Image.
+		$("#submit").click(function() {
+			$('#preview').css("display", "none");
+			$('#message').css("display", "block");
+		});
+	});
+
+
   </script>
-  
   {% endblock documentReady %}
   
 	<div class="row-fluid">
@@ -78,7 +115,7 @@
     
 			<div class="row-fluid">
 			<div class="page-header">
-					<h1>Jugadores <small>Unete a la LIMUBAC</small>
+					<h1>Jugadores <small>Registra jugador a la LIMUBAC</small>
 				</h1>
 			</div>
 
@@ -89,34 +126,103 @@
           <div class="form sharp vertical">
             <h6>Debes llenar todos los campos marcados con un asterisco</h6>
             
-            <br>
-            {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
-              {{form_widget(form.nombre, {'attr': {'placeholder': 'Nombre'|trans}} )}}<font color="red"> *</font><br>
-              {{form_widget(form.apPaterno, {'attr': {'placeholder': 'Apellido paterno'|trans}} )}}<font color="red"> *</font><br>
-              {{form_widget(form.apMaterno, {'attr': {'placeholder': 'Apellido materno'|trans}} )}}<font color="red"> *</font><br>
-              <br>
-              {{form_widget(form.fNacimiento)}}
-              <br>
-              {{form_widget(form.correo, {'attr': {'placeholder': 'Correo'|trans}} )}}<font color="red"> *</font><br>
-              {{form_widget(form.telefono, {'attr': {'placeholder': 'Telefono'|trans}} )}}<font color="red"> *</font><br>
-              {{form_widget(form.profesion, {'attr': {'placeholder': 'Profesion'|trans}} )}}<font color="red"> *</font><br>
-              <br>
-              <font color:#999>Genero: </font>{{form_widget(form.idGenero, {'attr': {'placeholder': 'Genero'|trans}} )}}<font color="red"> *</font>
-              <br>
-              {{form_widget(form.estatura, {'attr': {'placeholder': 'Estatura'|trans}} )}}<font color="red"> *</font><br>
-			  {{form_widget(form.numero, {'attr': {'placeholder': 'No. Camiseta'|trans}} )}}<font color="red"> *</font><br>
-              {{form_widget(form.peso, {'attr': {'placeholder': 'Peso'|trans}} )}}<font color="red"> *</font><br>
-              <font color:#999>Tipo sanguineo: </font>{{form_widget(form.idTiposanguineo, {'attr': {'placeholder': 'Tipo Sanguineo'|trans}} )}}<font color="red"> * </font>
-              <br>
-             {# {{form_widget(form., {'attr': {'placeholder': 'Foto'|trans}} )}}<font color="red"> *</font><br> #}
-			 <input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
-            {{form_end(form)}}
+            <br>	
+            {% if res != null %}
+	            {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+	              {{form_widget(form.idJugador, {value : res[0]['idJugador']} )}}
+	              {{form_widget(form.nombre, {value : res[0]['nombre']} )}}<font color="red"> *</font><br>
+	              {{form_widget(form.apPaterno, {value : res[0]['apPaterno']} )}}<font color="red"> *</font><br>
+	              {{form_widget(form.apMaterno, {value : res[0]['apMaterno']} )}}<font color="red"> *</font><br>
+	              <br>
+	              {{form_widget(form.fNacimiento, {value : res[0]['fNacimiento']|date('Y-m-d')} )}}<font color="red"> *</font><br>
+	              <br>
+	              {{form_widget(form.correo, {value : res[0]['correo']} )}}<font color="red"> *</font><br>
+	              {{form_widget(form.telefono, {value : res[0]['telefono']} )}}<font color="red"> *</font><br>
+	              {{form_widget(form.profesion, {value : res[0]['profesion']} )}}<br>
+	              <br>
+	              <font color:#999>Genero: </font>{{form_widget(form.idGenero, {value : res[0][2]} )}}<font color="red"> *</font>
+	              <br>
+	              {{form_widget(form.estatura, {value : res[0]['estatura']} )}}<br>
+				  {{form_widget(form.numero, {value   : nj                   } )}}<font color="red"> *</font><br>
+	              {{form_widget(form.peso, {value : res[0]['peso']} )}}<br>
+	              <font color:#999>Tipo sanguineo: </font>{{form_widget(form.idTiposanguineo, {value : res[0][3]} )}}
+	              <br>
+	              {% if res[0][4] != null %}
+	              	<h6>Este jugador ya tiene una fotografia asociada</h6>
+	              {% else %}
+	              	<h6>Ingresa fotografia de jugador</h6>
+	              {% endif %}
+	             {# {{form_widget(form., {'attr': {'placeholder': 'Foto'|trans}} )}}<font color="red"> *</font><br> #}
+				 <input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
+	            {{form_end(form)}}
+
+	            <!--Inicio ingreso de fotografia-->
+		          	<div id="mainform">
+						<div id="innerdiv">
+							<!-- Required Div Starts Here -->
+							<div id="formdiv">
+								<br>
+								<h3>Ingresa fotografia</h3>
+								<div id="detail">
+									<b>Nota:</b>
+									<ul>
+									<li>Seleccione un archivo .</li>
+									<li>Formatos admitidos- <b>imagenes(jpeg,jpg,png).</b></li>
+									<li>Debe pesar menos de 300kb.</li>
+									</ul>
+								</div>
+								<form action="" enctype="multipart/form-data" id="form" method="post" name="form">
+									<div id="upload">
+										<input id="file" name="file" type="file">
+										<input id="idi" name="idi" type="hidden" value="{{res[0]['idJugador']}}">
+										<input id="equipoi" name="equipoi" type="hidden" value="{{equipo.idEquipo}}">
+									</div>
+									<br>
+									<button class="btn btn-primary btn-info" type="submit" id="fotosup" name="fotosup"><i class="glyphicon-ok glyphicon"></i> Subir fotografia</button>
+								</form>
+							</div>
+							<div id="clear"></div>
+							<div id="preview">
+								<img id="previewimg" src=""><img id="deleteimg" src="/limubac/path/web/delete.png">
+							</div>
+							<div id="message">
+							</div>
+						</div>
+					</div>
+		          <!--Fin ingreso de fotografia-->
+	        {% else %}
+	        	{{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+	              {{form_widget(form.nombre, {'attr': {'placeholder':'Nombre'|trans}} )}}<font color="red"> *</font><br>
+	              {{form_widget(form.apPaterno, {'attr': {'placeholder':'Apellido Paterno'|trans}} )}}<font color="red"> *</font><br>
+	              {{form_widget(form.apMaterno, {'attr': {'placeholder':'Apellido Materno'|trans}} )}}<font color="red"> *</font><br>
+	              <br>
+	              {{form_widget(form.fNacimiento, {'attr': {'placeholder':'Fecha de nacimiento'|trans}} )}}<font color="red"> *</font><br>
+	              <br>
+	              {{form_widget(form.correo, {'attr': {'placeholder':'Correo'|trans}} )}}<font color="red"> *</font><br>
+	              {{form_widget(form.telefono, {'attr': {'placeholder':'Telefono'|trans}} )}}<font color="red"> *</font><br>
+	              {{form_widget(form.profesion, {'attr': {'placeholder':'Profesion'|trans}} )}}<br>
+	              <br>
+	              <font color:#999>Genero: </font>{{form_widget(form.idGenero, {'attr': {'placeholder':'Genero'|trans}} )}}<font color="red"> *</font>
+	              <br>
+	              {{form_widget(form.estatura, {'attr': {'placeholder':'Estatura'|trans}} )}}<br>
+				  {{form_widget(form.numero, {'attr': {'placeholder':'Numero'|trans}} )}}<font color="red"> *</font><br>
+	              {{form_widget(form.peso, {'attr': {'placeholder':'Peso'|trans}} )}}<br>
+	              <font color:#999>Tipo sanguineo: </font>{{form_widget(form.idTiposanguineo, {'attr': {'placeholder':'Tipo sanguineo'|trans}} )}}
+	              <br>
+				 <input name="opciones" type="hidden" value="{{equipo.idEquipo}}">
+	            {{form_end(form)}}
+	        {% endif %}
           </div>
         </div>
-        <div class="col-md-2 tRight">
-		
+        <div class="col-md-5 tRight">
           <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Salvar" name="jugador[Salvar]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
-          
+
+
+            <form action="" id="form" method="post" name="form">						
+				<input id="equipoid" name="equipoid" type="hidden" value="{{equipo.idEquipo}}">
+					
+				<button class="btn btn-large btn-danger sharp sp" type="submit" id="jugador_Borrar" name="borrar" style="margin-left: 18px;"><i class="glyphicon-remove glyphicon"></i> Borrar campos</button>				
+			</form>
         </div>
       </div>
     </div>
