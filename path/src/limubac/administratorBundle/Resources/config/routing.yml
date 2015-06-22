@@ -120,7 +120,7 @@ limubacadministrator_overview:
 
 limubacadministrator_sessions:
   path: /login
-  defaults: { _controller: limubacadministratorBundle:sessions:admin}
+  defaults: { _controller: limubacadministratorBundle:sessions:log}
 
 login_check:
   path: /login_check

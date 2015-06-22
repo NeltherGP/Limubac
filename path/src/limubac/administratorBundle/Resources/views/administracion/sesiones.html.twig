@@ -1,0 +1,199 @@
+
+
+
+
+
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+
+
+
+
+{% block PageContent %}
+
+ {% block javascripts %}
+              <script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+              <script type="text/javascript">
+
+              $('#mensaje_nuevo')
+
+                $(".icon").click(function() {
+                    var icon = $(this),
+                    input = icon.parent().find("#search"),
+                    submit = icon.parent().find(".submit"),
+                    is_submit_clicked = false;
+                  input.animate({
+                    "width": "165px",
+                    "padding": "10px",
+                    "opacity": 1
+                    }, 300, function() {
+                    input.focus();
+                  });
+                  submit.mousedown(function() {
+                    is_submit_clicked = true;
+                  });
+                  input.blur(function() {
+                    if(!input.val() && !is_submit_clicked) {
+                      input.animate({
+                        "width": "0",
+                        "padding": "0",
+                        "opacity": 0
+                      }, 200);
+
+                      // Get the icon back
+                      icon.fadeIn(200);
+                    };
+                  });
+                });
+              </script>
+            {% endblock javascripts %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert" id='mensaje_sesion'>Mensaje</div>
+
+
+
+<div class='col-md-6'>
+
+
+	<form class="form-horizontal" background-image="entrada.jpg" action="{{path('limubacadministrator_sessions')}}" role='form' method='POST'>
+
+<!-- Form Name -->
+		<legend>Inicia Sesion</legend>
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="user_nuevo">Usuario</label>
+		  <div class="controls">
+		    <input id="user_nuevo" name="user_nuevo" type="text" placeholder="" class="input-xlarge">
+
+		  </div>
+		</div>
+
+		<!-- Password input-->
+		<div class="control-group">
+		  <label class="control-label" for="password_nuevo">Password</label>
+		  <div class="controls">
+		    <input id="password_nuevo" name="password_nuevo" type="password" placeholder="" class="input-xlarge">
+
+
+		<!-- Button (Double) -->
+		<div class="control-group">
+		  <label class="control-label" for="enviar_sesion"></label>
+		  <div class="controls">
+
+		    <button id="enviar_sesion" name="enviar_sesion" class="btn btn-success">Iniciar</button>
+
+
+		    <a id="Lo olvidé" name="Lo olvidé" href='#' class="btn btn-danger">Estoy wey, olvidé mi contraseña</a>
+		  </div>
+		</div>
+
+
+		<IMG id='p1' SRC="{{asset('images/pg1.png')}}">
+		<IMG id='p1' SRC="{{asset('images/pg2.png')}}">
+		<IMG id='p1' SRC="{{asset('images/pg3.png')}}">
+		<IMG id='p1' SRC="{{asset('images/tg1.png')}}">
+		<IMG id='p1' SRC="{{asset('images/tg2.png')}}">
+	</form>
+
+</div>
+
+
+<div class='col-md-6'>
+	<form class="form-horizontal" background-image="entrada.jpg" action="" method='POST'>
+		<!-- Form Name -->
+		<!-- Form Name -->
+		<legend>Nuevo registro</legend>
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="nombre_Nuevo">Nombre</label>
+		  <div class="controls">
+		    <input id="nombre_Nuevo" name="nombre_Nuevo" type="text" placeholder="" class="input-xlarge" required="">
+
+		  </div>
+		</div>
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="apellido_nuevo">Apellido</label>
+		  <div class="controls">
+		    <input id="apellido_nuevo" name="apellido_nuevo" type="text" placeholder="" class="input-xlarge" required="">
+
+		  </div>
+		</div>
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="telefono_nuevo">Celular o teléfono</label>
+		  <div class="controls">
+		    <input id="telefono_nuevo" name="telefono_nuevo" type="text" placeholder="" class="input-xlarge">
+
+		  </div>
+		</div>
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="correo_nuevo">e-mail</label>
+		  <div class="controls">
+		    <input id="correo_nuevo" name="correo_nuevo" type="text" placeholder="" class="input-xlarge" required="">
+
+		  </div>
+		</div>
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="direccion_nuevo">Direccion</label>
+		  <div class="controls">
+		    <input id="direccion_nuevo" name="direccion_nuevo" type="text" placeholder="" class="input-xlarge">
+
+		  </div>
+		</div>
+
+		<!-- Select Basic -->
+		<div class="control-group">
+		  <label class="control-label" for="seleccion_nuevo">¿Cual es tu interes?</label>
+		  <div class="controls">
+		    <select id="seleccion_nuevo" name="seleccion_nuevo" class="input-xlarge">
+		      <option>Selecciona una opción</option>
+		      <option>Representante de equipo</option>
+		      <option>Administrador</option>
+		      <option>Comité de disciplina</option>
+		      <option>Capturista</option>
+		    </select>
+		  </div>
+		</div>
+
+		<!-- Textarea -->
+		<div class="control-group">
+		  <label class="control-label" for="mensaje_nuevo">¿Algún mensaje?</label>
+		  <div class="controls">
+		    <textarea id="mensaje_nuevo" name="mensaje_nuevo" placeholder='Aqui tu mensaje'></textarea>
+		  </div>
+		</div>
+
+		<!-- Button -->
+		<div class="control-group">
+		  <label class="control-label" for="enviar_nuevo"></label>
+		  <div class="controls">
+		    <button id="enviar_nuevo" name="enviar_nuevo" class="btn btn-success">enviar</button>
+		  </div>
+		</div>
+
+		</fieldset>
+	</form>
+
+</div>
+{% endblock %}
