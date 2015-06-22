@@ -1,116 +1,65 @@
-
-
-
-
-
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
-
-
-
-
 
 {% block PageContent %}
 
- {% block javascripts %}
-              <script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-              <script type="text/javascript">
+{% if error %}
+    <div class="alert alert-danger">{{ error.message }}</div>
+{% endif %}
 
-              $('#mensaje_nuevo')
+<!--div class="alert alert-danger">Algo</div-->
 
-                $(".icon").click(function() {
-                    var icon = $(this),
-                    input = icon.parent().find("#search"),
-                    submit = icon.parent().find(".submit"),
-                    is_submit_clicked = false;
-                  input.animate({
-                    "width": "165px",
-                    "padding": "10px",
-                    "opacity": 1
-                    }, 300, function() {
-                    input.focus();
-                  });
-                  submit.mousedown(function() {
-                    is_submit_clicked = true;
-                  });
-                  input.blur(function() {
-                    if(!input.val() && !is_submit_clicked) {
-                      input.animate({
-                        "width": "0",
-                        "padding": "0",
-                        "opacity": 0
-                      }, 200);
 
-                      // Get the icon back
-                      icon.fadeIn(200);
-                    };
-                  });
-                });
-              </script>
-            {% endblock javascripts %}
+<div class="row">
+	<div class='col-md-6'>
+		<form class="form-horizontal" background-image="entrada.jpg" action="{{path('login_check')}}" role='form' method='POST'>
+
+	<!-- Form Name -->
+			<legend>Inicia Sesion</legend>
+
+			<!-- Text input-->
+			<div class="control-group">
+			  <label class="control-label" for="username">Usuario</label>
+			  <div class="controls">
+			    <input id="username" name="username" type="text" placeholder="" class="input-xlarge">
+
+			  </div>
+			</div>
+
+			<!-- Password input-->
+			<div class="control-group">
+			  <label class="control-label" for="password">Password</label>
+			  <div class="controls">
+			    <input id="password" name="password" type="password" placeholder="" class="input-xlarge">
+
+
+			<!-- Button (Double) -->
+			<!--div class="control-group">
+			  <label class="control-label" for="enviar_sesion"></label>
+			  <div class="controls">
 
 
 
 
+			    <a id="Lo olvidé" name="Lo olvidé" href='#' class="btn btn-danger">Estoy wey, olvidé mi contraseña</a>
+			  </div>
+			</div-->
+			<button type="submit" id="enviar_sesion" name="enviar_sesion" class="btn btn-success">Iniciar</button>
+			<IMG id='p1' SRC="{{asset('images/pg1.png')}}">
+			<IMG id='p1' SRC="{{asset('images/pg2.png')}}">
+			<IMG id='p1' SRC="{{asset('images/pg3.png')}}">
+			<IMG id='p1' SRC="{{asset('images/tg1.png')}}">
+			<IMG id='p1' SRC="{{asset('images/tg2.png')}}">
+		</form>
+	</div>
 
 
 
-
-
-
-
-
-
-<div class="alert alert-info" role="alert" id='mensaje_sesion'>Mensaje</div>
-
-
-
-<div class='col-md-6'>
-
-
-	<form class="form-horizontal" background-image="entrada.jpg" action="{{path('limubacadministrator_sessions')}}" role='form' method='POST'>
-
-<!-- Form Name -->
-		<legend>Inicia Sesion</legend>
-
-		<!-- Text input-->
-		<div class="control-group">
-		  <label class="control-label" for="user_nuevo">Usuario</label>
-		  <div class="controls">
-		    <input id="user_nuevo" name="user_nuevo" type="text" placeholder="" class="input-xlarge">
-
-		  </div>
-		</div>
-
-		<!-- Password input-->
-		<div class="control-group">
-		  <label class="control-label" for="password_nuevo">Password</label>
-		  <div class="controls">
-		    <input id="password_nuevo" name="password_nuevo" type="password" placeholder="" class="input-xlarge">
-
-
-		<!-- Button (Double) -->
-		<div class="control-group">
-		  <label class="control-label" for="enviar_sesion"></label>
-		  <div class="controls">
-
-		    <button id="enviar_sesion" name="enviar_sesion" class="btn btn-success">Iniciar</button>
-
-
-		    <a id="Lo olvidé" name="Lo olvidé" href='#' class="btn btn-danger">Estoy wey, olvidé mi contraseña</a>
-		  </div>
-		</div>
-
-
-		<IMG id='p1' SRC="{{asset('images/pg1.png')}}">
-		<IMG id='p1' SRC="{{asset('images/pg2.png')}}">
-		<IMG id='p1' SRC="{{asset('images/pg3.png')}}">
-		<IMG id='p1' SRC="{{asset('images/tg1.png')}}">
-		<IMG id='p1' SRC="{{asset('images/tg2.png')}}">
-	</form>
 
 </div>
 
 
+
+>>>>>>> 04f86a620a3286b6aec098732775cc3bf828e3fa
 <div class='col-md-6'>
 	<form class="form-horizontal" background-image="entrada.jpg" action="" method='POST'>
 		<!-- Form Name -->
