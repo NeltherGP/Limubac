@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Equipo
  *
- * @ORM\Table(name="equipo", indexes={@ORM\Index(name="id_capitan", columns={"id_capitan", "representante", "auxiliar"}), @ORM\Index(name="representante", columns={"representante"}), @ORM\Index(name="auxiliar", columns={"auxiliar"}), @ORM\Index(name="IDX_C49C530BEF72FA", columns={"id_capitan"})})
+ * @ORM\Table(name="equipo", indexes={@ORM\Index(name="id_capitan", columns={"id_capitan", "representante", "auxiliar"}), @ORM\Index(name="representante", columns={"representante"}), @ORM\Index(name="auxiliar", columns={"auxiliar"}), @ORM\Index(name="equipo_ibfk_4", columns={"id_rama"}), @ORM\Index(name="equipo_ibfk_5", columns={"id_categoria"}), @ORM\Index(name="IDX_C49C530BEF72FA", columns={"id_capitan"})})
  * @ORM\Entity
  */
 class Equipo
@@ -34,6 +34,26 @@ class Equipo
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idEquipo;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\Categoria
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Categoria")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_categoria", referencedColumnName="id_categoria")
+     * })
+     */
+    private $idCategoria;
+
+    /**
+     * @var \limubac\administratorBundle\Entity\RamaEquipo
+     *
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\RamaEquipo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_rama", referencedColumnName="id_rama")
+     * })
+     */
+    private $idRama;
 
     /**
      * @var \limubac\administratorBundle\Entity\Jugador

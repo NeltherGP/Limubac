@@ -43,9 +43,10 @@ class RolController extends Controller{
 	$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
 		$queryCuantEqui = $repository->createQueryBuilder('h')
             ->select('count(h.idRegistro)')
+			->join('limubacadministratorBundle:Equipo','ez','WITH','h.idEquipo = ez.idEquipo')
             ->where('h.idTorneo = :torn')
-			->andWhere('h.idCategoria = :cate')
-			->andWhere('h.idRama = :rama')
+			->andWhere('ez.idCategoria = :cate')
+			->andWhere('ez.idRama = :rama')
 			->setParameter('torn',$torn)
 			->setParameter('cate',$cate)
 			->setParameter('rama',$rama)
@@ -57,8 +58,8 @@ class RolController extends Controller{
             ->select('e.idEquipo')
 			->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'e.idEquipo = k.idEquipo')
             ->where('k.idTorneo = :torn')
-			->andWhere('k.idCategoria = :cate')
-			->andWhere('k.idRama = :rama')
+			->andWhere('e.idCategoria = :cate')
+			->andWhere('e.idRama = :rama')
 			->setParameter('torn',$torn)
 			->setParameter('cate',$cate)
 			->setParameter('rama',$rama)
@@ -73,7 +74,7 @@ class RolController extends Controller{
 				}
 				for($i=0;$i<$n/2;$i++){
 					$p[$i][1]=$equipos[$i+($n/2)];
-					$p2[($n/2)-1-$i][1]=$p[$i][1];
+					$p2[$i][1]=$p[$i][1];
 				}
 			}
 		else {
@@ -87,73 +88,79 @@ class RolController extends Controller{
 				}
 				for($i=0;$i<$n/2-1;$i++){
 					$p[$i][1]=$equipos[$i+($n/2)];
-					$p2[$n/2-1-$i][1]=$p[$i][1];
+					$p2[$i][1]=$p[$i][1];
 				}
 				$p[$n/2-1][1]=0;
-				$p2[0][1]=0;
+				$p2[$n/2-1][1]=0;
 		}
 		for($cont=1;$cont<=$r/2;$cont++){
 			if($cont==$jorn){
-			for($c=0;$c<$n/2;$c++){
-				if($p[$c][0]!=0&&$p[$c][1]!=0){
-					//insert $p[$c][0]  vs  $p[$c][1] en la jornada cont
-					if($cont<10){
-						$claveJ="J0{$cont}_";
-					}else {
-						$claveJ="J{$cont}_";
-					}
-					if($contJ<10){
-						$claveJ.="0".$contJ;
-					}else {
-						$claveJ.=$contJ;
-					}
-					$contJ++;
-					$partido = new Partido();
-						$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
-                        $torneo = $class_repository->find($torn);
-					$partido -> setIdTorneo($torneo);
-					$partido -> setJornada($cont);
-					$partido -> setCategoria($cate);
-					$partido -> setRama($rama);
-					//$partido -> setClavep($claveJ);
-					$em = $this->getDoctrine()->getManager();
-                    $em -> persist($partido);
-                    $em -> flush();
+				for($c=0;$c<$n/2;$c++){
+					if($p[$c][0]!=0&&$p[$c][1]!=0){
+						//insert $p[$c][0]  vs  $p[$c][1] en la jornada cont
+						if($cont<10){
+							$claveJ="J0{$cont}_";
+						}else {
+							$claveJ="J{$cont}_";
+						}
+						if($contJ<10){
+							$claveJ.="0".$contJ;
+						}else {
+							$claveJ.=$contJ;
+						}
+						$contJ++;
+						$partido = new Partido();
+							$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+							$torneo = $class_repository->find($torn);
+						$partido -> setIdTorneo($torneo);
+						$partido -> setJornada($cont);
+						$partido -> setCategoria($cate);
+						$partido -> setRama($rama);
+						//$partido -> setClavep($claveJ);
+						$em = $this->getDoctrine()->getManager();
+						$em -> persist($partido);
+						$em -> flush();
 
-					$juegana = new Juegan();
+						$juegana = new Juegan();
+							$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Equipo');
+							$Iequipo= $class_repository->find($p[$c][0]);
+						$juegana -> setidEquipo($Iequipo);
+						$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+						$queryPartido = $repository->createQueryBuilder('h')
+							->select('max(h.idPartido)')
+							->getQuery();
+						$idpar =	$queryPartido->getResult();
+						$idpart=$idpar[0][1];
+							$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+							$idparti= $class_repository->find($idpart);
+						$juegana -> setidPartido($idparti);
+						$juegana -> setside('A');
+						$juegana -> setResultado(-1);
+						$em = $this->getDoctrine()->getManager();
+						$em -> persist($juegana);
+						$em -> flush();
+
+						$jueganb = new Juegan();
 						$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Equipo');
-                        $Iequipo= $class_repository->find($p[$c][0]);
-					$juegana -> setidEquipo($Iequipo);
-					$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
-					$queryPartido = $repository->createQueryBuilder('h')
-						->select('max(h.idPartido)')
-						->getQuery();
-					$idpar =	$queryPartido->getResult();
-					$idpart=$idpar[0][1];
-						$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
-                        $idparti= $class_repository->find($idpart);
-					$juegana -> setidPartido($idparti);
-					$juegana -> setside('A');
-					$juegana -> setResultado(-1);
-					$em = $this->getDoctrine()->getManager();
-                    $em -> persist($juegana);
-                    $em -> flush();
+							$Iequipo= $class_repository->find($p[$c][1]);
+						$jueganb -> setidEquipo($Iequipo);
+							$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+							$idparti= $class_repository->find($idpart);
+						$jueganb -> setidPartido($idparti);
+						$jueganb -> setside('B');
+						$jueganb -> setResultado(-1);
+						$em = $this->getDoctrine()->getManager();
+						$em -> persist($jueganb);
+						$em -> flush();
 
-					$jueganb = new Juegan();
-					$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Equipo');
-                        $Iequipo= $class_repository->find($p[$c][1]);
-					$jueganb -> setidEquipo($Iequipo);
-						$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
-                        $idparti= $class_repository->find($idpart);
-					$jueganb -> setidPartido($idparti);
-					$jueganb -> setside('B');
-					$jueganb -> setResultado(-1);
-					$em = $this->getDoctrine()->getManager();
-                    $em -> persist($jueganb);
-                    $em -> flush();
-
+					}
 				}
-			}}
+			}
+			else{
+				if($cont<$jorn){
+					
+				}
+			}
 			$j=2;
 			$t1=$p[1][0];
 			for($i=1;$i<$n-1;$i++){

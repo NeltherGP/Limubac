@@ -38,6 +38,7 @@
                   <th>Fecha de Termino</th>
                   <th>Costo</th>
                   <th>Editar</th>
+                  <th>Abrir/Cerrar</th>
                   <th>Rol</th>
                   <th>Ver</th>
                 </tr>
@@ -57,6 +58,26 @@
                         </button>
                       </div>  
                     </td>
+
+
+                    <td>
+                      {% if entitie.inscripcionAbierta == 1 %}
+                      <div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                        <button class="btn btn-mini btn-success" type='submit' name='noInsc[]' value ='{{entitie.idTorneo}}'>
+                          <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                      </div>
+                      {% endif%}
+                      {% if entitie.inscripcionAbierta == 0 %}
+                      <div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                        <button class="btn btn-mini btn-success" type='submit' name='insc[]' value ='{{entitie.idTorneo}}'>
+                          <i class="glyphicon glyphicon-ok"></i>
+                        </button>
+                      </div> 
+                      {% endif%} 
+                    </td>
+
+
                     <td>
                       <div class="btn-group sharp" data-toggle="radio" style="width: 50px">
                         <button class="btn btn-mini btn-success" type='submit' name='rol[]' value ='{{entitie.idTorneo}}'>

@@ -63,6 +63,7 @@ class ConsultasPartidos{
 	}
 	$dif=$pf+$pc;
 	$total=($pg*3)+($pp);
+	
 
 	$lista=array('pj'=>$pj,'pg'=>$pg,'pp'=>$pp,'pf'=>$pf,'pc'=>$pc,'dif'=>$dif,'total'=>$total);
 

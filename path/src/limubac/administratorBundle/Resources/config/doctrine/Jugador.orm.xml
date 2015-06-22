@@ -4,8 +4,8 @@
     <indexes>
       <index name="id_status" columns="id_status,id_genero,id_tiposanguineo,id_foto"/>
       <index name="id_genero" columns="id_genero"/>
-      <index name="id_tiposanguineo" columns="id_tiposanguineo"/>
       <index name="id_foto" columns="id_foto"/>
+      <index name="jugador_ibfk_3" columns="id_tiposanguineo"/>
       <index name="IDX_527D6F185D37D0F1" columns="id_status"/>
     </indexes>
     <id name="idJugador" type="integer" column="id_jugador">

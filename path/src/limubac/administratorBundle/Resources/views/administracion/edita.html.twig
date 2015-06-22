@@ -19,7 +19,10 @@
               {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
       <div class="row-fluid">
         <div class="col-md-3 profilePerson thumbnail">
-            
+          {% if edita[0][4] != null %}
+              <p><img src="{{ asset ('\upload/images/' ~ photo[0]['foto']) }}" width="250px" alt=""/></p>
+          {% else %}
+          {%  endif %}
           <div class="profileOptions"></div>
         </div>
         <div class="col-md-7">

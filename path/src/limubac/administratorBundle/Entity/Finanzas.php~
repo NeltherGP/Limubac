@@ -57,44 +57,51 @@ class Finanzas
     /**
      * @var integer
      *
-     * @ORM\Column(name="enero", type="integer", nullable=false)
+     * @ORM\Column(name="mes_1", type="integer", nullable=false)
      */
-    private $enero;
+    private $mes1;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="febrero", type="integer", nullable=false)
+     * @ORM\Column(name="mes_2", type="integer", nullable=false)
      */
-    private $febrero;
+    private $mes2;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="marzo", type="integer", nullable=false)
+     * @ORM\Column(name="mes_3", type="integer", nullable=false)
      */
-    private $marzo;
+    private $mes3;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="abril", type="integer", nullable=false)
+     * @ORM\Column(name="mes_4", type="integer", nullable=false)
      */
-    private $abril;
+    private $mes4;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="mayo", type="integer", nullable=false)
+     * @ORM\Column(name="mes_5", type="integer", nullable=false)
      */
-    private $mayo;
+    private $mes5;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="junio", type="integer", nullable=false)
+     * @ORM\Column(name="mes_6", type="integer", nullable=false)
      */
-    private $junio;
+    private $mes6;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="mes_7", type="integer", nullable=false)
+     */
+    private $mes7;
 
     /**
      * @var integer

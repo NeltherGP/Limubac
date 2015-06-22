@@ -15,7 +15,7 @@ class Fotos
     /**
      * @var string
      *
-     * @ORM\Column(name="foto", type="blob", nullable=false)
+     * @ORM\Column(name="foto", type="string", length=255, nullable=true)
      */
     private $foto;
 
