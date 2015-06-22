@@ -39,7 +39,7 @@ join limubacadministratorBundle:ParticipanT p with i.idEquipo = p.idEquipo where
 				$mes = date("m");
 				$year= date("Y");
 				$query =$em->createQuery('Select IDENTITY(i.idJugador) FROM limubacadministratorBundle:Integra i join limubacadministratorBundle:Jugador j 
-with i.idJugador = j.idJugador where i.id='.$equipo->getIdEquipo().' and j.fNacimiento<'.$dia."-".$mes."-".($year-22));
+with i.idJugador = j.idJugador where i.idEquipo='.$equipo->getIdEquipo().' and j.fNacimiento<'.$dia."-".$mes."-".($year-22));
 				$resultado = $query->getResult();
 				
 				//echo 'Select IDENTITY(i.idJugador) FROM limubacadministratorBundle:Integra i join limubacadministratorBundle:Jugador j 
