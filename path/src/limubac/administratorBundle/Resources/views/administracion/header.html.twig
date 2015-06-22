@@ -5,19 +5,9 @@
 {{parent()}}
 
 
-{% set sesion = app.session.get('user') %}
-{% if sesion == null %}
-	
-	{{render(controller('limubacadministratorBundle:administracion:sesiones.html.twig'))}}
 
-{% endif %}
 
 {% endblock %}
-
-
-
-
-
     
 	
 

@@ -119,13 +119,15 @@ limubacadministrator_overview:
 
 
 limubacadministrator_sessions:
-  path: /sesiones
-  defaults: { _controller: limubacadministratorBundle:sessions:sex}
+  path: /login
+  defaults: { _controller: limubacadministratorBundle:sessions:admin}
 
+login_check:
+  path: /login_check
 
 limubacadministrator_sesiones:
   path: /sesion
-  defaults: { _controller: limubacadministratorBundle:sesiones}
+  defaults: { _controller: limubacadministratorBundle:sessions:sex}
 
 limubacadministrator_finanzas:
     path:     /finanzas
