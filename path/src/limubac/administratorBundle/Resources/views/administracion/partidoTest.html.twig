@@ -4,6 +4,7 @@
 <label>Seleccionar jornada</label>
 <nav>
   <ul class="pagination pagination-lg">
+    
     {% for i in 1.. cantidadJornadas %}
     <li class="{% if i != jornada %} disable {% else %} active {% endif %}"><a  href="{{path('limubacadministrator_partidos',{'idtorneo':listaPartidos.0.0.0.torneo,'jornada': i})}}" >{{i}}</a></li>
     {% endfor %}

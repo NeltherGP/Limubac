@@ -90,15 +90,15 @@
 	<div class="formAnotacion form-group" style="padding-left:100px">
 		<label  name="normal" class="col-md-1 control-label text-center">NORMAL </label>
 		<div class="col-md-3">
-	  	<input type="radio" name="estatus" id="inlineRadio1" value="1">
+	  	<input type="radio" name="estatus" id="estadoPartido" value="1">
 		</div>
 		<label  name="normal" class="col-md-1 control-label text-center">DEFAULT</label>
 		<div class="col-md-3">
-	  	<input type="radio" name="estatus" id="inlineRadio1" value="2">
+	  	<input type="radio" name="estatus" id="estadoPartido" value="2">
 		</div>
 		<label  name="normal" class="col-md-1 control-label text-center">EN MESA</label>
 		<div class="col-md-3">
-	  	<input type="radio" name="estatus" id="inlineRadio1" value="3">
+	  	<input type="radio" name="estatus" id="estadoPartido" value="3">
 		</div>
 	</div>
   <div class="formAnotacion form-group"></br>
@@ -127,6 +127,7 @@
 	<table class="table table-bordered" style="table-layout:fixed" >
 		<thead>
 			<tr>
+				<th class = "text-center">#</th>
 				<th class = "text-center">Nombre</th>
 				<th class = "text-center">Apellido Paterno</th>
 				<th class = "text-center">Apellido Materno</th>
@@ -137,6 +138,7 @@
 		<tbody>
 			{% for jugador in ListA %}
 			<tr>
+				<td>{{jugador.noPlayera}}</td>
 				<td>{{jugador.nombre}}</td>
 				<td>{{jugador.apPaterno}}</td>
 				<td>{{jugador.apMaterno}}</td>
@@ -146,43 +148,43 @@
 				<td>
 					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 						<option  value="0">-</option>
-						<option  value="5">F</option>
-						<option  value="2">F1</option>
-						<option  value="3">F2</option>
-						<option  value="4">T</option>
-						<option  value="1">D</option>
+						<option  value="5">P</option>
+						<option  value="2">P1</option>
+						<option  value="3">P2</option>
+						<option  value="4">T1</option>
+						<option  value="1">D2</option>
 					</select>
 					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 						<option  value="0">-</option>
-						<option  value="5">F</option>
-						<option  value="2">F1</option>
-						<option  value="3">F2</option>
-						<option  value="4">T</option>
-						<option  value="1">D</option>
+						<option  value="5">P</option>
+						<option  value="2">P1</option>
+						<option  value="3">P2</option>
+						<option  value="4">T1</option>
+						<option  value="1">D2</option>
 					</select>
 					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 						<option  value="0">-</option>
-						<option  value="5">F</option>
-						<option  value="2">F1</option>
-						<option  value="3">F2</option>
-						<option  value="4">T</option>
-						<option  value="1">D</option>
+						<option  value="5">P</option>
+						<option  value="2">P1</option>
+						<option  value="3">P2</option>
+						<option  value="4">T1</option>
+						<option  value="1">D2</option>
 					</select>
 					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 						<option  value="0">-</option>
-						<option  value="5">F</option>
-						<option  value="2">F1</option>
-						<option  value="3">F2</option>
-						<option  value="4">T</option>
-						<option  value="1">D</option>
+						<option  value="5">P</option>
+						<option  value="2">P1</option>
+						<option  value="3">P2</option>
+						<option  value="4">T1</option>
+						<option  value="1">D2</option>
 					</select>
 					<select name="faltasA[{{jugador.idJugador}}][]" class="form-control group2 checkbox-inline">
 						<option  value="0">-</option>
-						<option  value="5">F</option>
-						<option  value="2">F1</option>
-						<option  value="3">F2</option>
-						<option  value="4">T</option>
-						<option  value="1">D</option>
+						<option  value="5">P</option>
+						<option  value="2">P1</option>
+						<option  value="3">P2</option>
+						<option  value="4">T1</option>
+						<option  value="1">D2</option>
 					</select>
 				</td>
 			</tr>
@@ -201,7 +203,7 @@
 	<table class="table table-bordered" style="table-layout:fixed" >
 		<thead>
 			<tr>
-
+				<th class = "text-center">#</th>
 				<th class="text-center">Nombre</th>
 				<th class="text-center">Apellido Paterno</th>
 				<th class="text-center">Apellido Materno</th>
@@ -212,6 +214,7 @@
 			<tbody>
 				{% for jugador in ListB %}
 				<tr>
+					<td>{{jugador.noPlayera}}</td>
 					<td>{{jugador.nombre}}</td>
 					<td>{{jugador.apPaterno}}</td>
 					<td>{{jugador.apMaterno}}</td>

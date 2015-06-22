@@ -42,7 +42,7 @@ class ConsultasAnotaciones{
 	}
 
 	function listJugadoresEquipo($side,$idPartido,$manager){
-		$consulta= $manager->createQuery("SELECT  p.nombre,p.apPaterno, p.apMaterno, p.idJugador FROM limubacadministratorBundle:Juegan j
+		$consulta= $manager->createQuery("SELECT  p.nombre,p.apPaterno, p.apMaterno, p.idJugador, i.noPlayera FROM limubacadministratorBundle:Juegan j
 		JOIN limubacadministratorBundle:Equipo e WITH j.idEquipo= e.idEquipo
 		JOIN limubacadministratorBundle:Integra i  WITH e.idEquipo=i.idEquipo
 		JOIN limubacadministratorBundle:Jugador p WITH i.idJugador=p.idJugador
@@ -88,6 +88,10 @@ class ConsultasAnotaciones{
 	function updateResultadoByPartido($idPartido,$side,$resultado,$manager){
 		$consulta= $manager->createQuery("UPDATE limubacadministratorBundle:Juegan j set j.resultado =".$resultado." WHERE j.idPartido=".$idPartido."AND j.side='".$side."'");
 		$Updated = $consulta->execute();
+	}
+
+	function updateEstatusPartido($idPartido,$estatus,$manager){
+		$consulta=$manager->createQuery("UPDATE limubacadministratorBundle:Partido p set j.idEstatus={$idPartido} where idPartido={$Partido}");
 	}
 
 

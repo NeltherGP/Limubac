@@ -17,6 +17,7 @@ use limubac\administratorBundle\Entity\DetallePartido;
 use limubac\administratorBundle\Entity\FaltasEquipo;
 use limubac\administratorBundle\Entity\Faltas;
 use limubac\administratorBundle\Entity\Asistencia;
+use limubac\administratorBundle\Entity\Estatus;
 
 class HojaAnotacionesController extends Controller{
 
@@ -32,8 +33,6 @@ class HojaAnotacionesController extends Controller{
     $idPartido=$idpartido;//SE SUPONE LO RECIBE DE PARAMETRO...
     $idJugador;
     $Errores = array("AsistenciaA"=>0,"AsistenciaB"=>0,"Playera"=>0,"General"=>0);
-
-
     //echo $request->getMethod() ;//Quitar o comentar
 
     $List_A=$consultasManager->listJugadoresEquipo('A',$idPartido,$doctrineManager);
@@ -41,7 +40,7 @@ class HojaAnotacionesController extends Controller{
     $List_B=$consultasManager->listJugadoresEquipo('B',$idPartido,$doctrineManager);
 
     $datosGenerales = $consultasManager->getEquipoByPartido($idPartido,$doctrineManager);
-    print_r($datosGenerales);
+    //print_r($datosGenerales);
 
     if($request->getMethod() == 'POST')//si se envia el formulario
     {
@@ -110,6 +109,8 @@ class HojaAnotacionesController extends Controller{
       //ESTATUS PARTIDO
       if(isset($_POST['estatus'])){
         $estatus=$_POST['estatus'];
+        $consultasManager->updateEstatusPartido($idPartido,$estatus,$doctrineManager);
+
       }
 
       if(isset($_POST['Ganador'])){
@@ -575,7 +576,7 @@ class HojaAnotacionesController extends Controller{
             $consultasManager->commitPartidoById($idPartido,$doctrineManager); //todo salio bien aqui debes redireccionar
           }else{
             //Algo salio mal, aqui debes recargar la pagina mostrando al usuario los errores
-            print_r($Errores);
+            //print_r($Errores);
             return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig',array('ListA'=>$List_A,'ListB'=>$List_B,'datosGenerales'=>$datosGenerales,'errores'=>$Errores));
           }
 
@@ -624,6 +625,6 @@ class HojaAnotacionesController extends Controller{
     $Equipos=json_encode($consultasManager->getEquipoByPartido($idPartido,$doctrineManager));
     return new Response($Equipos);
   }
-
 }
+
 ?>
