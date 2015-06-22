@@ -1,17 +1,4 @@
 {% extends '::base.html.twig' %}
-
-{#% block stylesheets %}
-{{parent()}}
-
-
-{% set sesion = app.session.get('user') %}
-{% if sesion == null %}
-
-	{{render(controller('limubacadministratorBundle:administracion:sesiones.html.twig'))}}
-
-{% endif %}
-
-{% endblock %#}
 {% block body %}
 	<div class="container-fluid">
 		<nav class="navbar navbar-default" role="navigation">

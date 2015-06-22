@@ -43,16 +43,10 @@ class EquiposController extends Controller{
 			//Restricciones
 			if(restringe($equipo,$Torneo,$this)){
 				$Participan = new ParticipanT();
-				$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
-				$query = $repositorio->createQueryBuilder('p')
-					->select('p.idRegistro')
-					->where('p.idEquipo = '.$_REQUEST['idEquipo'])
-					->getQuery();
-				$temp = $query->getResult();
-				$Participan = $repositorio->find($temp[0]['idRegistro']);
 
 				$equipo->setRegistrado(true);
 				$Participan->setIdTorneo($Torneo);
+				$Participan->setIdEquipo($equipo);
 				$Manager->persist($Participan);
 				$Manager->persist($Torneo);
 				$Manager->flush();
