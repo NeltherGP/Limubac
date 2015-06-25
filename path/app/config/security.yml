@@ -4,7 +4,7 @@ security:
 
 
     encoders:
-        Symfony\Component\Security\Core\User\User: 
+        Symfony\Component\Security\Core\User\User: plaintext
 
     access_control:
        
