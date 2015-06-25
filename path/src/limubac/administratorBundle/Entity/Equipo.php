@@ -27,6 +27,13 @@ class Equipo
     private $registrado;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="modificable", type="boolean", nullable=false)
+     */
+    private $modificable;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_equipo", type="integer")
@@ -131,6 +138,29 @@ class Equipo
     public function getRegistrado()
     {
         return $this->registrado;
+    }
+
+    /**
+     * Set modificable
+     *
+     * @param boolean $modificable
+     * @return Equipo
+     */
+    public function setModificable($modificable)
+    {
+        $this->modificable = $modificable;
+
+        return $this;
+    }
+
+    /**
+     * Get modificable
+     *
+     * @return boolean 
+     */
+    public function getModificable()
+    {
+        return $this->modificable;
     }
 
     /**
