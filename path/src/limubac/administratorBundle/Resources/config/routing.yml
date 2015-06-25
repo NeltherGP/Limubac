@@ -117,14 +117,6 @@ limubacadministrator_overview:
   path: /overview/{idtorneo}/{idpartido}/{jornada}
   defaults: {_controller:limubacadministratorBundle:overview:overviewPartidos,idtorneo:0,idpartido:0,jornada:1}
 
-
-limubacadministrator_sessions:
-  path: /login
-  defaults: { _controller: limubacadministratorBundle:sessions:admin}
-
-login_check:
-  path: /login_check
-
 limubacadministrator_sesiones:
   path: /sesion
   defaults: { _controller: limubacadministratorBundle:sessions:sex}
@@ -140,3 +132,18 @@ limubacadministrator_actfin:
 limubacadministrator_editfin:
     path:     /editfin
     defaults: { _controller: limubacadministratorBundle:Finanzas:editfin}
+
+limubacadministrator_sessions:
+  path: /login
+  defaults: { _controller: limubacadministratorBundle:sessions:log}
+
+login_check:
+  path: /login_check
+
+limubacadministrator_ActualizarSesiones:
+  path: /usuario
+  defaults: { _controller: limubacadministratorBundle:sessions:act}
+
+limubacadministrator_logout:
+  path: /logout
+  defaults: { _controller: limubacadministratorBundle:sessions:logout}

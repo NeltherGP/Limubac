@@ -4,24 +4,26 @@
 {% block PageContent %}
 
 {% if error %}
-    <div class="alert alert-danger">{{ error.message }}</div>
+    <div class="alert alert-danger">Error de autenticacion ({{ error.message }})</div>
 {% endif %}
 
-<!--div class="alert alert-danger">Algo</div-->
+<!--div class="alert alert-danger">Sesion iniciada por </div-->
 
-
+<legend> <P ALIGN=center> Bienvenido al sistema LIMUBAC, para empezar Inicia Sesion </P></legend>
 <div class="row">
+<div class="col-md-4"></div>
 	<div class='col-md-6'>
+
 		<form class="form-horizontal" background-image="entrada.jpg" action="{{path('login_check')}}" role='form' method='POST'>
 
 	<!-- Form Name -->
-			<legend>Inicia Sesion</legend>
+			
 
 			<!-- Text input-->
 			<div class="control-group">
 			  <label class="control-label" for="username">Usuario</label>
 			  <div class="controls">
-			    <input id="username" name="username" type="text" placeholder="" class="input-xlarge">
+			    <input id="username" name="_username" type="text" placeholder="" class="input-xlarge" required="true">
 
 			  </div>
 			</div>
@@ -30,9 +32,10 @@
 			<div class="control-group">
 			  <label class="control-label" for="password">Password</label>
 			  <div class="controls">
-			    <input id="password" name="password" type="password" placeholder="" class="input-xlarge">
+			    <input id="password" name="_password" type="password" placeholder="" class="input-xlarge" required="true">
 
-
+			    <p>
+			    </p>
 			<!-- Button (Double) -->
 			<!--div class="control-group">
 			  <label class="control-label" for="enviar_sesion"></label>
@@ -44,107 +47,19 @@
 			    <a id="Lo olvidé" name="Lo olvidé" href='#' class="btn btn-danger">Estoy wey, olvidé mi contraseña</a>
 			  </div>
 			</div-->
-			<button type="submit" id="enviar_sesion" name="enviar_sesion" class="btn btn-success">Iniciar</button>
 			<IMG id='p1' SRC="{{asset('images/pg1.png')}}">
 			<IMG id='p1' SRC="{{asset('images/pg2.png')}}">
 			<IMG id='p1' SRC="{{asset('images/pg3.png')}}">
 			<IMG id='p1' SRC="{{asset('images/tg1.png')}}">
 			<IMG id='p1' SRC="{{asset('images/tg2.png')}}">
+			<p>
+			    </p>
+			
+
+			<button type="submit" id="enviar_sesion" name="enviar_sesion" class="btn btn-success">Iniciar</button>
 		</form>
 	</div>
 
-
-
-
 </div>
-
-
-
-<div class='col-md-6'>
-	<form class="form-horizontal" background-image="entrada.jpg" action="" method='POST'>
-		<!-- Form Name -->
-		<!-- Form Name -->
-		<legend>Nuevo registro</legend>
-
-		<!-- Text input-->
-		<div class="control-group">
-		  <label class="control-label" for="nombre_Nuevo">Nombre</label>
-		  <div class="controls">
-		    <input id="nombre_Nuevo" name="nombre_Nuevo" type="text" placeholder="" class="input-xlarge" required="">
-
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="control-group">
-		  <label class="control-label" for="apellido_nuevo">Apellido</label>
-		  <div class="controls">
-		    <input id="apellido_nuevo" name="apellido_nuevo" type="text" placeholder="" class="input-xlarge" required="">
-
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="control-group">
-		  <label class="control-label" for="telefono_nuevo">Celular o teléfono</label>
-		  <div class="controls">
-		    <input id="telefono_nuevo" name="telefono_nuevo" type="text" placeholder="" class="input-xlarge">
-
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="control-group">
-		  <label class="control-label" for="correo_nuevo">e-mail</label>
-		  <div class="controls">
-		    <input id="correo_nuevo" name="correo_nuevo" type="text" placeholder="" class="input-xlarge" required="">
-
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="control-group">
-		  <label class="control-label" for="direccion_nuevo">Direccion</label>
-		  <div class="controls">
-		    <input id="direccion_nuevo" name="direccion_nuevo" type="text" placeholder="" class="input-xlarge">
-
-		  </div>
-		</div>
-
-		<!-- Select Basic -->
-		<div class="control-group">
-		  <label class="control-label" for="seleccion_nuevo">¿Cual es tu interes?</label>
-		  <div class="controls">
-		    <select id="seleccion_nuevo" name="seleccion_nuevo" class="input-xlarge">
-		      <option>Selecciona una opción</option>
-		      <option>Representante de equipo</option>
-		      <option>Administrador</option>
-		      <option>Comité de disciplina</option>
-		      <option>Capturista</option>
-		    </select>
-		  </div>
-		</div>
-
-		<!-- Textarea -->
-		<div class="control-group">
-		  <label class="control-label" for="mensaje_nuevo">¿Algún mensaje?</label>
-		  <div class="controls">
-		    <textarea id="mensaje_nuevo" name="mensaje_nuevo" placeholder='Aqui tu mensaje'></textarea>
-		  </div>
-		</div>
-
-		<!-- Button -->
-		<div class="control-group">
-		  <label class="control-label" for="enviar_nuevo"></label>
-		  <div class="controls">
-		    <button id="enviar_nuevo" name="enviar_nuevo" class="btn btn-success">enviar</button>
-		  </div>
-		</div>
-
-		</fieldset>
-	</form>
-
-</div>
-
 
 {% endblock %}

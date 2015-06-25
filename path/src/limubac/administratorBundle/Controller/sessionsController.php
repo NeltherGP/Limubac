@@ -12,13 +12,8 @@
 	use limubac\administratorBundle\Entity\Userlim; //Nuevo
 	use Symfony\Component\HttpFoundation\Session\sfAction;
 
-
 	class sessionsController extends Controller{
- 
-
-		
-
-		public function logAction(){
+ 		public function logAction(){
 			$request = $this->getRequest();
 	        $session = $request->getSession();
 
@@ -30,42 +25,37 @@
 	            );
 	            echo $error;
 	        } else {
-	        	echo "ERROR 2";
+	        	//echo "ERROR 2";
 	            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
 	            //echo ' -'.$error.' - ';
 	            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
 	            //print_r($error);
 	        }
 
-	        echo "ERROR 3";
-	        //print_r($session);
-
-	        //var_dump($session->get(SecurityContext::LAST_USERNAME));
-	       
-	        	return $this->render(
+	        //echo "ERROR 3";
+			      
+	        //$usr=$this->getUser();
+	        //print_r($usr);
+	               	return $this->render(
 		            'limubacadministratorBundle:administracion:sesiones.html.twig',
 		            array(
 		                // último nombre de usuario ingresado
-		                'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+		                //'last_username' => $session->getName(),
 		                'error'         => $error
 		            )
 	        	);
-	    public function adminAction()
-    	{
-        		return new Response('Admin page!');
-    	}
-	        
-
-
+		}
+	
+		public function actAction(){
+			return $this->render(
+		            'limubacadministratorBundle:administracion:ActualizarSesiones.html.twig'
+	        	);
 		}
 
-
-
-
+		public function logoutAction(){
+			return $this->render(
+		            'limubacadministratorBundle:administracion:logout.html.twig'
+	        	);
+		}
 	}
-
-
-
-
-
 ?>
