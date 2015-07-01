@@ -1,0 +1,122 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+
+
+{% if mensaje is defined %}
+    <div class="alert alert-danger">{{ mensaje }}</div>    
+{% endif %}
+
+
+<div class="col-md-6">
+	<h2>PASOS PARA INGRESAR A LA LIGA</h2>
+	<h3>Paso 1</h3>
+	<p> Llenar el formulario de la derecha. Todos los campos son obligatorios excepto el de mensaje, al terminar favor de dar click en el botn guardar. Se enviará un correo a la liga para validar el usuario.</p>
+	
+	<h3>Paso 2</h3>
+	<p> Se te enviará un mensaje al correo que hallas registrado con el numero de cuenta para depositar o la direccion a la que puedes asistir para realizar el pago</p>
+	
+	<h3>Paso 3</h3>
+	<p>Una ves realizado el pago, entra de nuevo a la pagina con tu usuario y contraseña</p>
+	<h3>Paso 4</h3>
+	<p> bla bla bla</p>
+</div>
+
+
+<div class='col-md-6'>
+<P ALIGN=center>
+
+<form class="form-horizontal" background-image="entrada.jpg" action="{{path('limubacadministrator_nuevoUsuario')}}" method='POST'>
+		<!-- Form Name -->
+		<!-- Form Name -->
+		
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="nombre_nuevo">Nombre completo</label>
+		  <div class="controls">
+		    <input id="nombre_nuevo" name="nombre_nuevo" type="text" placeholder="" class="input-xlarge" required="true">
+
+		  </div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="password">Nueva Contraseña</label>
+			<div class="controls">
+			    <input id="password_nuevo" name="nuevo_password" type="password" placeholder="" class="input-xlarge" required="true">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="password">Confirmar Contraseña</label>
+			<div class="controls">
+			    <input id="confirmacion_nuevo" name="confirmar_password" type="password" placeholder="" class="input-xlarge" required="true">
+			    
+			</div>
+		</div>
+
+		
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="telefono_nuevo">Celular o teléfono</label>
+		  <div class="controls">
+		    <input id="telefono_nuevo" name="telefono_nuevo" type="text" placeholder="" class="input-xlarge" required="true">
+
+		  </div>
+		</div>
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="correo_nuevo">e-mail</label>
+		  <div class="controls">
+		    <input id="correo_nuevo" name="correo_nuevo" type="text" placeholder="" class="input-xlarge" required="true">
+
+		  </div>
+		</div>
+
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="direccion_nuevo">Direccion</label>
+		  <div class="controls">
+		    <input id="direccion_nuevo" name="direccion_nuevo" type="text" placeholder="" class="input-xlarge" required="true">
+
+		  </div>
+		</div>
+
+		<!-- Select Basic -->
+		<div class="control-group">
+		  <label class="control-label" for="seleccion_nuevo">¿Cual es tu interes?</label>
+		  <div class="controls">
+		    <select id="seleccion_nuevo" name="seleccion_nuevo" >
+		      <option>Selecciona una opción</option>
+		      <option>Representante de equipo</option>
+		      <option>Comité administrativo</option>
+		      <option>Comité de disciplina</option>
+		      <option>Capturista</option>
+		    </select>
+		  </div>
+		</div>
+
+		<!-- Textarea -->
+		<div class="control-group">
+		  <label class="control-label" for="mensaje_nuevo">¿Algún mensaje?</label>
+		  <div class="controls">
+		    <textarea id="mensaje_nuevo" name="mensaje_nuevo" placeholder='Aqui tu mensaje'></textarea>
+		  </div>
+		</div>
+
+		<!-- Button -->
+		<div class="control-group">
+		  <label class="control-label" for="enviar_nuevo"></label>
+		  <div class="controls">
+		    <button id="enviar_nuevo" name="enviar_nuevo" class="btn btn-success">Guardar</button>
+		  </div>
+		</div>
+
+		</fieldset>
+	</form>
+</P>
+</div>
+
+
+{% endblock %}
