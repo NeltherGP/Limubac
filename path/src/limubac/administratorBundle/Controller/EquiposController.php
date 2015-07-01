@@ -29,8 +29,19 @@ class EquiposController extends Controller{
 		
 	public function equiposAction(){
 		
-		//Registrar a Torneo
+		//Solicitando Modificacion
+		if(isset($_POST['activar'])){
+			activandoModificacion($_POST['activar'],$this);
+		}
 		
+		//Solicitando Modificacion
+		if(isset($_POST['solicitando'])){
+			$body = 'Gracias por contactarnos. Esta es una respuesta automática confirmando la solicutud para modificar el equipo <b>'.$_POST['solicitando'].'</b>. Nuestro equipo se pondrá en contacto con usted tan pronto como sea posible.
+		  <br>';		  
+			enviaCorreo('Se ha recibido notificacion de la peticion de cambio','edgar_5_11@hotmail.com',$body,$this);
+		}
+		
+		//Registrar a Torneo
 		if(isset($_REQUEST['Torneo'])){ //valor del torneo al que se reitrara el equipo
 			$Manager = $this->getDoctrine()->getManager();
 			//echo "Torneo: ".$_REQUEST['Torneo']."   equipo: ".$_REQUEST['idEquipo']."<br>";
@@ -69,7 +80,6 @@ class EquiposController extends Controller{
 		if(isset($_REQUEST['editarEquipo'])){
 			$repositorio = $this->getDoctrine()->getRepository("limubacadministratorBundle:ParticipanT");
 			$Participan = $repositorio->find($_REQUEST['editarEquipo']);
-			
 			
 			
 			$Manager = $this->getDoctrine()->getManager();
@@ -117,7 +127,7 @@ class EquiposController extends Controller{
 
         $request = $this->get('request');
         $form->handleRequest($request);
-
+		
 		//Agregando nuevo equipo
 		if(isset($_POST['NuevoEquipo'])){
 			$equipo = new Equipo();

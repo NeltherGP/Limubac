@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="usuario", indexes={@ORM\Index(name="usuario_ibfk_1", columns={"id_rol"})})
  * @ORM\Entity
  */
-class Usuario
+class Usuario implements UserInterface
 {
     /**
      * @var string

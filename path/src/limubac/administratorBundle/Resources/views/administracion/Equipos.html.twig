@@ -48,11 +48,15 @@
 												<input type="hidden" value={{equipo.idEquipo}} name="opciones">
 												<button type="submit" class="btn btn-primary btn-info col-md-12">Ver Equipo</button>
 											</form>
-											<form class="form-horizontal" role="form" action="../app_dev.php/equipo" method="post">
+											<form class="form-horizontal" role="form" action="../app_dev.php/equipos" method="post">
+												<input type="hidden" value={{equipo.nombre}} name="solicitando">
 												<input type="hidden" value={{equipo.idEquipo}} name="opciones">
 												<button type="submit" class="btn btn-primary btn-info col-md-12">Solicitar Modificacion</button>
 											</form>
-											
+											<form class="form-horizontal" role="form" action="../app_dev.php/equipos" method="post">
+												<input type="hidden" value={{equipo.idEquipo}} name="activar">
+												<button type="submit" class="btn btn-danger col-md-12">Activar Modificacion</button>
+											</form>
 										
 										{% endif %}
 									</div>

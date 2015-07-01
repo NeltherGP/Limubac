@@ -1,7 +1,17 @@
+
 security:
+
+
+
     encoders:
+        limubac\administratorBundle\Entity\Userlim
+            algorithm:  sha1
+            encode_as_base64: false
+            iterations: 1
         Symfony\Component\Security\Core\User\User: plaintext
+
     access_control:
+<<<<<<< HEAD
         - { path: ^/hojaAnotaciones, roles: ROLE_ADMIN }
         - { path: ^/nombresEquipos, roles: ROLE_ADMIN }
         - { path: ^/equipos, roles: ROLE_ADMIN }
@@ -34,6 +44,8 @@ security:
         - { path: ^/finanzas, roles: ROLE_ADMIN }
         - { path: ^/actfin, roles: ROLE_ADMIN }
         - { path: ^/editfin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_USER }
+
 
 
     role_hierarchy:
@@ -41,6 +53,11 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
+        chain_provider:
+            chain:
+                providers: [main, default_provider]
+        main:
+            entity: { class: limubac\administratorBundle\Entity\Userlim, property: usuariolim}
         default_provider:
             memory:
                 users:
@@ -48,20 +65,19 @@ security:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
+    
     firewalls:
         secured_area:
+            provider: main
+            http_basic:
+                realm: "Secured Demo Area"
+                provider: default_provider
+            logout: ~
             pattern: ^/
             anonymous: ~
             security: true  
-            form_login: 
-                login_path: /login
-                check_path: /login_check
-                default_target_path: /admin
-                always_use_default_target_path: true
-            logout: 
-                path: /logout
-                target: /login
-
+            form_login: ~
+                
 
 #        dev:
  #           pattern:  ^/(_(profiler|wdt)|css|images|js)/
