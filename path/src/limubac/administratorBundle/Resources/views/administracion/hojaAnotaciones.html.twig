@@ -127,6 +127,7 @@
 	<table class="table table-bordered" style="table-layout:fixed" >
 		<thead>
 			<tr>
+				<th class = "text-center">id</th>
 				<th class = "text-center">#</th>
 				<th class = "text-center">Nombre</th>
 				<th class = "text-center">Apellido Paterno</th>
@@ -138,6 +139,7 @@
 		<tbody>
 			{% for jugador in ListA %}
 			<tr>
+				<td>{{jugador.idJugador}}</td>
 				<td>{{jugador.noPlayera}}</td>
 				<td>{{jugador.nombre}}</td>
 				<td>{{jugador.apPaterno}}</td>
@@ -272,8 +274,11 @@
 	{#End Fila 2#}
 	<div class="col-md-12">
 		{% if errores is defined %}
-		{% if errores.Playera!= 0%}
-		<div class="col-md-12 alert alert-danger text-center" role="alert">Ups! Parece que un numero de playera es incorrecto</div>
+		{% if errores.PlayeraA != 0%}
+		<div class="col-md-12 alert alert-danger text-center" role="alert">Ups! Parece que un numero de playera es incorrecto en el equipo A</div>
+		{% endif %}
+		{% if errores.PlayeraB != 0%}
+		<div class="col-md-12 alert alert-danger text-center" role="alert">Ups! Parece que un numero de playera es incorrecto en el equipo B</div>
 		{% endif %}
 		{% endif %}
 
@@ -281,17 +286,25 @@
 			{% for i in 1..30 %}
 			<div class="formAnotacion form-group">{#1#}
 				<div class="col-md-4">
+					{% if post['NumanotadorA' ~ i] is defined %}
+					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero" value="{{post['NumanotadorA' ~ i]}}">
+					{% else %}
 					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
+					{% endif %}
 				</div>
 				<div class="col-md-1 AglinBoxA">
-					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}" name="MarcadorCuartoA[]">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}"  name="MarcadorCuartoA[]">
 				</div>
 				<label class="col-md-2 text-center ">{{ i }}</label>
 				<div class="col-md-1 AglinBoxB">
-					<input class="boxMarcador"type="checkbox" id="inlineCheckboxB{{ i }}" value="{{ i }}"  name="MarcadorCuartoB[]">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxB{{ i }}" value="{{ i }}" name="MarcadorCuartoB[]">
 				</div>
 				<div class="col-md-4">
+					{% if post['NumanotadorB' ~ i] is defined %}
+					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero" value="{{post['NumanotadorB' ~ i]}}">
+					{% else %}
 					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
+					{% endif %}
 				</div>
 			</div>
 			{% endfor %}
@@ -301,17 +314,25 @@
 			{% for i in 31..60 %}
 			<div class="formAnotacion form-group">{#1#}
 				<div class="col-md-4">
+					{% if post['NumanotadorA' ~ i] is defined %}
+					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero" value="{{post['NumanotadorA' ~ i]}}">
+					{% else %}
 					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
+					{% endif %}
 				</div>
 				<div class="col-md-1 AglinBoxA">
-					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}" name="MarcadorCuartoA[]">
+					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}"  name="MarcadorCuartoA[]">
 				</div>
 				<label class="col-md-2 text-center ">{{ i }}</label>
 				<div class="col-md-1 AglinBoxB">
 					<input class="boxMarcador"type="checkbox" id="inlineCheckboxB{{ i }}" value="{{ i }}" name="MarcadorCuartoB[]">
 				</div>
 				<div class="col-md-4">
+					{% if post['NumanotadorB' ~ i] is defined %}
+					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero" value="{{post['NumanotadorB' ~ i]}}">
+					{% else %}
 					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
+					{% endif %}
 				</div>
 			</div>
 			{% endfor %}
@@ -321,7 +342,11 @@
 			{% for i in 61..90 %}
 			<div class="formAnotacion form-group">{#1#}
 				<div class="col-md-4">
+					{% if post['NumanotadorA' ~ i] is defined %}
+					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero" value="{{post['NumanotadorA' ~ i]}}">
+					{% else %}
 					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
+					{% endif %}
 				</div>
 				<div class="col-md-1 AglinBoxA">
 					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}"  name="MarcadorCuartoA[]">
@@ -331,7 +356,11 @@
 					<input class="boxMarcador"type="checkbox" id="inlineCheckboxB{{ i }}" value="{{ i }}" name="MarcadorCuartoB[]">
 				</div>
 				<div class="col-md-4">
+					{% if post['NumanotadorB' ~ i] is defined %}
+					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero" value="{{post['NumanotadorB' ~ i]}}">
+					{% else %}
 					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
+					{% endif %}
 				</div>
 			</div>
 			{% endfor %}
@@ -341,7 +370,11 @@
 			{% for i in 91..120 %}
 			<div class="formAnotacion form-group">{#1#}
 				<div class="col-md-4">
+					{% if post['NumanotadorA' ~ i] is defined %}
+					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero" value="{{post['NumanotadorA' ~ i]}}">
+					{% else %}
 					<input class="form-control" id="NA" name="NumanotadorA{{ i }}" placeholder="Numero">
+					{% endif %}
 				</div>
 				<div class="col-md-1 AglinBoxA">
 					<input class="boxMarcador"type="checkbox" id="inlineCheckboxA{{ i }}" value="{{ i }}"  name="MarcadorCuartoA[]">
@@ -351,7 +384,11 @@
 					<input class="boxMarcador"type="checkbox" id="inlineCheckboxB{{ i }}" value="{{ i }}" name="MarcadorCuartoB[]">
 				</div>
 				<div class="col-md-4">
+					{% if post['NumanotadorB' ~ i] is defined %}
+					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero" value="{{post['NumanotadorB' ~ i]}}">
+					{% else %}
 					<input class="form-control" id="NA" name="NumanotadorB{{ i }}" placeholder="Numero">
+					{% endif %}
 				</div>
 			</div>
 			{% endfor %}
@@ -362,25 +399,41 @@
     <label for="primero" class="col-md-12  text-center">Equipo A</label>
 		<label for="primero" class="col-md-1 control-label text-center">Primero: </label>
 		<div class="col-md-2">
-
+			{% if post.primeroA is defined %}
+			<input class="form-control" id="primero" name="primeroA" placeholder="" value="{{post.primeroA}}">
+			{% else %}
 			<input class="form-control" id="primero" name="primeroA" placeholder="" value="">
+			{% endif %}
+
 
 		</div>
 
 		<label for="segundo" class="col-md-1 control-label text-center">Segundo: </label>
 		<div class="col-md-2">
-
+			{% if post.segundoA is defined %}
+			<input class="form-control" id="segundo" name="segundoA" placeholder="" value="{{post.segundoA}}">
+			{% else %}
 			<input class="form-control" id="segundo" name="segundoA" placeholder="" value="">
-
+			{% endif %}
 		</div>
 
 		<label for="tercero" class="col-md-1 control-label text-center">Tercero: </label>
 		<div class="col-md-2">
+			{% if post.terceroA is defined %}
+			<input class="form-control" id="tercero" name="terceroA" placeholder="" value="{{post.terceroA}}">
+			{% else %}
 			<input class="form-control" id="tercero" name="terceroA" placeholder="" value="">
+			{% endif %}
+
 		</div>
-		<label for="tercero" class="col-md-1 control-label text-center">Cuarto </label>
+		<label for="cuarto" class="col-md-1 control-label text-center">Cuarto </label>
 		<div class="col-md-2">
+			{% if post.cuartoA is defined %}
+			<input class="form-control" id="cuarto" name="cuartoA" placeholder="" value="{{post.cuartoA}}">
+			{% else %}
 			<input class="form-control" id="cuarto" name="cuartoA" placeholder="" value="">
+			{% endif %}
+
 		</div>
     <label for="tercero" class="col-md-1 control-label text-center">Complementario </label>
 		<div class="col-md-2">
@@ -391,29 +444,50 @@
     <label for="primero" class="col-md-12 text-center">Equipo B</label>
 		<label for="primero" class="col-md-1 control-label text-center">Primero: </label>
 		<div class="col-md-2">
-
+			{% if post.primeroB is defined %}
+			<input class="form-control" id="primero" name="primeroB" placeholder="" value="{{post.primeroB}}">
+			{% else %}
 			<input class="form-control" id="primero" name="primeroB" placeholder="" value="">
+			{% endif %}
 
 		</div>
 
 		<label for="segundo" class="col-md-1 control-label text-center">Segundo: </label>
 		<div class="col-md-2">
-
+			{% if post.segundoB is defined %}
+			<input class="form-control" id="segundo" name="segundoB" placeholder="" value="{{post.segundoB}}">
+			{% else %}
 			<input class="form-control" id="segundo" name="segundoB" placeholder="" value="">
+			{% endif %}
 
 		</div>
 
 		<label for="tercero" class="col-md-1 control-label text-center">Tercero: </label>
 		<div class="col-md-2">
+			{% if post.terceroB is defined %}
+			<input class="form-control" id="tercero" name="terceroB" placeholder="" value="{{post.terceroB}}">
+			{% else %}
 			<input class="form-control" id="tercero" name="terceroB" placeholder="" value="">
+			{% endif %}
+
 		</div>
 		<label for="tercero" class="col-md-1 control-label text-center">Cuarto </label>
 		<div class="col-md-2">
+			{% if post.cuartoB is defined %}
+			<input class="form-control" id="cuarto" name="cuartoB" placeholder="" value="{{post.cuartoB}}">
+			{% else %}
 			<input class="form-control" id="cuarto" name="cuartoB" placeholder="" value="">
+			{% endif %}
+
 		</div>
     <label for="tercero" class="col-md-1 control-label text-center">Complementario </label>
 		<div class="col-md-2">
+			{% if post.complementarioB is defined %}
+			<input class="form-control" id="cuarto" name="ComlpementarioB" placeholder="" value="{{post.complementarioB}}">
+			{% else %}
 			<input class="form-control" id="cuarto" name="ComlpementarioB" placeholder="" value="">
+			{% endif %}
+
 		</div>
 	</div>
 

@@ -4,6 +4,7 @@ namespace limubac\administratorBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use limubac\administratorBundle\claseForm\hojaAnotacion;
 use limubac\administratorBundle\consultas\ConsultasPartidos;
+use limubac\administratorBundle\consultas\ConsultasAnotaciones;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use limubac\administratorBundle\Entity\Equipo;
@@ -21,6 +22,9 @@ class PartidosController extends Controller{
 
   public function partidoTestAction($idpartido,$idtorneo,$jornada){
     $idTorneo=$idtorneo;
+    if(isset($_GET[0])){
+    $idTorneo=$_GET[0];
+    }
     $consultasManager = new ConsultasPartidos();
     $request = $this->getRequest();
     $doctrineManager= $this -> getDoctrine()->getManager();
@@ -28,7 +32,7 @@ class PartidosController extends Controller{
     $listPartidos1=$consultasManager->listPartidosByTorneo($idTorneo,$doctrineManager,$jornada);
 
     $listPartidosCompletos=$consultasManager->listPartidosCompletos($doctrineManager);
-    $cantidadJornada=$consultasManager->getCantidadJornadasbyTorneo($idtorneo,$doctrineManager);
+    $cantidadJornada=$consultasManager->getCantidadJornadasbyTorneo($idTorneo,$doctrineManager);
 
     foreach ($listPartidosCompletos as $id => $value) {
       $listPartidosCompletos2[]=$value['idPartido'];
@@ -56,6 +60,7 @@ class PartidosController extends Controller{
 
 
     //print_r($listPartidos1);
+
     return $this->render('limubacadministratorBundle:administracion:partidoTest.html.twig',array('listaPartidos'=>$listPartidos2,'listSede'=>$listSede,'listArbitros'=>$listArbitros,'listPartidosCompletos'=>$listPartidosCompletos2,'cantidadJornadas'=>$cantidadJornada[0][1],'jornada'=>$jornada));
   }
 }

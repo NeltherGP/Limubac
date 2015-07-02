@@ -15,13 +15,10 @@
 
 	class sessionsController extends Controller{
 
-
-
-
 		public function logAction(){
 			$request = $this->getRequest();
 	        $session = $request->getSession();
-
+					//print_r($session);
 	        // obtiene el error de inicio de sesión si lo hay
 	        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
 	        	echo "ERROR 1";
@@ -51,7 +48,7 @@
 		            )
 	        	);
 
-	        
+
 		}
 }
 

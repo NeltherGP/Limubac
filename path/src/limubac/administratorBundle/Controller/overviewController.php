@@ -4,6 +4,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use limubac\administratorBundle\consultas\ConsultasPartidos;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class overviewController extends Controller{
   public function OverviewPartidosAction($idpartido,$idtorneo,$jornada){
@@ -17,8 +18,9 @@ class overviewController extends Controller{
     $cantidadJornadas=$consultasManager->getCantidadJornadasbyTorneo($idtorneo,$doctrineManager);
     $listEqCategoria=$consultasManager->listEqCategoriaByTorneo($idtorneo,$doctrineManager);
 
+
     for($i=0;$i<count($listEqCategoria);$i++){
-      $listEqCategoria[$i]['stats']=$consultasManager->estadisticasEquipo(1,$listEqCategoria[$i]['idEquipo'],$doctrineManager);;
+      $listEqCategoria[$i]['stats']=$consultasManager->estadisticasEquipo($idtorneo,$listEqCategoria[$i]['idEquipo'],$doctrineManager);;
     }
     //print_r($listEqCategoria);
 
