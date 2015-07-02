@@ -138,5 +138,26 @@ join limubacadministratorBundle:ParticipanT p with i.idEquipo = p.idEquipo where
 		
 		return true;
 	}
-
+	
+	function activandoModificacion($idEquipo,$controlador){
+		$Manager = $controlador->getDoctrine()->getManager();
+		$query = $Manager->createQuery("UPDATE limubac\administratorBundle\Entity\Equipo as e SET e.modificable=1 where e.idEquipo=".$idEquipo);
+		$query->getResult();
+		echo "<script type='text/javascript'>alert('Se Enviara un correo al dueño del equipo avisandole del permiso');</script>";
+		$body = 'Esta es una respuesta automática confirmando que ahora dispone de permiso para modificar el equipo <b>'.$Equipo.'</b>';
+		$asunto= 'Ahora puede modificar el equipo';
+		enviaCorreo($asunto,$destino,$body,$controlador);
+	}
+	
+	function enviaCorreo($asunto,$destino,$body,$controlador){
+		$mailer = $controlador->get('mailer');
+		$message = $mailer->createMessage()
+        ->setSubject($asunto)
+        ->setFrom('Limubac@gmail.com')
+		->setCC('Limubac@gmail.com')
+        ->setTo($destino)
+        ->setBody($body,'text/html')
+    ;
+    $mailer->send($message);	
+	}
 ?>

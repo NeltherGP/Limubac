@@ -16,49 +16,42 @@
 		    <div class="navbar-header">
 			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 			        <span class="sr-only">Toggle navigation</span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
 			      </button>
 		      {#logo#}
-
-		      	<a class="navbar-brand" href="#" ><img id="logo" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>
+		      	<a class="navbar-brand" href="{{url('limubacadministrator_homepage')}}" ><img id="logo" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		     	 <ul class="nav navbar-nav">
-			      	<li>
+			      	<!--li>
 			      		<button id="icono" type="button" class="btn btn-default btn-lg">
 	  					<span id="flechita" class="glyphicon glyphicon-chevron-right"></span>
 						</button>
-					</li>
+					</li-->
 
-			        <li class="active"><a href="#">SISTEMA DE CONTROL LIMUBAC</a></li>
-
+			        <li class="inactive"><a href="{{url('limubacadministrator_homepage')}}">  BIENVENIDO AL SISTEMA DE LA LIMUBAC</a></li>
+			        
+			        
 		      	</ul>
 
 			    <ul class="nav navbar-nav navbar-right">
-			        
 			        <li class="dropdown">
-
 					{% if app.user.username is defined %}			        
 				         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 				          	{{ app.user.username }}
 				          	<span class="caret"></span>
 				         </a>
 				        	<ul class="dropdown-menu" role="menu">
-					            <li><a href="#">Ver mi información</a></li>
-					            <li><a href="#">Actualizar mi información</a></li>
+					            <li><a href="{{url('limubacadministrator_miPerfil')}}">Mi perfil</a></li>
 					            <li class="divider"></li>
 					            <li><a href="{{url('limubacadministrator_logout')}}">Cerrar Sesion</a></li>
 				          	</ul>
 			          {% elseif app.user.username is not defined %}  
-				          	<a href="{{url('limubacadministrator_sessions')}}" class="dropdown-toggle" data-toggle="dropdown"> 
-				          		Iniciar
+				          	<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+				          		<li><a href="{{url('limubacadministrator_nuevoUsuario')}}">Nuevo Usuario</a></li>
+					        </a>
 			          {% endif %}
-
-			          
 			        </li>
 			    
                         
@@ -71,29 +64,29 @@
 
 		{% block sidebar%}
 
-		<div id="wrapper">
+		<!--div id="wrapper">
 
         <!-- Sidebar -->
-	        <div id="sidebar-wrapper">
+	        <!--div id="sidebar-wrapper">
 		            <ul class="sidebar-nav ">
-		                <li class="sidebar-brand">
-		                    <a class="navbar-brand" href="{{url('limubacadministrator_homepage')}}" ><img id="limubac" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>
-		                </li>
-									 </br></br></br></br></br></br></br></br></br></br></br></br>
+		                <!--li class="sidebar-brand">
+		                    <!--a class="navbar-brand" href="{{url('limubacadministrator_homepage')}}" ><img id="limubac" src="{{ asset('favicon.ico') }}" alt="LIMUBAC" class="img-rounded"></a>
+		                </li-->
+									 <!--/br></br></br></br></br></br></br></br></br></br></br></br>
 		                <li>
-		                    <a href="{{url('limubacadministrator_jugadoresAdmin')}}">Jugadores</a>
+	                    	<a href="{{url('limubacadministrator_jugadoresAdmin')}}"><h2>Jugadores</h2></a>
 		                </li>
-										<li>
-												<a href="{{url('limubacadministrator_selectTorneo')}}">Partidos</a>
-										</li>
+						<li>
+							<a href="{{url('limubacadministrator_selectTorneo')}}"><h2>Partidos</h2></a>
+						</li>
 		                <li>
-		                    <a href="{{url('limubacadministrator_equipos')}}">Equipos</a>
+		                    <a href="{{url('limubacadministrator_equipos')}}"><h2>Equipos</h2></a>
 		                </li>
 		                <li>
-		                    <a href="{{url('limubacadministrator_torneos')}}">Torneos</a>
+		                    <a href="{{url('limubacadministrator_torneos')}}"><h2>Torneos</h2></a>
 		                </li>
 		            </ul>
-		        </div>
+		        </div-->
 		        <!-- /#sidebar-wrapper -->
 
 		        <!-- Page Content -->
@@ -105,7 +98,7 @@
 		        	</div>
 		        </div>
         </div>
-<!-- Menu Toggle Script -->
+<!-- Menu Toggle Script >
     <script>
     $("#icono").click(function(e) {
         e.preventDefault();
@@ -119,7 +112,7 @@
 
 
     });
-    </script>
+    </script-->
 
 		{% endblock %}
 	</div>

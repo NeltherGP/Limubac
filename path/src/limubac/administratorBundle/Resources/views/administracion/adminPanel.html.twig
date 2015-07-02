@@ -1,50 +1,57 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
-
+{% if mensaje is defined %}
+    <div class="alert alert-success">{{ mensaje }}</div>    
+{% endif %}
         <!-- Page Content -->
 
                 {#INICIO FILA 1#}
                 <div id="fl-1" class="row">
 
-                    <a href="#">
+                    <a href="{{url('limubacadministrator_selectTorneo')}}">
                         <div  class="col-lg-4">
                             <div id="hoja">
-                                <img  id="hojaimg" src="{{asset('images/hoja.png')}}">
+                                <img  id="hojaimg" src="{{asset('images/hoja.png')}}">Partidos
                             </div>
                         </div>
                     </a>
-
-                    <div class="col-lg-4">
-                        <div id="equipos" >
-                            <img id="eqimg" src="{{asset('images/eq.png')}}">
+                    <a href="{{url('limubacadministrator_equipos')}}">
+                        <div class="col-lg-4">
+                            <div id="equipos" >
+                                <img id="eqimg" src="{{asset('images/eq.png')}}">        Equipos
+                            </div>
                         </div>
-                    </div>
-
+                    </a>
                     <a href="{{url('limubacadministrator_jugadoresAdmin')}}">
                         <div class="col-lg-4">
                             <div id="jugadores" >
-                                <img id="jugadoresimg" src="{{asset('images/jugadores.png')}}">
+                                <img id="jugadoresimg" src="{{asset('images/jugadores.png')}}">Jugadores
                             </div>
                         </div>
                     </a>
 
                 </div>
                 {#FIN FILA 1#}
+                {#INICIO FILA 2#}
                 <div id="fl-2" class="row">
-
-                    <div class="col-lg-4">
+                <a href="#">
+                    <div class="col-md-4">
+                    
                         <div id="arbitros" >
-                            <img id="arbitrosimg" src="{{asset('images/arbitros.png')}}">
+                            <img id="arbitrosimg" src="{{asset('images/arbitros.png')}}"> Arbitros                            
                         </div>
+                        
                     </div>
-
+                </a>
+                <a href="{{url('limubacadministrator_torneos')}}">
                     <div  class="col-lg-4">
                         <div id="avisos" >
-                            <img id="avisosimg" src="{{asset('images/avisos.png')}}">
+                            <img id="avisosimg" src="{{asset('images/avisos.png')}}"> Torneos
                         </div>
 
                     </div>
+                </a>
                     <div id="mas" class="col-lg-4"></div>
 
                 </div>
