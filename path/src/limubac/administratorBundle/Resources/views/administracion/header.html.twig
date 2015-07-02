@@ -1,19 +1,13 @@
 
 {% extends '::base.html.twig' %}
-{#% block stylesheets %}
+
+{% block stylesheets %}
 {{parent()}}
-
-
-
-
-<<<<<<< HEAD
 {% endblock %}
     
 	
 
-=======
-{% endblock %#}
->>>>>>> 5dea784b18c301d3b17a5bf236e69d0ac34ee0e1
+
 {% block body %}
 	<div class="container-fluid">
 		<nav class="navbar navbar-default" role="navigation">
@@ -46,10 +40,28 @@
 
 			    <ul class="nav navbar-nav navbar-right">
 			        
+			        <li class="dropdown">
 
-                        {% for flashMessage in app.session.getflashBag.get('name') %}
-                           <li><a href="{{url('limubacadministrator_sessions')}}"> {{ flashMessage }} </a></li>                             
-						{% endfor %}
+					{% if app.user.username is defined %}			        
+				         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+				          	{{ app.user.username }}
+				          	<span class="caret"></span>
+				         </a>
+				        	<ul class="dropdown-menu" role="menu">
+					            <li><a href="#">Ver mi información</a></li>
+					            <li><a href="#">Actualizar mi información</a></li>
+					            <li class="divider"></li>
+					            <li><a href="{{url('limubacadministrator_logout')}}">Cerrar Sesion</a></li>
+				          	</ul>
+			          {% elseif app.user.username is not defined %}  
+				          	<a href="{{url('limubacadministrator_sessions')}}" class="dropdown-toggle" data-toggle="dropdown"> 
+				          		Iniciar
+			          {% endif %}
+
+			          
+			        </li>
+			    
+                        
 
 
 			    </ul>

@@ -59,7 +59,7 @@ limubacadministrator_torneos:
     defaults: { _controller: limubacadministratorBundle:Default:torneos}
 
 limubacadministrator_crearTorneo:
-    path:     /crearTorneo
+    path:     /torneos/crear
     defaults: { _controller: limubacadministratorBundle:Default:crearTorneo}
 
 limubacadministrator_categorias:
@@ -67,7 +67,7 @@ limubacadministrator_categorias:
     defaults: { _controller: limubacadministratorBundle:Default:categorias}
 
 limubacadministrator_crearCategoria:
-    path:     /crearCategoria
+    path:     /categorias/crear
     defaults: { _controller: limubacadministratorBundle:Default:crearCategoria}
 
 limubacadministrator_acTorneo:
@@ -75,7 +75,7 @@ limubacadministrator_acTorneo:
     defaults: { _controller: limubacadministratorBundle:Default:acTorneo}
 
 limubacadministrator_acTorneo:
-    path:     /participan
+    path:     /torneo/participan
     defaults: { _controller: limubacadministratorBundle:Default:participan}
 
 limubacadministrator_editTorneo:
@@ -117,14 +117,6 @@ limubacadministrator_overview:
   path: /overview/{idtorneo}/{idpartido}/{jornada}
   defaults: {_controller:limubacadministratorBundle:overview:overviewPartidos,idtorneo:0,idpartido:0,jornada:1}
 
-
-limubacadministrator_sessions:
-  path: /login
-  defaults: { _controller: limubacadministratorBundle:sessions:admin}
-
-login_check:
-  path: /login_check
-
 limubacadministrator_sesiones:
   path: /sesion
   defaults: { _controller: limubacadministratorBundle:sessions:sex}
@@ -140,3 +132,18 @@ limubacadministrator_actfin:
 limubacadministrator_editfin:
     path:     /editfin
     defaults: { _controller: limubacadministratorBundle:Finanzas:editfin}
+
+limubacadministrator_sessions:
+  path: /login
+  defaults: { _controller: limubacadministratorBundle:sessions:log}
+
+login_check:
+  path: /login_check
+
+limubacadministrator_ActualizarSesiones:
+  path: /usuario
+  defaults: { _controller: limubacadministratorBundle:sessions:act}
+
+limubacadministrator_logout:
+  path: /logout
+  defaults: { _controller: limubacadministratorBundle:sessions:logout}
