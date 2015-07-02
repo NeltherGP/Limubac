@@ -141,3 +141,30 @@ limubacadministrator_actfin:
 limubacadministrator_editfin:
     path:     /editfin
     defaults: { _controller: limubacadministratorBundle:Finanzas:editfin}
+
+limubacadministrator_sessions:
+  path: /login
+  defaults: { _controller: limubacadministratorBundle:sessions:log}
+
+login_check:
+  path: /login_check
+
+limubacadministrator_nuevoUsuario:
+  path: /users/nuevoUsuario
+  defaults: { _controller: limubacadministratorBundle:sessions:newuser}
+
+limubacadministrator_logout:
+  path: /logout
+  defaults: { _controller: limubacadministratorBundle:sessions:logout}
+
+limubacadministrator_miPerfil:
+  path: /users/miPerfil
+  defaults: { _controller: limubacadministratorBundle:sessions:miPerfil}
+
+limubacadministrator_principal:
+    path:     /
+    defaults: { _controller: limubacadministratorBundle:Default:admin}
+
+limubacadministrator_actualizarContrasena:
+  path: /users/actualizarContraseña
+  defaults: { _controller: limubacadministratorBundle:sessions:actualizarContrasena}

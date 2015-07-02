@@ -8,26 +8,37 @@
 	background-color: transparent;
 	border-color: transparent;
 }
+
 #equipos{
 	background-color: #CF000F;
+	color: white;
+	font: oblique bold 200% cursive; 
 
 }
 #hoja{
 	background-color:#26C281;
-
+	color: white;
+	font: oblique bold 200% cursive; 
 }
 #jugadores{
 	background-color:#19B5FE;
+	color: white;
+	font: oblique bold 200% cursive; 
 }
 
 
 #arbitros{
 	background-color:#F5D76E;
+	color: white;
+	font: oblique bold 200% cursive; 
 }
 
 #avisos{
 	background-color: #BFBFBF;
+	color: white;
+	font: oblique bold 200% cursive; 
 }
+
 #fl-1 > a> div >div {
 	padding: 10px;
 }
@@ -53,6 +64,11 @@
 	padding: 10px;
 }
 #fl-2 > div > div >img{/*Borrar despues de actualizar*/
+	/*margin-left: 250px;*/
+	width: 100px;
+	height:100px;
+}
+#fl-2 > a > div > div  >img{
 	/*margin-left: 250px;*/
 	width: 100px;
 	height:100px;
@@ -501,7 +517,7 @@ margin-bottom:5px
 }
 
 /*-----------------------FINAL ESTILOS DE FAFI...NO TOCAR!!!!------------------------*/
-
+/* Ya los toque... :3 */
 /*------------------Estilos Equipo----------*/
 
 #DivCentrado{
@@ -519,3 +535,33 @@ margin-bottom:5px
 }
 
 
+
+/* -----------------------ESTILOS PARA EL NUEVO REGISTRO DE UN USUARIO -------------- */
+#nombre_nuevo{
+	width: 400px;
+}
+#palomita_nuevo{
+	background-color: transparent;
+}
+#password_nuevo{
+	width: 400px;
+}
+#confirmacion_nuevo{
+	width: 400px;
+}
+#telefono_nuevo{
+	width: 400px;
+}
+#correo_nuevo{
+	width: 400px;
+}
+#direccion_nuevo{
+	width: 400px;
+}
+#seleccion_nuevo{
+	width: 400px;
+}
+#mensaje_nuevo{
+	width: 400px;
+	height: 100px;
+}

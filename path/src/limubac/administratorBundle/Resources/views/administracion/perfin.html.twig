@@ -1,0 +1,68 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+
+<div class="col-md-6">
+
+	<div class="list-group">
+	  <a href="#" class="list-group-item active">
+	    <h4 class="list-group-item-heading">Equipos</h4>
+	    <p class="list-group-item-text">Aqui podras revisar los equipos que has inscrito asi como caracteristicas sobre ellos.</p>
+	  </a>
+	  <p></p>
+	  <a href="#" class="list-group-item active">
+	    <h4 class="list-group-item-heading">Torneos</h4>
+	    <p class="list-group-item-text">Revisa los torneos activos, estadisticas y otras cosas mas referente a ello.</p>
+	  </a>
+	  <p></p>
+	   <a href="{{url('limubacadministrator_actualizarContrasena')}}" class="list-group-item active">
+	    <h4 class="list-group-item-heading">Seguridad</h4>
+	    <p class="list-group-item-text">Cambia tu contraseña, o si la has olvidado, recuperala.</p>
+	  </a>
+	  <p></p>
+	  <a href="#" class="list-group-item active">
+	    <h4 class="list-group-item-heading">Mi información</h4>
+	    <p class="list-group-item-text">Si cambiaste de dirección, telefono o correo, cambialo en este apartado, es importante tener actualizada tu información</p>
+	  </a>
+	  <p></p>
+	  <a href="#" class="list-group-item active">
+	    <h4 class="list-group-item-heading">Créditos</h4>
+	    <p class="list-group-item-text">Revisa la cantidad de equipos que puedes ingresar</p>
+	  </a>
+	  <p></p>
+	  <a href="#" class="list-group-item active">
+	    <span class="badge"> 0 </span>
+	    <h4 class="list-group-item-heading">Avisos</h4>
+	    <p class="list-group-item-text">Revisa los avisos referentes a la LIMUBAC</p>
+	  </a>
+	 <p></p>
+	 <a href="#" class="list-group-item active"> 
+	    <h4 class="list-group-item-heading">Contacto</h4>
+	    <p class="list-group-item-text">Envia tus quejas, sugerencias y comentarios a la liga</p>
+	  </a>
+		</div>
+
+</div>
+	
+<div class="col-md-6">
+	  <legend>
+	  	<h1>
+	  		<P ALIGN=center>Mi perfil </P>
+	  	</h1>
+	  </legend>
+	  <h3>Nombre</h3> <p> Nombre completo </p>
+	  <h3>Correo</h3> <p> Correo registrado</p>
+	  <h3>Status</h3> <p> Status de la cuenta</p>
+	<legend>
+	  	<h1>
+	  		<P ALIGN=center>Información de la Liga</P>
+	  	</h1>
+	  </legend>
+	  <h3>Nombre</h3> <p> Liga Municipal de Basquetbol de Celaya A.C. </p>
+	  <h3>Dirección</h3> <p> Calle Insurgentes #410-B Primer piso </p>
+	  <h3>Telefono</h3> <p> (461) 613-5585</p>
+	  <h3>Presidente de la liga</h3> <p>Daniel Isaí Ramirez</p>
+	  <h3>Correo de la liga</h3> <p> limubac@gmail.com</p>
+	  <h3>Horario</h3> <p> Lunes a Jueves de 6:00 PM a 8:30 PM</p>
+</div>
+{% endblock %}

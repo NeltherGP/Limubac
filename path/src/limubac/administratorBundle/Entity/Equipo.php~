@@ -27,6 +27,13 @@ class Equipo
     private $registrado;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="modificable", type="boolean", nullable=false)
+     */
+    private $modificable;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id_equipo", type="integer")
