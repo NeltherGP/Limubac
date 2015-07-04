@@ -57,7 +57,11 @@
       <div class="col-md-12 borBox wellDark btn-dashboard" style="height: 52.66666674613952px">
         <div class="formAnotacion form-group">
           <div  class="col-md-8">
-            <h3>Selecciona Torneo</h3>
+            {% if query is empty %}
+              <h3>Selecciona Torneo</h3>
+            {% else %}
+              <h3> {{query[0]['torneo']}} </h3>
+            {% endif %}
           </div>
           <div class="btn-group sharp col-md-2" style="padding-left: 24px;">
             <select class="form-control" name="sel">
@@ -195,7 +199,7 @@
                         <td bgcolor="#D65CFF">$ {{entitie.mes7}} </td>
                       {% endif %}
                       <td text-align="center">
-                        <button class="btn btn-mini btn-success" type='submit' formtarget="_blank" name='edit' value ='{{entitie.ide}}'>
+                        <button class="btn btn-mini btn-success" type='submit' name='edit' value ='{{entitie.nump}}'>
                           <i class="glyphicon-pencil glyphicon"></i>
                         </button>
                       </td>
@@ -203,7 +207,7 @@
                   {% endfor %}
                   <tr>
                     <td colspan="16">
-                      <button class="btn btn-primary btn-info" type='submit' name='pdf' value="{{aide}}">
+                      <button class="btn btn-primary btn-info" type='submit' formtarget="_blank" name='pdf' value="{{aide}}">
                         <i class="glyphicon glyphicon-file"></i> Imprimir Torneo en PDF
                       </button>
                     </td>

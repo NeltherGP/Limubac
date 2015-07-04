@@ -53,16 +53,16 @@ class FinanzasController extends Controller{
         if (!empty($_REQUEST['edit'])) {
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Finanzas');
             $queryEdit = $repository->createQueryBuilder('f')
-            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.dia','f.hora','f.monto','f.cuenta','f.manejo','f.mes1','f.mes2','f.mes3','f.mes4','f.mes5','f.mes6','f.mes7')
+            ->select('f.idFinanzas as nump','e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.dia','f.hora','f.monto','f.cuenta','f.manejo','f.mes1','f.mes2','f.mes3','f.mes4','f.mes5','f.mes6','f.mes7')
             ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'f.idEquipo = e.idEquipo')
             ->join('limubacadministratorBundle:ParticipanT', 'p', 'WITH' ,'p.idEquipo = f.idEquipo')
-            ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'p.idCategoria = c.idCategoria')
-            ->where('f.idFinanzas = :aidi')
-            ->setParameter('aidi', $_REQUEST['edit'])
+            ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'e.idCategoria = c.idCategoria')
+            ->where('f.idFinanzas = :word')
+            ->setParameter('word', $_REQUEST['edit'])
             ->orderBy('categoria')
             ->getQuery();
             $resul = $queryEdit->getResult();
-
+            
             return $this->render('limubacadministratorBundle:administracion:editaFinanzas.html.twig', array('query' => $resul));
         }
         elseif (!empty($_REQUEST['pdf'])) {
@@ -280,16 +280,17 @@ class FinanzasController extends Controller{
         elseif (!empty($_REQUEST['sel'])) {
             $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Finanzas');
             $queryEdit = $repository->createQueryBuilder('f')
-            ->select('e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.dia','f.hora','f.monto','f.cuenta','f.manejo','f.mes1','f.mes2','f.mes3','f.mes4','f.mes5','f.mes6','f.mes7')
+            ->select('f.idFinanzas as nump','e.idEquipo as ide','e.nombre AS equipo','c.nombre AS categoria','f.inscripcion','f.dia','f.hora','f.monto','f.cuenta','f.manejo','f.mes1','f.mes2','f.mes3','f.mes4','f.mes5','f.mes6','f.mes7','t.nombre as torneo')
             ->join('limubacadministratorBundle:Equipo', 'e', 'WITH' ,'f.idEquipo = e.idEquipo')
             ->join('limubacadministratorBundle:ParticipanT', 'p', 'WITH' ,'p.idEquipo = f.idEquipo')
             ->join('limubacadministratorBundle:Categoria', 'c', 'WITH' ,'e.idCategoria = c.idCategoria')
+            ->join('limubacadministratorBundle:Torneo', 't', 'WITH' ,'t.idTorneo = f.idTorneo')
             ->where('f.idTorneo = :word AND p.idTorneo = :word')
             ->setParameter('word', $_REQUEST['sel'])
             ->orderBy('categoria')
             ->getQuery();
             $resul = $queryEdit->getResult();
-
+            
             $queryIngresos = $repository->createQueryBuilder('i')
             ->select('sum(i.inscripcion + i.cuenta + i.mes1 + i.mes2 + i.mes3 + i.mes4 + i.mes5 + i.mes6 + i.mes7)')
             ->join('limubacadministratorBundle:ParticipanT', 'p', 'WITH' ,'p.idEquipo = i.idEquipo')
@@ -354,7 +355,7 @@ class FinanzasController extends Controller{
             ->setParameter('mes5', $_REQUEST['mes5'])
             ->setParameter('mes6', $_REQUEST['mes6'])
             ->setParameter('mes7', $_REQUEST['mes7'])
-            ->setParameter('idc', $_REQUEST['ides'])
+            ->setParameter('idc', $_REQUEST['nump'])
             ->getQuery();
         $res = $qu->execute();
 
