@@ -22,6 +22,7 @@ namespace limubac\administratorBundle\Controller;
 		use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 		use Symfony\Component\Validator\Constraints\DateTime;
 		use limubac\administratorBundle\Entity\Fotos;
+		use limubac\administratorBundle\Entity\Finanzas;
 
 	include 'funcionesExtras.php';	
 		
@@ -61,6 +62,26 @@ class EquiposController extends Controller{
 				$Manager->persist($Participan);
 				$Manager->persist($Torneo);
 				$Manager->flush();
+
+				$finanzas = new Finanzas();
+				$finanzas -> setIdEquipo($equipo);
+				$finanzas -> setIdTorneo($Torneo);
+				$finanzas -> setInscripcion(0);
+				$finanzas -> setCuenta("");
+				$finanzas -> setManejo("");
+				$finanzas -> setHora("");
+				$finanzas -> setMonto("");
+				$finanzas -> setDia("");
+				$finanzas -> setMes1(0);
+				$finanzas -> setMes2(0);
+				$finanzas -> setMes3(0);
+				$finanzas -> setMes4(0);
+				$finanzas -> setMes5(0);
+				$finanzas -> setMes6(0);
+				$finanzas -> setMes7(0);
+				$em = $this->getDoctrine()->getManager();
+	            $em -> persist($finanzas);
+	            $em -> flush();
 			}
 		}
 		
