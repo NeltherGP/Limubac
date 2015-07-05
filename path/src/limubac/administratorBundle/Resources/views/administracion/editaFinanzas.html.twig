@@ -55,6 +55,7 @@
                 <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mes6" value="{{query[0]['mes6']}}"><br>
                 <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mes7" value="{{query[0]['mes7']}}"><br>
                 <input type="hidden" name="ides" value="{{query[0]['ide']}}"><br>
+                <input type="hidden" name="nump" value="{{query[0]['nump']}}"><br>
               </form>
               {% block javascripts %}
                 <script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
@@ -86,7 +87,7 @@
           </div>
         </div>
         <div class="col-md-2 tRight">
-          <button class="btn btn-large btn-success sharp sp" type="submit" id="edita_finanzas" name="equipo[{{query[0]['ide']}}]" style="
+          <button class="btn btn-large btn-success sharp sp" type="submit" id="edita_finanzas" name="equipo[{{query[0]['nump']}}]" style="
     margin-left: 0px;"><i class="glyphicon-ok glyphicon"></i> Actualizar</button>
           <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_finanzas')}}"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
         </div>

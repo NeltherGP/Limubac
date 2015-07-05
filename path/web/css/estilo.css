@@ -39,6 +39,12 @@
 	font: oblique bold 200% cursive; 
 }
 
+#finanzas{
+	background-color: #FFCCFF;
+	color: white;
+	font: oblique bold 200% cursive; 
+}
+
 #fl-1 > a> div >div {
 	padding: 10px;
 }
