@@ -1,7 +1,16 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
+{% if mensaje is defined %}
+    <div class="alert alert-success">{{ mensaje }}</div>    
+{% endif %}
 
+	<a href="#" class="list-group-item inactive">
+		<span class="badge"> 0 </span>
+		<h4 class="list-group-item-heading">Avisos</h4>
+	    <p class="list-group-item-text">Revisa los avisos referentes a la LIMUBAC</p>
+  </a>
+  <p></p>
 <div class="col-md-6">
 
 	<div class="list-group">
@@ -17,26 +26,23 @@
 	  <p></p>
 	   <a href="{{url('limubacadministrator_actualizarContrasena')}}" class="list-group-item active">
 	    <h4 class="list-group-item-heading">Seguridad</h4>
-	    <p class="list-group-item-text">Cambia tu contraseña, o si la has olvidado, recuperala.</p>
+	    <p class="list-group-item-text">Cambia tu contraseña.</p>
 	  </a>
 	  <p></p>
-	  <a href="#" class="list-group-item active">
+	  <a href="{{url('limubacadministrator_actualizarInformacion')}}" class="list-group-item active">
 	    <h4 class="list-group-item-heading">Mi información</h4>
 	    <p class="list-group-item-text">Si cambiaste de dirección, telefono o correo, cambialo en este apartado, es importante tener actualizada tu información</p>
 	  </a>
 	  <p></p>
 	  <a href="#" class="list-group-item active">
+	  	<span class="badge"> 0 </span>
 	    <h4 class="list-group-item-heading">Créditos</h4>
 	    <p class="list-group-item-text">Revisa la cantidad de equipos que puedes ingresar</p>
 	  </a>
-	  <p></p>
-	  <a href="#" class="list-group-item active">
-	    <span class="badge"> 0 </span>
-	    <h4 class="list-group-item-heading">Avisos</h4>
-	    <p class="list-group-item-text">Revisa los avisos referentes a la LIMUBAC</p>
-	  </a>
+	  
+	  
 	 <p></p>
-	 <a href="#" class="list-group-item active"> 
+	 <a href="{{url('limubacadministrator_Contacto')}}" class="list-group-item active"> 
 	    <h4 class="list-group-item-heading">Contacto</h4>
 	    <p class="list-group-item-text">Envia tus quejas, sugerencias y comentarios a la liga</p>
 	  </a>

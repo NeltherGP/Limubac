@@ -155,3 +155,11 @@ limubacadministrator_principal:
 limubacadministrator_actualizarContrasena:
   path: /users/actualizarContraseña
   defaults: { _controller: limubacadministratorBundle:sessions:actualizarContrasena}
+
+limubacadministrator_actualizarInformacion:
+  path: /users/actualizarInformación
+  defaults: { _controller: limubacadministratorBundle:sessions:actualizarInformacion}
+
+limubacadministrator_Contacto:
+  path: /users/contacto
+  defaults: { _controller: limubacadministratorBundle:sessions:contacto}
