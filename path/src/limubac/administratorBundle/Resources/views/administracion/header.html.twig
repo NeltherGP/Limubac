@@ -1,11 +1,10 @@
-
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
 {{parent()}}
 {% endblock %}
-    
-	
+
+
 
 
 {% block body %}
@@ -31,8 +30,8 @@
 					</li-->
 
 			        <li class="inactive"><a href="{{url('limubacadministrator_homepage')}}">  INICIO</a></li>
-			        
-			        
+
+
 		      	</ul>
 		      	<ul class="nav navbar-nav navbar-centre">
 		      			<li class="inactive"><a href="">    ----------------------------------------------------------------------------------------------------------- SISTEMA LIMUBAC -----------------------------------------------------------------------------------------------------------</a></li>
@@ -47,8 +46,8 @@
 			    </li>
 			    {% endif %}
 			        <li class="dropdown">
-					{% if app.user.username is defined %}			        
-				         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+					{% if app.user.username is defined %}
+				         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				          	{{ app.user.username }}
 				          	<span class="caret"></span>
 				         </a>
@@ -57,8 +56,8 @@
 					            <li class="divider"></li>
 					            <li><a href="{{url('limubacadministrator_logout')}}">Cerrar Sesion</a></li>
 				          	</ul>
-			          {% elseif app.user.username is not defined %}  
-				          	<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+			          {% elseif app.user.username is not defined %}
+				          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				          		<li><a href="{{url('limubacadministrator_sessions')}}">Iniciar Sesion</a></li>
 					        </a>
 			          {% endif %}
@@ -66,8 +65,8 @@
 
 
 			        </li>
-			    
-                        
+
+
 
 
 			    </ul>
@@ -78,7 +77,6 @@
 		{% block sidebar%}
 
 		<!--div id="wrapper">
-
         <!-- Sidebar -->
 	        <!--div id="sidebar-wrapper">
 		            <ul class="sidebar-nav ">
@@ -116,14 +114,11 @@
     $("#icono").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
-
         if($('#flechita').attr("class")=="glyphicon glyphicon-chevron-right"){
             $('#flechita').attr("class","glyphicon glyphicon-chevron-left");
         }else{
              $('#flechita').attr("class","glyphicon glyphicon-chevron-right");
         }
-
-
     });
     </script-->
 

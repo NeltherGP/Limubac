@@ -5,8 +5,7 @@ namespace limubac\administratorBundle\consultas;
 class ConsultasPartidos{
 
   function listPartidosByTorneo($idTorneo,$manager,$jornada){
-
-  		$consulta = $manager ->createQuery('SELECT pa.idPartido, e.nombre, j.side, pa.jornada, IDENTITY(pa.idTorneo) as torneo, j.resultado, j.primero, j.segundo, j.tercero, j.cuarto from limubacadministratorBundle:Equipo e
+  		$consulta = $manager ->createQuery('SELECT pa.idPartido, e.nombre, j.side, pa.jornada, IDENTITY(pa.idTorneo) as torneo, j.resultado, j.primero, j.segundo, j.tercero, j.cuarto, pa.commited from limubacadministratorBundle:Equipo e
   											    join  limubacadministratorBundle:Juegan j with e.idEquipo=j.idEquipo
 
   											                    join limubacadministratorBundle:Partido pa with pa.idPartido=j.idPartido
@@ -21,7 +20,7 @@ class ConsultasPartidos{
                 FROM limubacadministratorBundle:ParticipanT p
                 INNER JOIN limubacadministratorBundle:Equipo e  WITH p.idEquipo=e.idEquipo
                 INNER JOIN limubacadministratorBundle:Torneo t  WITH p.idTorneo=t.idTorneo
-				INNER JOIN limubacadministratorBundle:Categoria c  WITH p.idCategoria=c.idCategoria
+				INNER JOIN limubacadministratorBundle:Categoria c  WITH e.idCategoria=c.idCategoria
                 WHERE p.idTorneo={$idTorneo}
 				ORDER BY c.idCategoria");
 
@@ -33,7 +32,7 @@ class ConsultasPartidos{
                 FROM limubacadministratorBundle:ParticipanT p
                 INNER JOIN limubacadministratorBundle:Equipo e  WITH p.idEquipo=e.idEquipo
                 INNER JOIN limubacadministratorBundle:Torneo t  WITH p.idTorneo=t.idTorneo
-		            INNER JOIN limubacadministratorBundle:Categoria c  WITH p.idCategoria=c.idCategoria
+		            INNER JOIN limubacadministratorBundle:Categoria c  WITH e.idCategoria=c.idCategoria
                 WHERE p.idTorneo={$idTorneo}");
     return $consulta->getResult();
   }
@@ -63,7 +62,7 @@ class ConsultasPartidos{
 	}
 	$dif=$pf+$pc;
 	$total=($pg*3)+($pp);
-	
+
 
 	$lista=array('pj'=>$pj,'pg'=>$pg,'pp'=>$pp,'pf'=>$pf,'pc'=>$pc,'dif'=>$dif,'total'=>$total);
 
@@ -129,6 +128,11 @@ class ConsultasPartidos{
   function getCantidadJornadasbyTorneo($idTorneo,$manager){
     $consulta=$manager->createQuery('SELECT MAX(p.jornada) from limubacadministratorBundle:Partido p where p.idTorneo='.$idTorneo);
 
+    return $consulta->getResult();
+  }
+
+  function getIdTorneobyPartido($idPartido,$manager){
+    $consulta=$manager->createQuery("SELECT IDENTITY(p.idTorneo) from limubacadministratorBundle:Partido p where p.idPartido={$idPartido}"); 
     return $consulta->getResult();
   }
 
