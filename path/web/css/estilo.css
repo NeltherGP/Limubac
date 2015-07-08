@@ -39,6 +39,12 @@
 	font: oblique bold 200% cursive;
 }
 
+#finanzas{
+	background-color: #FFCCFF;
+	color: white;
+	font: oblique bold 200% cursive; 
+}
+
 #fl-1 > a> div >div {
 	padding: 10px;
 }
@@ -538,34 +544,39 @@ margin-bottom:5px
 	height: 20px;
 }
 
+/* -----------------------ESTILOS PARA EL NUEVO REGISTRO DE UN USUARIO -------------- */
 
+#asteriscos{
+	color: red;
+}
 
 /* -----------------------ESTILOS PARA EL NUEVO REGISTRO DE UN USUARIO -------------- */
-#nombre_nuevo{
+#nombre_nuevo, #password_nuevo, #confirmacion_nuevo, #telefono_nuevo, #correo_nuevo, #direccion_nuevo, #seleccion_nuevo,
+#mensaje_nuevo{
 	width: 400px;
 }
+
 #palomita_nuevo{
 	background-color: transparent;
 }
-#password_nuevo{
+
+
+/* ------ ESTILO PARA LAS CAJAS DE LA ACTUALIZACION DE LA INFORMACION DE PERFIL ----------*/
+#actInf{
 	width: 400px;
 }
-#confirmacion_nuevo{
+
+/* ------ ESTILO PARA LAS CAJAS DE CONTACTO EN EL PERFIL ----------*/
+#contacto{
 	width: 400px;
 }
-#telefono_nuevo{
-	width: 400px;
+#contacto_msj{
+	width: 500px;
+	height: 300px;
 }
-#correo_nuevo{
-	width: 400px;
-}
-#direccion_nuevo{
-	width: 400px;
-}
-#seleccion_nuevo{
-	width: 400px;
-}
-#mensaje_nuevo{
-	width: 400px;
-	height: 100px;
+/* ---------- ESTILO PARA LOS ICONOS DE LAS REDES SOCIALES -------------*/
+#rs{
+	width: 30px;
+	height: 30px;
+	
 }

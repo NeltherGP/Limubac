@@ -1,0 +1,69 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+
+{% if mensaje is defined %}
+    <div class="alert alert-success">{{ mensaje }}</div>    
+{% endif %}
+
+<div class="row">
+	<div class="col-md-6">
+		
+		<form class="form-horizontal" background-image="entrada.jpg" action="{{path('limubacadministrator_Contacto')}}" method='POST'>
+
+			<!-- Text input-->
+			<div class="control-group">
+			  <label class="control-label" for="correo" >Correo <sup id="asteriscos">*</sup></label>
+			  <div class="controls">
+			    <input id="contacto" name="correo" type="text" placeholder="" class="input-xlarge" required="true" >
+
+			    
+
+			  </div>
+			</div>
+
+
+			<!-- Text input-->
+			<div class="control-group">
+			  <label class="control-label" for="asunto">Asunto<sup id="asteriscos">*</sup></label>
+			  <div class="controls">
+			    <input id="contacto" name="asunto" type="text" placeholder="" class="input-xlarge" required="true" >
+			     
+			  </div>
+			</div>
+
+			<!-- Textarea -->
+			<div class="control-group">
+			  <label class="control-label" for="mensaje">Escribe aqui tu mensaje <sup id="asteriscos">*</sup></label>
+			
+			  <div class="controls">
+			    <textarea id="contacto_msj" name="mensaje" placeholder='Aqui tu mensaje' required="true"></textarea>
+			    <p id="asteriscos"> * Campos obligatorios </p>
+			  </div>
+			</div>
+
+			<button type="submit" id="btn_contacto" name="enviar" >Enviar</button>
+			
+
+		</form>
+<p></p>
+		
+
+	</div>
+
+	<div class="col-md-6">
+		<legend>Otros medios de contacto.</legend>
+		<h3>Nombre</h3> <p> Liga Municipal de Basquetbol de Celaya A.C. </p>
+	  	<h3>Dirección</h3> <p> Calle Insurgentes #410-B Primer piso </p>
+	  	<h3>Telefono</h3> <p> (461) 613-5585</p>
+	  	<h3>Presidente de la liga</h3> <p>Daniel Isaí Ramirez</p>
+	  	<h3>Correo de la liga</h3> <p> limubac@gmail.com</p>
+	  	<h3>Horario</h3> <p> Lunes a Jueves de 6:00 PM a 8:30 PM</p>
+	  	<h3>Redes Sociales</h3> <p> Siguenos en <a href="https://www.facebook.com/limubac?fref=ts" target="_blank">facebook</a> o <a href="https://twitter.com/limubac" target="_blank">@twitter</a></p>
+	  	 
+		
+	</div>
+</div>
+
+
+{% endblock %}

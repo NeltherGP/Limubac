@@ -2,29 +2,42 @@
 
 {% block PageContent %}
 
+{% if mensaje is defined %}
+    <div class="alert alert-danger">{{ mensaje }}</div>    
+{% endif %}
+
+
 <legend> <P ALIGN=center>Cambio de contraseña</P></legend>
-<div class="col-md-4"></div>
-<div class="col-md-6">
-	<div class="control-group">
-	  	<label class="control-label" for="password">Contraseña actual</label>
-		  	<div class="controls">
-		    	<input id="password" name="_password" type="password" placeholder="" class="input-xlarge" required="true">
-	    	</div>
-	</div>
+<div class="row"> 
+	<div class="col-md-4"></div>
 
-	<div class="control-group">
-	  	<label class="control-label" for="password">Nueva contraseña</label>
-		  	<div class="controls">
-		    	<input id="password" name="_password" type="password" placeholder="" class="input-xlarge" required="true">
-	    	</div>
-	</div>
+	<div class="col-md-6">
+		<form class="form-horizontal" action="{{path('limubacadministrator_actualizarContrasena')}}" role='form' method='POST'>
 
-	<div class="control-group">
-	  	<label class="control-label" for="password">Confirmar contraseña</label>
-		  	<div class="controls">
-		    	<input id="password" name="_password" type="password" placeholder="" class="input-xlarge" required="true">
-	    	</div>
+			<div class="control-group">
+			  	<label class="control-label" for="password">Contraseña actual</label>
+				  	<div class="controls">
+				    	<input id="actual_password" name="actual_password" type="password" placeholder="" class="input-xlarge" required="true">
+			    	</div>
+			</div>
+
+			<div class="control-group">
+			  	<label class="control-label" for="password">Nueva contraseña</label>
+				  	<div class="controls">
+				    	<input id="nuevo_password" name="nuevo_password" type="password" placeholder="" class="input-xlarge" required="true">
+			    	</div>
+			</div>
+
+			<div class="control-group">
+			  	<label class="control-label" for="password">Confirmar contraseña</label>
+				  	<div class="controls">
+				    	<input id="confirmar_password" name="confirmar_password" type="password" placeholder="" class="input-xlarge" required="true">
+			    	</div>
+			</div>
+
+
+			<button type="submit" id="enviar_sesion" name="enviar_sesion" >Guardar</button>
+		</form>
 	</div>
 </div>
-
 {% endblock %}

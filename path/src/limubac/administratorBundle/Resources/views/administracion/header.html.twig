@@ -1,7 +1,11 @@
 {% extends '::base.html.twig' %}
+
 {% block stylesheets %}
 {{parent()}}
 {% endblock %}
+
+
+
 
 {% block body %}
 	<div class="container-fluid">
@@ -25,18 +29,22 @@
 						</button>
 					</li-->
 
-			        <li class="inactive"><a href="{{url('limubacadministrator_homepage')}}">  BIENVENIDO AL SISTEMA DE LA LIMUBAC</a></li>
+			        <li class="inactive"><a href="{{url('limubacadministrator_homepage')}}">  INICIO</a></li>
 
 
 		      	</ul>
+		      	<ul class="nav navbar-nav navbar-centre">
+		      			<li class="inactive"><a href="">    ----------------------------------------------------------------------------------------------------------- SISTEMA LIMUBAC -----------------------------------------------------------------------------------------------------------</a></li>
+		      	</ul>
 
 			    <ul class="nav navbar-nav navbar-right">
-
-
-                        {% for flashMessage in app.session.getflashBag.get('name') %}
-                           <li><a href="{{url('limubacadministrator_sessions')}}"> {{ flashMessage }} </a></li>
-						{% endfor %}
-
+			    {% if cancelar is defined%}
+			    <li class="dropdown">
+				    <a href="" onclick="history.back()">
+				    	{{ cancelar }}
+				    </a>
+			    </li>
+			    {% endif %}
 			        <li class="dropdown">
 					{% if app.user.username is defined %}
 				         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -50,10 +58,14 @@
 				          	</ul>
 			          {% elseif app.user.username is not defined %}
 				          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				          		<li><a href="{{url('limubacadministrator_nuevoUsuario')}}">Nuevo Usuario</a></li>
+				          		<li><a href="{{url('limubacadministrator_sessions')}}">Iniciar Sesion</a></li>
 					        </a>
 			          {% endif %}
+
+
+
 			        </li>
+
 
 
 
@@ -65,7 +77,6 @@
 		{% block sidebar%}
 
 		<!--div id="wrapper">
-
         <!-- Sidebar -->
 	        <!--div id="sidebar-wrapper">
 		            <ul class="sidebar-nav ">
@@ -103,7 +114,6 @@
     $("#icono").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
-
         if($('#flechita').attr("class")=="glyphicon glyphicon-chevron-right"){
             $('#flechita').attr("class","glyphicon glyphicon-chevron-left");
         }else{
