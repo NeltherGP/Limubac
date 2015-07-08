@@ -12,31 +12,31 @@
 #equipos{
 	background-color: #CF000F;
 	color: white;
-	font: oblique bold 200% cursive; 
+	font: oblique bold 200% cursive;
 
 }
 #hoja{
 	background-color:#26C281;
 	color: white;
-	font: oblique bold 200% cursive; 
+	font: oblique bold 200% cursive;
 }
 #jugadores{
 	background-color:#19B5FE;
 	color: white;
-	font: oblique bold 200% cursive; 
+	font: oblique bold 200% cursive;
 }
 
 
 #arbitros{
 	background-color:#F5D76E;
 	color: white;
-	font: oblique bold 200% cursive; 
+	font: oblique bold 200% cursive;
 }
 
 #avisos{
 	background-color: #BFBFBF;
 	color: white;
-	font: oblique bold 200% cursive; 
+	font: oblique bold 200% cursive;
 }
 
 #fl-1 > a> div >div {
@@ -98,6 +98,10 @@ background-color: #003171;
 }
 
 /*Estilo de la hoja de Anotaciones*/
+.has-error{
+	color: red;
+	border-color: red;
+}
 .form-horizontal .form-group{
 	margin-left: 0px;
 	margin-right: 0px;

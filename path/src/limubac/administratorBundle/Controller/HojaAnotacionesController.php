@@ -129,14 +129,22 @@
           if(isset($_POST['estatus'])  && !empty($_POST['estatus']) ){
             $estatus=$_POST['estatus'];
             $consultasManager->updateEstatusPartido($idPartido,$estatus,$doctrineManager);
+
+            if(isset($_POST['Ganador'])){
+              $Ganador=$_POST['Ganador'];
+            }else{
+              if($estatus!=1){
+                $Errores['Ganador']=1;
+                $Errores['General']=1;
+              }
+            }
+            
           }else{
             $Errores['Estatus']=1;
             $Errores['General']=1;
           }
 
-          if(isset($_POST['Ganador'])){
-            $Ganador=$_POST['Ganador'];
-          }
+
           //END ESTATUS PARTIDO
 
 
@@ -177,14 +185,14 @@
 
             default:
             if(!empty($assistA)&&(!(count($assistA)<4))){
-              tomarAsistencia($assistA);
+              $this->tomarAsistencia($assistA,$idPartido,$doctrineManager);
             }else{//Si hay menos de 4 asistencias cambia a 1 el valor de asistenciaA en el arreglo de errores
               $Errores['AsistenciaA']=1;
               $Errores['General']=1;
             }
 
             if(!empty($assistB)&&(!(count($assistB)<4))){
-              tomarAsistencia($assistB);
+              $this->tomarAsistencia($assistB,$idPartido,$doctrineManager);
             }else{//Si hay menos de 4 asistencias cambia a 1 el valor de asistenciaB en el arreglo de errores
               $Errores['AsistenciaB']=1;
               $Errores['General']=1;
@@ -282,9 +290,9 @@
                     }
                   }else{
                     if(($j%2)==0){
-                      $Errores['PlayeraA']=1;
+                      $Errores['PlayeraA']=$j+1;
                     }else{
-                      $Errores['PlayeraB']=1;
+                      $Errores['PlayeraB']=$j+1;
                     }
                     $Errores['General']=1;
                     break;
@@ -566,7 +574,8 @@
                   $consultasManager->commitPartidoById($idPartido,$doctrineManager); //todo salio bien aqui debes redireccionar
                   return new Response('HOJA DE ANOTACION CARGADA EXITOSAMENTE!');
                 }else{//errores con las anotaciones
-                  return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig',array('ListA'=>$List_A,'ListB'=>$List_B,'datosGenerales'=>$datosGenerales,'errores'=>$Errores));
+                  print_r($Errores);
+                  return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig',array('ListA'=>$List_A,'ListB'=>$List_B,'datosGenerales'=>$datosGenerales,'errores'=>$Errores,'post'=>$_POST));
                 }
 
 
@@ -599,8 +608,8 @@
 
           }else{
             //Algo salio mal, aqui debes recargar la pagina mostrando al usuario los errores
-            //print_r($Errores);
-            return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig',array('ListA'=>$List_A,'ListB'=>$List_B,'datosGenerales'=>$datosGenerales,'errores'=>$Errores));
+            print_r($Errores);
+            return $this->render('limubacadministratorBundle:administracion:hojaAnotaciones.html.twig',array('ListA'=>$List_A,'ListB'=>$List_B,'datosGenerales'=>$datosGenerales,'errores'=>$Errores,'post'=>$_POST));
           }
 
         }//Renderiza la pagina por primera vez
@@ -617,7 +626,7 @@
       return new Response($Equipos);
     }
 
-    private function tomarAsistencia($assistArray){
+    public function tomarAsistencia($assistArray,$idPartido,$doctrineManager){
       foreach ($assistArray as $a) {
         $asistencia = new Asistencia();
         $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
