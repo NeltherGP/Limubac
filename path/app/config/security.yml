@@ -1,6 +1,4 @@
 security:
-    
-
 
     encoders:
         #limubac\administratorBundle\Entity\Userlim
