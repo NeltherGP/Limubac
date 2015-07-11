@@ -13,6 +13,7 @@
 	use limubac\administratorBundle\Entity\Userlim; //Nuevo
 	use Symfony\Component\HttpFoundation\Session\sfAction;
 	use Symfony\Component\HttpFoundation\Response;
+	//include 'funcionesExtras.php';
 
 	class sessionsController extends Controller{
 		
@@ -200,8 +201,17 @@
 
 		public function contactoAction(){
 			$correcto = "Mensaje enviado";
+			$name = "nothing";
 
 			if (isset($_POST["correo"]) && isset($_POST["asunto"]) && isset($_POST["mensaje"])) {
+				$asunto= $_POST["asunto"];
+				$correo = $_POST["correo"];
+				$mensaje = $_POST["mensaje"];
+
+				enviaCorreo( $asunto, $correo , $mensaje, $this);
+				    
+
+
 				return $this->render(
 		            'limubacadministratorBundle:administracion:perfin.html.twig', 
 		            array('mensaje' => $correcto

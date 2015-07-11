@@ -14,14 +14,19 @@
             <thead>
               <tr>
                 <th class = "text-center">Torneo</th>
+
+                {% if is_granted('ROLE_ADMIN')%}
                 <th class = "text-center">Partidos</th>
+                {% endif %}
               </tr>
             </thead>
             <tbody>
               {% for torneo in listTorneos%}
                 <tr>
                   <td>{{torneo.nombre}}</td>
-                  <td><a class="btn btn-default" href="{{path('limubacadministrator_partidos',{'idpartido':0,'idtorneo':torneo.idTorneo})}}" role="button">Ver</a></td>
+                  {% if is_granted('ROLE_ADMIN')%}
+                    <td><a class="btn btn-default" href="{{path('limubacadministrator_partidos',{'idpartido':0,'idtorneo':torneo.idTorneo})}}" role="button">Ver</a></td>
+                  {% endif %}
                 </tr>
               {% endfor %}
             </tbody>
