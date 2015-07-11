@@ -57,72 +57,7 @@
           $datos->setJuez2($_POST["Juez2"]);
 
           //MARCADORES POR CUARTO
-          if(isset($_POST['primeroA']) && !empty($_POST['primeroA'])){
 
-            $primero=$_POST['primeroA'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$primero, "A",$doctrineManager);
-          }else{
-            $Errores['PrimeroA']=1;
-            $Errores['General']=1;
-          }
-          if(isset($_POST['segundoA']) && !empty($_POST['segundoA']) ){
-            $segundo=$_POST['segundoA'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$segundo, "A",$doctrineManager);
-          }else{
-            $Errores['SegundoA']=1;
-            $Errores['General']=1;
-          }
-          if(isset($_POST['terceroA']) && !empty($_POST['terceroA']) ){
-            $tercero=$_POST['terceroA'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$tercero, "A",$doctrineManager);
-          }else{
-            $Errores['TerceroA']=1;
-            $Errores['General']=1;
-          }
-          if(isset($_POST['cuartoA']) && !empty($_POST['cuartoA']) ){
-            $cuarto=$_POST['cuartoA'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$cuarto, "A",$doctrineManager);
-          }else{
-            $Errores['CuartoA']=1;
-            $Errores['General']=1;
-          }
-          if(isset($_POST['complementarioA'])){
-            $complementario=$_POST['complementarioA'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"complementario",$complementario, "A",$doctrineManager);
-          }
-
-          if(isset($_POST['primeroB']) && !empty($_POST['primeroB']) ){
-            $primero=$_POST['primeroB'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$primero, "B",$doctrineManager);
-          }else{
-            $Errores['PrimeroB']=1;
-            $Errores['General']=1;
-          }
-          if(isset($_POST['segundoB'])  && !empty($_POST['segundoB']) ){
-            $segundo=$_POST['segundoB'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$segundo, "B",$doctrineManager);
-          }else{
-            $Errores['SegundoB']=1;
-            $Errores['General']=1;
-          }
-          if(isset($_POST['terceroB']) && !empty($_POST['terceroB']) ){
-            $tercero=$_POST['terceroB'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$tercero, "B",$doctrineManager);
-          }else{
-            $Errores['TerceroB']=1;
-            $Errores['General']=1;
-          }
-          if(isset($_POST['cuartoB']) && !empty($_POST['cuartoB']) ){
-            $cuarto=$_POST['cuartoB'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$cuarto, "B",$doctrineManager);
-          }else{
-            $Errores['CuartoB']=1;
-            $Errores['General']=1;
-          }
-          if(isset($_POST['complementarioB'])){
-            $complementario=$_POST['complementarioB'];
-            $consultasManager->MarcadoresCuartosPartidoById($idPartido,"complementario",$complementario, "B",$doctrineManager);
-          }
           //END MARCADORES POR CUARTO
 
           //ESTATUS PARTIDO
@@ -138,7 +73,7 @@
                 $Errores['General']=1;
               }
             }
-            
+
           }else{
             $Errores['Estatus']=1;
             $Errores['General']=1;
@@ -568,6 +503,72 @@
                       }
                     }
                   }
+                }
+                if(isset($_POST['primeroA']) && !empty($_POST['primeroA'])){
+
+                  $primero=$_POST['primeroA'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$primero, "A",$doctrineManager);
+                }else{
+                  $Errores['PrimeroA']=1;
+                  $Errores['General']=1;
+                }
+                if(isset($_POST['segundoA']) && !empty($_POST['segundoA']) ){
+                  $segundo=$_POST['segundoA'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$segundo, "A",$doctrineManager);
+                }else{
+                  $Errores['SegundoA']=1;
+                  $Errores['General']=1;
+                }
+                if(isset($_POST['terceroA']) && !empty($_POST['terceroA']) ){
+                  $tercero=$_POST['terceroA'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$tercero, "A",$doctrineManager);
+                }else{
+                  $Errores['TerceroA']=1;
+                  $Errores['General']=1;
+                }
+                if(isset($_POST['cuartoA']) && !empty($_POST['cuartoA']) ){
+                  $cuarto=$_POST['cuartoA'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$cuarto, "A",$doctrineManager);
+                }else{
+                  $Errores['CuartoA']=1;
+                  $Errores['General']=1;
+                }
+                if(isset($_POST['complementarioA'])){
+                  $complementario=$_POST['complementarioA'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"complementario",$complementario, "A",$doctrineManager);
+                }
+
+                if(isset($_POST['primeroB']) && !empty($_POST['primeroB']) ){
+                  $primero=$_POST['primeroB'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"primero",$primero, "B",$doctrineManager);
+                }else{
+                  $Errores['PrimeroB']=1;
+                  $Errores['General']=1;
+                }
+                if(isset($_POST['segundoB'])  && !empty($_POST['segundoB']) ){
+                  $segundo=$_POST['segundoB'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"segundo",$segundo, "B",$doctrineManager);
+                }else{
+                  $Errores['SegundoB']=1;
+                  $Errores['General']=1;
+                }
+                if(isset($_POST['terceroB']) && !empty($_POST['terceroB']) ){
+                  $tercero=$_POST['terceroB'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"tercero",$tercero, "B",$doctrineManager);
+                }else{
+                  $Errores['TerceroB']=1;
+                  $Errores['General']=1;
+                }
+                if(isset($_POST['cuartoB']) && !empty($_POST['cuartoB']) ){
+                  $cuarto=$_POST['cuartoB'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"cuarto",$cuarto, "B",$doctrineManager);
+                }else{
+                  $Errores['CuartoB']=1;
+                  $Errores['General']=1;
+                }
+                if(isset($_POST['complementarioB'])){
+                  $complementario=$_POST['complementarioB'];
+                  $consultasManager->MarcadoresCuartosPartidoById($idPartido,"complementario",$complementario, "B",$doctrineManager);
                 }
                 if($Errores['General']!=1){
                   $consultasManager->updateResultadoByPartido($idPartido,"B",$marcadorB,$doctrineManager);

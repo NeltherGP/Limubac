@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 class overviewController extends Controller{
-  public function OverviewPartidosAction($idpartido,$idtorneo,$jornada){
+  public function OverviewPartidosAction($idtorneo,$idpartido,$jornada){
 
     $consultasManager = new ConsultasPartidos();
     $request = $this->getRequest();
@@ -22,7 +22,7 @@ class overviewController extends Controller{
     for($i=0;$i<count($listEqCategoria);$i++){
       $listEqCategoria[$i]['stats']=$consultasManager->estadisticasEquipo($idtorneo,$listEqCategoria[$i]['idEquipo'],$doctrineManager);;
     }
-    //print_r($listEqCategoria);
+
 
     for($i=0; $i<count($listPartidos1)-1;){
       for($j=0; $j<2; $j++){

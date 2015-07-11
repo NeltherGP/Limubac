@@ -38,27 +38,36 @@ class ConsultasPartidos{
   }
 
   function estadisticasEquipo($idTorneo,$idEquipo,$manager){
+    echo($idEquipo);
 	$pfe=$this->PFequipo($idTorneo,$idEquipo,$manager);
 	$pce=$this->PCequipo($idTorneo,$idEquipo,$manager);
 	$consulta = $manager ->createQuery("SELECT COUNT(j.idPartido)
 		FROM limubacadministratorBundle:Juegan j
 		INNER JOIN limubacadministratorBundle:Partido p WITH j.idPartido=p.idPartido
-		WHERE j.idEquipo={$idEquipo} and p.idTorneo={$idTorneo}");
+		WHERE j.idEquipo={$idEquipo} and p.idTorneo={$idTorneo} and j.resultado >=0");
 
 	$pj=$consulta->getResult();
   $pj=$pj[0][1];
 	$pg=0;
 	$pp=0;
-
+  echo("PFE");
+  print_r($pfe);
+  echo("PCE");
+  print_r($pce);
+  echo("pj= ".$pj);
 	for($par=0;$par<$pj;$par++){
-		if($pfe[$par]>$pce[$par])$pg++;
-		else $pp++;
+    if(!empty($pfe) && !empty($pce)){
+  		if( $pfe[$par]>$pce[$par])$pg++;
+  		else $pp++;
+    }
 	}
 	$pf=0;
 	$pc=0;
 	for($par=0;$par<$pj;$par++){
+    if(!empty($pfe) && !empty($pce)){
 		$pf+=$pfe[$par]['resultado'];
 		$pc-=$pce[$par]['resultado'];
+  }
 	}
 	$dif=$pf+$pc;
 	$total=($pg*3)+($pp);
@@ -74,7 +83,8 @@ class ConsultasPartidos{
 			$consulta = $manager ->createQuery("select j.resultado from limubacadministratorBundle:Juegan j
 				join limubacadministratorBundle:Partido p with p.idPartido=j.idPartido
 				where j.idEquipo={$idEquipo}
-				and p.idTorneo={$idTorneo}");
+				and p.idTorneo={$idTorneo}
+				and j.resultado>=0");
 
 			return $list=$consulta->getResult();
 	}
@@ -84,8 +94,10 @@ class ConsultasPartidos{
           				where pr.idPartido in (select p.idPartido from limubacadministratorBundle:Juegan j
           				join limubacadministratorBundle:Partido p with p.idPartido=j.idPartido
           				where j.idEquipo={$idEquipo}
-          				and p.idTorneo={$idTorneo})
-          				and not k.idEquipo={$idEquipo}");
+          				and p.idTorneo={$idTorneo}
+						and j.resultado>=0)
+          				and not k.idEquipo={$idEquipo}
+						and k.resultado>=0");
 
 			return $list=$consulta->getResult();
 	}
@@ -105,7 +117,7 @@ class ConsultasPartidos{
   }
 
   function updateArbitranByPartido($idArbitran,$idPartido,$manager){
-    print_r($idArbitran);
+    //print_r($idArbitran);
     $consulta=$manager->createQuery('UPDATE limubacadministratorBundle:Partido p set p.idArbitran = '.$idArbitran[0]['idArbitran'] .' where p.idPartido= '.$idPartido);
      $consulta->execute();
   }
@@ -132,7 +144,7 @@ class ConsultasPartidos{
   }
 
   function getIdTorneobyPartido($idPartido,$manager){
-    $consulta=$manager->createQuery("SELECT IDENTITY(p.idTorneo) from limubacadministratorBundle:Partido p where p.idPartido={$idPartido}"); 
+    $consulta=$manager->createQuery("SELECT IDENTITY(p.idTorneo) from limubacadministratorBundle:Partido p where p.idPartido={$idPartido}");
     return $consulta->getResult();
   }
 
