@@ -10,11 +10,9 @@
 	use limubac\administratorBundle\Entity\Userlim; //Nuevo
 	use Symfony\Component\HttpFoundation\Session\sfAction;
 	use Symfony\Component\HttpFoundation\Response;
-<<<<<<< HEAD
+
 	//include 'funcionesExtras.php';
 
-=======
->>>>>>> 30628487e0067cd819d93e24df38a0ce463abe80
 	class sessionsController extends Controller{
 
  		public function logAction(){
@@ -27,7 +25,7 @@
 	            $error = $request->attributes->get(
 	                SecurityContext::AUTHENTICATION_ERROR
 	            );
-	            echo $error;
+	            //echo $error;
 	        } else {
 	        	//echo "ERROR 2";
 	            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -36,7 +34,7 @@
 	            //print_r($error);
 	        }
 	        //echo "ERROR 3--";
-	       print_r($error);
+	       //print_r($error);
 
 	        	return $this->render(
 		            'limubacadministratorBundle:administracion:sesiones.html.twig',
@@ -179,11 +177,10 @@
 		}
 		public function contactoAction(){
 			$correcto = "Mensaje enviado";
-<<<<<<< HEAD
+
 			$name = "nothing";
 
-=======
->>>>>>> 30628487e0067cd819d93e24df38a0ce463abe80
+
 			if (isset($_POST["correo"]) && isset($_POST["asunto"]) && isset($_POST["mensaje"])) {
 				$asunto= $_POST["asunto"];
 				$correo = $_POST["correo"];
