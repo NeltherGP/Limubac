@@ -66,7 +66,7 @@ class FinanzasController extends Controller{
             return $this->render('limubacadministratorBundle:administracion:editaFinanzas.html.twig', array('query' => $resul));
         }
         elseif (!empty($_REQUEST['pdf'])) {
-            //$pdf = $this->get("white_october.tcpdf")->create();
+            $pdf = $this->get("white_october.tcpdf")->create();
 
             // set names parameters
             $Author="Farid Carreon";

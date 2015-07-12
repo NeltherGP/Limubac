@@ -10,47 +10,61 @@
   </ul>
 </nav>
 <div class="bordes">
-		 <table class="table table-bordered" style="table-layout:fixed" >
-                  <thead>
-                    <tr>
-                      <th class = "text-center">#Partido</th>
-                      <th class = "text-center">Equipo A</th>
-                      <th class = "text-center">Equipo B</th>
-											<th class= "text-center">Informacion</th>
-                      <th class = "text-center">Hoja Anotacion</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-										{% for partido in listaPartidos%}
-
-                      	<tr>
-
-                      		<td>{{partido.0.idPartido}}</td>
-                      		<td>{{partido.0.nombre}}</td>
-                      		<td>{{partido.1.nombre}}</td>
-
-    											{% if partido.0.idPartido  in listPartidosCompletos %}
-                      		<td>
-    												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}},{{listaPartidos.0.0.0.torneo}})" disabled>Completo</button>
-    											</td>
-                          {% if partido.0.commited == 0%}
-                          <td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button">Cargar Anotaciones</a></td>
-                          {% else %}
-                              <td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button" disabled >Anotaciones Cargadas</a></td>
-                          {% endif %}
-    											{% else %}
-    											<td>
-    												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}},{{listaPartidos.0.0.0.torneo}})">Completar</button>
-    											</td>
-                          <td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button" disabled>Cargar Anotaciones</a></td>
-    											{% endif %}
-
-
-                      	</tr>
-
-									   {% endfor %}
-                  </tbody>
+	<table class="table table-bordered" style="table-layout:fixed" >
+        <thead>
+            <tr>
+     	        <th class = "text-center">#Partido</th>
+                <th class = "text-center">Equipo A</th>
+                <th class = "text-center">Equipo B</th>
+				<th class= "text-center">Informacion</th>
+                <th class = "text-center">Hoja Anotacion</th>
+                <th class = "text-center">Imprimir hoja de anotaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+			{% for partido in listaPartidos%}                      	
+				<tr>
+                    <td>{{partido.0.idPartido}}</td>
+                    <td>{{partido.0.nombre}}</td>
+              		<td>{{partido.1.nombre}}</td>
+					{% if partido.0.idPartido  in listPartidosCompletos %}
+	              		<td>
+							<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}},{{listaPartidos.0.0.0.torneo}})" disabled>Completo</button>
+						</td>
+                    	{% if partido.0.commited == 0%}
+                        	<td>
+                        		<a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button">Cargar Anotaciones</a>
+                        	</td>
+                        	<td>
+		                    	<a class="btn btn-default" href="#" role="button" disabled>Hoja PDF</a>
+		                    </td>
+                        {% else %}
+                            <td>
+                            	<a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button" disabled >Anotaciones Cargadas</a>
+                            </td>
+                            <td>
+                            	<form class="form-horizontal" role="form" action="{{path('limubacadministrator_hojapdf',{'pdf':partido.0.idPartido})}}">
+                            		<button class="btn btn-primary btn-info" type='submit' formtarget="_blank" name='pdf' value="{{partido.0.idPartido}}">
+		                        		<i class="glyphicon glyphicon-file"></i> Hoja PDF
+		                      		</button>
+                            	</form>
+		                    </td>
+                        {% endif %}
+					{% else %}
+						<td>
+							<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}},{{listaPartidos.0.0.0.torneo}})">Completar</button>
+						</td>
+	                    <td>
+	                    	<a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button" disabled>Cargar Anotaciones</a>
+	                    </td>
+	                    <td>
+	                    	<a class="btn btn-default" href="#" role="button" disabled>Hoja PDF</a>
+	                    </td>
+					{% endif %}
+              	</tr>
+		   {% endfor %}
+      	</tbody>
+    </table>
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
