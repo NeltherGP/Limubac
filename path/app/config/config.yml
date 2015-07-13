@@ -63,6 +63,6 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: gmail
-    username:  limubac@gmail.com
-    password:  L1mub4C_1000
+    username:  sistemalimubac@gmail.com
+    password:  otsrnmdxtgphptsf
 
