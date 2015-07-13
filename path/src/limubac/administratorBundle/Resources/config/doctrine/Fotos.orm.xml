@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\Fotos" table="fotos">
+    <indexes>
+      <index name="id_foto" columns="id_foto"/>
+    </indexes>
     <id name="idFoto" type="integer" column="id_foto">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="foto" type="string" column="foto" length="255" nullable="true"/>
-    <field name="nombre" type="string" column="nombre" length="255" nullable="true"/>
+    <field name="foto" type="string" column="foto" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="nombre" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

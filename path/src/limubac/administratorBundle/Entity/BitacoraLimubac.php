@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * BitacoraLimubac
  *
- * @ORM\Table(name="bitacora_limubac")
+ * @ORM\Table(name="bitacora_limubac", indexes={@ORM\Index(name="id_bitacora", columns={"id_bitacora"})})
  * @ORM\Entity
  */
 class BitacoraLimubac
@@ -76,6 +76,7 @@ class BitacoraLimubac
      * Set nombreDato
      *
      * @param string $nombreDato
+     *
      * @return BitacoraLimubac
      */
     public function setNombreDato($nombreDato)
@@ -88,7 +89,7 @@ class BitacoraLimubac
     /**
      * Get nombreDato
      *
-     * @return string 
+     * @return string
      */
     public function getNombreDato()
     {
@@ -99,6 +100,7 @@ class BitacoraLimubac
      * Set evento
      *
      * @param string $evento
+     *
      * @return BitacoraLimubac
      */
     public function setEvento($evento)
@@ -111,7 +113,7 @@ class BitacoraLimubac
     /**
      * Get evento
      *
-     * @return string 
+     * @return string
      */
     public function getEvento()
     {
@@ -122,6 +124,7 @@ class BitacoraLimubac
      * Set tabla
      *
      * @param string $tabla
+     *
      * @return BitacoraLimubac
      */
     public function setTabla($tabla)
@@ -134,7 +137,7 @@ class BitacoraLimubac
     /**
      * Get tabla
      *
-     * @return string 
+     * @return string
      */
     public function getTabla()
     {
@@ -145,6 +148,7 @@ class BitacoraLimubac
      * Set fecha
      *
      * @param \DateTime $fecha
+     *
      * @return BitacoraLimubac
      */
     public function setFecha($fecha)
@@ -157,7 +161,7 @@ class BitacoraLimubac
     /**
      * Get fecha
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFecha()
     {
@@ -168,6 +172,7 @@ class BitacoraLimubac
      * Set usuario
      *
      * @param string $usuario
+     *
      * @return BitacoraLimubac
      */
     public function setUsuario($usuario)
@@ -180,7 +185,7 @@ class BitacoraLimubac
     /**
      * Get usuario
      *
-     * @return string 
+     * @return string
      */
     public function getUsuario()
     {
@@ -191,6 +196,7 @@ class BitacoraLimubac
      * Set aplicacion
      *
      * @param string $aplicacion
+     *
      * @return BitacoraLimubac
      */
     public function setAplicacion($aplicacion)
@@ -203,7 +209,7 @@ class BitacoraLimubac
     /**
      * Get aplicacion
      *
-     * @return string 
+     * @return string
      */
     public function getAplicacion()
     {
@@ -214,6 +220,7 @@ class BitacoraLimubac
      * Set terminal
      *
      * @param string $terminal
+     *
      * @return BitacoraLimubac
      */
     public function setTerminal($terminal)
@@ -226,7 +233,7 @@ class BitacoraLimubac
     /**
      * Get terminal
      *
-     * @return string 
+     * @return string
      */
     public function getTerminal()
     {
@@ -236,7 +243,7 @@ class BitacoraLimubac
     /**
      * Get idBitacora
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdBitacora()
     {

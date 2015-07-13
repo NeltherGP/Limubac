@@ -57,6 +57,13 @@ class Partido
     /**
      * @var integer
      *
+     * @ORM\Column(name="numpar", type="integer", nullable=true)
+     */
+    private $numpar;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id_partido", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -105,3 +112,4 @@ class Partido
 
 
 }
+
