@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\BitacoraLimubac" table="bitacora_limubac">
+    <indexes>
+      <index name="id_bitacora" columns="id_bitacora"/>
+    </indexes>
     <id name="idBitacora" type="integer" column="id_bitacora">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="nombreDato" type="string" column="nombre_dato" length="100" nullable="false"/>
-    <field name="evento" type="string" column="evento" length="100" nullable="false"/>
-    <field name="tabla" type="string" column="tabla" length="100" nullable="false"/>
+    <field name="nombreDato" type="string" column="nombre_dato" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="evento" type="string" column="evento" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tabla" type="string" column="tabla" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <field name="fecha" type="date" column="fecha" nullable="false"/>
-    <field name="usuario" type="string" column="usuario" length="100" nullable="false"/>
-    <field name="aplicacion" type="string" column="aplicacion" length="100" nullable="false"/>
-    <field name="terminal" type="string" column="terminal" length="100" nullable="false"/>
+    <field name="usuario" type="string" column="usuario" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="aplicacion" type="string" column="aplicacion" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="terminal" type="string" column="terminal" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

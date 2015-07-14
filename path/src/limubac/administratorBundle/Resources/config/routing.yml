@@ -6,6 +6,10 @@ limubacadministrator_hojaAnotaciones:
     path:     /hojaAnotaciones/{idpartido}
     defaults: { _controller: limubacadministratorBundle:HojaAnotaciones:hojaAnotaciones,idpartido:0}
 
+limubacadministrator_hojapdf:
+    path:     /hojapdf
+    defaults: { _controller: limubacadministratorBundle:HojaAnotaciones:hojapdf}
+
 limubacadministrator_nombresEquipos:
     path:     /nombresEquipos
     defaults: { _controller: limubacadministratorBundle:HojaAnotaciones:nombresEquipos}

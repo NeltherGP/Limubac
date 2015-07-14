@@ -144,6 +144,7 @@ class Jugador
      * Set nombre
      *
      * @param string $nombre
+     *
      * @return Jugador
      */
     public function setNombre($nombre)
@@ -156,7 +157,7 @@ class Jugador
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -167,6 +168,7 @@ class Jugador
      * Set apPaterno
      *
      * @param string $apPaterno
+     *
      * @return Jugador
      */
     public function setApPaterno($apPaterno)
@@ -179,7 +181,7 @@ class Jugador
     /**
      * Get apPaterno
      *
-     * @return string 
+     * @return string
      */
     public function getApPaterno()
     {
@@ -190,6 +192,7 @@ class Jugador
      * Set apMaterno
      *
      * @param string $apMaterno
+     *
      * @return Jugador
      */
     public function setApMaterno($apMaterno)
@@ -202,7 +205,7 @@ class Jugador
     /**
      * Get apMaterno
      *
-     * @return string 
+     * @return string
      */
     public function getApMaterno()
     {
@@ -213,6 +216,7 @@ class Jugador
      * Set fNacimiento
      *
      * @param \DateTime $fNacimiento
+     *
      * @return Jugador
      */
     public function setFNacimiento($fNacimiento)
@@ -225,7 +229,7 @@ class Jugador
     /**
      * Get fNacimiento
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFNacimiento()
     {
@@ -236,6 +240,7 @@ class Jugador
      * Set correo
      *
      * @param string $correo
+     *
      * @return Jugador
      */
     public function setCorreo($correo)
@@ -248,7 +253,7 @@ class Jugador
     /**
      * Get correo
      *
-     * @return string 
+     * @return string
      */
     public function getCorreo()
     {
@@ -259,6 +264,7 @@ class Jugador
      * Set telefono
      *
      * @param string $telefono
+     *
      * @return Jugador
      */
     public function setTelefono($telefono)
@@ -271,7 +277,7 @@ class Jugador
     /**
      * Get telefono
      *
-     * @return string 
+     * @return string
      */
     public function getTelefono()
     {
@@ -282,6 +288,7 @@ class Jugador
      * Set profesion
      *
      * @param string $profesion
+     *
      * @return Jugador
      */
     public function setProfesion($profesion)
@@ -294,7 +301,7 @@ class Jugador
     /**
      * Get profesion
      *
-     * @return string 
+     * @return string
      */
     public function getProfesion()
     {
@@ -305,6 +312,7 @@ class Jugador
      * Set estatura
      *
      * @param float $estatura
+     *
      * @return Jugador
      */
     public function setEstatura($estatura)
@@ -317,7 +325,7 @@ class Jugador
     /**
      * Get estatura
      *
-     * @return float 
+     * @return float
      */
     public function getEstatura()
     {
@@ -328,6 +336,7 @@ class Jugador
      * Set peso
      *
      * @param float $peso
+     *
      * @return Jugador
      */
     public function setPeso($peso)
@@ -340,7 +349,7 @@ class Jugador
     /**
      * Get peso
      *
-     * @return float 
+     * @return float
      */
     public function getPeso()
     {
@@ -351,6 +360,7 @@ class Jugador
      * Set curp
      *
      * @param string $curp
+     *
      * @return Jugador
      */
     public function setCurp($curp)
@@ -363,7 +373,7 @@ class Jugador
     /**
      * Get curp
      *
-     * @return string 
+     * @return string
      */
     public function getCurp()
     {
@@ -374,6 +384,7 @@ class Jugador
      * Set numero
      *
      * @param integer $numero
+     *
      * @return Jugador
      */
     public function setNumero($numero)
@@ -386,7 +397,7 @@ class Jugador
     /**
      * Get numero
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumero()
     {
@@ -396,7 +407,7 @@ class Jugador
     /**
      * Get idJugador
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdJugador()
     {
@@ -407,6 +418,7 @@ class Jugador
      * Set idFoto
      *
      * @param \limubac\administratorBundle\Entity\Fotos $idFoto
+     *
      * @return Jugador
      */
     public function setIdFoto(\limubac\administratorBundle\Entity\Fotos $idFoto = null)
@@ -419,7 +431,7 @@ class Jugador
     /**
      * Get idFoto
      *
-     * @return \limubac\administratorBundle\Entity\Fotos 
+     * @return \limubac\administratorBundle\Entity\Fotos
      */
     public function getIdFoto()
     {
@@ -430,6 +442,7 @@ class Jugador
      * Set idTiposanguineo
      *
      * @param \limubac\administratorBundle\Entity\TipoSanguineo $idTiposanguineo
+     *
      * @return Jugador
      */
     public function setIdTiposanguineo(\limubac\administratorBundle\Entity\TipoSanguineo $idTiposanguineo = null)
@@ -442,7 +455,7 @@ class Jugador
     /**
      * Get idTiposanguineo
      *
-     * @return \limubac\administratorBundle\Entity\TipoSanguineo 
+     * @return \limubac\administratorBundle\Entity\TipoSanguineo
      */
     public function getIdTiposanguineo()
     {
@@ -453,6 +466,7 @@ class Jugador
      * Set idGenero
      *
      * @param \limubac\administratorBundle\Entity\Genero $idGenero
+     *
      * @return Jugador
      */
     public function setIdGenero(\limubac\administratorBundle\Entity\Genero $idGenero = null)
@@ -465,7 +479,7 @@ class Jugador
     /**
      * Get idGenero
      *
-     * @return \limubac\administratorBundle\Entity\Genero 
+     * @return \limubac\administratorBundle\Entity\Genero
      */
     public function getIdGenero()
     {
@@ -476,6 +490,7 @@ class Jugador
      * Set idStatus
      *
      * @param \limubac\administratorBundle\Entity\Status $idStatus
+     *
      * @return Jugador
      */
     public function setIdStatus(\limubac\administratorBundle\Entity\Status $idStatus = null)
@@ -488,7 +503,7 @@ class Jugador
     /**
      * Get idStatus
      *
-     * @return \limubac\administratorBundle\Entity\Status 
+     * @return \limubac\administratorBundle\Entity\Status
      */
     public function getIdStatus()
     {

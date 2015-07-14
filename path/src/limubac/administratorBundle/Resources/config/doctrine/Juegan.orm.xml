@@ -9,19 +9,47 @@
     <id name="idJuegan" type="integer" column="id_juegan">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="resultado" type="integer" column="resultado" nullable="false"/>
-    <field name="side" type="string" column="side" length="1" nullable="true"/>
-    <field name="primero" type="integer" column="primero" nullable="true"/>
-    <field name="segundo" type="integer" column="segundo" nullable="true"/>
-    <field name="tercero" type="integer" column="tercero" nullable="true"/>
-    <field name="cuarto" type="integer" column="cuarto" nullable="true"/>
-    <field name="complementario" type="integer" column="complementario" nullable="true"/>
-    <many-to-one field="idEquipo" target-entity="Equipo">
+    <field name="resultado" type="integer" column="resultado" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="side" type="string" column="side" length="1" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="primero" type="integer" column="primero" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="segundo" type="integer" column="segundo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="tercero" type="integer" column="tercero" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="cuarto" type="integer" column="cuarto" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="complementario" type="integer" column="complementario" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idEquipo" target-entity="Equipo" fetch="LAZY">
       <join-columns>
         <join-column name="id_equipo" referenced-column-name="id_equipo"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idPartido" target-entity="Partido">
+    <many-to-one field="idPartido" target-entity="Partido" fetch="LAZY">
       <join-columns>
         <join-column name="id_partido" referenced-column-name="id_partido"/>
       </join-columns>

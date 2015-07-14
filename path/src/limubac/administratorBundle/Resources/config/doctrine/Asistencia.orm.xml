@@ -9,12 +9,12 @@
     <id name="idAsistencia" type="integer" column="id_asistencia">
       <generator strategy="IDENTITY"/>
     </id>
-    <many-to-one field="idJugador" target-entity="Jugador">
+    <many-to-one field="idJugador" target-entity="Jugador" fetch="LAZY">
       <join-columns>
         <join-column name="id_jugador" referenced-column-name="id_jugador"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idPartido" target-entity="Partido">
+    <many-to-one field="idPartido" target-entity="Partido" fetch="LAZY">
       <join-columns>
         <join-column name="id_partido" referenced-column-name="id_partido"/>
       </join-columns>
