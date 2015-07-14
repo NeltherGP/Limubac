@@ -69,6 +69,13 @@ class User
     private $email;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isActive", type="boolean", nullable=true)
+     */
+    private $isactive;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")

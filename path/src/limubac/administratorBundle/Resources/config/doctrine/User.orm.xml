@@ -47,5 +47,6 @@
         <option name="fixed"/>
       </options>
     </field>
+    <field name="isactive" type="boolean" column="isActive" nullable="true"/>
   </entity>
 </doctrine-mapping>

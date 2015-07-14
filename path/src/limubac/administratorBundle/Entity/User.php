@@ -69,6 +69,13 @@ class User
     private $email;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isActive", type="boolean", nullable=true)
+     */
+    private $isactive;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -269,6 +276,30 @@ class User
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set isactive
+     *
+     * @param boolean $isactive
+     *
+     * @return User
+     */
+    public function setIsactive($isactive)
+    {
+        $this->isactive = $isactive;
+
+        return $this;
+    }
+
+    /**
+     * Get isactive
+     *
+     * @return boolean
+     */
+    public function getIsactive()
+    {
+        return $this->isactive;
     }
 
     /**
