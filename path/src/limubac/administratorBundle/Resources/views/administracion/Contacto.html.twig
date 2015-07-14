@@ -11,14 +11,22 @@
 		
 		<form class="form-horizontal" background-image="entrada.jpg" action="{{path('limubacadministrator_Contacto')}}" method='POST'>
 
+
+			<!-- Text input-->
+			<div class="control-group">
+			  <label class="control-label" for="nombre">Nombre<sup id="asteriscos">*</sup></label>
+			  <div class="controls">
+			    <input id="contacto" name="nombre" type="text" placeholder="Escribe tu nombre por favor." class="input-xlarge" required="true" >
+			     
+			  </div>
+			</div>
+
+
 			<!-- Text input-->
 			<div class="control-group">
 			  <label class="control-label" for="correo" >Correo <sup id="asteriscos">*</sup></label>
 			  <div class="controls">
-			    <input id="contacto" name="correo" type="text" placeholder="" class="input-xlarge" required="true" >
-
-			    
-
+			    <input id="contacto" name="correo" type="mail" placeholder="Correo donde recibiras respuestas" class="input-xlarge" required="true" >
 			  </div>
 			</div>
 
@@ -27,17 +35,17 @@
 			<div class="control-group">
 			  <label class="control-label" for="asunto">Asunto<sup id="asteriscos">*</sup></label>
 			  <div class="controls">
-			    <input id="contacto" name="asunto" type="text" placeholder="" class="input-xlarge" required="true" >
+			    <input id="contacto" name="asunto" type="text" placeholder="Sugerencia/Comentario/Duda/etc" class="input-xlarge" required="true" >
 			     
 			  </div>
 			</div>
 
 			<!-- Textarea -->
 			<div class="control-group">
-			  <label class="control-label" for="mensaje">Escribe aqui tu mensaje <sup id="asteriscos">*</sup></label>
+			  <label class="control-label" for="mensaje">Mensaje <sup id="asteriscos">*</sup></label>
 			
 			  <div class="controls">
-			    <textarea id="contacto_msj" name="mensaje" placeholder='Aqui tu mensaje' required="true"></textarea>
+			    <textarea id="contacto_msj" name="mensaje" placeholder='' required="true"></textarea>
 			    <p id="asteriscos"> * Campos obligatorios </p>
 			  </div>
 			</div>

@@ -13,7 +13,7 @@ security:
         - { path: ^/hojaAnotaciones, roles: ROLE_ADMIN }
         - { path: ^/finanzas, roles: ROLE_ADMIN }
         - { path: ^/actfin, roles: ROLE_ADMIN }
-   
+        - { path: ^/acTorneo, roles: ROLE_ADMIN }
 
     role_hierarchy:
         
