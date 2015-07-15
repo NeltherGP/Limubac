@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TipoSanguineo
  *
- * @ORM\Table(name="tipo_sanguineo")
+ * @ORM\Table(name="tipo_sanguineo", indexes={@ORM\Index(name="id_tiposanguineo", columns={"id_tiposanguineo"})})
  * @ORM\Entity
  */
 class TipoSanguineo
@@ -34,6 +34,7 @@ class TipoSanguineo
      * Set tipoSangre
      *
      * @param string $tipoSangre
+     *
      * @return TipoSanguineo
      */
     public function setTipoSangre($tipoSangre)
@@ -46,7 +47,7 @@ class TipoSanguineo
     /**
      * Get tipoSangre
      *
-     * @return string 
+     * @return string
      */
     public function getTipoSangre()
     {
@@ -56,7 +57,7 @@ class TipoSanguineo
     /**
      * Get idTiposanguineo
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdTiposanguineo()
     {

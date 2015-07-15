@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\Status" table="status">
+    <indexes>
+      <index name="id_status" columns="id_status"/>
+    </indexes>
     <id name="idStatus" type="integer" column="id_status">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="status" type="string" column="status" length="10" nullable="false"/>
+    <field name="status" type="string" column="status" length="10" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

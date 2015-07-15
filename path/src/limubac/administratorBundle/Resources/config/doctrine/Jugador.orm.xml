@@ -11,33 +11,65 @@
     <id name="idJugador" type="integer" column="id_jugador">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="nombre" type="string" column="nombre" length="35" nullable="false"/>
-    <field name="apPaterno" type="string" column="ap_paterno" length="35" nullable="false"/>
-    <field name="apMaterno" type="string" column="ap_materno" length="35" nullable="false"/>
+    <field name="nombre" type="string" column="nombre" length="35" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apPaterno" type="string" column="ap_paterno" length="35" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apMaterno" type="string" column="ap_materno" length="35" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <field name="fNacimiento" type="date" column="f_nacimiento" nullable="false"/>
-    <field name="correo" type="string" column="correo" length="35" nullable="false"/>
-    <field name="telefono" type="string" column="telefono" length="12" nullable="true"/>
-    <field name="profesion" type="string" column="profesion" length="35" nullable="true"/>
+    <field name="correo" type="string" column="correo" length="35" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefono" type="string" column="telefono" length="12" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="profesion" type="string" column="profesion" length="35" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <field name="estatura" type="float" column="estatura" precision="10" scale="0" nullable="true"/>
     <field name="peso" type="float" column="peso" precision="10" scale="0" nullable="true"/>
-    <field name="curp" type="string" column="curp" length="30" nullable="true"/>
-    <field name="numero" type="integer" column="numero" nullable="true"/>
-    <many-to-one field="idFoto" target-entity="Fotos">
+    <field name="curp" type="string" column="curp" length="30" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numero" type="integer" column="numero" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idFoto" target-entity="Fotos" fetch="LAZY">
       <join-columns>
         <join-column name="id_foto" referenced-column-name="id_foto"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idTiposanguineo" target-entity="TipoSanguineo">
+    <many-to-one field="idTiposanguineo" target-entity="TipoSanguineo" fetch="LAZY">
       <join-columns>
         <join-column name="id_tiposanguineo" referenced-column-name="id_tiposanguineo"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idGenero" target-entity="Genero">
+    <many-to-one field="idGenero" target-entity="Genero" fetch="LAZY">
       <join-columns>
         <join-column name="id_genero" referenced-column-name="id_genero"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idStatus" target-entity="Status">
+    <many-to-one field="idStatus" target-entity="Status" fetch="LAZY">
       <join-columns>
         <join-column name="id_status" referenced-column-name="id_status"/>
       </join-columns>

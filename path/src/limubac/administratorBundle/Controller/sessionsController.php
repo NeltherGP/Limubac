@@ -11,7 +11,9 @@
 	use Symfony\Component\HttpFoundation\Session\sfAction;
 	use Symfony\Component\HttpFoundation\Response;
 
-	//include 'funcionesExtras.php';
+
+	include 'Contacto.php';
+
 
 	class sessionsController extends Controller{
 
@@ -49,21 +51,32 @@
 		}
 
 		public function newuserAction(){
-			$user = new Userlim();
+			//$user = new user();
+			$validado = "Registro exitoso";
+			$novalidado = "Error, contraseñas no coinciden";
+			$asunto = "Nuevo usuario: ";
+			$correo = "limubac@gmail.com";
+			$mensaje = "Existe un nuevo usuario. Cuando gustes puedes marcarlo como activo. Enseguida la información:<br>";
 
 			if (isset($_POST["confirmar_password"]) && isset($_POST["nuevo_password"])) {
 				$clave1 = $_POST["confirmar_password"];
    				$clave2 = $_POST["nuevo_password"];
-   				$validado = "Registro exitoso";
-   				$novalidado = "Error, contraseñas no coinciden";
    				if ($clave1 == $clave2) {
+   					$nombre = $_POST["nombre_nuevo"];
+   					$telefono = $_POST["telefono_nuevo"];
+   					$correo = $_POST["correo_nuevo"];
+   					$direccion = $_POST["direccion_nuevo"];
+   					$rol = $_POST["seleccion_nuevo"];
+   					$mensajeAdicional = $_POST["mensaje_nuevo"];
+   					$mensaje=$mensaje."Nombre: ".$nombre." <br>Telefono: ".$telefono." <br>Direccion: ".$direccion." <br>Correo: ".$correo." <br>Clave: ".$clave2." <br>Rol deseado: ".$rol." <br>Mensaje adicional: ".$mensajeAdicional;
+   					//$user->setUsuariolim($_POST["correo_nuevo"]);
+   					//$user->setCorreolim($_POST["correo_nuevo"]);
+   					//$user->setContrasenalim($_POST["confirmar_password"]);
+   					//$em = $this->getDoctrine()->getManager();
+   					//$em->persist($user);
+   					//$em->flush();
 
-   					$user->setUsuariolim($_POST["correo_nuevo"]);
-   					$user->setCorreolim($_POST["correo_nuevo"]);
-   					$user->setContrasenalim($_POST["confirmar_password"]);
-   					$em = $this->getDoctrine()->getManager();
-   					$em->persist($user);
-   					$em->flush();
+   					enviaCorreo( $asunto, $correo , $mensaje, $this);
    					return $this->render(
 		            'limubacadministratorBundle:administracion:adminPanel.html.twig',  array('mensaje' => $validado)
 	        		);
@@ -176,7 +189,7 @@
 			}
 		}
 		public function contactoAction(){
-			$correcto = "Mensaje enviado";
+			$correcto = "Mensaje enviado. Recibirás en tu correo una copia del mensaje, si no la recibes, favor de ponerte en contacto por otro medio.";
 
 			$name = "nothing";
 
@@ -185,13 +198,14 @@
 				$asunto= $_POST["asunto"];
 				$correo = $_POST["correo"];
 				$mensaje = $_POST["mensaje"];
-
+				$nombre = $_POST["nombre"];
+				$mensaje= $nombre." dice: \n".$mensaje;
 				enviaCorreo( $asunto, $correo , $mensaje, $this);
 				    
 
 
 				return $this->render(
-		            'limubacadministratorBundle:administracion:perfin.html.twig',
+		            'limubacadministratorBundle:administracion:adminPanel.html.twig',
 		            array('mensaje' => $correcto
 
 		            	)
