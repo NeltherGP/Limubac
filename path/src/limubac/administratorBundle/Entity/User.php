@@ -3,10 +3,6 @@
 namespace limubac\administratorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-//use Symfony\Bridge\Doctrine\Tests\Fixtures\User;
-//use Symfony\Component\Security\Core\User\User;
-use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * User
@@ -14,7 +10,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"})})
  * @ORM\Entity
  */
-class User implements UserInterface, \Serializable
+class User
 {
     /**
      * @var string
@@ -40,9 +36,9 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="role", type="string", length=40, nullable=true)
+     * @ORM\Column(name="roles", type="string", length=40, nullable=true)
      */
-    private $role;
+    private $roles;
 
     /**
      * @var string
@@ -75,9 +71,9 @@ class User implements UserInterface, \Serializable
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isActive", type="boolean", nullable=true)
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
      */
-    private $isactive;
+    private $isActive;
 
     /**
      * @var integer
@@ -88,11 +84,7 @@ class User implements UserInterface, \Serializable
      */
     private $id;
 
-    public function __construct(){
 
-        $this->isActive = true;
-        $this->salt = md5(uniqid(null, true));
-    }
 
     /**
      * Set username
@@ -167,28 +159,27 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set role
+     * Set roles
      *
-     * @param string $role
+     * @param string $roles
      *
      * @return User
      */
-    public function setRole($role)
+    public function setRoles($roles)
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
 
     /**
-     * Get role
+     * Get roles
      *
      * @return string
      */
     public function getRoles()
     {
-        //return $this->role;
-        return array('ROLE_USER');
+        return $this->roles;
     }
 
     /**
@@ -288,27 +279,27 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set isactive
+     * Set isActive
      *
-     * @param boolean $isactive
+     * @param boolean $isActive
      *
      * @return User
      */
-    public function setIsactive($isactive)
+    public function setIsActive($isActive)
     {
-        $this->isactive = $isactive;
+        $this->isActive = $isActive;
 
         return $this;
     }
 
     /**
-     * Get isactive
+     * Get isActive
      *
      * @return boolean
      */
-    public function getIsactive()
+    public function getIsActive()
     {
-        return $this->isactive;
+        return $this->isActive;
     }
 
     /**
@@ -320,42 +311,4 @@ class User implements UserInterface, \Serializable
     {
         return $this->id;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function equals(UserInterface $user)
-    {
-        return $this->id === $user->getId();
-    }
-
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-        ));
-    }
-
-    /**
-     * @see \Serializable::unserialize()
-     */ 
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-        ) = unserialize($serialized);
-    }
-
-
-
 }

@@ -22,7 +22,7 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="role" type="string" column="role" length="40" nullable="true">
+    <field name="roles" type="string" column="roles" length="40" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
@@ -47,6 +47,6 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="isactive" type="boolean" column="isActive" nullable="true"/>
+    <field name="isActive" type="boolean" column="is_active" nullable="true"/>
   </entity>
 </doctrine-mapping>
