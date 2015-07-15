@@ -2,9 +2,10 @@ security:
 
     encoders:
         limubac\administratorBundle\Entity\User: sha512
-            
+            #encode-as-base64: true
+            #iterations: 10
 
-        #Symfony\Component\Security\Core\User\User: plaintext
+        Symfony\Component\Security\Core\User\User: plaintext
 
     access_control:
         - { path: ^/partidos, roles: ROLE_ADMIN }
@@ -18,10 +19,10 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        #chain_provider:
-         #   chain:
-          #      providers: [main, default_provider]
-        main:
+        chain_provider:
+            chain:
+                providers: [user_db, default_provider]
+        user_db:
             entity: { class: limubac\administratorBundle\Entity\User, property: username }
         default_provider:
             memory:
@@ -34,7 +35,7 @@ security:
     
     firewalls:
         secured_area:
-            provider: main
+            provider: user_db
             http_basic:
                 realm: "Secured Demo Area"
                 provider: default_provider

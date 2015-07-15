@@ -17,7 +17,7 @@
 	class sessionsController extends Controller{
 
  		public function logAction(){
- 			$count=0;
+ 			
 			$request = $this->getRequest();
 	        $session = $request->getSession();
 	        // obtiene el error de inicio de sesión si lo hay
@@ -78,7 +78,6 @@
    					$mensajeAdicional = $_POST["mensaje_nuevo"];
    					$mensaje=$mensaje."Nombre: ".$nombre." <br>Telefono: ".$telefono." <br>Direccion: ".$direccion." <br>Correo: ".$correo." <br>Clave: ".$clave2." <br>Rol deseado: ".$rol." <br>Mensaje adicional: ".$mensajeAdicional;
    					
-
 $factory = $this->get('security.encoder_factory');
 $user = new User();
 
@@ -88,10 +87,10 @@ $user->setPassword($password);
 
 
    					$user->setUsername($nombre);
-   					//$password = $encoder->encodePassword($clave1, $user->getSalt());
-   					$password=$clave1;
-					//$user->setPassword($password);
-					$user->setSalt("");
+   					$password = $encoder->encodePassword($clave1, $user->getSalt());
+   					//$password=$clave1;
+					//$user->setPassword($clave1);
+					//$user->setSalt("");
 					$user->setRole("ROLE_ADMIN");
 					$user->setName($nombre);
 					$user->setAddress($direccion);
