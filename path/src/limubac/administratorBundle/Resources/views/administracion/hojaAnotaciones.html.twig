@@ -6,6 +6,7 @@
 {% if errores.General is defined and errores.General != 0%}
 <div class="col-md-12 alert alert-danger text-center" role="alert">Cometiste un error al llenar el formulario</div>
 {% endif %}
+{{dump(ListB)}}
 <form action="{{ path('limubacadministrator_hojaAnotaciones',{'idpartido':datosGenerales.0.idpartido})}}" method='POST' class="form-horizontal" role="form" id="formulario" >
 
 	{#Encabezado primera parte#}

@@ -144,18 +144,66 @@
           //FALTAS
           if($Errores['General']!=1){
 
-            $idsJugadores=array_keys($_POST['faltasA']);
+
+
 
             if(isset($_POST['faltasA'])){
               $faltasA=$_POST['faltasA'];
+              $idsJugadoresA=array_keys($_POST['faltasA']);
             }
 
             if(isset($_POST['faltasB'])){
               $faltasB=$_POST['faltasB'];
+              $idsJugadoresB=array_keys($_POST['faltasB']);
             }
 
-            foreach ($idsJugadores as $jugador => $Idjugador) {
+            foreach ($idsJugadoresA as $jugador => $Idjugador) {
               foreach ($faltasA[$Idjugador] as $falta=> $Idfalta) {
+
+                if($Idfalta!=0){
+                  $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador)
+                  FROM limubacadministratorBundle:FaltasEquipo d
+                  WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$Idjugador.
+                  'AND d.idFalta= '.$Idfalta);
+                  $falta=$queryDetalleList->getResult();
+
+                  if(empty($falta)){
+                    $faltasEquipo= new FaltasEquipo();
+
+                    $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Falta');
+                    $auxFinder= $auxRepository->find(''.$Idfalta);
+                    $faltasEquipo->setIdFalta($auxFinder);
+
+                    $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Jugador');
+                    $auxFinder= $auxRepository->find(''.$Idjugador);
+                    $faltasEquipo->setIdJugador($auxFinder);
+
+                    $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+                    $auxFinder= $auxRepository->find(''.$idPartido);
+                    $faltasEquipo->setIdPartido($auxFinder);
+
+                    $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Equipo');
+                    $auxConsulta=$consultasManager->GetIdEquipoByIdJugadorAndIdPartido($Idjugador,$idPartido,$doctrineManager);
+                    //print_r($auxConsulta);
+                    $auxFinder= $auxRepository->find(''.$auxConsulta[0][1]);
+                    $faltasEquipo->setIdEquipo($auxFinder);
+                    $faltasEquipo->setTiempo(0);
+                    $faltasEquipo->setDescFalta("");
+
+                    $doctrineManager-> persist($faltasEquipo);
+                    $doctrineManager -> flush();
+
+                  }else{
+                    $auxRepository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Equipo');
+                    $auxConsulta=$consultasManager->GetIdEquipoByIdJugadorAndIdPartido($Idjugador,$idPartido,$doctrineManager);
+                    $consultasManager-> updateCantidadFalta($Idjugador,$idPartido,$Idfalta,$auxConsulta[0][1],$doctrineManager);
+
+                  }
+                }
+              }
+            }
+            foreach ($idsJugadoresB as $jugador => $Idjugador) {
+              foreach ($faltasB[$Idjugador] as $falta=> $Idfalta) {
 
                 if($Idfalta!=0){
                   $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador)
@@ -239,7 +287,7 @@
                   if($i==0 && $puntosA[$i]!=''){//ANOTACION DE UN PUNTO
                     $marcadorA++;
                     $x=$consultasManager->getIdJugadorByPlayera($idPartido,$puntosA[$i],'A',$doctrineManager);
-
+                    print_r($x);
                     $queryDetalleList = $doctrineManager->createQuery('SELECT IDENTITY (d.idJugador),d.anotaciones,d.cantidad
                     FROM limubacadministratorBundle:DetallePartido d
                     WHERE d.idPartido=' . $idPartido .'AND d.idJugador=' .$x[0]["id"]. 'AND d.anotaciones= 1');
