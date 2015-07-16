@@ -50,6 +50,19 @@ class PartidosController extends Controller{
     for($i=0; $i<count($listPartidos1)-1;){
       for($j=0; $j<2; $j++){
         $listPartidos2[$aux][]=$listPartidos1[$i];
+		$equi=$listPartidos1[$i]['idEquipo'];
+		$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Finanzas');
+			$queryinscrip = $repository->createQueryBuilder('f')
+				->select('f.inscripcion')
+				->where('f.idTorneo = :torn')
+				->andWhere('f.idEquipo = :equi')
+				->setParameter('torn',$idTorneo)
+				->setParameter('equi',$equi)
+				->getQuery();
+		$ins =	$queryinscrip->getResult();
+		//$ins=$ins[0]['inscripcion'];
+		if($ins!=null)$listPartidos2[$aux][$j]['pago']=true;
+		else $listPartidos2[$aux][$j]['pago']=false;
         $i++;
       }
       $aux++;

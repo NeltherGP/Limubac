@@ -4,7 +4,7 @@ security:
         limubac\administratorBundle\Entity\User: sha512
             
 
-        #Symfony\Component\Security\Core\User\User: plaintext
+        Symfony\Component\Security\Core\User\User: plaintext
 
     access_control:
         - { path: ^/partidos, roles: ROLE_ADMIN }
