@@ -1,0 +1,57 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+{% if mensaje is defined %}
+    <div class="alert alert-success">{{ mensaje }}</div>    
+{% endif %}
+
+<legend> <P ALIGN=center> Sección para actualizar la información de usuario </P></legend>
+
+	<h3> <P ALIGN=center> Usuario actual: "{{nombre_actual}}" </P></h3>	
+
+<div class="row">
+	
+<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<form class="form-horizontal" background-image="entrada.jpg" action="{{path('limubacadministrator_actualizarInformacion')}}" role='form' method='POST'>
+
+			<div class="control-group" align="center">
+			  <label class="control-label" for="correo"><h3>Correo</h3></label>
+			  <div class="controls">
+			    <input id="actInf" name="correo" type="email" value="{{correo_actual}}" class="input-xlarge">
+
+
+			  </div>
+			</div>
+
+			<div class="control-group" align="center">
+			  <label class="control-label" for="direccion"><h3>Dirección</h3></label>
+			  <div class="controls">
+			    <input id="actInf" name="direccion" type="text" value="{{direccion_actual}}" class="input-xlarge" >
+			  </div>
+			</div>
+
+			<div class="control-group" align="center">
+			  <label class="control-label" for="telefono"><h3>Telefono</h3></label>
+			  <div class="controls">
+			    <input id="actInf" name="telefono" type="text" value="{{telefono_actual}}" class="input-xlarge" >
+			  </div>
+			</div>
+
+			<div align="center">
+				<!-- Button (Double) -->
+				<div class="control-group">
+				  <div class="controls">
+				    <button id="actInfo" name="guardar" >Guardar</button>
+				    
+				  </div>
+				</div>  
+				
+			</div>
+		</form>
+	</div>
+
+</div>
+
+
+{% endblock %}

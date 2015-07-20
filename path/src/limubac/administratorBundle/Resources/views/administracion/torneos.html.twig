@@ -7,12 +7,12 @@
       <div class="col-md-12 borBox well btn-dashboard">     
         <div class="formAnotacion form-group">
           <div class="col-md-6 tLeft" >
-            <h1>Torneos</h1>
+            <h1>Seccion de Torneos</h1>
           </div>
         </div>
       </div>
     </div>
-
+    {% if is_granted('ROLE_ADMIN')%}
     <div class="row-fluid">
       <div class="col-md-12 borBox wellDark btn-dashboard">
         <div class="formAnotacion form-group">
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-
+    
     <div class="row-fluid">
       <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
         <div class="formAnotacion form-group col-md-12" style="padding-left:0px; padding-right:0px;">
@@ -32,7 +32,7 @@
             <table class="table table-bordered" >
               <thead>
                 <tr>
-                  <th>#</th>
+                  
                   <th>Nombre</th>
                   <th>Fecha de Inicio</th>
                   <th>Fecha de Termino</th>
@@ -44,9 +44,41 @@
                 </tr>
               </thead>
               <tbody>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER') %}
+          <div class="row-fluid">
+            <div class="col-md-12 borBox wellDark btn-dashboard">
+              <div class="formAnotacion form-group">
+                <h3 class="col-md-7">Los siguientes son torneos activos actualmente</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-fluid">
+            <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+              <div class="formAnotacion form-group col-md-12" style="padding-left:0px; padding-right:0px;">
+                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                  <table class="table table-bordered" >
+                    <thead>
+                      <tr>
+                        
+                        <th>Nombre</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha de Termino</th>
+                        <th>Costo</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+        {% endif %}
+
+
+<!--  SI EL USUARIO ES ADMINISTRADOR SE MOSTRARÁ LO SIGUIENTE   -->
+              {% if is_granted('ROLE_ADMIN')%}
                 {% for entitie in entities %}
-                  <tr>
-                    <td> {{entitie.idTorneo}} </td>
+                      <tr>
+                    
                     <td> {{entitie.nombre}} </td>
                     <td> {{entitie.fInicio|date('Y-m-d')}} </td>
                     <td> {{entitie.fTermino|date('Y-m-d')}} </td>
@@ -81,8 +113,8 @@
                     <td>
                       <div class="btn-group sharp" data-toggle="radio" style="width: 50px">
                         <button class="btn btn-mini btn-success" type='submit' name='rol[]' value ='{{entitie.idTorneo}}'>
-						              <i class="glyphicon glyphicon-list-alt"></i>
-						            </button>
+                          <i class="glyphicon glyphicon-list-alt"></i>
+                        </button>
                       </div>  
                     </td>
                     <td>
@@ -94,6 +126,32 @@
                     </td>
                   </tr>
                 {% endfor %}
+                {% endif %}
+
+<!--  SI EL USUARIO ES UN USUARIO MORTAL SE MOSTRARÁ LO SIGUIENTE   -->
+                {% if is_granted('ROLE_USER')%}
+                  {% for entitie in entities %}
+                    {% if date(entitie.fTermino|date('Y-m-d')) >= date() %}
+
+
+                             
+                      
+                    
+
+
+                  <tr>
+                    
+                    <td> {{entitie.nombre}} </td>
+                    <td> {{entitie.fInicio|date('Y-m-d')}} </td>
+                    <td> {{entitie.fTermino|date('Y-m-d')}} </td>
+                    <td> {{entitie.costo}} </td>
+                    
+                  </tr>  
+                    {% endif %}
+                  {% endfor %}
+
+                {% endif %}
+
               </tbody>
             </table>
           </div>

@@ -139,6 +139,7 @@ join limubacadministratorBundle:ParticipanT p with i.idEquipo = p.idEquipo where
 		return true;
 	}
 	
+	
 	function activandoModificacion($idEquipo,$controlador){
 		$Manager = $controlador->getDoctrine()->getManager();
 		$query = $Manager->createQuery("UPDATE limubac\administratorBundle\Entity\Equipo as e SET e.modificable=1 where e.idEquipo=".$idEquipo);

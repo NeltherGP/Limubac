@@ -4,13 +4,55 @@
 {% if mensaje is defined %}
     <div class="alert alert-success">{{ mensaje }}</div>    
 {% endif %}
-        <!-- Page Content -->
 
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+          <a href="#" class="list-group-item active">
+            <h3 class="list-group-item-heading">ROL</h3>
+            <p class="list-group-item-text">Revisa el rol de juegos</p>
+            <p class="list-group-item-text">Jornada: ##  Fechas: ##/##/##</p>
+          </a>
+          <p></p>
+          <a href="#" class="list-group-item active">
+            <h3 class="list-group-item-heading">ESTADISTICAS</h3>
+            <p class="list-group-item-text">Revisa las estadisticas del torneo.</p>
+          </a>
+
+          <p></p>
+          <a href="#" class="list-group-item active">
+            <h3 class="list-group-item-heading">DESCARGAS</h3>
+            <p class="list-group-item-text">Descarga la convocatoria, reglamentos y mas.</p>
+          </a>
+
+          <p></p>
+          <a href="{{url('limubacadministrator_Contacto')}}" class="list-group-item active">
+            <h3 class="list-group-item-heading">CONTACTO</h3>
+            <p class="list-group-item-text">Obten información de la liga y ponte en contacto con nosotros.</p>
+          </a>
+
+          <p></p>
+          <a href="{{url('limubacadministrator_Contacto')}}" class="list-group-item active">
+            <h3 class="list-group-item-heading">ACERCA DE</h3>
+            <p class="list-group-item-text">Si quieres saber mas sobre la liga. Mision, vision, valores, comite de disciplina y mucho mas.</p>
+          </a>
+
+          <p></p>
+          
+        </div>
+
+
+    </div>
+
+    <div class="col-md-6">
+        <!-- Page Content -->
+        {% if is_granted('ROLE_ADMIN') %}
                 {#INICIO FILA 1#}
                 <div id="fl-1" class="row">
-
                     <a href="{{url('limubacadministrator_selectTorneo')}}">
-                        <div  class="col-lg-4">
+                        <div  class="col-md-4">
                             <div id="hoja">
                                 <img  id="hojaimg" src="{{asset('images/hoja.png')}}">Partidos
                             </div>
@@ -26,36 +68,44 @@
                     <a href="{{url('limubacadministrator_jugadoresAdmin')}}">
                         <div class="col-lg-4">
                             <div id="jugadores" >
-                                <img id="jugadoresimg" src="{{asset('images/jugadores.png')}}">Jugadores
+                                <img id="jugadoresimg" src="{{asset('images/jugadores.png')}}">Usuarios
                             </div>
                         </div>
                     </a>
-
                 </div>
                 {#FIN FILA 1#}
                 {#INICIO FILA 2#}
                 <div id="fl-2" class="row">
-                <a href="#">
-                    <div class="col-md-4">
-                    
-                        <div id="arbitros" >
-                            <img id="arbitrosimg" src="{{asset('images/arbitros.png')}}"> Arbitros                            
+                    <a href="#">
+                        <div class="col-md-4">
+                            <div id="arbitros" >
+                                <img id="arbitrosimg" src="{{asset('images/arbitros.png')}}"> Arbitros                            
+                            </div>
                         </div>
-                        
-                    </div>
-                </a>
+                    </a>
                 <a href="{{url('limubacadministrator_torneos')}}">
                     <div  class="col-lg-4">
                         <div id="avisos" >
                             <img id="avisosimg" src="{{asset('images/avisos.png')}}"> Torneos
                         </div>
-
                     </div>
                 </a>
-                    <div id="mas" class="col-lg-4"></div>
-
+                <a href="{{url('limubacadministrator_finanzas')}}">
+                    <div class="col-lg-4">
+                        <div id="finanzas" >
+                            <img id="finanzasimg" src="{{asset('images/fin.png')}}"> Finanzas
+                        </div>
+                    </div>
+                </a>
                 </div>
 
+                {% elseif not is_granted('ROLE_ADMIN') %}
+
+                    <img src="{{asset('images/dani.jpg')}}"> 
+
+                {% endif %}
+
             </div>
-        </div>
+</div>
+   
 {% endblock %}

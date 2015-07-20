@@ -4,7 +4,7 @@
 <label>Seleccionar jornada</label>
 <nav>
   <ul class="pagination pagination-lg">
-    {% for i in 1.. cantidadJornadas %}
+  {% for i in 1.. cantidadJornadas %}
     <li class="{% if i != jornada %} disable {% else %} active {% endif %}"><a  href="{{path('limubacadministrator_partidos',{'idtorneo':listaPartidos.0.0.0.torneo,'jornada': i})}}" >{{i}}</a></li>
     {% endfor %}
   </ul>
@@ -32,14 +32,20 @@
 
     											{% if partido.0.idPartido  in listPartidosCompletos %}
                       		<td>
-    												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}})" disabled>Completo</button>
+    												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}},{{listaPartidos.0.0.0.torneo}})" disabled>Completo</button>
     											</td>
+                          {% if partido.0.commited == 0%}
+                          <td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button">Cargar Anotaciones</a></td>
+                          {% else %}
+                              <td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button" disabled >Anotaciones Cargadas</a></td>
+                          {% endif %}
     											{% else %}
     											<td>
-    												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}})">Completar</button>
+    												<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}},{{listaPartidos.0.0.0.torneo}})">Completar</button>
     											</td>
+                          <td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button" disabled>Cargar Anotaciones</a></td>
     											{% endif %}
-    											<td><a class="btn btn-default" href="{{path('limubacadministrator_hojaAnotaciones',{'idpartido':partido.0.idPartido})}}" role="button">Cargar Anotaciones</a></td>
+
 
                       	</tr>
 
@@ -56,7 +62,7 @@
       </div>
       <div class="modal-body">
 				<div class="container-fluid">
-				<form class="form-horizontal" action="{{path('limubacadministrator_completarInfoPartidoPost')}}" method='POST' name="formulariocompletar" role="form" id="formulariocompletar">
+				<form class="form-horizontal" action="{{path('limubacadministrator_completarInfoPartidoPost',{'idtorneo':listaPartidos.0.0.0.torneo})}}" method='POST' name="formulariocompletar" role="form" id="formulariocompletar">
 				  <div class="form-group">
 				    <label for="cancha" class="col-sm-2 control-label">Cancha</label>
 				    <div class="col-sm-10">

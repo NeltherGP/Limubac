@@ -7,7 +7,7 @@
   use limubac\administratorBundle\Entity\Arbitran;
 
   class CompletarInfoPartidoController extends Controller{
-    public function completarinfopartidoAction ($idpartido){
+    public function completarinfopartidoAction ($idpartido,$idTorneo){
       $request=$this->getRequest();
       $consultasManager = new ConsultasPartidos();
       $doctrineManager= $this -> getDoctrine()->getManager();
@@ -51,14 +51,15 @@
       $doctrineManager->persist($Arbitran);
       $doctrineManager-> flush();
 
-      $idArbitran=$consultasManager->getArbitranByIdArbitros($arbitro1,$arbitro2,$arbitro3,$doctrineManager);//Que pasa cuando se repite el orden de los arbitros 
+      $idArbitran=$consultasManager->getArbitranByIdArbitros($arbitro1,$arbitro2,$arbitro3,$doctrineManager);//Que pasa cuando se repite el orden de los arbitros
 
       $consultasManager->updateArbitranByPartido($idArbitran,$idPartido,$doctrineManager);
 
       $consultasManager->updateSedebyPartido($cancha,$idPartido,$doctrineManager);
 
-      print_r($_POST);
-      return $this->redirect($this->generateUrl('limubacadministrator_partidos'));
+      $idTorneo=$consultasManager->getIdTorneobyPartido($idPartido,$doctrineManager);
+
+      return $this->redirect($this->generateUrl('limubacadministrator_partidos', array($idTorneo[0][1]),true));
     }
   }
 ?>

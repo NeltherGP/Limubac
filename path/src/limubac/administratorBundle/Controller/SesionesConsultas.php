@@ -12,6 +12,7 @@
 			echo " ";
 			echo $ctrñ;
 
+
 			$resultado=$mngr->createQuery("SELECT u.nombre as id
 				FROM limubacadministratorBundle:CuentasSesion s
 				JOIN limubacadministratorBundle:Usuario u
