@@ -2,31 +2,84 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\Finanzas" table="finanzas">
     <indexes>
+      <index name="id_finanzas" columns="id_finanzas"/>
       <index name="finanzas_ibfk_1" columns="id_torneo"/>
       <index name="finanzas_ibfk_2" columns="id_equipo"/>
     </indexes>
     <id name="idFinanzas" type="integer" column="id_finanzas">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="inscripcion" type="integer" column="inscripcion" nullable="false"/>
-    <field name="dia" type="string" column="dia" length="255" nullable="false"/>
-    <field name="hora" type="string" column="hora" length="11" nullable="false"/>
-    <field name="monto" type="integer" column="monto" nullable="false"/>
-    <field name="cuenta" type="integer" column="cuenta" nullable="false"/>
-    <field name="manejo" type="string" column="manejo" length="255" nullable="false"/>
-    <field name="mes1" type="integer" column="mes_1" nullable="false"/>
-    <field name="mes2" type="integer" column="mes_2" nullable="false"/>
-    <field name="mes3" type="integer" column="mes_3" nullable="false"/>
-    <field name="mes4" type="integer" column="mes_4" nullable="false"/>
-    <field name="mes5" type="integer" column="mes_5" nullable="false"/>
-    <field name="mes6" type="integer" column="mes_6" nullable="false"/>
-    <field name="mes7" type="integer" column="mes_7" nullable="false"/>
-    <many-to-one field="idEquipo" target-entity="Equipo">
+    <field name="inscripcion" type="integer" column="inscripcion" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dia" type="string" column="dia" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hora" type="string" column="hora" length="11" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="monto" type="integer" column="monto" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="cuenta" type="integer" column="cuenta" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="manejo" type="string" column="manejo" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mes1" type="integer" column="mes_1" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mes2" type="integer" column="mes_2" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mes3" type="integer" column="mes_3" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mes4" type="integer" column="mes_4" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mes5" type="integer" column="mes_5" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mes6" type="integer" column="mes_6" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mes7" type="integer" column="mes_7" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idEquipo" target-entity="Equipo" fetch="LAZY">
       <join-columns>
         <join-column name="id_equipo" referenced-column-name="id_equipo"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idTorneo" target-entity="Torneo">
+    <many-to-one field="idTorneo" target-entity="Torneo" fetch="LAZY">
       <join-columns>
         <join-column name="id_torneo" referenced-column-name="id_torneo"/>
       </join-columns>

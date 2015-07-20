@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="limubac\administratorBundle\Entity\Userlim" table="userlim">
-    <id name="usuariolim" type="string" column="usuariolim" length="255"/>
-    <id name="contrasenalim" type="integer" column="contrasenalim"/>
-    <id name="correolim" type="integer" column="correolim"/>
-  </entity>
-</doctrine-mapping>

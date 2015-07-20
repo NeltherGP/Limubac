@@ -7,16 +7,8 @@ namespace limubac\administratorBundle\Controller;
 		use limubac\administratorBundle\Entity\Categoria;
 		use limubac\administratorBundle\Entity\ParticipanT;
 		use limubac\administratorBundle\Entity\Integra;
-		use limubac\administratorBundle\Entity\Jugador;
 		use limubac\administratorBundle\Entity\Partido;
 		use limubac\administratorBundle\Entity\Juegan;
-		use limubac\administratorBundle\Entity\TipoSanguineo;
-		use limubac\administratorBundle\Entity\DetallePartido;
-		use limubac\administratorBundle\Entity\FaltasEquipo;
-		use limubac\administratorBundle\Entity\Faltas;
-		use limubac\administratorBundle\Entity\Asistencia;
-		use limubac\administratorBundle\Form\Type\JugadorType;
-		use limubac\administratorBundle\Form\Type\JugadorAType;
 		use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 		use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -309,6 +301,107 @@ class RolController extends Controller{
 		$roles= array("Se agrego una semana de partidos al Rol");
 		return $this->render('limubacadministratorBundle:administracion:rolhecho.html.twig',array('rols'=>$roles));
 	}
+	
+	/*public function modpartidoAction(){
+		if($_REQUEST['part']!=null&&$_REQUEST['jorn']!=null){
+			$PartId=$_REQUEST['part'][0];
+			$NuevaJornada=$_REQUEST['jornada'][0];
+			$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+			$queryModPart = $repository->createQueryBuilder()
+			$q = $queryModPart->update('Partido','p')
+				->set('p.jornada','?1');
+				->where('p.idPartido = ?2')
+				->setParameter(1, $NuevaJornada)
+				->setParameter(2, $PartId)
+				->getQuery();
+			$p = $q->execute();
+		}
+	}
+	
+	public function delpartidoAction(){
+		if($_REQUEST['part']!=null){
+			$PartId=$_REQUEST['part'][0];
+			$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+			$queryModPart = $repository->createQueryBuilder()
+			$q = $queryModPart->delete('Partido','p')
+				->where('p.idPartido = ?1')
+				->setParameter(1, $PartId)
+				->getQuery();
+			$p = $q->execute();
+		}
+	}
+	
+	public function newpartidoAction(){
+		if($_REQUEST['eqa']!=null&&$_REQUEST['eqb']!=null&&$_REQUEST['jornada']!=null&&$_REQUEST['torneo']!=null&&$_REQUEST['cate']!=null&&$_REQUEST['rama']!=null&&){
+			$equipoA=$_REQUEST['eqa'][0];
+			$equipoB=$_REQUEST['eqb'][0];
+			$cont=$_REQUEST['jornada'][0];
+			$torn=$_REQUEST['torneo'][0];
+			
+			$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Equipo');
+			$queryEquis = $repository->createQueryBuilder('e')
+            ->select('e.idCategoria,e.idRama')
+            ->where('e.idEquipo = :equip')
+			->setParameter('equip',$equipoA)
+            ->getQuery();
+        $crA = $queryEquis->getResult();
+		print_r($crA);
+		$queryE = $repository->createQueryBuilder('e')
+            ->select('e.idCategoria,e.idRama')
+            ->where('e.idEquipo = :equip')
+			->setParameter('equip',$equipoB)
+            ->getQuery();
+        $crB = $queryE->getResult();
+		print_r($crB);
+			if($crA==$crbB){
+				$cate=1;
+				$rama=1;
+					$partido = new Partido();
+							$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
+							$torneo = $class_repository->find($torn);
+						$partido -> setIdTorneo($torneo);
+						$partido -> setJornada($cont);
+						$partido -> setCategoria($cate);
+						$partido -> setRama($rama);
+						//$partido -> setClavep($claveJ);
+						$em = $this->getDoctrine()->getManager();
+						$em -> persist($partido);
+						$em -> flush();
+
+						$juegana = new Juegan();
+							$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Equipo');
+							$Iequipo= $class_repository->find($equipoA);
+						$juegana -> setidEquipo($Iequipo);
+						$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+						$queryPartido = $repository->createQueryBuilder('h')
+							->select('max(h.idPartido)')
+							->getQuery();
+						$idpar =	$queryPartido->getResult();
+						$idpart=$idpar[0][1];
+							$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+							$idparti= $class_repository->find($idpart);
+						$juegana -> setidPartido($idparti);
+						$juegana -> setside('A');
+						$juegana -> setResultado(-1);
+						$em = $this->getDoctrine()->getManager();
+						$em -> persist($juegana);
+						$em -> flush();
+
+						$jueganb = new Juegan();
+						$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Equipo');
+							$Iequipo= $class_repository->find($equipoB);
+						$jueganb -> setidEquipo($Iequipo);
+							$class_repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Partido');
+							$idparti= $class_repository->find($idpart);
+						$jueganb -> setidPartido($idparti);
+						$jueganb -> setside('B');
+						$jueganb -> setResultado(-1);
+						$em = $this->getDoctrine()->getManager();
+						$em -> persist($jueganb);
+						$em -> flush();
+			}
+		}
+	}*/
 	
 	//FINAL CONTROLADOR  ROL DE JUEGOS
 	

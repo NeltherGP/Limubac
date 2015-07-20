@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Categoria
  *
- * @ORM\Table(name="categoria")
+ * @ORM\Table(name="categoria", indexes={@ORM\Index(name="id_categoria", columns={"id_categoria"})})
  * @ORM\Entity
  */
 class Categoria
@@ -55,6 +55,7 @@ class Categoria
      * Set nombre
      *
      * @param string $nombre
+     *
      * @return Categoria
      */
     public function setNombre($nombre)
@@ -67,7 +68,7 @@ class Categoria
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -78,6 +79,7 @@ class Categoria
      * Set edad
      *
      * @param string $edad
+     *
      * @return Categoria
      */
     public function setEdad($edad)
@@ -90,7 +92,7 @@ class Categoria
     /**
      * Get edad
      *
-     * @return string 
+     * @return string
      */
     public function getEdad()
     {
@@ -101,6 +103,7 @@ class Categoria
      * Set limiteEquipo
      *
      * @param integer $limiteEquipo
+     *
      * @return Categoria
      */
     public function setLimiteEquipo($limiteEquipo)
@@ -113,7 +116,7 @@ class Categoria
     /**
      * Get limiteEquipo
      *
-     * @return integer 
+     * @return integer
      */
     public function getLimiteEquipo()
     {
@@ -124,6 +127,7 @@ class Categoria
      * Set refEdad
      *
      * @param boolean $refEdad
+     *
      * @return Categoria
      */
     public function setRefEdad($refEdad)
@@ -136,7 +140,7 @@ class Categoria
     /**
      * Get refEdad
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getRefEdad()
     {
@@ -146,7 +150,7 @@ class Categoria
     /**
      * Get idCategoria
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdCategoria()
     {

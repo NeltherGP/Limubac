@@ -46,7 +46,7 @@ class Asistencia
     /**
      * Get idAsistencia
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdAsistencia()
     {
@@ -57,6 +57,7 @@ class Asistencia
      * Set idJugador
      *
      * @param \limubac\administratorBundle\Entity\Jugador $idJugador
+     *
      * @return Asistencia
      */
     public function setIdJugador(\limubac\administratorBundle\Entity\Jugador $idJugador = null)
@@ -69,7 +70,7 @@ class Asistencia
     /**
      * Get idJugador
      *
-     * @return \limubac\administratorBundle\Entity\Jugador 
+     * @return \limubac\administratorBundle\Entity\Jugador
      */
     public function getIdJugador()
     {
@@ -80,6 +81,7 @@ class Asistencia
      * Set idPartido
      *
      * @param \limubac\administratorBundle\Entity\Partido $idPartido
+     *
      * @return Asistencia
      */
     public function setIdPartido(\limubac\administratorBundle\Entity\Partido $idPartido = null)
@@ -92,7 +94,7 @@ class Asistencia
     /**
      * Get idPartido
      *
-     * @return \limubac\administratorBundle\Entity\Partido 
+     * @return \limubac\administratorBundle\Entity\Partido
      */
     public function getIdPartido()
     {

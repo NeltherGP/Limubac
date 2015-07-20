@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * BitacoraLimubac
  *
- * @ORM\Table(name="bitacora_limubac")
+ * @ORM\Table(name="bitacora_limubac", indexes={@ORM\Index(name="id_bitacora", columns={"id_bitacora"})})
  * @ORM\Entity
  */
 class BitacoraLimubac
@@ -72,3 +72,4 @@ class BitacoraLimubac
 
 
 }
+

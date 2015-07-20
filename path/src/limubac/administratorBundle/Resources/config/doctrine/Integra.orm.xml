@@ -10,17 +10,17 @@
     <id name="noPlayera" type="integer" column="no_playera"/>
     <id name="idJugador" association-key="true"/>
     <id name="idEquipo" association-key="true"/>
-    <one-to-one field="idJugador" target-entity="Jugador">
+    <one-to-one field="idJugador" target-entity="Jugador" fetch="LAZY">
       <join-columns>
         <join-column name="id_jugador" referenced-column-name="id_jugador"/>
       </join-columns>
     </one-to-one>
-    <one-to-one field="idEquipo" target-entity="Equipo">
+    <one-to-one field="idEquipo" target-entity="Equipo" fetch="LAZY">
       <join-columns>
         <join-column name="id_equipo" referenced-column-name="id_equipo"/>
       </join-columns>
     </one-to-one>
-    <many-to-one field="idTorneo" target-entity="Torneo">
+    <many-to-one field="idTorneo" target-entity="Torneo" fetch="LAZY">
       <join-columns>
         <join-column name="id_torneo" referenced-column-name="id_torneo"/>
       </join-columns>
