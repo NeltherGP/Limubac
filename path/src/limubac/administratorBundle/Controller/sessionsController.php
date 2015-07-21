@@ -10,8 +10,8 @@
 	use limubac\administratorBundle\Entity\User; //Nuevo
 	use Symfony\Component\HttpFoundation\Session\sfAction;
 	use Symfony\Component\HttpFoundation\Response;
-
-	include 'Contacto.php';
+	use limubac\administratorBundle\Form\Type\UserType;
+	//include 'Contacto.php';
 
 
 	class sessionsController extends Controller{
@@ -122,7 +122,7 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
 							$user->setRoles("ROLE_CAPTURISTA");
 							break;
 						case 'Otros':
-							$user->setRoles("ROLE_OTRO");
+							$user->setRoles("ROLE_OTROS");
 							break;
 						
 						default:
@@ -235,37 +235,50 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
 			$cancelar="Cancelar y regresar";
 			$correcto = "Información actualizada";
 			$error1= "Compruebe el numero telefonico por favor, debe ser parecido a (012)345 6789";
-			$nombre = "busqueda pendiente";
-			$correo = "algo@algo.com";
-			$direccion = "busqueda pendiente";
-			$telefono = "461-123-4567";
-			if (isset($_POST["correo"]) && isset($_POST["direccion"]) && isset($_POST["telefono"])) {
-				$expresion = '/^([0-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/';
-				$correo = $_POST["correo"];
-				$direccion = $_POST["direccion"];
-				$telefono = $_POST["telefono"];
-/*
-				if (!preg_match($expresion, $telefono)) {
-					return $this->render(
-		            'limubacadministratorBundle:administracion:actInformacion.html.twig',
-		            array('mensaje' => $error1,
-		            	'nombre_actual' => $nombre,
-		            	'correo_actual' => $correo,
-		            	'direccion_actual' => $direccion,
-		            	'telefono_actual'=> $telefono)
+			
 
-	        		);
-				}
-*/
-				//CODIGO DE ACTUALIZACION AQUI
-				return $this->render(
-		            'limubacadministratorBundle:administracion:perfin.html.twig',
-		            array('mensaje' => $correcto
+			if(!empty($_REQUEST['editar'])){
+	            $user = new User();
+	            $form = $this->createForm(new UserType(), $user);
+	            $ed = $_REQUEST['editar'][0];
+	            print_r($ed);
 
-		            	)
 
-	        	);
-			}else{
+	            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
+	            $queryEdit = $repository->createQueryBuilder('e')
+	            ->select('e.id','e.name','e.username','e.password','e.email','e.isActive','e.address','e.phone','e.roles')
+	            ->where('e.username = :word')
+	            ->setParameter('word', $ed)
+	            ->getQuery();
+	            $resul = $queryEdit->getResult();
+	            print_r($resul);
+
+	            return $this->render(
+	            		'limubacadministratorBundle:administracion:actInformacion.html.twig',
+	            		array('mensaje' => $correcto,
+	            			'form' => $form->createView(),
+	            			'editar' => $resul));
+		        }elseif(!empty($_REQUEST['eliminar'])){
+		        	$username = $_REQUEST['eliminar'][0];
+		        	$em = $this->getDoctrine()->getManager();
+		        	$repository = $this->getDoctrine()
+    					->getRepository('limubacadministratorBundle:User');
+					//$product = $em->getRepository('limubacadministratorBundle:User')->findByUsername($username);
+		        	$product = $repository->findOneBy(
+					    array('username' => $username)
+					);
+
+			        $em->remove($product);
+					$em->flush();
+
+					$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
+			        $queryTorneos = $repository->createQueryBuilder('u')
+		            ->select('u.name','u.username','u.email','u.phone','u.address','u.roles','u.isActive')
+		            ->getQuery();
+			        $entities = $queryTorneos->getResult();
+
+			        return $this->render('limubacadministratorBundle:administracion:mostrarUsuarios.html.twig',array('entities' => $entities));
+		        }else{
 				return $this->render(
 		            'limubacadministratorBundle:administracion:actInformacion.html.twig',
 		            array(
@@ -278,6 +291,62 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
 	        	);
 			}
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------EDITAR USUARIOS -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+
+
+		public function editUserAction(){
+        $upt = $_REQUEST['user'];
+
+        $name = $upt['name'];
+        $username = $upt['username'];
+        $password = $upt['password'];
+        $email = $upt['email'];
+        $status = $upt['isActive'];
+        $address = $upt['address'];
+        $phone = $upt['phone'];
+        $roles = $upt['roles'];
+
+        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
+        $queryAct = $repository->createQueryBuilder('z');
+        $q = $queryAct->update('limubacadministratorBundle:User', 'z')
+            ->set('z.name', ':nom')
+            ->set('z.username', ':usrnm')
+            ->set('z.phone', ':ph')
+            ->set('z.password', ':pass')   
+            ->set('z.email', ':mail')
+            ->set('z.isActive', ':stts')
+            ->set('z.address', ':add')
+            ->set('z.roles', ':rl')
+            ->where('z.id= :idt')
+            ->setParameter('idt', $upt['id'])
+            ->setParameter('nom', $name)
+            ->setParameter('usrnm', $username)
+            ->setParameter('pass', $password)
+            ->setParameter('mail', $email)
+            ->setParameter('stts', $status)
+            ->setParameter('add', $address)
+            ->setParameter('ph', $phone)
+            ->setParameter('rl', $roles)
+            
+            ->getQuery();
+        	$resul = $q->execute();
+
+        return $this->redirect($this->generateUrl('limubacadministrator_showUser'));
+    }
+
+    public function deleteUserAction(){
+
+
+    	$query="DELETE FROM `user` AS d
+        
+        WHERE d.usernmae='".$username."';";
+      $result5 = mysql_query($query) or die('Errant query:  '.$query);
+    }
+
+
+
 //------------------------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------CONTACTO -----------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------

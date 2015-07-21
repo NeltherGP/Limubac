@@ -1,7 +1,7 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 {% block PageContent %}
 
-<form class="form-horizontal" role="form" action="{{path('limubacadministrator_showUser')}}" method='POST'>
+<form class="form-horizontal" role="form" action="{{path('limubacadministrator_actualizarInformacion')}}" method='POST'>
 	<div class="row-fluid">
       <div class="col-md-12 borBox well btn-dashboard">     
         <div class="formAnotacion form-group">
@@ -28,6 +28,7 @@
                   <th>Rol</th>
                   <th>Status</th>
                   <th>Modificar</th>
+                  <th>Eliminar</th>
                   
                 </tr>
               </thead>
@@ -35,7 +36,7 @@
 
               {% for entitie in entities %}
               	<tr>
-                    
+                
                 <td> {{entitie.name}} </td>
                 <td> {{entitie.username}} </td>
                 <td> {{entitie.email}} </td>
@@ -45,12 +46,18 @@
                 <td> {% if entitie.isActive == true %} Activo {% elseif entitie.isActive == false %} Inactivo {% endif %}</td>
                 <td> 
                 	<div class="btn-group sharp" data-toggle="radio" style="width: 50px">
-                        <button class="btn btn-mini btn-success" type='submit' name='editar[]' value ='Editar'>
+                        <button class="btn btn-mini btn-success" type='submit' name='editar[]' value ='{{entitie.username}}'>
                           <i class="glyphicon-pencil glyphicon"></i>
                         </button>
                       </div>  
                 </td>
-
+                <td>
+                	<div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                        <button class="btn btn-mini btn-success" type='submit' name='eliminar[]' value ='{{entitie.username}}'>
+                          <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </div>
+                </td>
             	</tr>
               {% endfor %} 
               </tbody>
