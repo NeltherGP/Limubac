@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * User
  *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"})})
+ * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})}, indexes={@ORM\Index(name="id", columns={"id"})})
  * @ORM\Entity
  */
 class User implements AdvancedUserInterface
@@ -30,21 +30,33 @@ class User implements AdvancedUserInterface
     /**
      * @var string
      *
+<<<<<<< HEAD
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
+=======
+     * @ORM\Column(name="salt", type="string", length=50, nullable=true)
+>>>>>>> c49cc39d52e15da2bb76d4e36cffe5ef4243b02f
      */
     private $email;
 
     /**
      * @var boolean
      *
+<<<<<<< HEAD
      * @ORM\Column(name="is_active", type="boolean", nullable=true)
+=======
+     * @ORM\Column(name="roles", type="string", length=50, nullable=true)
+>>>>>>> c49cc39d52e15da2bb76d4e36cffe5ef4243b02f
      */
     private $isActive;
 
     /**
      * @var string
      *
+<<<<<<< HEAD
      * @ORM\Column(name="salt", type="string", length=50, nullable=true)
+=======
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
+>>>>>>> c49cc39d52e15da2bb76d4e36cffe5ef4243b02f
      */
     private $salt;
 

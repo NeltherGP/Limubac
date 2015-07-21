@@ -30,9 +30,13 @@
         <join-column name="auxiliar" referenced-column-name="id_jugador"/>
       </join-columns>
     </many-to-one>
+<<<<<<< HEAD
     <many-to-one field="representante" target-entity="Jugador">
+=======
+    <many-to-one field="representante" target-entity="User" fetch="LAZY">
+>>>>>>> c49cc39d52e15da2bb76d4e36cffe5ef4243b02f
       <join-columns>
-        <join-column name="representante" referenced-column-name="id_jugador"/>
+        <join-column name="representante" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="idCapitan" target-entity="Jugador">
