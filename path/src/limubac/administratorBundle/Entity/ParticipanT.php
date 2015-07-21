@@ -46,7 +46,7 @@ class ParticipanT
     /**
      * Get idRegistro
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdRegistro()
     {
@@ -57,7 +57,6 @@ class ParticipanT
      * Set idEquipo
      *
      * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
-     *
      * @return ParticipanT
      */
     public function setIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo = null)
@@ -70,7 +69,7 @@ class ParticipanT
     /**
      * Get idEquipo
      *
-     * @return \limubac\administratorBundle\Entity\Equipo
+     * @return \limubac\administratorBundle\Entity\Equipo 
      */
     public function getIdEquipo()
     {
@@ -81,7 +80,6 @@ class ParticipanT
      * Set idTorneo
      *
      * @param \limubac\administratorBundle\Entity\Torneo $idTorneo
-     *
      * @return ParticipanT
      */
     public function setIdTorneo(\limubac\administratorBundle\Entity\Torneo $idTorneo = null)
@@ -94,7 +92,7 @@ class ParticipanT
     /**
      * Get idTorneo
      *
-     * @return \limubac\administratorBundle\Entity\Torneo
+     * @return \limubac\administratorBundle\Entity\Torneo 
      */
     public function getIdTorneo()
     {

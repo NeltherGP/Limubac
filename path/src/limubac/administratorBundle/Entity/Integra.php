@@ -61,7 +61,6 @@ class Integra
      * Set noPlayera
      *
      * @param integer $noPlayera
-     *
      * @return Integra
      */
     public function setNoPlayera($noPlayera)
@@ -74,7 +73,7 @@ class Integra
     /**
      * Get noPlayera
      *
-     * @return integer
+     * @return integer 
      */
     public function getNoPlayera()
     {
@@ -85,7 +84,6 @@ class Integra
      * Set idJugador
      *
      * @param \limubac\administratorBundle\Entity\Jugador $idJugador
-     *
      * @return Integra
      */
     public function setIdJugador(\limubac\administratorBundle\Entity\Jugador $idJugador)
@@ -98,7 +96,7 @@ class Integra
     /**
      * Get idJugador
      *
-     * @return \limubac\administratorBundle\Entity\Jugador
+     * @return \limubac\administratorBundle\Entity\Jugador 
      */
     public function getIdJugador()
     {
@@ -109,7 +107,6 @@ class Integra
      * Set idEquipo
      *
      * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
-     *
      * @return Integra
      */
     public function setIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo)
@@ -122,7 +119,7 @@ class Integra
     /**
      * Get idEquipo
      *
-     * @return \limubac\administratorBundle\Entity\Equipo
+     * @return \limubac\administratorBundle\Entity\Equipo 
      */
     public function getIdEquipo()
     {
@@ -133,7 +130,6 @@ class Integra
      * Set idTorneo
      *
      * @param \limubac\administratorBundle\Entity\Torneo $idTorneo
-     *
      * @return Integra
      */
     public function setIdTorneo(\limubac\administratorBundle\Entity\Torneo $idTorneo = null)
@@ -146,7 +142,7 @@ class Integra
     /**
      * Get idTorneo
      *
-     * @return \limubac\administratorBundle\Entity\Torneo
+     * @return \limubac\administratorBundle\Entity\Torneo 
      */
     public function getIdTorneo()
     {

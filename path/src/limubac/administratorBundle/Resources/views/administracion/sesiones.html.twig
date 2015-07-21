@@ -3,8 +3,13 @@
 {% block PageContent %}
 
 {% if error %}
-    <div class="alert alert-danger">Error de autenticacion ({{ error.message }})</div>
-    
+    <div class="alert alert-danger">Error de autenticacion.
+    {% if error.message == "User account is disabled." %}
+	    "Su usuario esta inhabilitado. Favor de ponerse en contacto con la liga."
+	    	<a href="{{url('limubacadministrator_Contacto')}}">   Click aqui para ponerse en contacto</a>
+	    
+    {% endif %}
+    </div>
 {% endif %}
 
 <!--div class="alert alert-danger">Sesion iniciada por </div-->

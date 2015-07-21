@@ -15,7 +15,9 @@
 
 
 	class sessionsController extends Controller{
-
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------INICIAR SESION-----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
  		public function logAction(){
  			
 			$request = $this->getRequest();
@@ -49,6 +51,10 @@
 
 		}
 
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------NUEVO USUARIO -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+
 		public function newuserAction(){
 			//$user = new User();
 			$validado = "Registro exitoso";
@@ -75,26 +81,64 @@
    					$correo = $_POST["correo_nuevo"];
    					$direccion = $_POST["direccion_nuevo"];
    					$rol = $_POST["seleccion_nuevo"];
+   					$curp = $_POST["curp_nuevo"];
    					$mensajeAdicional = $_POST["mensaje_nuevo"];
    					$mensaje=$mensaje."Nombre: ".$nombre." <br>Telefono: ".$telefono." <br>Direccion: ".$direccion." <br>Correo: ".$correo." <br>Clave: ".$clave2." <br>Rol deseado: ".$rol." <br>Mensaje adicional: ".$mensajeAdicional;
-   					
-$factory = $this->get('security.encoder_factory');
+   				
 $user = new User();
 
+$factory = $this->get('security.encoder_factory');
 $encoder = $factory->getEncoder($user);
 $password = $encoder->encodePassword($clave1, $user->getSalt());
-$user->setPassword($password);
+
+// ESTE METODO SOLO FUNCIONA A PARTIR DE SYMFONY 2.6
+//$encoder = $this->container->get('security.password_encoder');
+//$encoded = $encoder->encodePassword($user, $clave2);
+//$user->setPassword($encoded);
 
 
-   					$user->setUsername($nombre);
-   					$password = $encoder->encodePassword($clave1, $user->getSalt());
-   					//$password=$clave1;
-					//$user->setPassword($clave1);
+
+   					$user->setUsername($curp);
+
+   					$user->setPassword($password);
+   					//$user->setPassword($clave1);
+   					//$user->setPassword(md5($clave1));
+   					
+					
 					//$user->setSalt("");
-					$user->setRole("ROLE_ADMIN");
-					$user->setName($nombre);
-					$user->setAddress($direccion);
-					$user->setPhone($telefono);
+
+
+					switch ($rol) {
+						case 'Representante de equipo':
+							$user->setRoles("ROLE_USER");
+							break;
+						case 'Comité administrativo':
+							$user->setRoles("ROLE_FINANZAS");
+							break;
+						case 'Comité de disciplina':
+							$user->setRoles("ROLE_DISCIPLINA");
+							break;
+						case 'Capturista':
+							$user->setRoles("ROLE_CAPTURISTA");
+							break;
+						case 'Otros':
+							$user->setRoles("ROLE_OTRO");
+							break;
+						
+						default:
+							# code...
+							break;
+					}
+
+						
+
+
+
+
+
+						$user->setName($nombre);
+						$user->setAddress($direccion);
+						$user->setPhone($telefono);
 					$user->setEmail($correo);
 					$user->setIsactive(true);
 
@@ -107,7 +151,7 @@ $user->setPassword($password);
    					$em->persist($user);
    					$em->flush();
 
-   					//enviaCorreo( $asunto, $correo , $mensaje, $this);
+   					enviaCorreo( $asunto, $correo , $mensaje, $this);
    					return $this->render(
 		            'limubacadministratorBundle:administracion:adminPanel.html.twig',  array('mensaje' => $validado)
 	        		);
@@ -127,8 +171,13 @@ $user->setPassword($password);
 			}
 
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------ACTUALIZAR CONTRASEÑA -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 		public function actualizarContrasenaAction(){
 			$cancelar = "Cancelar y regresar";
+
+
 
 			if ( isset($_POST["actual_password"]) && isset($_POST["nuevo_password"]) && isset($_POST["confirmar_password"]) ) {
 				$actual = $_POST["actual_password"];
@@ -160,18 +209,28 @@ $user->setPassword($password);
 
 	        	);
 			}
+			
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------CERRAR SESION -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 
 		public function logoutAction(){
 			return $this->render(
 		            'limubacadministratorBundle:administracion:logout.html.twig'
 	        	);
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------VER MI PERFIL-----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 		public function miPerfilAction(){
 			return $this->render(
 		            'limubacadministratorBundle:administracion:perfin.html.twig'
 	        	);
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------ACTUALIZAR INFORMACION-----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 		public function actualizarInformacionAction(){
 			$cancelar="Cancelar y regresar";
 			$correcto = "Información actualizada";
@@ -219,6 +278,9 @@ $user->setPassword($password);
 	        	);
 			}
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------CONTACTO -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 		public function contactoAction(){
 			$correcto = "Mensaje enviado. Recibirás en tu correo una copia del mensaje, si no la recibes, favor de ponerte en contacto por otro medio.";
 
@@ -253,6 +315,21 @@ $user->setPassword($password);
 			}
 
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------VER USUARIOS -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+		public function showUserAction(){
+
+	        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
+	        $queryTorneos = $repository->createQueryBuilder('u')
+            ->select('u.name','u.username','u.email','u.phone','u.address','u.roles','u.isActive')
+            ->orderBy('u.name', 'DESC')
+            ->getQuery();
+	        $entities = $queryTorneos->getResult();
+	        return $this->render('limubacadministratorBundle:administracion:mostrarUsuarios.html.twig',array('entities' => $entities));
+
+		}
+
 
 	}
 ?>

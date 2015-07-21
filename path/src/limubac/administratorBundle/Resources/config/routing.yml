@@ -180,3 +180,7 @@ limubacadministrator_actualizarInformacion:
 limubacadministrator_Contacto:
   path: /users/contacto
   defaults: { _controller: limubacadministratorBundle:sessions:contacto}
+
+limubacadministrator_showUser:
+  path: /users/mostrar
+  defaults: { _controller: limubacadministratorBundle:sessions:showUser}

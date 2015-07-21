@@ -3,18 +3,15 @@
 namespace limubac\administratorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-//use Symfony\Bridge\Doctrine\Tests\Fixtures\User;
-//use Symfony\Component\Security\Core\User\User;
-use Symfony\Component\Security\Core\User\EquatableInterface;
-
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * User
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"})})
  * @ORM\Entity
  */
-class User implements UserInterface, \Serializable
+class User implements AdvancedUserInterface
 {
     /**
      * @var string
@@ -33,28 +30,28 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
+     */
+    private $isActive;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=50, nullable=true)
      */
     private $salt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="role", type="string", length=40, nullable=true)
-     */
-    private $role;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=200, nullable=true)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     * @ORM\Column(name="address", type="string", length=150, nullable=true)
      */
     private $address;
 
@@ -68,16 +65,16 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="roles", type="string", length=50, nullable=true)
      */
-    private $email;
+    private $roles;
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="isActive", type="boolean", nullable=true)
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      */
-    private $isactive;
+    private $name;
 
     /**
      * @var integer
@@ -88,17 +85,20 @@ class User implements UserInterface, \Serializable
      */
     private $id;
 
-    public function __construct(){
 
+    public function __construct()
+    {
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
+        $this->roles = new ArrayCollection();
     }
+
+
 
     /**
      * Set username
      *
      * @param string $username
-     *
      * @return User
      */
     public function setUsername($username)
@@ -111,7 +111,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get username
      *
-     * @return string
+     * @return string 
      */
     public function getUsername()
     {
@@ -122,7 +122,6 @@ class User implements UserInterface, \Serializable
      * Set password
      *
      * @param string $password
-     *
      * @return User
      */
     public function setPassword($password)
@@ -135,7 +134,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get password
      *
-     * @return string
+     * @return string 
      */
     public function getPassword()
     {
@@ -143,131 +142,9 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set salt
-     *
-     * @param string $salt
-     *
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * Set role
-     *
-     * @param string $role
-     *
-     * @return User
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Get role
-     *
-     * @return string
-     */
-    public function getRoles()
-    {
-        //return $this->role;
-        return array('ROLE_USER');
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return User
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set address
-     *
-     * @param string $address
-     *
-     * @return User
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * Set phone
-     *
-     * @param integer $phone
-     *
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return integer
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
      * Set email
      *
      * @param string $email
-     *
      * @return User
      */
     public function setEmail($email)
@@ -280,7 +157,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get email
      *
-     * @return string
+     * @return string 
      */
     public function getEmail()
     {
@@ -288,76 +165,176 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set isactive
+     * Set isActive
      *
-     * @param boolean $isactive
-     *
+     * @param boolean $isActive
      * @return User
      */
-    public function setIsactive($isactive)
+    public function setIsActive($isActive)
     {
-        $this->isactive = $isactive;
+        $this->isActive = $isActive;
 
         return $this;
     }
 
     /**
-     * Get isactive
+     * Get isActive
      *
-     * @return boolean
+     * @return boolean 
      */
-    public function getIsactive()
+    public function getIsActive()
     {
-        return $this->isactive;
+        return $this->isActive;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return User
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param integer $phone
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return integer 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return string 
+     */
+    public function getRoles()
+    {
+       
+        return array($this->roles);
+        //return array('ROLE_USER');
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return User
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function eraseCredentials()
     {
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function equals(UserInterface $user)
+    public function isAccountNonExpired()
     {
-        return $this->id === $user->getId();
+            return true;
     }
 
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize()
+    public function isAccountNonLocked()
     {
-        return serialize(array(
-            $this->id,
-        ));
+            return true;
     }
 
-    /**
-     * @see \Serializable::unserialize()
-     */ 
-    public function unserialize($serialized)
+    public function isCredentialsNonExpired()
     {
-        list (
-            $this->id,
-        ) = unserialize($serialized);
+            return true;
     }
 
-
-
-
-
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
 }

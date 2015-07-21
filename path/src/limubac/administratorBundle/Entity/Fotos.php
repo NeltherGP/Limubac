@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Fotos
  *
- * @ORM\Table(name="fotos", indexes={@ORM\Index(name="id_foto", columns={"id_foto"})})
+ * @ORM\Table(name="fotos")
  * @ORM\Entity
  */
 class Fotos
@@ -41,7 +41,6 @@ class Fotos
      * Set foto
      *
      * @param string $foto
-     *
      * @return Fotos
      */
     public function setFoto($foto)
@@ -54,7 +53,7 @@ class Fotos
     /**
      * Get foto
      *
-     * @return string
+     * @return string 
      */
     public function getFoto()
     {
@@ -65,7 +64,6 @@ class Fotos
      * Set nombre
      *
      * @param string $nombre
-     *
      * @return Fotos
      */
     public function setNombre($nombre)
@@ -78,7 +76,7 @@ class Fotos
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -88,7 +86,7 @@ class Fotos
     /**
      * Get idFoto
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdFoto()
     {

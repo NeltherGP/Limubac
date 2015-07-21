@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Torneo
  *
- * @ORM\Table(name="torneo", indexes={@ORM\Index(name="id_torneo", columns={"id_torneo"})})
+ * @ORM\Table(name="torneo")
  * @ORM\Entity
  */
 class Torneo
@@ -45,7 +45,7 @@ class Torneo
      *
      * @ORM\Column(name="inscripcion_abierta", type="boolean", nullable=false)
      */
-    private $inscripcionAbierta = '1';
+    private $inscripcionAbierta;
 
     /**
      * @var integer
@@ -62,7 +62,6 @@ class Torneo
      * Set nombre
      *
      * @param string $nombre
-     *
      * @return Torneo
      */
     public function setNombre($nombre)
@@ -75,7 +74,7 @@ class Torneo
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -86,7 +85,6 @@ class Torneo
      * Set costo
      *
      * @param float $costo
-     *
      * @return Torneo
      */
     public function setCosto($costo)
@@ -99,7 +97,7 @@ class Torneo
     /**
      * Get costo
      *
-     * @return float
+     * @return float 
      */
     public function getCosto()
     {
@@ -110,7 +108,6 @@ class Torneo
      * Set fInicio
      *
      * @param \DateTime $fInicio
-     *
      * @return Torneo
      */
     public function setFInicio($fInicio)
@@ -123,7 +120,7 @@ class Torneo
     /**
      * Get fInicio
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFInicio()
     {
@@ -134,7 +131,6 @@ class Torneo
      * Set fTermino
      *
      * @param \DateTime $fTermino
-     *
      * @return Torneo
      */
     public function setFTermino($fTermino)
@@ -147,7 +143,7 @@ class Torneo
     /**
      * Get fTermino
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFTermino()
     {
@@ -158,7 +154,6 @@ class Torneo
      * Set inscripcionAbierta
      *
      * @param boolean $inscripcionAbierta
-     *
      * @return Torneo
      */
     public function setInscripcionAbierta($inscripcionAbierta)
@@ -171,7 +166,7 @@ class Torneo
     /**
      * Get inscripcionAbierta
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getInscripcionAbierta()
     {
@@ -181,7 +176,7 @@ class Torneo
     /**
      * Get idTorneo
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdTorneo()
     {

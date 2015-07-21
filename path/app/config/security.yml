@@ -1,7 +1,8 @@
 security:
 
     encoders:
-        limubac\administratorBundle\Entity\User: sha512
+        limubac\administratorBundle\Entity\User:
+            algorithm: bcrypt
             #encode-as-base64: true
             #iterations: 10
 
@@ -15,7 +16,7 @@ security:
         - { path: ^/acTorneo, roles: ROLE_ADMIN }
 
     role_hierarchy:
-        
+        ROLE_ADMIN: [ROLE_USER, ROLE_FINANZAS, ROLE_DISCIPLINA, ROLE_CAPTURISTA, ROLE_OTRO, ROLE_ALLOWED_TO_SWITCH]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
@@ -27,18 +28,22 @@ security:
         default_provider:
             memory:
                 users:
-                    Rick: { password: 1234, roles: ['ROLE_ADMIN']}
+                    #Rick: { password: 1234, roles: ['ROLE_ADMIN']}
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
                     rock: { password: 4880957a2a75f398f689a09a8f4042edac1b6736, roles: [ 'ROLE_ADMIN' ] }
 
     
     firewalls:
+        #default:
+         # pattern: ^/
+          #http_basic: ~
+          #provider: user_db
         secured_area:
             provider: user_db
             http_basic:
                 realm: "Secured Demo Area"
-                provider: default_provider
+                provider: user_db
             logout: ~
             pattern: ^/
             anonymous: ~

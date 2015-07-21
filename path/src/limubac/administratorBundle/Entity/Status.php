@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Status
  *
- * @ORM\Table(name="status", indexes={@ORM\Index(name="id_status", columns={"id_status"})})
+ * @ORM\Table(name="status")
  * @ORM\Entity
  */
 class Status
@@ -34,7 +34,6 @@ class Status
      * Set status
      *
      * @param string $status
-     *
      * @return Status
      */
     public function setStatus($status)
@@ -47,7 +46,7 @@ class Status
     /**
      * Get status
      *
-     * @return string
+     * @return string 
      */
     public function getStatus()
     {
@@ -57,7 +56,7 @@ class Status
     /**
      * Get idStatus
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdStatus()
     {

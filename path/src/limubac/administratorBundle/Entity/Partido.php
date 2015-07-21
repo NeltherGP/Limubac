@@ -116,7 +116,6 @@ class Partido
      * Set hInicio
      *
      * @param \DateTime $hInicio
-     *
      * @return Partido
      */
     public function setHInicio($hInicio)
@@ -129,7 +128,7 @@ class Partido
     /**
      * Get hInicio
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getHInicio()
     {
@@ -140,7 +139,6 @@ class Partido
      * Set hTermino
      *
      * @param \DateTime $hTermino
-     *
      * @return Partido
      */
     public function setHTermino($hTermino)
@@ -153,7 +151,7 @@ class Partido
     /**
      * Get hTermino
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getHTermino()
     {
@@ -164,7 +162,6 @@ class Partido
      * Set commited
      *
      * @param boolean $commited
-     *
      * @return Partido
      */
     public function setCommited($commited)
@@ -177,7 +174,7 @@ class Partido
     /**
      * Get commited
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getCommited()
     {
@@ -188,7 +185,6 @@ class Partido
      * Set jornada
      *
      * @param integer $jornada
-     *
      * @return Partido
      */
     public function setJornada($jornada)
@@ -201,7 +197,7 @@ class Partido
     /**
      * Get jornada
      *
-     * @return integer
+     * @return integer 
      */
     public function getJornada()
     {
@@ -212,7 +208,6 @@ class Partido
      * Set rama
      *
      * @param integer $rama
-     *
      * @return Partido
      */
     public function setRama($rama)
@@ -225,7 +220,7 @@ class Partido
     /**
      * Get rama
      *
-     * @return integer
+     * @return integer 
      */
     public function getRama()
     {
@@ -236,7 +231,6 @@ class Partido
      * Set categoria
      *
      * @param integer $categoria
-     *
      * @return Partido
      */
     public function setCategoria($categoria)
@@ -249,7 +243,7 @@ class Partido
     /**
      * Get categoria
      *
-     * @return integer
+     * @return integer 
      */
     public function getCategoria()
     {
@@ -260,7 +254,6 @@ class Partido
      * Set numpar
      *
      * @param integer $numpar
-     *
      * @return Partido
      */
     public function setNumpar($numpar)
@@ -273,7 +266,7 @@ class Partido
     /**
      * Get numpar
      *
-     * @return integer
+     * @return integer 
      */
     public function getNumpar()
     {
@@ -283,7 +276,7 @@ class Partido
     /**
      * Get idPartido
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdPartido()
     {
@@ -294,7 +287,6 @@ class Partido
      * Set idEstatus
      *
      * @param \limubac\administratorBundle\Entity\Estatus $idEstatus
-     *
      * @return Partido
      */
     public function setIdEstatus(\limubac\administratorBundle\Entity\Estatus $idEstatus = null)
@@ -307,7 +299,7 @@ class Partido
     /**
      * Get idEstatus
      *
-     * @return \limubac\administratorBundle\Entity\Estatus
+     * @return \limubac\administratorBundle\Entity\Estatus 
      */
     public function getIdEstatus()
     {
@@ -318,7 +310,6 @@ class Partido
      * Set idSede
      *
      * @param \limubac\administratorBundle\Entity\Sede $idSede
-     *
      * @return Partido
      */
     public function setIdSede(\limubac\administratorBundle\Entity\Sede $idSede = null)
@@ -331,7 +322,7 @@ class Partido
     /**
      * Get idSede
      *
-     * @return \limubac\administratorBundle\Entity\Sede
+     * @return \limubac\administratorBundle\Entity\Sede 
      */
     public function getIdSede()
     {
@@ -342,7 +333,6 @@ class Partido
      * Set idArbitran
      *
      * @param \limubac\administratorBundle\Entity\Arbitran $idArbitran
-     *
      * @return Partido
      */
     public function setIdArbitran(\limubac\administratorBundle\Entity\Arbitran $idArbitran = null)
@@ -355,7 +345,7 @@ class Partido
     /**
      * Get idArbitran
      *
-     * @return \limubac\administratorBundle\Entity\Arbitran
+     * @return \limubac\administratorBundle\Entity\Arbitran 
      */
     public function getIdArbitran()
     {
@@ -366,7 +356,6 @@ class Partido
      * Set idTorneo
      *
      * @param \limubac\administratorBundle\Entity\Torneo $idTorneo
-     *
      * @return Partido
      */
     public function setIdTorneo(\limubac\administratorBundle\Entity\Torneo $idTorneo = null)
@@ -379,7 +368,7 @@ class Partido
     /**
      * Get idTorneo
      *
-     * @return \limubac\administratorBundle\Entity\Torneo
+     * @return \limubac\administratorBundle\Entity\Torneo 
      */
     public function getIdTorneo()
     {

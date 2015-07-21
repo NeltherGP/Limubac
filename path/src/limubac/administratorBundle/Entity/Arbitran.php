@@ -56,7 +56,7 @@ class Arbitran
     /**
      * Get idArbitran
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdArbitran()
     {
@@ -67,7 +67,6 @@ class Arbitran
      * Set idArbitro3
      *
      * @param \limubac\administratorBundle\Entity\Arbitro $idArbitro3
-     *
      * @return Arbitran
      */
     public function setIdArbitro3(\limubac\administratorBundle\Entity\Arbitro $idArbitro3 = null)
@@ -80,7 +79,7 @@ class Arbitran
     /**
      * Get idArbitro3
      *
-     * @return \limubac\administratorBundle\Entity\Arbitro
+     * @return \limubac\administratorBundle\Entity\Arbitro 
      */
     public function getIdArbitro3()
     {
@@ -91,7 +90,6 @@ class Arbitran
      * Set idArbitro2
      *
      * @param \limubac\administratorBundle\Entity\Arbitro $idArbitro2
-     *
      * @return Arbitran
      */
     public function setIdArbitro2(\limubac\administratorBundle\Entity\Arbitro $idArbitro2 = null)
@@ -104,7 +102,7 @@ class Arbitran
     /**
      * Get idArbitro2
      *
-     * @return \limubac\administratorBundle\Entity\Arbitro
+     * @return \limubac\administratorBundle\Entity\Arbitro 
      */
     public function getIdArbitro2()
     {
@@ -115,7 +113,6 @@ class Arbitran
      * Set idArbitro1
      *
      * @param \limubac\administratorBundle\Entity\Arbitro $idArbitro1
-     *
      * @return Arbitran
      */
     public function setIdArbitro1(\limubac\administratorBundle\Entity\Arbitro $idArbitro1 = null)
@@ -128,7 +125,7 @@ class Arbitran
     /**
      * Get idArbitro1
      *
-     * @return \limubac\administratorBundle\Entity\Arbitro
+     * @return \limubac\administratorBundle\Entity\Arbitro 
      */
     public function getIdArbitro1()
     {

@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\Torneo" table="torneo">
-    <indexes>
-      <index name="id_torneo" columns="id_torneo"/>
-    </indexes>
     <id name="idTorneo" type="integer" column="id_torneo">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="nombre" type="string" column="nombre" length="50" nullable="false">
-      <options>
-        <option name="fixed"/>
-      </options>
-    </field>
+    <field name="nombre" type="string" column="nombre" length="50" nullable="false"/>
     <field name="costo" type="float" column="costo" precision="10" scale="0" nullable="false"/>
     <field name="fInicio" type="date" column="f_inicio" nullable="false"/>
     <field name="fTermino" type="date" column="f_termino" nullable="false"/>
-    <field name="inscripcionAbierta" type="boolean" column="inscripcion_abierta" nullable="false">
-      <options>
-        <option name="default">1</option>
-      </options>
-    </field>
+    <field name="inscripcionAbierta" type="boolean" column="inscripcion_abierta" nullable="false"/>
   </entity>
 </doctrine-mapping>

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Finanzas
  *
- * @ORM\Table(name="finanzas", indexes={@ORM\Index(name="id_finanzas", columns={"id_finanzas"}), @ORM\Index(name="finanzas_ibfk_1", columns={"id_torneo"}), @ORM\Index(name="finanzas_ibfk_2", columns={"id_equipo"})})
+ * @ORM\Table(name="finanzas", indexes={@ORM\Index(name="finanzas_ibfk_1", columns={"id_torneo"}), @ORM\Index(name="finanzas_ibfk_2", columns={"id_equipo"})})
  * @ORM\Entity
  */
 class Finanzas
@@ -138,7 +138,6 @@ class Finanzas
      * Set inscripcion
      *
      * @param integer $inscripcion
-     *
      * @return Finanzas
      */
     public function setInscripcion($inscripcion)
@@ -151,7 +150,7 @@ class Finanzas
     /**
      * Get inscripcion
      *
-     * @return integer
+     * @return integer 
      */
     public function getInscripcion()
     {
@@ -162,7 +161,6 @@ class Finanzas
      * Set dia
      *
      * @param string $dia
-     *
      * @return Finanzas
      */
     public function setDia($dia)
@@ -175,7 +173,7 @@ class Finanzas
     /**
      * Get dia
      *
-     * @return string
+     * @return string 
      */
     public function getDia()
     {
@@ -186,7 +184,6 @@ class Finanzas
      * Set hora
      *
      * @param string $hora
-     *
      * @return Finanzas
      */
     public function setHora($hora)
@@ -199,7 +196,7 @@ class Finanzas
     /**
      * Get hora
      *
-     * @return string
+     * @return string 
      */
     public function getHora()
     {
@@ -210,7 +207,6 @@ class Finanzas
      * Set monto
      *
      * @param integer $monto
-     *
      * @return Finanzas
      */
     public function setMonto($monto)
@@ -223,7 +219,7 @@ class Finanzas
     /**
      * Get monto
      *
-     * @return integer
+     * @return integer 
      */
     public function getMonto()
     {
@@ -234,7 +230,6 @@ class Finanzas
      * Set cuenta
      *
      * @param integer $cuenta
-     *
      * @return Finanzas
      */
     public function setCuenta($cuenta)
@@ -247,7 +242,7 @@ class Finanzas
     /**
      * Get cuenta
      *
-     * @return integer
+     * @return integer 
      */
     public function getCuenta()
     {
@@ -258,7 +253,6 @@ class Finanzas
      * Set manejo
      *
      * @param string $manejo
-     *
      * @return Finanzas
      */
     public function setManejo($manejo)
@@ -271,7 +265,7 @@ class Finanzas
     /**
      * Get manejo
      *
-     * @return string
+     * @return string 
      */
     public function getManejo()
     {
@@ -282,7 +276,6 @@ class Finanzas
      * Set mes1
      *
      * @param integer $mes1
-     *
      * @return Finanzas
      */
     public function setMes1($mes1)
@@ -295,7 +288,7 @@ class Finanzas
     /**
      * Get mes1
      *
-     * @return integer
+     * @return integer 
      */
     public function getMes1()
     {
@@ -306,7 +299,6 @@ class Finanzas
      * Set mes2
      *
      * @param integer $mes2
-     *
      * @return Finanzas
      */
     public function setMes2($mes2)
@@ -319,7 +311,7 @@ class Finanzas
     /**
      * Get mes2
      *
-     * @return integer
+     * @return integer 
      */
     public function getMes2()
     {
@@ -330,7 +322,6 @@ class Finanzas
      * Set mes3
      *
      * @param integer $mes3
-     *
      * @return Finanzas
      */
     public function setMes3($mes3)
@@ -343,7 +334,7 @@ class Finanzas
     /**
      * Get mes3
      *
-     * @return integer
+     * @return integer 
      */
     public function getMes3()
     {
@@ -354,7 +345,6 @@ class Finanzas
      * Set mes4
      *
      * @param integer $mes4
-     *
      * @return Finanzas
      */
     public function setMes4($mes4)
@@ -367,7 +357,7 @@ class Finanzas
     /**
      * Get mes4
      *
-     * @return integer
+     * @return integer 
      */
     public function getMes4()
     {
@@ -378,7 +368,6 @@ class Finanzas
      * Set mes5
      *
      * @param integer $mes5
-     *
      * @return Finanzas
      */
     public function setMes5($mes5)
@@ -391,7 +380,7 @@ class Finanzas
     /**
      * Get mes5
      *
-     * @return integer
+     * @return integer 
      */
     public function getMes5()
     {
@@ -402,7 +391,6 @@ class Finanzas
      * Set mes6
      *
      * @param integer $mes6
-     *
      * @return Finanzas
      */
     public function setMes6($mes6)
@@ -415,7 +403,7 @@ class Finanzas
     /**
      * Get mes6
      *
-     * @return integer
+     * @return integer 
      */
     public function getMes6()
     {
@@ -426,7 +414,6 @@ class Finanzas
      * Set mes7
      *
      * @param integer $mes7
-     *
      * @return Finanzas
      */
     public function setMes7($mes7)
@@ -439,7 +426,7 @@ class Finanzas
     /**
      * Get mes7
      *
-     * @return integer
+     * @return integer 
      */
     public function getMes7()
     {
@@ -449,7 +436,7 @@ class Finanzas
     /**
      * Get idFinanzas
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdFinanzas()
     {
@@ -460,7 +447,6 @@ class Finanzas
      * Set idEquipo
      *
      * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
-     *
      * @return Finanzas
      */
     public function setIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo = null)
@@ -473,7 +459,7 @@ class Finanzas
     /**
      * Get idEquipo
      *
-     * @return \limubac\administratorBundle\Entity\Equipo
+     * @return \limubac\administratorBundle\Entity\Equipo 
      */
     public function getIdEquipo()
     {
@@ -484,7 +470,6 @@ class Finanzas
      * Set idTorneo
      *
      * @param \limubac\administratorBundle\Entity\Torneo $idTorneo
-     *
      * @return Finanzas
      */
     public function setIdTorneo(\limubac\administratorBundle\Entity\Torneo $idTorneo = null)
@@ -497,7 +482,7 @@ class Finanzas
     /**
      * Get idTorneo
      *
-     * @return \limubac\administratorBundle\Entity\Torneo
+     * @return \limubac\administratorBundle\Entity\Torneo 
      */
     public function getIdTorneo()
     {

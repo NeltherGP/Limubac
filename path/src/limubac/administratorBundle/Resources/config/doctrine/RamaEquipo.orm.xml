@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\RamaEquipo" table="rama_equipo">
-    <indexes>
-      <index name="id_rama" columns="id_rama"/>
-    </indexes>
     <id name="idRama" type="integer" column="id_rama">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="nombre" type="string" column="nombre" length="35" nullable="false">
-      <options>
-        <option name="fixed"/>
-      </options>
-    </field>
+    <field name="nombre" type="string" column="nombre" length="35" nullable="false"/>
   </entity>
 </doctrine-mapping>

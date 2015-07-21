@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * RamaEquipo
  *
- * @ORM\Table(name="rama_equipo", indexes={@ORM\Index(name="id_rama", columns={"id_rama"})})
+ * @ORM\Table(name="rama_equipo")
  * @ORM\Entity
  */
 class RamaEquipo
@@ -30,4 +30,3 @@ class RamaEquipo
 
 
 }
-

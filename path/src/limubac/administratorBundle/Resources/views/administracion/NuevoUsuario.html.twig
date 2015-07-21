@@ -29,13 +29,20 @@
 <form class="form-horizontal" background-image="entrada.jpg" action="{{path('limubacadministrator_nuevoUsuario')}}" method='POST'>
 		<!-- Form Name -->
 		<!-- Form Name -->
-		
+		<!-- Text input-->
+		<div class="control-group">
+		  <label class="control-label" for="curp_nuevo">CURP</label>
+		  <div class="controls">
+		    <input id="nuevo" name="curp_nuevo" type="text" placeholder="" class="input-xlarge" required="true">
+
+		  </div>
+		</div>
 
 		<!-- Text input-->
 		<div class="control-group">
 		  <label class="control-label" for="nombre_nuevo">Nombre completo</label>
 		  <div class="controls">
-		    <input id="nombre_nuevo" name="nombre_nuevo" type="text" placeholder="" class="input-xlarge" required="true">
+		    <input id="nuevo" name="nombre_nuevo" type="text" placeholder="" class="input-xlarge" required="true">
 
 		  </div>
 		</div>
@@ -43,13 +50,13 @@
 		<div class="control-group">
 			<label class="control-label" for="password">Nueva Contraseña</label>
 			<div class="controls">
-			    <input id="password_nuevo" name="nuevo_password" type="password" placeholder="" class="input-xlarge" required="true">
+			    <input id="nuevo" name="nuevo_password" type="password" placeholder="" class="input-xlarge" required="true">
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label" for="password">Confirmar Contraseña</label>
 			<div class="controls">
-			    <input id="confirmacion_nuevo" name="confirmar_password" type="password" placeholder="" class="input-xlarge" required="true">
+			    <input id="nuevo" name="confirmar_password" type="password" placeholder="" class="input-xlarge" required="true">
 			    
 			</div>
 		</div>
@@ -60,7 +67,7 @@
 		<div class="control-group">
 		  <label class="control-label" for="telefono_nuevo">Celular o teléfono</label>
 		  <div class="controls">
-		    <input id="telefono_nuevo" name="telefono_nuevo" type="numeric" placeholder="" class="input-xlarge" required="true">
+		    <input id="nuevo" name="telefono_nuevo" type="numeric" placeholder="" class="input-xlarge" required="true">
 
 		  </div>
 		</div>
@@ -69,7 +76,7 @@
 		<div class="control-group">
 		  <label class="control-label" for="correo_nuevo">e-mail</label>
 		  <div class="controls">
-		    <input id="correo_nuevo" name="correo_nuevo" type="mail" placeholder="" class="input-xlarge" required="true">
+		    <input id="nuevo" name="correo_nuevo" type="mail" placeholder="" class="input-xlarge" required="true">
 
 		  </div>
 		</div>
@@ -78,7 +85,7 @@
 		<div class="control-group">
 		  <label class="control-label" for="direccion_nuevo">Direccion</label>
 		  <div class="controls">
-		    <input id="direccion_nuevo" name="direccion_nuevo" type="text" placeholder="" class="input-xlarge" required="true">
+		    <input id="nuevo" name="direccion_nuevo" type="text" placeholder="" class="input-xlarge" required="true">
 
 		  </div>
 		</div>
@@ -87,7 +94,7 @@
 		<div class="control-group">
 		  <label class="control-label" for="seleccion_nuevo">¿Cual es tu interes?</label>
 		  <div class="controls">
-		    <select id="seleccion_nuevo" name="seleccion_nuevo" >
+		    <select id="nuevo" name="seleccion_nuevo" >
 		      <option>Selecciona una opción</option>
 		      <option>Representante de equipo</option>
 		      <option>Comité administrativo</option>
@@ -102,7 +109,7 @@
 		<div class="control-group">
 		  <label class="control-label" for="mensaje_nuevo">¿Algún mensaje?</label>
 		  <div class="controls">
-		    <textarea id="mensaje_nuevo" name="mensaje_nuevo" placeholder='Aqui tu mensaje'></textarea>
+		    <textarea id="msj_nuevo" name="mensaje_nuevo" placeholder='Aqui tu mensaje'></textarea>
 		  </div>
 		</div>
 
@@ -110,7 +117,7 @@
 		<div class="control-group">
 		  <label class="control-label" for="enviar_nuevo"></label>
 		  <div class="controls">
-		    <button id="enviar_nuevo" name="enviar_nuevo" class="btn btn-success">Guardar</button>
+		    <button id="btn_nuevo" name="enviar_nuevo" class="btn btn-success">Guardar</button>
 		  </div>
 		</div>
 

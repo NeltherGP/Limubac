@@ -61,7 +61,6 @@ class DetallePartido
      * Set anotaciones
      *
      * @param integer $anotaciones
-     *
      * @return DetallePartido
      */
     public function setAnotaciones($anotaciones)
@@ -74,7 +73,7 @@ class DetallePartido
     /**
      * Get anotaciones
      *
-     * @return integer
+     * @return integer 
      */
     public function getAnotaciones()
     {
@@ -85,7 +84,6 @@ class DetallePartido
      * Set cantidad
      *
      * @param integer $cantidad
-     *
      * @return DetallePartido
      */
     public function setCantidad($cantidad)
@@ -98,7 +96,7 @@ class DetallePartido
     /**
      * Get cantidad
      *
-     * @return integer
+     * @return integer 
      */
     public function getCantidad()
     {
@@ -108,7 +106,7 @@ class DetallePartido
     /**
      * Get idDetalle
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdDetalle()
     {
@@ -119,7 +117,6 @@ class DetallePartido
      * Set idPartido
      *
      * @param \limubac\administratorBundle\Entity\Partido $idPartido
-     *
      * @return DetallePartido
      */
     public function setIdPartido(\limubac\administratorBundle\Entity\Partido $idPartido = null)
@@ -132,7 +129,7 @@ class DetallePartido
     /**
      * Get idPartido
      *
-     * @return \limubac\administratorBundle\Entity\Partido
+     * @return \limubac\administratorBundle\Entity\Partido 
      */
     public function getIdPartido()
     {
@@ -143,7 +140,6 @@ class DetallePartido
      * Set idJugador
      *
      * @param \limubac\administratorBundle\Entity\Jugador $idJugador
-     *
      * @return DetallePartido
      */
     public function setIdJugador(\limubac\administratorBundle\Entity\Jugador $idJugador = null)
@@ -156,7 +152,7 @@ class DetallePartido
     /**
      * Get idJugador
      *
-     * @return \limubac\administratorBundle\Entity\Jugador
+     * @return \limubac\administratorBundle\Entity\Jugador 
      */
     public function getIdJugador()
     {

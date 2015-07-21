@@ -551,9 +551,12 @@ margin-bottom:5px
 }
 
 /* -----------------------ESTILOS PARA EL NUEVO REGISTRO DE UN USUARIO -------------- */
-#nombre_nuevo, #password_nuevo, #confirmacion_nuevo, #telefono_nuevo, #correo_nuevo, #direccion_nuevo, #seleccion_nuevo,
-#mensaje_nuevo{
+#nuevo{
 	width: 400px;
+}
+#msj_nuevo{
+	width: 400px;
+	height: 200px;
 }
 
 #palomita_nuevo{

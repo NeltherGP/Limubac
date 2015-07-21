@@ -96,7 +96,6 @@ class Juegan
      * Set resultado
      *
      * @param integer $resultado
-     *
      * @return Juegan
      */
     public function setResultado($resultado)
@@ -109,7 +108,7 @@ class Juegan
     /**
      * Get resultado
      *
-     * @return integer
+     * @return integer 
      */
     public function getResultado()
     {
@@ -120,7 +119,6 @@ class Juegan
      * Set side
      *
      * @param string $side
-     *
      * @return Juegan
      */
     public function setSide($side)
@@ -133,7 +131,7 @@ class Juegan
     /**
      * Get side
      *
-     * @return string
+     * @return string 
      */
     public function getSide()
     {
@@ -144,7 +142,6 @@ class Juegan
      * Set primero
      *
      * @param integer $primero
-     *
      * @return Juegan
      */
     public function setPrimero($primero)
@@ -157,7 +154,7 @@ class Juegan
     /**
      * Get primero
      *
-     * @return integer
+     * @return integer 
      */
     public function getPrimero()
     {
@@ -168,7 +165,6 @@ class Juegan
      * Set segundo
      *
      * @param integer $segundo
-     *
      * @return Juegan
      */
     public function setSegundo($segundo)
@@ -181,7 +177,7 @@ class Juegan
     /**
      * Get segundo
      *
-     * @return integer
+     * @return integer 
      */
     public function getSegundo()
     {
@@ -192,7 +188,6 @@ class Juegan
      * Set tercero
      *
      * @param integer $tercero
-     *
      * @return Juegan
      */
     public function setTercero($tercero)
@@ -205,7 +200,7 @@ class Juegan
     /**
      * Get tercero
      *
-     * @return integer
+     * @return integer 
      */
     public function getTercero()
     {
@@ -216,7 +211,6 @@ class Juegan
      * Set cuarto
      *
      * @param integer $cuarto
-     *
      * @return Juegan
      */
     public function setCuarto($cuarto)
@@ -229,7 +223,7 @@ class Juegan
     /**
      * Get cuarto
      *
-     * @return integer
+     * @return integer 
      */
     public function getCuarto()
     {
@@ -240,7 +234,6 @@ class Juegan
      * Set complementario
      *
      * @param integer $complementario
-     *
      * @return Juegan
      */
     public function setComplementario($complementario)
@@ -253,7 +246,7 @@ class Juegan
     /**
      * Get complementario
      *
-     * @return integer
+     * @return integer 
      */
     public function getComplementario()
     {
@@ -263,7 +256,7 @@ class Juegan
     /**
      * Get idJuegan
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdJuegan()
     {
@@ -274,7 +267,6 @@ class Juegan
      * Set idEquipo
      *
      * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
-     *
      * @return Juegan
      */
     public function setIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo = null)
@@ -287,7 +279,7 @@ class Juegan
     /**
      * Get idEquipo
      *
-     * @return \limubac\administratorBundle\Entity\Equipo
+     * @return \limubac\administratorBundle\Entity\Equipo 
      */
     public function getIdEquipo()
     {
@@ -298,7 +290,6 @@ class Juegan
      * Set idPartido
      *
      * @param \limubac\administratorBundle\Entity\Partido $idPartido
-     *
      * @return Juegan
      */
     public function setIdPartido(\limubac\administratorBundle\Entity\Partido $idPartido = null)
@@ -311,7 +302,7 @@ class Juegan
     /**
      * Get idPartido
      *
-     * @return \limubac\administratorBundle\Entity\Partido
+     * @return \limubac\administratorBundle\Entity\Partido 
      */
     public function getIdPartido()
     {

@@ -24,14 +24,14 @@ class Equipo
      *
      * @ORM\Column(name="registrado", type="boolean", nullable=false)
      */
-    private $registrado = '0';
+    private $registrado;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="modificable", type="boolean", nullable=false)
      */
-    private $modificable = '1';
+    private $modificable;
 
     /**
      * @var integer
@@ -94,4 +94,3 @@ class Equipo
 
 
 }
-

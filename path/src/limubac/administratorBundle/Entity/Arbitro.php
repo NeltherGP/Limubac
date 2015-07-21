@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Arbitro
  *
- * @ORM\Table(name="arbitro", indexes={@ORM\Index(name="id_arbitro", columns={"id_arbitro"})})
+ * @ORM\Table(name="arbitro")
  * @ORM\Entity
  */
 class Arbitro
@@ -48,7 +48,6 @@ class Arbitro
      * Set nombre
      *
      * @param string $nombre
-     *
      * @return Arbitro
      */
     public function setNombre($nombre)
@@ -61,7 +60,7 @@ class Arbitro
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -72,7 +71,6 @@ class Arbitro
      * Set correo
      *
      * @param string $correo
-     *
      * @return Arbitro
      */
     public function setCorreo($correo)
@@ -85,7 +83,7 @@ class Arbitro
     /**
      * Get correo
      *
-     * @return string
+     * @return string 
      */
     public function getCorreo()
     {
@@ -96,7 +94,6 @@ class Arbitro
      * Set telefono
      *
      * @param integer $telefono
-     *
      * @return Arbitro
      */
     public function setTelefono($telefono)
@@ -109,7 +106,7 @@ class Arbitro
     /**
      * Get telefono
      *
-     * @return integer
+     * @return integer 
      */
     public function getTelefono()
     {
@@ -119,7 +116,7 @@ class Arbitro
     /**
      * Get idArbitro
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdArbitro()
     {

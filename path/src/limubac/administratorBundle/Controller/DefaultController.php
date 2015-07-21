@@ -498,6 +498,7 @@ class DefaultController extends Controller{
     // TORNEO
 
     public function torneosAction(){
+    	
 /*
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:ParticipanT');
         $queryTorneos = $repository->createQueryBuilder('p')

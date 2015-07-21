@@ -7,7 +7,7 @@
 
 <legend> <P ALIGN=center> Sección para actualizar la información de usuario </P></legend>
 
-	<h3> <P ALIGN=center> Usuario actual: "{{nombre_actual}}" </P></h3>	
+	<h3> <P ALIGN=center> Usuario actual: "{{app.user.name}}" </P></h3>	
 
 <div class="row">
 	
@@ -18,7 +18,7 @@
 			<div class="control-group" align="center">
 			  <label class="control-label" for="correo"><h3>Correo</h3></label>
 			  <div class="controls">
-			    <input id="actInf" name="correo" type="email" value="{{correo_actual}}" class="input-xlarge">
+			    <input id="actInf" name="correo" type="email" value="{{app.user.email}}" class="input-xlarge">
 
 
 			  </div>
@@ -27,14 +27,14 @@
 			<div class="control-group" align="center">
 			  <label class="control-label" for="direccion"><h3>Dirección</h3></label>
 			  <div class="controls">
-			    <input id="actInf" name="direccion" type="text" value="{{direccion_actual}}" class="input-xlarge" >
+			    <input id="actInf" name="direccion" type="text" value="{{app.user.address}}" class="input-xlarge" >
 			  </div>
 			</div>
 
 			<div class="control-group" align="center">
 			  <label class="control-label" for="telefono"><h3>Telefono</h3></label>
 			  <div class="controls">
-			    <input id="actInf" name="telefono" type="text" value="{{telefono_actual}}" class="input-xlarge" >
+			    <input id="actInf" name="telefono" type="text" value="{{app.user.phone}}" class="input-xlarge" >
 			  </div>
 			</div>
 

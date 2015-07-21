@@ -88,7 +88,6 @@ class FaltasEquipo
      * Set tiempo
      *
      * @param integer $tiempo
-     *
      * @return FaltasEquipo
      */
     public function setTiempo($tiempo)
@@ -101,7 +100,7 @@ class FaltasEquipo
     /**
      * Get tiempo
      *
-     * @return integer
+     * @return integer 
      */
     public function getTiempo()
     {
@@ -112,7 +111,6 @@ class FaltasEquipo
      * Set descFalta
      *
      * @param string $descFalta
-     *
      * @return FaltasEquipo
      */
     public function setDescFalta($descFalta)
@@ -125,7 +123,7 @@ class FaltasEquipo
     /**
      * Get descFalta
      *
-     * @return string
+     * @return string 
      */
     public function getDescFalta()
     {
@@ -136,7 +134,6 @@ class FaltasEquipo
      * Set cantidad
      *
      * @param integer $cantidad
-     *
      * @return FaltasEquipo
      */
     public function setCantidad($cantidad)
@@ -149,7 +146,7 @@ class FaltasEquipo
     /**
      * Get cantidad
      *
-     * @return integer
+     * @return integer 
      */
     public function getCantidad()
     {
@@ -159,7 +156,7 @@ class FaltasEquipo
     /**
      * Get idFaltasEq
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdFaltasEq()
     {
@@ -170,7 +167,6 @@ class FaltasEquipo
      * Set idFalta
      *
      * @param \limubac\administratorBundle\Entity\Falta $idFalta
-     *
      * @return FaltasEquipo
      */
     public function setIdFalta(\limubac\administratorBundle\Entity\Falta $idFalta = null)
@@ -183,7 +179,7 @@ class FaltasEquipo
     /**
      * Get idFalta
      *
-     * @return \limubac\administratorBundle\Entity\Falta
+     * @return \limubac\administratorBundle\Entity\Falta 
      */
     public function getIdFalta()
     {
@@ -194,7 +190,6 @@ class FaltasEquipo
      * Set idJugador
      *
      * @param \limubac\administratorBundle\Entity\Jugador $idJugador
-     *
      * @return FaltasEquipo
      */
     public function setIdJugador(\limubac\administratorBundle\Entity\Jugador $idJugador = null)
@@ -207,7 +202,7 @@ class FaltasEquipo
     /**
      * Get idJugador
      *
-     * @return \limubac\administratorBundle\Entity\Jugador
+     * @return \limubac\administratorBundle\Entity\Jugador 
      */
     public function getIdJugador()
     {
@@ -218,7 +213,6 @@ class FaltasEquipo
      * Set idPartido
      *
      * @param \limubac\administratorBundle\Entity\Partido $idPartido
-     *
      * @return FaltasEquipo
      */
     public function setIdPartido(\limubac\administratorBundle\Entity\Partido $idPartido = null)
@@ -231,7 +225,7 @@ class FaltasEquipo
     /**
      * Get idPartido
      *
-     * @return \limubac\administratorBundle\Entity\Partido
+     * @return \limubac\administratorBundle\Entity\Partido 
      */
     public function getIdPartido()
     {
@@ -242,7 +236,6 @@ class FaltasEquipo
      * Set idEquipo
      *
      * @param \limubac\administratorBundle\Entity\Equipo $idEquipo
-     *
      * @return FaltasEquipo
      */
     public function setIdEquipo(\limubac\administratorBundle\Entity\Equipo $idEquipo = null)
@@ -255,7 +248,7 @@ class FaltasEquipo
     /**
      * Get idEquipo
      *
-     * @return \limubac\administratorBundle\Entity\Equipo
+     * @return \limubac\administratorBundle\Entity\Equipo 
      */
     public function getIdEquipo()
     {
