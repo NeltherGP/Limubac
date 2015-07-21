@@ -33,7 +33,6 @@ security:
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
                     rock: { password: 4880957a2a75f398f689a09a8f4042edac1b6736, roles: [ 'ROLE_ADMIN' ] }
 
-    
     firewalls:
         #default:
          # pattern: ^/
@@ -49,7 +48,6 @@ security:
             anonymous: ~
             security: true  
             form_login: ~
-                
 
 #        dev:
  #           pattern:  ^/(_(profiler|wdt)|css|images|js)/
