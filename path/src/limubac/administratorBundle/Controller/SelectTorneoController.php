@@ -11,6 +11,7 @@ class SelectTorneoController extends Controller{
     $consultasManager = new ConsultasPartidos();
     $doctrineManager= $this -> getDoctrine()->getManager();
     $listTorneos=$consultasManager->listTorneos($doctrineManager);
+    
 
     return $this->render('limubacadministratorBundle:administracion:seleccionTorneo.html.twig',array('listTorneos'=>$listTorneos));
   }

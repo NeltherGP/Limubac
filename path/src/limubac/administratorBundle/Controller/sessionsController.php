@@ -10,14 +10,16 @@
 	use limubac\administratorBundle\Entity\User; //Nuevo
 	use Symfony\Component\HttpFoundation\Session\sfAction;
 	use Symfony\Component\HttpFoundation\Response;
-
+	use limubac\administratorBundle\Form\Type\UserType;
 	//include 'Contacto.php';
 
 
 	class sessionsController extends Controller{
-
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------INICIAR SESION-----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
  		public function logAction(){
- 			$count=0;
+ 			
 			$request = $this->getRequest();
 	        $session = $request->getSession();
 	        // obtiene el error de inicio de sesión si lo hay
@@ -49,6 +51,10 @@
 
 		}
 
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------NUEVO USUARIO -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+
 		public function newuserAction(){
 			//$user = new User();
 			$validado = "Registro exitoso";
@@ -75,27 +81,64 @@
    					$correo = $_POST["correo_nuevo"];
    					$direccion = $_POST["direccion_nuevo"];
    					$rol = $_POST["seleccion_nuevo"];
+   					$curp = $_POST["curp_nuevo"];
    					$mensajeAdicional = $_POST["mensaje_nuevo"];
    					$mensaje=$mensaje."Nombre: ".$nombre." <br>Telefono: ".$telefono." <br>Direccion: ".$direccion." <br>Correo: ".$correo." <br>Clave: ".$clave2." <br>Rol deseado: ".$rol." <br>Mensaje adicional: ".$mensajeAdicional;
-   					
-
-$factory = $this->get('security.encoder_factory');
+   				
 $user = new User();
 
+$factory = $this->get('security.encoder_factory');
 $encoder = $factory->getEncoder($user);
 $password = $encoder->encodePassword($clave1, $user->getSalt());
-$user->setPassword($password);
+
+// ESTE METODO SOLO FUNCIONA A PARTIR DE SYMFONY 2.6
+//$encoder = $this->container->get('security.password_encoder');
+//$encoded = $encoder->encodePassword($user, $clave2);
+//$user->setPassword($encoded);
 
 
-   					$user->setUsername($nombre);
-   					//$password = $encoder->encodePassword($clave1, $user->getSalt());
-   					$password=$clave1;
-					//$user->setPassword($password);
-					$user->setSalt("");
-					$user->setRole("ROLE_ADMIN");
-					$user->setName($nombre);
-					$user->setAddress($direccion);
-					$user->setPhone($telefono);
+
+   					$user->setUsername($curp);
+
+   					$user->setPassword($password);
+   					//$user->setPassword($clave1);
+   					//$user->setPassword(md5($clave1));
+   					
+					
+					//$user->setSalt("");
+
+
+					switch ($rol) {
+						case 'Representante de equipo':
+							$user->setRoles("ROLE_USER");
+							break;
+						case 'Comité administrativo':
+							$user->setRoles("ROLE_FINANZAS");
+							break;
+						case 'Comité de disciplina':
+							$user->setRoles("ROLE_DISCIPLINA");
+							break;
+						case 'Capturista':
+							$user->setRoles("ROLE_CAPTURISTA");
+							break;
+						case 'Otros':
+							$user->setRoles("ROLE_OTROS");
+							break;
+						
+						default:
+							# code...
+							break;
+					}
+
+						
+
+
+
+
+
+						$user->setName($nombre);
+						$user->setAddress($direccion);
+						$user->setPhone($telefono);
 					$user->setEmail($correo);
 					$user->setIsactive(true);
 
@@ -108,7 +151,7 @@ $user->setPassword($password);
    					$em->persist($user);
    					$em->flush();
 
-   					//enviaCorreo( $asunto, $correo , $mensaje, $this);
+   					enviaCorreo( $asunto, $correo , $mensaje, $this);
    					return $this->render(
 		            'limubacadministratorBundle:administracion:adminPanel.html.twig',  array('mensaje' => $validado)
 	        		);
@@ -128,8 +171,13 @@ $user->setPassword($password);
 			}
 
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------ACTUALIZAR CONTRASEÑA -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 		public function actualizarContrasenaAction(){
 			$cancelar = "Cancelar y regresar";
+
+
 
 			if ( isset($_POST["actual_password"]) && isset($_POST["nuevo_password"]) && isset($_POST["confirmar_password"]) ) {
 				$actual = $_POST["actual_password"];
@@ -161,53 +209,76 @@ $user->setPassword($password);
 
 	        	);
 			}
+			
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------CERRAR SESION -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 
 		public function logoutAction(){
 			return $this->render(
 		            'limubacadministratorBundle:administracion:logout.html.twig'
 	        	);
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------VER MI PERFIL-----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 		public function miPerfilAction(){
 			return $this->render(
 		            'limubacadministratorBundle:administracion:perfin.html.twig'
 	        	);
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------ACTUALIZAR INFORMACION-----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 		public function actualizarInformacionAction(){
 			$cancelar="Cancelar y regresar";
 			$correcto = "Información actualizada";
 			$error1= "Compruebe el numero telefonico por favor, debe ser parecido a (012)345 6789";
-			$nombre = "busqueda pendiente";
-			$correo = "algo@algo.com";
-			$direccion = "busqueda pendiente";
-			$telefono = "461-123-4567";
-			if (isset($_POST["correo"]) && isset($_POST["direccion"]) && isset($_POST["telefono"])) {
-				$expresion = '/^([0-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/';
-				$correo = $_POST["correo"];
-				$direccion = $_POST["direccion"];
-				$telefono = $_POST["telefono"];
-/*
-				if (!preg_match($expresion, $telefono)) {
-					return $this->render(
-		            'limubacadministratorBundle:administracion:actInformacion.html.twig',
-		            array('mensaje' => $error1,
-		            	'nombre_actual' => $nombre,
-		            	'correo_actual' => $correo,
-		            	'direccion_actual' => $direccion,
-		            	'telefono_actual'=> $telefono)
+			
 
-	        		);
-				}
-*/
-				//CODIGO DE ACTUALIZACION AQUI
-				return $this->render(
-		            'limubacadministratorBundle:administracion:perfin.html.twig',
-		            array('mensaje' => $correcto
+			if(!empty($_REQUEST['editar'])){
+	            $user = new User();
+	            $form = $this->createForm(new UserType(), $user);
+	            $ed = $_REQUEST['editar'][0];
+	            print_r($ed);
 
-		            	)
 
-	        	);
-			}else{
+	            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
+	            $queryEdit = $repository->createQueryBuilder('e')
+	            ->select('e.id','e.name','e.username','e.password','e.email','e.isActive','e.address','e.phone','e.roles')
+	            ->where('e.username = :word')
+	            ->setParameter('word', $ed)
+	            ->getQuery();
+	            $resul = $queryEdit->getResult();
+	            print_r($resul);
+
+	            return $this->render(
+	            		'limubacadministratorBundle:administracion:actInformacion.html.twig',
+	            		array('mensaje' => $correcto,
+	            			'form' => $form->createView(),
+	            			'editar' => $resul));
+		        }elseif(!empty($_REQUEST['eliminar'])){
+		        	$username = $_REQUEST['eliminar'][0];
+		        	$em = $this->getDoctrine()->getManager();
+		        	$repository = $this->getDoctrine()
+    					->getRepository('limubacadministratorBundle:User');
+					//$product = $em->getRepository('limubacadministratorBundle:User')->findByUsername($username);
+		        	$product = $repository->findOneBy(
+					    array('username' => $username)
+					);
+
+			        $em->remove($product);
+					$em->flush();
+
+					$repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
+			        $queryTorneos = $repository->createQueryBuilder('u')
+		            ->select('u.name','u.username','u.email','u.phone','u.address','u.roles','u.isActive')
+		            ->getQuery();
+			        $entities = $queryTorneos->getResult();
+
+			        return $this->render('limubacadministratorBundle:administracion:mostrarUsuarios.html.twig',array('entities' => $entities));
+		        }else{
 				return $this->render(
 		            'limubacadministratorBundle:administracion:actInformacion.html.twig',
 		            array(
@@ -220,6 +291,65 @@ $user->setPassword($password);
 	        	);
 			}
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------EDITAR USUARIOS -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+
+
+		public function editUserAction(){
+        $upt = $_REQUEST['user'];
+
+        $name = $upt['name'];
+        $username = $upt['username'];
+        $password = $upt['password'];
+        $email = $upt['email'];
+        $status = $upt['isActive'];
+        $address = $upt['address'];
+        $phone = $upt['phone'];
+        $roles = $upt['roles'];
+
+        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
+        $queryAct = $repository->createQueryBuilder('z');
+        $q = $queryAct->update('limubacadministratorBundle:User', 'z')
+            ->set('z.name', ':nom')
+            ->set('z.username', ':usrnm')
+            ->set('z.phone', ':ph')
+            ->set('z.password', ':pass')   
+            ->set('z.email', ':mail')
+            ->set('z.isActive', ':stts')
+            ->set('z.address', ':add')
+            ->set('z.roles', ':rl')
+            ->where('z.id= :idt')
+            ->setParameter('idt', $upt['id'])
+            ->setParameter('nom', $name)
+            ->setParameter('usrnm', $username)
+            ->setParameter('pass', $password)
+            ->setParameter('mail', $email)
+            ->setParameter('stts', $status)
+            ->setParameter('add', $address)
+            ->setParameter('ph', $phone)
+            ->setParameter('rl', $roles)
+            
+            ->getQuery();
+        	$resul = $q->execute();
+
+        return $this->redirect($this->generateUrl('limubacadministrator_showUser'));
+    }
+
+    public function deleteUserAction(){
+
+
+    	$query="DELETE FROM `user` AS d
+        
+        WHERE d.usernmae='".$username."';";
+      $result5 = mysql_query($query) or die('Errant query:  '.$query);
+    }
+
+
+
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------CONTACTO -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 		public function contactoAction(){
 			$correcto = "Mensaje enviado. Recibirás en tu correo una copia del mensaje, si no la recibes, favor de ponerte en contacto por otro medio.";
 
@@ -254,6 +384,21 @@ $user->setPassword($password);
 			}
 
 		}
+//------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------VER USUARIOS -----------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+		public function showUserAction(){
+
+	        $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
+	        $queryTorneos = $repository->createQueryBuilder('u')
+            ->select('u.name','u.username','u.email','u.phone','u.address','u.roles','u.isActive')
+            ->orderBy('u.name', 'DESC')
+            ->getQuery();
+	        $entities = $queryTorneos->getResult();
+	        return $this->render('limubacadministratorBundle:administracion:mostrarUsuarios.html.twig',array('entities' => $entities));
+
+		}
+
 
 	}
 ?>

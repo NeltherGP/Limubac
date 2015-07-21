@@ -1,0 +1,72 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+{% block PageContent %}
+
+<form class="form-horizontal" role="form" action="{{path('limubacadministrator_actualizarInformacion')}}" method='POST'>
+	<div class="row-fluid">
+      <div class="col-md-12 borBox well btn-dashboard">     
+        <div class="formAnotacion form-group">
+          <div class="col-md-6 tLeft" >
+            <h1>Usuarios</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+        <div class="formAnotacion form-group col-md-12" style="padding-left:0px; padding-right:0px;">
+          <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+            <table class="table table-bordered" >
+              <thead>
+                <tr>
+                  
+                  <th>Nombre</th>
+                  <th>Username</th>
+                  <th>Correo</th>
+                  <th>Telefono</th>
+                  <th>Direccion</th>
+                  <th>Rol</th>
+                  <th>Status</th>
+                  <th>Modificar</th>
+                  <th>Eliminar</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+
+              {% for entitie in entities %}
+              	<tr>
+                
+                <td> {{entitie.name}} </td>
+                <td> {{entitie.username}} </td>
+                <td> {{entitie.email}} </td>
+                <td> {{entitie.phone}} </td>
+                <td> {{entitie.address}} </td>
+                <td> {{entitie.roles}} </td>
+                <td> {% if entitie.isActive == true %} Activo {% elseif entitie.isActive == false %} Inactivo {% endif %}</td>
+                <td> 
+                	<div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                        <button class="btn btn-mini btn-success" type='submit' name='editar[]' value ='{{entitie.username}}'>
+                          <i class="glyphicon-pencil glyphicon"></i>
+                        </button>
+                      </div>  
+                </td>
+                <td>
+                	<div class="btn-group sharp" data-toggle="radio" style="width: 50px">
+                        <button class="btn btn-mini btn-success" type='submit' name='eliminar[]' value ='{{entitie.username}}'>
+                          <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </div>
+                </td>
+            	</tr>
+              {% endfor %} 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</form>
+{% endblock %}

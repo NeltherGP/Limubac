@@ -25,8 +25,16 @@
 			{% for partido in listaPartidos%}                      	
 				<tr>
                     <td>{{partido.0.idPartido}}</td>
-                    <td>{{partido.0.nombre}}</td>
-              		<td>{{partido.1.nombre}}</td>
+                      		<td{% if partido.0.pago %}
+						 style="color:green"
+						 {% else %}
+						 style="color:red"
+						 {% endif %}>{{partido.0.nombre}}</td>
+                      		<td{% if partido.1.pago %}
+						 style="color:green"
+						 {% else %}
+						 style="color:red"
+						 {% endif %}>{{partido.1.nombre}}</td>
 					{% if partido.0.idPartido  in listPartidosCompletos %}
 	              		<td>
 							<button id=Completar{{partido.0.idPartido}} type="button" value={{partido.0.idPartido}} class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" onclick="formCompletar({{partido.0.idPartido}},{{listaPartidos.0.0.0.torneo}})" disabled>Completo</button>

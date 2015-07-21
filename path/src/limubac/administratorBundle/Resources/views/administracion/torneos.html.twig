@@ -12,11 +12,12 @@
         </div>
       </div>
     </div>
+
     {% if is_granted('ROLE_ADMIN')%}
     <div class="row-fluid">
       <div class="col-md-12 borBox wellDark btn-dashboard">
         <div class="formAnotacion form-group">
-          <h3 class="col-md-7">Accion</h3>
+          <h3 class="col-md-7">Acciones</h3>
           <div class="btn-group sharp pull-right">
             <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_categorias')}}"><i class="glyphicon-plus glyphicon"></i> Categorias</a>
             <a class="btn btn-primary btn-info" href="{{url('limubacadministrator_crearTorneo')}}"><i class="glyphicon-plus glyphicon"></i> Crear Torneo</a>
@@ -132,12 +133,6 @@
                 {% if is_granted('ROLE_USER')%}
                   {% for entitie in entities %}
                     {% if date(entitie.fTermino|date('Y-m-d')) >= date() %}
-
-
-                             
-                      
-                    
-
 
                   <tr>
                     

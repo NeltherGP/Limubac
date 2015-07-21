@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="limubac\administratorBundle\Entity\User" table="user">
+    <indexes>
+      <index name="id" columns="id"/>
+    </indexes>
     <unique-constraints>
-      <unique-constraint name="id" columns="id"/>
+      <unique-constraint name="username" columns="username"/>
     </unique-constraints>
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
@@ -17,22 +20,22 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="salt" type="string" column="salt" length="255" nullable="true">
+    <field name="salt" type="string" column="salt" length="50" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="role" type="string" column="role" length="40" nullable="true">
+    <field name="roles" type="string" column="roles" length="50" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="name" type="string" column="name" length="200" nullable="true">
+    <field name="name" type="string" column="name" length="100" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="address" type="string" column="address" length="255" nullable="true">
+    <field name="address" type="string" column="address" length="150" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
@@ -47,6 +50,6 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="isactive" type="boolean" column="isActive" nullable="true"/>
+    <field name="isActive" type="boolean" column="is_active" nullable="true"/>
   </entity>
 </doctrine-mapping>

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 class TorneoSelectController extends Controller{
   function seleccionarTorneoAction (){
 
+
     return $this->render('limubacadministratorBundle:administracion:seleccionTorneo.html.twig');
   }
 }

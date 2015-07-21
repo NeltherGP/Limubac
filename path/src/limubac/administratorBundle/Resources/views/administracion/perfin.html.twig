@@ -56,9 +56,12 @@
 	  		<P ALIGN=center>Mi perfil </P>
 	  	</h1>
 	  </legend>
-	  <h3>Nombre</h3> <p> Nombre completo </p>
-	  <h3>Correo</h3> <p> Correo registrado</p>
-	  <h3>Status</h3> <p> Status de la cuenta</p>
+	  <h3>Nombre</h3> <p> {{ app.user.name }} </p>
+	  <h3>Correo</h3> <p> {{ app.user.email }}</p>
+	  <h3>Telefono</h3> <p> {{ app.user.phone }}</p>
+	  <h3>Direccion</h3> <p> {{ app.user.address }}</p>
+	  <h3>Status</h3> <p> {% if app.user.isActive == true %} Activo {% elseif app.user.isActive == false %} Inactivo {% endif %}</p>
+
 	<legend>
 	  	<h1>
 	  		<P ALIGN=center>Información de la Liga</P>

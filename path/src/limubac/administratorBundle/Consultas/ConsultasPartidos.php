@@ -5,7 +5,7 @@ namespace limubac\administratorBundle\consultas;
 class ConsultasPartidos{
 
   function listPartidosByTorneo($idTorneo,$manager,$jornada){
-  		$consulta = $manager ->createQuery('SELECT pa.idPartido, e.nombre, j.side, pa.jornada, IDENTITY(pa.idTorneo) as torneo, j.resultado, j.primero, j.segundo, j.tercero, j.cuarto, pa.commited from limubacadministratorBundle:Equipo e
+  		$consulta = $manager ->createQuery('SELECT pa.idPartido, e.nombre, j.side, pa.jornada, IDENTITY(pa.idTorneo) as torneo, j.resultado, j.primero, j.segundo, j.tercero, j.cuarto, pa.commited, e.idEquipo from limubacadministratorBundle:Equipo e
   											    join  limubacadministratorBundle:Juegan j with e.idEquipo=j.idEquipo
 
   											                    join limubacadministratorBundle:Partido pa with pa.idPartido=j.idPartido

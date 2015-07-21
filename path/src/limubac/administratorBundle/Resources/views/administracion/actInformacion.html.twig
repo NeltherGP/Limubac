@@ -1,57 +1,46 @@
 {% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
 
 {% block PageContent %}
-{% if mensaje is defined %}
-    <div class="alert alert-success">{{ mensaje }}</div>    
-{% endif %}
-
-<legend> <P ALIGN=center> Sección para actualizar la información de usuario </P></legend>
-
-	<h3> <P ALIGN=center> Usuario actual: "{{nombre_actual}}" </P></h3>	
-
-<div class="row">
-	
-<div class="col-md-4"></div>
-	<div class="col-md-4">
-		<form class="form-horizontal" background-image="entrada.jpg" action="{{path('limubacadministrator_actualizarInformacion')}}" role='form' method='POST'>
-
-			<div class="control-group" align="center">
-			  <label class="control-label" for="correo"><h3>Correo</h3></label>
-			  <div class="controls">
-			    <input id="actInf" name="correo" type="email" value="{{correo_actual}}" class="input-xlarge">
 
 
-			  </div>
-			</div>
+<form class="form-horizontal" role="form" action="{{path('limubacadministrator_editUser')}}">
+    <div class="row-fluid">
+      <div class="col-md-12 borBox well btn-dashboard">     
+        <div class="formAnotacion form-group">
+          <div class="col-md-6 tLeft" >
+            <h1>Editar usuario</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    
 
-			<div class="control-group" align="center">
-			  <label class="control-label" for="direccion"><h3>Dirección</h3></label>
-			  <div class="controls">
-			    <input id="actInf" name="direccion" type="text" value="{{direccion_actual}}" class="input-xlarge" >
-			  </div>
-			</div>
+  <div class="row-fluid">  
+    <div class="col-md-7">
+            {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+              {{form_widget(form.id, {value : editar[0]['id']} ) }}
+              <h3>Nombre:</h3>{{form_widget(form.name, {value : editar[0]['name']} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Username:</h3>{{form_widget(form.username, {value : editar[0]['username']} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Password:</h3>{{form_widget(form.password, {value : editar[0]['password']} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Email:</h3>{{form_widget(form.email, {value : editar[0]['email']} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Status:</h3>{{form_widget(form.isActive, {value : editar[0]['isActive']} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Address:</h3>{{form_widget(form.address, {value : editar[0]['address']} )}}<font color="red"> *</font>
+              <br><br>
+              <h3>Roles:</h3>{{form_widget(form.roles, {value : editar[0]['roles']} )}}<font color="red"> *</font>
+              <br><br>
+            {{form_end(form)}}
+    </div>
 
-			<div class="control-group" align="center">
-			  <label class="control-label" for="telefono"><h3>Telefono</h3></label>
-			  <div class="controls">
-			    <input id="actInf" name="telefono" type="text" value="{{telefono_actual}}" class="input-xlarge" >
-			  </div>
-			</div>
-
-			<div align="center">
-				<!-- Button (Double) -->
-				<div class="control-group">
-				  <div class="controls">
-				    <button id="actInfo" name="guardar" >Guardar</button>
-				    
-				  </div>
-				</div>  
-				
-			</div>
-		</form>
-	</div>
-
-</div>
-
+    <div class="col-md-2 tRight">
+          <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Editar" name="jugador[{{editar[0]['name']}}]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
+        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_torneos')}}"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
+    </div>
+  </div>
+</form>
 
 {% endblock %}
