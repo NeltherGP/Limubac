@@ -73,11 +73,11 @@ class Equipo
     private $auxiliar;
 
     /**
-     * @var \limubac\administratorBundle\Entity\Jugador
+     * @var \limubac\administratorBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="representante", referencedColumnName="id_jugador")
+     *   @ORM\JoinColumn(name="representante", referencedColumnName="id")
      * })
      */
     private $representante;
@@ -251,11 +251,11 @@ class Equipo
     /**
      * Set representante
      *
-     * @param \limubac\administratorBundle\Entity\Jugador $representante
+     * @param \limubac\administratorBundle\Entity\User $representante
      *
      * @return Equipo
      */
-    public function setRepresentante(\limubac\administratorBundle\Entity\Jugador $representante = null)
+    public function setRepresentante(\limubac\administratorBundle\Entity\User $representante = null)
     {
         $this->representante = $representante;
 
@@ -265,7 +265,7 @@ class Equipo
     /**
      * Get representante
      *
-     * @return \limubac\administratorBundle\Entity\Jugador
+     * @return \limubac\administratorBundle\Entity\User
      */
     public function getRepresentante()
     {

@@ -42,9 +42,9 @@
         <join-column name="auxiliar" referenced-column-name="id_jugador"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="representante" target-entity="Jugador" fetch="LAZY">
+    <many-to-one field="representante" target-entity="User" fetch="LAZY">
       <join-columns>
-        <join-column name="representante" referenced-column-name="id_jugador"/>
+        <join-column name="representante" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="idCapitan" target-entity="Jugador" fetch="LAZY">
