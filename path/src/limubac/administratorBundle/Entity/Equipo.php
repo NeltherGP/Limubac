@@ -24,14 +24,14 @@ class Equipo
      *
      * @ORM\Column(name="registrado", type="boolean", nullable=false)
      */
-    private $registrado;
+    private $registrado = '0';
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="modificable", type="boolean", nullable=false)
      */
-    private $modificable;
+    private $modificable = '1';
 
     /**
      * @var integer
@@ -73,11 +73,11 @@ class Equipo
     private $auxiliar;
 
     /**
-     * @var \limubac\administratorBundle\Entity\User
+     * @var \limubac\administratorBundle\Entity\Jugador
      *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="representante", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="representante", referencedColumnName="id_jugador")
      * })
      */
     private $representante;
@@ -98,6 +98,7 @@ class Equipo
      * Set nombre
      *
      * @param string $nombre
+     *
      * @return Equipo
      */
     public function setNombre($nombre)
@@ -110,7 +111,7 @@ class Equipo
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -121,6 +122,7 @@ class Equipo
      * Set registrado
      *
      * @param boolean $registrado
+     *
      * @return Equipo
      */
     public function setRegistrado($registrado)
@@ -133,7 +135,7 @@ class Equipo
     /**
      * Get registrado
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getRegistrado()
     {
@@ -144,6 +146,7 @@ class Equipo
      * Set modificable
      *
      * @param boolean $modificable
+     *
      * @return Equipo
      */
     public function setModificable($modificable)
@@ -156,7 +159,7 @@ class Equipo
     /**
      * Get modificable
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getModificable()
     {
@@ -166,7 +169,7 @@ class Equipo
     /**
      * Get idEquipo
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdEquipo()
     {
@@ -177,6 +180,7 @@ class Equipo
      * Set idCategoria
      *
      * @param \limubac\administratorBundle\Entity\Categoria $idCategoria
+     *
      * @return Equipo
      */
     public function setIdCategoria(\limubac\administratorBundle\Entity\Categoria $idCategoria = null)
@@ -189,7 +193,7 @@ class Equipo
     /**
      * Get idCategoria
      *
-     * @return \limubac\administratorBundle\Entity\Categoria 
+     * @return \limubac\administratorBundle\Entity\Categoria
      */
     public function getIdCategoria()
     {
@@ -200,6 +204,7 @@ class Equipo
      * Set idRama
      *
      * @param \limubac\administratorBundle\Entity\RamaEquipo $idRama
+     *
      * @return Equipo
      */
     public function setIdRama(\limubac\administratorBundle\Entity\RamaEquipo $idRama = null)
@@ -212,7 +217,7 @@ class Equipo
     /**
      * Get idRama
      *
-     * @return \limubac\administratorBundle\Entity\RamaEquipo 
+     * @return \limubac\administratorBundle\Entity\RamaEquipo
      */
     public function getIdRama()
     {
@@ -223,6 +228,7 @@ class Equipo
      * Set auxiliar
      *
      * @param \limubac\administratorBundle\Entity\Jugador $auxiliar
+     *
      * @return Equipo
      */
     public function setAuxiliar(\limubac\administratorBundle\Entity\Jugador $auxiliar = null)
@@ -235,7 +241,7 @@ class Equipo
     /**
      * Get auxiliar
      *
-     * @return \limubac\administratorBundle\Entity\Jugador 
+     * @return \limubac\administratorBundle\Entity\Jugador
      */
     public function getAuxiliar()
     {
@@ -245,15 +251,11 @@ class Equipo
     /**
      * Set representante
      *
-<<<<<<< HEAD
      * @param \limubac\administratorBundle\Entity\Jugador $representante
-=======
-     * @param \limubac\administratorBundle\Entity\User $representante
      *
->>>>>>> c49cc39d52e15da2bb76d4e36cffe5ef4243b02f
      * @return Equipo
      */
-    public function setRepresentante(\limubac\administratorBundle\Entity\User $representante = null)
+    public function setRepresentante(\limubac\administratorBundle\Entity\Jugador $representante = null)
     {
         $this->representante = $representante;
 
@@ -263,11 +265,7 @@ class Equipo
     /**
      * Get representante
      *
-<<<<<<< HEAD
-     * @return \limubac\administratorBundle\Entity\Jugador 
-=======
-     * @return \limubac\administratorBundle\Entity\User
->>>>>>> c49cc39d52e15da2bb76d4e36cffe5ef4243b02f
+     * @return \limubac\administratorBundle\Entity\Jugador
      */
     public function getRepresentante()
     {
@@ -278,6 +276,7 @@ class Equipo
      * Set idCapitan
      *
      * @param \limubac\administratorBundle\Entity\Jugador $idCapitan
+     *
      * @return Equipo
      */
     public function setIdCapitan(\limubac\administratorBundle\Entity\Jugador $idCapitan = null)
@@ -290,7 +289,7 @@ class Equipo
     /**
      * Get idCapitan
      *
-     * @return \limubac\administratorBundle\Entity\Jugador 
+     * @return \limubac\administratorBundle\Entity\Jugador
      */
     public function getIdCapitan()
     {

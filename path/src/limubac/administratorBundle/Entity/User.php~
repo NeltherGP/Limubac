@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"})})
+ * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})}, indexes={@ORM\Index(name="id", columns={"id"})})
  * @ORM\Entity
  */
 class User
@@ -29,23 +29,23 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="salt", type="string", length=50, nullable=true)
      */
-    private $email;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_active", type="boolean", nullable=true)
-     */
-    private $isActive;
+    private $salt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=50, nullable=true)
+     * @ORM\Column(name="roles", type="string", length=50, nullable=true)
      */
-    private $salt;
+    private $roles;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
+     */
+    private $name;
 
     /**
      * @var string
@@ -64,16 +64,16 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="roles", type="string", length=50, nullable=true)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
-    private $roles;
+    private $email;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=true)
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
      */
-    private $name;
+    private $isActive;
 
     /**
      * @var integer
@@ -86,3 +86,4 @@ class User
 
 
 }
+

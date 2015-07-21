@@ -34,10 +34,18 @@
 
 		      	</ul>
 		      	<ul class="nav navbar-nav navbar-centre">
-		      			<li class="inactive"><a href="">    -------------------------------------------------------------------------------------------------------- SISTEMA LIMUBAC --------------------------------------------------------------------------------------------------------</a></li>
+		      			<!--<li class="inactive"><a href="">    -------------------------------------------------------------------------------------------------------- SISTEMA LIMUBAC --------------------------------------------------------------------------------------------------------</a></li>-->
 		      	</ul>
 
 			    <ul class="nav navbar-nav navbar-right">
+			    {% if is_granted('ROLE_ADMIN') %}
+			    	<li class="inactive"><a href="{{url('limubacadministrator_selectTorneo')}}">  PARTIDOS</a></li>
+	      			<li class="inactive"><a href="{{url('limubacadministrator_equipos')}}">  EQUIPOS</a></li>
+	      			<li class="inactive"><a href="{{url('limubacadministrator_jugadoresAdmin')}}">  USUARIOS</a></li>
+	      			<li class="inactive"><a href="#">  ARBITROS</a></li>
+	      			<li class="inactive"><a href="{{url('limubacadministrator_torneos')}}">  TORNEOS</a></li>
+	      			<li class="inactive"><a href="{{url('limubacadministrator_finanzas')}}">  FINANZAS</a></li>
+	      		{% endif %}	
 			    {% if cancelar is defined%}
 			    <li class="dropdown">
 				    <a href="" onclick="history.back()">

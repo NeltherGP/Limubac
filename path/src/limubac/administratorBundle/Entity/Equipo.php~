@@ -24,14 +24,14 @@ class Equipo
      *
      * @ORM\Column(name="registrado", type="boolean", nullable=false)
      */
-    private $registrado;
+    private $registrado = '0';
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="modificable", type="boolean", nullable=false)
      */
-    private $modificable;
+    private $modificable = '1';
 
     /**
      * @var integer
@@ -73,11 +73,11 @@ class Equipo
     private $auxiliar;
 
     /**
-     * @var \limubac\administratorBundle\Entity\User
+     * @var \limubac\administratorBundle\Entity\Jugador
      *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="representante", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="representante", referencedColumnName="id_jugador")
      * })
      */
     private $representante;
@@ -94,3 +94,4 @@ class Equipo
 
 
 }
+

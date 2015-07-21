@@ -3,15 +3,14 @@
 namespace limubac\administratorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * User
  *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"})})
+ * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})}, indexes={@ORM\Index(name="id", columns={"id"})})
  * @ORM\Entity
  */
-class User implements AdvancedUserInterface
+class User
 {
     /**
      * @var string
@@ -30,23 +29,23 @@ class User implements AdvancedUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="salt", type="string", length=50, nullable=true)
      */
-    private $email;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_active", type="boolean", nullable=true)
-     */
-    private $isActive;
+    private $salt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=50, nullable=true)
+     * @ORM\Column(name="roles", type="string", length=50, nullable=true)
      */
-    private $salt;
+    private $roles;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
+     */
+    private $name;
 
     /**
      * @var string
@@ -65,16 +64,16 @@ class User implements AdvancedUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="roles", type="string", length=50, nullable=true)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
-    private $roles;
+    private $email;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=true)
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
      */
-    private $name;
+    private $isActive;
 
     /**
      * @var integer
@@ -86,19 +85,12 @@ class User implements AdvancedUserInterface
     private $id;
 
 
-    public function __construct()
-    {
-        $this->isActive = true;
-        $this->salt = md5(uniqid(null, true));
-        $this->roles = new ArrayCollection();
-    }
-
-
 
     /**
      * Set username
      *
      * @param string $username
+     *
      * @return User
      */
     public function setUsername($username)
@@ -111,7 +103,7 @@ class User implements AdvancedUserInterface
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {
@@ -122,6 +114,7 @@ class User implements AdvancedUserInterface
      * Set password
      *
      * @param string $password
+     *
      * @return User
      */
     public function setPassword($password)
@@ -134,7 +127,7 @@ class User implements AdvancedUserInterface
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -142,55 +135,10 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     * @return User
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
      * Set salt
      *
      * @param string $salt
+     *
      * @return User
      */
     public function setSalt($salt)
@@ -203,7 +151,7 @@ class User implements AdvancedUserInterface
     /**
      * Get salt
      *
-     * @return string 
+     * @return string
      */
     public function getSalt()
     {
@@ -211,55 +159,10 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Set address
-     *
-     * @param string $address
-     * @return User
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string 
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * Set phone
-     *
-     * @param integer $phone
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return integer 
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
      * Set roles
      *
      * @param string $roles
+     *
      * @return User
      */
     public function setRoles($roles)
@@ -272,19 +175,18 @@ class User implements AdvancedUserInterface
     /**
      * Get roles
      *
-     * @return string 
+     * @return string
      */
     public function getRoles()
     {
-       
-        return array($this->roles);
-        //return array('ROLE_USER');
+        return $this->roles;
     }
 
     /**
      * Set name
      *
      * @param string $name
+     *
      * @return User
      */
     public function setName($name)
@@ -297,7 +199,7 @@ class User implements AdvancedUserInterface
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -305,36 +207,108 @@ class User implements AdvancedUserInterface
     }
 
     /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return User
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param integer $phone
+     *
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return integer
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-    public function isAccountNonExpired()
-    {
-            return true;
-    }
-
-    public function isAccountNonLocked()
-    {
-            return true;
-    }
-
-    public function isCredentialsNonExpired()
-    {
-            return true;
-    }
-
-    public function isEnabled()
-    {
-        return $this->isActive;
     }
 }

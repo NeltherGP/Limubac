@@ -14,26 +14,42 @@
     <field name="hInicio" type="time" column="h_inicio" nullable="true"/>
     <field name="hTermino" type="time" column="h_termino" nullable="true"/>
     <field name="commited" type="boolean" column="commited" nullable="true"/>
-    <field name="jornada" type="integer" column="jornada" nullable="true"/>
-    <field name="rama" type="integer" column="rama" nullable="true"/>
-    <field name="categoria" type="integer" column="categoria" nullable="true"/>
-    <field name="numpar" type="integer" column="numpar" nullable="true"/>
-    <many-to-one field="idEstatus" target-entity="Estatus">
+    <field name="jornada" type="integer" column="jornada" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="rama" type="integer" column="rama" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="categoria" type="integer" column="categoria" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="numpar" type="integer" column="numpar" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idEstatus" target-entity="Estatus" fetch="LAZY">
       <join-columns>
         <join-column name="id_estatus" referenced-column-name="id_estatus"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idSede" target-entity="Sede">
+    <many-to-one field="idSede" target-entity="Sede" fetch="LAZY">
       <join-columns>
         <join-column name="id_sede" referenced-column-name="id_sede"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idArbitran" target-entity="Arbitran">
+    <many-to-one field="idArbitran" target-entity="Arbitran" fetch="LAZY">
       <join-columns>
         <join-column name="id_arbitran" referenced-column-name="id_arbitran"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idTorneo" target-entity="Torneo">
+    <many-to-one field="idTorneo" target-entity="Torneo" fetch="LAZY">
       <join-columns>
         <join-column name="id_torneo" referenced-column-name="id_torneo"/>
       </join-columns>

@@ -22,16 +22,9 @@ security:
     providers:
         chain_provider:
             chain:
-                providers: [user_db, default_provider]
+                providers: [user_db]
         user_db:
             entity: { class: limubac\administratorBundle\Entity\User, property: username }
-        default_provider:
-            memory:
-                users:
-                    #Rick: { password: 1234, roles: ['ROLE_ADMIN']}
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-                    rock: { password: 4880957a2a75f398f689a09a8f4042edac1b6736, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
         #default:
