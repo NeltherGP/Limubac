@@ -42,7 +42,7 @@
   });
   </script>
   {% endblock documentReady %}
-  <form class="form-horizontal" role="form" action="../app_dev.php/editar">
+  <form class="form-horizontal" role="form" action="../app_dev.php/editar" enctype="multipart/form-data" id="form" method="post">
     
     <div class="row-fluid">
       <div class="page-header">
@@ -110,14 +110,14 @@
                         <li>Debe pesar menos de 300kb.</li>
                         </ul>
                       </div>
-                      <form action="" enctype="multipart/form-data" id="form" method="post" name="form">
+                      <!--<form action=""  name="form">-->
                         <div id="upload">
                           <input id="file" name="file" type="file">
                           <input id="idi" name="idi" type="hidden" value="{{edita[0]['idJugador']}}">
                         </div>
                         <br>
                         <button class="btn btn-primary btn-info" type="submit" id="fotosup" name="fotosup"><i class="glyphicon-ok glyphicon"></i> Subir fotografia</button>
-                      </form>
+                      <!--</form>-->
                     </div>
                     <div id="clear"></div>
                     <div id="message"></div>
