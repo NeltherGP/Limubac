@@ -17,6 +17,11 @@
         <option name="fixed"/>
       </options>
     </field>
+    <field name="representante" type="string" column="representante" length="11" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <field name="registrado" type="boolean" column="registrado" nullable="false">
       <options>
         <option name="default">0</option>
@@ -40,11 +45,6 @@
     <many-to-one field="auxiliar" target-entity="Jugador" fetch="LAZY">
       <join-columns>
         <join-column name="auxiliar" referenced-column-name="id_jugador"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="representante" target-entity="Jugador" fetch="LAZY">
-      <join-columns>
-        <join-column name="representante" referenced-column-name="id_jugador"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="idCapitan" target-entity="Jugador" fetch="LAZY">
