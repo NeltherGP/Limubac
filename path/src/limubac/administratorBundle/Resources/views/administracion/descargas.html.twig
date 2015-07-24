@@ -60,7 +60,11 @@
                 <tbody>
                   {% for dat in datos %}
                     <tr>
-                      <td> {{dat.nombre}} </td>
+                      <td> 
+                        <a href="{{ asset ('\upload/documentos/' ~ dat.nombre ~ '.' ~ dat.tipo) }}" target="_blank"> 
+                          {{dat.nombre}} 
+                        </a>
+                      </td>
                       <td> {{dat.tipo}} </td>
                       <td> {{dat.tamano ~ ' KB'}} </td>
                       <td> {{dat.fecha}} </td>
