@@ -10,9 +10,12 @@
 <div class="row">
     <div class="col-md-6">
         <div class="list-group">
+
+        {% if app.user.username is not defined %}
           <a href="{{url('limubacadministrator_nuevoUsuario')}}" class="list-group-item active">
-            <h3 class="list-group-item-heading">Solicitar ingreso</h3>
+            <h3 class="list-group-item-heading">Solicitar ingreso </h3>
             <p class="list-group-item-text">Si quieres ingresar a la Liga como representante de equipo o alguno de los otros puestos disponibles.</p>
+        {% endif %}
             
           </a>
           <p></p>
