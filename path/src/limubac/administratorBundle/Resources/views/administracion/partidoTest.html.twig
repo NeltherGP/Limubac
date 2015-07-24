@@ -19,10 +19,11 @@
 				<th class= "text-center">Informacion</th>
                 <th class = "text-center">Hoja Anotacion</th>
                 <th class = "text-center">Imprimir hoja de anotaciones</th>
+
             </tr>
         </thead>
         <tbody>
-			{% for partido in listaPartidos%}                      	
+			{% for partido in listaPartidos%}
 				<tr>
                     <td>{{partido.0.idPartido}}</td>
                       		<td{% if partido.0.pago %}
@@ -57,6 +58,7 @@
 		                      		</button>
                             	</form>
 		                    </td>
+                        
                         {% endif %}
 					{% else %}
 						<td>

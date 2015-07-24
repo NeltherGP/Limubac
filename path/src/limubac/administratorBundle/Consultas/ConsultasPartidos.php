@@ -50,11 +50,7 @@ class ConsultasPartidos{
   $pj=$pj[0][1];
 	$pg=0;
 	$pp=0;
-  echo("PFE");
-  print_r($pfe);
-  echo("PCE");
-  print_r($pce);
-  echo("pj= ".$pj);
+  
 	for($par=0;$par<$pj;$par++){
     if(!empty($pfe) && !empty($pce)){
   		if( $pfe[$par]>$pce[$par])$pg++;
