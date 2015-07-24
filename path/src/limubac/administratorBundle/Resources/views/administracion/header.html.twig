@@ -41,10 +41,11 @@
 			    {% if is_granted('ROLE_ADMIN') %}
 			    	<li class="inactive"><a href="{{url('limubacadministrator_selectTorneo')}}">  PARTIDOS</a></li>
 	      			<li class="inactive"><a href="{{url('limubacadministrator_equipos')}}">  EQUIPOS</a></li>
-	      			<li class="inactive"><a href="{{url('limubacadministrator_jugadoresAdmin')}}">  USUARIOS</a></li>
+	      			<li class="inactive"><a href="{{url('limubacadministrator_jugadoresAdmin')}}">  JUGADORES</a></li>
 	      			<li class="inactive"><a href="#">  ARBITROS</a></li>
 	      			<li class="inactive"><a href="{{url('limubacadministrator_torneos')}}">  TORNEOS</a></li>
 	      			<li class="inactive"><a href="{{url('limubacadministrator_finanzas')}}">  FINANZAS</a></li>
+	      			<li class="inactive"><a href="{{url('limubacadministrator_showUser')}}">  USUARIOS</a></li>
 	      		{% endif %}	
 			    {% if cancelar is defined%}
 			    <li class="dropdown">

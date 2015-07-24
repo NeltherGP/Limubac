@@ -24,14 +24,10 @@
 	    <p class="list-group-item-text">Revisa los torneos activos, estadisticas y otras cosas mas referente a ello.</p>
 	  </a>
 	  <p></p>
-	   <a href="{{url('limubacadministrator_actualizarContrasena')}}" class="list-group-item active">
-	    <h4 class="list-group-item-heading">Seguridad</h4>
-	    <p class="list-group-item-text">Cambia tu contraseña.</p>
-	  </a>
-	  <p></p>
-	  <a href="{{url('limubacadministrator_actualizarInformacion')}}" class="list-group-item active">
+	   
+	  <a href="{{url('limubacadministrator_actualizarInformacion')}}" class="list-group-item active" value="{{ app.user.username }}" >
 	    <h4 class="list-group-item-heading">Mi información</h4>
-	    <p class="list-group-item-text">Si cambiaste de dirección, telefono o correo, cambialo en este apartado, es importante tener actualizada tu información</p>
+	    <p class="list-group-item-text">Si cambiaste de dirección, telefono, correo, cambialo en este apartado, es importante tener actualizada tu información. Tambien tu contraseña </p>
 	  </a>
 	  <p></p>
 	  <a href="#" class="list-group-item active">

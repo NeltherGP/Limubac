@@ -3,14 +3,15 @@
 namespace limubac\administratorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * User
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})}, indexes={@ORM\Index(name="id", columns={"id"})})
  * @ORM\Entity
  */
-class User
+class User implements AdvancedUserInterface
 {
     /**
      * @var string
@@ -83,6 +84,15 @@ class User
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+
+    public function __construct()
+    {
+        $this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
+        //$this->roles = new ArrayCollection();
+    }
+
 
 
 
@@ -179,7 +189,7 @@ class User
      */
     public function getRoles()
     {
-        return $this->roles;
+        return array($this->roles);
     }
 
     /**
@@ -311,4 +321,30 @@ class User
     {
         return $this->id;
     }
+
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function isAccountNonExpired()
+    {
+            return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+            return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+            return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+
 }

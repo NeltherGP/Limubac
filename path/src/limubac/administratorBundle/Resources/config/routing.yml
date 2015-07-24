@@ -189,4 +189,10 @@ limubacadministrator_showUser:
   path: /users/mostrar
   defaults: { _controller: limubacadministratorBundle:sessions:showUser}
 
+limubacadministrator_descargas:
+    path:     /descargas
+    defaults: { _controller: limubacadministratorBundle:Default:descargas}
 
+limubacadministrator_subir:
+    path:     /subir
+    defaults: { _controller: limubacadministratorBundle:Default:subir}

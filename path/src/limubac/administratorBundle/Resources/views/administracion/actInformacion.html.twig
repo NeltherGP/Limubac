@@ -20,25 +20,30 @@
             {{form_start(form, {attr: {novalidate: 'novalidate'}}) }}
               {{form_widget(form.id, {value : editar[0]['id']} ) }}
               <h3>Nombre:</h3>{{form_widget(form.name, {value : editar[0]['name']} )}}<font color="red"> *</font>
-              <br><br>
+              
               <h3>Username:</h3>{{form_widget(form.username, {value : editar[0]['username']} )}}<font color="red"> *</font>
-              <br><br>
+              
               <h3>Password:</h3>{{form_widget(form.password, {value : editar[0]['password']} )}}<font color="red"> *</font>
-              <br><br>
+              
+              
               <h3>Email:</h3>{{form_widget(form.email, {value : editar[0]['email']} )}}<font color="red"> *</font>
-              <br><br>
+              
               <h3>Status:</h3>{{form_widget(form.isActive, {value : editar[0]['isActive']} )}}<font color="red"> *</font>
-              <br><br>
+              
               <h3>Address:</h3>{{form_widget(form.address, {value : editar[0]['address']} )}}<font color="red"> *</font>
-              <br><br>
-              <h3>Roles:</h3>{{form_widget(form.roles, {value : editar[0]['roles']} )}}<font color="red"> *</font>
-              <br><br>
+              
+               <h3>Telefono:</h3>{{form_widget(form.phone, {value : editar[0]['phone']} )}}<font color="red"> *</font>
+
+              <h3>Roles:</h3>{{form_widget(form.roles, {value : editar[0]['roles']}) }}<font color="red"> *</font>
+              
+              
+             
             {{form_end(form)}}
     </div>
 
     <div class="col-md-2 tRight">
           <button class="btn btn-large btn-success sharp sp" type="submit" id="jugador_Editar" name="jugador[{{editar[0]['name']}}]"><i class="glyphicon-ok glyphicon"></i> Salvar</button>
-        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_torneos')}}"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
+        <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_showUser')}}"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
     </div>
   </div>
 </form>

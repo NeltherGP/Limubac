@@ -14,7 +14,14 @@
 	//include 'Contacto.php';
 
 
+
+
+
 	class sessionsController extends Controller{
+
+
+
+
 //------------------------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------INICIAR SESION-----------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
@@ -83,8 +90,29 @@
    					$rol = $_POST["seleccion_nuevo"];
    					$curp = $_POST["curp_nuevo"];
    					$mensajeAdicional = $_POST["mensaje_nuevo"];
+   					
    					$mensaje=$mensaje."Nombre: ".$nombre." <br>Telefono: ".$telefono." <br>Direccion: ".$direccion." <br>Correo: ".$correo." <br>Clave: ".$clave2." <br>Rol deseado: ".$rol." <br>Mensaje adicional: ".$mensajeAdicional;
-   				
+   					
+   					$mailer = $this->get('mailer');
+					$message = $mailer->createMessage()
+			        ->setSubject($asunto)
+			        ->setFrom('sistemalimubac@gmail.com')
+					->setTo('limubac@gmail.com')
+			        //->setTo($correo)
+			        ->setBody($mensaje,'text/html');
+			    	$mailer->send($message);
+
+			    	$mensaje="Bienvenido a la Limubac, en breve el administrador se pondrá en contacto contigo.<br>Gracias y ¡Juguemos basquet!";
+			    	$mailer = $this->get('mailer');
+					$message = $mailer->createMessage()
+			        ->setSubject($asunto)
+			        ->setFrom('sistemalimubac@gmail.com')
+					->setTo($correo)
+			        //->setTo($correo)
+			        ->setBody($mensaje,'text/html');
+			    	$mailer->send($message);		
+
+
 $user = new User();
 
 $factory = $this->get('security.encoder_factory');
@@ -140,7 +168,7 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
 						$user->setAddress($direccion);
 						$user->setPhone($telefono);
 					$user->setEmail($correo);
-					$user->setIsactive(true);
+					$user->setIsactive(false);
 
 
 
@@ -151,7 +179,7 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
    					$em->persist($user);
    					$em->flush();
 
-   					enviaCorreo( $asunto, $correo , $mensaje, $this);
+   					//enviaCorreo( $asunto, $correo , $mensaje, $this);
    					return $this->render(
 		            'limubacadministratorBundle:administracion:adminPanel.html.twig',  array('mensaje' => $validado)
 	        		);
@@ -241,7 +269,7 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
 	            $user = new User();
 	            $form = $this->createForm(new UserType(), $user);
 	            $ed = $_REQUEST['editar'][0];
-	            print_r($ed);
+	            //print_r($ed);
 
 
 	            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
@@ -251,7 +279,7 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
 	            ->setParameter('word', $ed)
 	            ->getQuery();
 	            $resul = $queryEdit->getResult();
-	            print_r($resul);
+	            //print_r($resul);
 
 	            return $this->render(
 	            		'limubacadministratorBundle:administracion:actInformacion.html.twig',
@@ -279,15 +307,26 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
 
 			        return $this->render('limubacadministratorBundle:administracion:mostrarUsuarios.html.twig',array('entities' => $entities));
 		        }else{
+				$user = new User();
+	            $form = $this->createForm(new UserType(), $user);
+	            $username = $this->getUser()->getUsername(); 
+	            //print_r($ed);
+
+
+	            $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
+	            $queryEdit = $repository->createQueryBuilder('e')
+	            ->select('e.id','e.name','e.username','e.password','e.email','e.isActive','e.address','e.phone','e.roles')
+	            ->where('e.username = :word')
+	            ->setParameter('word', $username)
+	            ->getQuery();
+	            $resul = $queryEdit->getResult();
+	            //print_r($resul);
+
 				return $this->render(
-		            'limubacadministratorBundle:administracion:actInformacion.html.twig',
-		            array(
-		            	'nombre_actual' => $nombre,
-		            	'correo_actual' => $correo,
-		            	'direccion_actual' => $direccion,
-		            	'telefono_actual'=> $telefono,
-		            	'cancelar' => $cancelar
-		            	)
+		            'limubacadministratorBundle:administracion:actInformacion.html.twig', array('mensaje' => $correcto,
+	            			'form' => $form->createView(),
+	            			'editar' => $resul)
+		            
 	        	);
 			}
 		}
@@ -301,15 +340,36 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
 
         $name = $upt['name'];
         $username = $upt['username'];
-        $password = $upt['password'];
+        $clave1 = $upt['password'];
+        if ($this->getUser()->getPassword() == $clave1) {
+        	//echo "Error1";
+        }else{
+        	//echo "Error2";
+
+        	$user = new User();
+
+			$factory = $this->get('security.encoder_factory');
+			$encoder = $factory->getEncoder($user);
+			$password = $encoder->encodePassword($clave1, $user->getSalt());
+        	
+        }
+
+
+
+
+
         $email = $upt['email'];
         $status = $upt['isActive'];
         $address = $upt['address'];
         $phone = $upt['phone'];
+
         $roles = $upt['roles'];
 
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:User');
         $queryAct = $repository->createQueryBuilder('z');
+
+if ($this->getUser()->getRoles() == 'ROLE_ADMIN') {
+	
         $q = $queryAct->update('limubacadministratorBundle:User', 'z')
             ->set('z.name', ':nom')
             ->set('z.username', ':usrnm')
@@ -329,11 +389,49 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
             ->setParameter('add', $address)
             ->setParameter('ph', $phone)
             ->setParameter('rl', $roles)
-            
             ->getQuery();
+}else{
+	$q = $queryAct->update('limubacadministratorBundle:User', 'z')
+            ->set('z.name', ':nom')
+            //->set('z.username', ':usrnm')
+            ->set('z.phone', ':ph')
+            ->set('z.password', ':pass')   
+            ->set('z.email', ':mail')
+            //->set('z.isActive', ':stts')
+            ->set('z.address', ':add')
+            //->set('z.roles', ':rl')
+            ->where('z.id= :idt')
+            ->setParameter('idt', $upt['id'])
+            ->setParameter('nom', $name)
+            //->setParameter('usrnm', $username)
+            ->setParameter('pass', $password)
+            ->setParameter('mail', $email)
+            //->setParameter('stts', $status)
+            ->setParameter('add', $address)
+            ->setParameter('ph', $phone)
+            //->setParameter('rl', $roles)
+            ->getQuery();
+	
+}
+
         	$resul = $q->execute();
 
-        return $this->redirect($this->generateUrl('limubacadministrator_showUser'));
+        	if ($this->get('security.context')->isGranted('ROLE_ADMIN')==true) {
+        		# code...
+        		return $this->redirect($this->generateUrl('limubacadministrator_showUser'));
+        	}else{
+        		return $this->redirect($this->generateUrl('limubacadministrator_miPerfil'));
+        	}
+
+        	//if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        		//$_SERVER['HTTP_REFERER'];
+        		//return $this->redirect($this->generateUrl('limubacadministrator_miPerfil'));
+    			//throw $this->createAccessDeniedException();
+			//}else{
+				return $_SERVER['HTTP_REFERER'];
+				//return $this->redirect($this->generateUrl('limubacadministrator_showUser'));
+			//}
+        
     }
 
     public function deleteUserAction(){
@@ -362,7 +460,16 @@ $password = $encoder->encodePassword($clave1, $user->getSalt());
 				$mensaje = $_POST["mensaje"];
 				$nombre = $_POST["nombre"];
 				$mensaje= $nombre." dice: \n".$mensaje;
-				enviaCorreo( $asunto, $correo , $mensaje, $this);
+				//enviaCorreo( $asunto, $correo , $mensaje, $this);
+
+				$mailer = $this->get('mailer');
+					$message = $mailer->createMessage()
+			        ->setSubject($asunto)
+			        ->setFrom('sistemalimubac@gmail.com')
+					->setBCC('limubac@gmail.com')
+			        ->setTo($correo)
+			        ->setBody($mensaje,'text/html');
+			    	$mailer->send($message);	
 				    
 
 
