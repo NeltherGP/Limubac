@@ -20,6 +20,13 @@ class Equipo
     private $nombre;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="representante", type="string", length=11, nullable=false)
+     */
+    private $representante;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="registrado", type="boolean", nullable=false)
@@ -77,16 +84,6 @@ class Equipo
      *
      * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="representante", referencedColumnName="id_jugador")
-     * })
-     */
-    private $representante;
-
-    /**
-     * @var \limubac\administratorBundle\Entity\Jugador
-     *
-     * @ORM\ManyToOne(targetEntity="limubac\administratorBundle\Entity\Jugador")
-     * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_capitan", referencedColumnName="id_jugador")
      * })
      */
@@ -116,6 +113,30 @@ class Equipo
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set representante
+     *
+     * @param string $representante
+     *
+     * @return Equipo
+     */
+    public function setRepresentante($representante)
+    {
+        $this->representante = $representante;
+
+        return $this;
+    }
+
+    /**
+     * Get representante
+     *
+     * @return string
+     */
+    public function getRepresentante()
+    {
+        return $this->representante;
     }
 
     /**
@@ -246,30 +267,6 @@ class Equipo
     public function getAuxiliar()
     {
         return $this->auxiliar;
-    }
-
-    /**
-     * Set representante
-     *
-     * @param \limubac\administratorBundle\Entity\Jugador $representante
-     *
-     * @return Equipo
-     */
-    public function setRepresentante(\limubac\administratorBundle\Entity\Jugador $representante = null)
-    {
-        $this->representante = $representante;
-
-        return $this;
-    }
-
-    /**
-     * Get representante
-     *
-     * @return \limubac\administratorBundle\Entity\Jugador
-     */
-    public function getRepresentante()
-    {
-        return $this->representante;
     }
 
     /**

@@ -807,7 +807,7 @@ $queryRamas = $repository->createQueryBuilder('l')
     //FINAL CONTROLADOR TORNEO
 
 
-    //****************************INICIO CONTRALADOR FINANZAS****************************
+    //****************************INICIO CONTROLADOR FINANZAS****************************
     public function finanzasAction(){
         $repository = $this->getDoctrine()->getRepository('limubacadministratorBundle:Torneo');
             $querytorn = $repository->createQueryBuilder('e')
@@ -943,5 +943,85 @@ $queryRamas = $repository->createQueryBuilder('l')
 
     	return $this->redirect($this->generateUrl('limubacadministrator_finanzas'));
     }
-    //****************************FINAL CONTRALADOR FINANZAS****************************
+    //****************************FINAL CONTROLADOR FINANZAS****************************
+
+	//****************************INICIO CONTROLADOR DESCARGAS****************************    
+	public function descargasAction(){
+		$dr = __DIR__.'/../../../../web/upload/documentos/';
+		$dir = opendir($dr);
+		$archivo = array();
+		$cont = 0;
+		while ($arch = readdir($dir)){
+			if ($arch != '.' && $arch != '..'){
+				$v_arc_tem = $arch; //imagen.png
+				list($v_name,$v_ext) = explode(".",$v_arc_tem);
+				
+				$archivo[$cont]['nombre'] = $v_name;
+				$archivo[$cont]['tipo'] = $v_ext;
+				$archivo[$cont]['tamano'] = round (filesize($dr.$arch)/1024,1);
+				$archivo[$cont]['fecha'] = date ("m/d (H:i)", filemtime ($dr.$arch));
+				$cont+=1;
+			}
+		}
+
+		return $this->render('limubacadministratorBundle:administracion:descargas.html.twig',array('datos' => $archivo));
+	}
+
+	public function subirAction(){
+		if (isset($_POST['up'])){
+			if (isset($_FILES["file"])) {
+				$dir = __DIR__.'/../../../../web/upload/documentos/';
+				$validextensions = array("jpeg", "jpg", "png","txt", "pdf", "xlsx", "ppt", "doc", "pptx");
+	            $temporary = explode(".", $_FILES["file"]["name"]);
+	            $file_extension = end($temporary);
+
+	            if ((($_FILES["file"]["type"] == "image/png") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/jpeg") 
+	            	|| ($_FILES["file"]["type"] == "application/octet-stream") || ($_FILES["file"]["type"] == "text/plain") || ($_FILES["file"]["type"] == "application/pdf")
+	            ) && ($_FILES["file"]["size"] < 500000)//Approx. 100kb files can be uploaded.
+	            && in_array($file_extension, $validextensions)) {
+	                        
+	                if ($_FILES["file"]["error"] > 0) {
+	                    echo "Return Code: " . $_FILES["file"]["error"] . "<br/><br/>";
+	                }else{
+	                    if (file_exists($dir. $_FILES["file"]["name"])) {
+	                        echo $_FILES["file"]["name"] . " <b> ya existe.</b> ";
+	                    }else{
+	                        move_uploaded_file($_FILES["file"]["tmp_name"], $dir . $_FILES["file"]["name"]);
+	                    }
+	                }
+	            }else{
+	            	print_r($_FILES["file"]["type"]);
+	                echo "<span>***Invalid file Size or Type***<span>";
+	            }
+			}else{
+				print_r("<span>***No disponible***<span>");
+			}
+		}elseif (!empty($_REQUEST['eliminar'])){
+			$dir = __DIR__.'/../../../../web/upload/documentos/';
+			$path = $dir.$_REQUEST['eliminar'][0];
+            unlink($path);
+		}else{
+			print_r("<span>***Problemas de envio***<span>");
+		}
+
+		$dr = __DIR__.'/../../../../web/upload/documentos/';
+		$dir = opendir($dr);
+		$archivo = array();
+		$cont = 0;
+		while ($arch = readdir($dir)){
+			if ($arch != '.' && $arch != '..'){
+				$v_arc_tem = $arch; //imagen.png
+				list($v_name,$v_ext) = explode(".",$v_arc_tem);
+				
+				$archivo[$cont]['nombre'] = $v_name;
+				$archivo[$cont]['tipo'] = $v_ext;
+				$archivo[$cont]['tamano'] = round (filesize($dr.$arch)/1024,1);
+				$archivo[$cont]['fecha'] = date ("m/d (H:i)", filemtime ($dr.$arch));
+				$cont+=1;
+			}
+		}
+
+		return $this->render('limubacadministratorBundle:administracion:descargas.html.twig',array('datos' => $archivo));
+	}
+	//****************************FINAL CONTROLADOR DESCARGAS****************************    
 }

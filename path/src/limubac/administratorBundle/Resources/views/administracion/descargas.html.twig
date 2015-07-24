@@ -1,0 +1,91 @@
+{% extends 'limubacadministratorBundle:administracion:header.html.twig'%}
+
+{% block PageContent %}
+  <form class="form-horizontal" role="form" action="../app_dev.php/subir" enctype="multipart/form-data" id="form" method="post">
+    
+    <div class="row-fluid">
+      <div class="page-header">
+        <h1>Descargas <small>Sube archivos...es gratis!</small>
+        </h1>
+      </div>
+      <div class="row-fluid">
+        <div class="col-md-9">
+          <div class="form sharp vertical">
+            <!--Inicio ingreso de fotografia-->
+                <div id="mainform">
+                  <div id="innerdiv">
+                    <!--Required Div Starts Here-->
+                    <div id="formdiv">
+                      <div id="detail">
+                        <h6>
+                          <b>Nota:</b>
+                          <ul>
+                            <li>Seleccione un archivo .</li>
+                            <li>Formatos admitidos
+                              <ul>
+                                <li><b>imagenes (jpeg, jpg, png).</b></li>
+                                <li><b>documentos (txt, pdf, xlsx, ppt, doc).</b></li>
+                              </ul>
+                            </li>
+                            <li>Debe pesar menos de 500kb.</li>
+                          </ul>
+                        </h6>
+                      </div>
+                      <form action=""  name="form">
+                        <div id="upload">
+                          <input id="file" name="file" type="file" style="width:325px">
+                        </div>
+                        <br>
+                        <button class="btn btn-primary btn-info" type="submit" id="up" name="up"><i class="glyphicon-ok glyphicon"></i> Subir archivo</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <br>
+            <!--Fin ingreso de fotografia-->
+            {% if datos is empty %}
+              <h1>No hay ningun archivo para mostrar, sube alguno.</h1>
+            {% else %}
+              <table  class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Tamaño</th>
+                    <th>Fecha de subida</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for dat in datos %}
+                    <tr>
+                      <td> 
+                        <a href="{{ asset ('\upload/documentos/' ~ dat.nombre ~ '.' ~ dat.tipo) }}" target="_blank"> 
+                          {{dat.nombre}} 
+                        </a>
+                      </td>
+                      <td> {{dat.tipo}} </td>
+                      <td> {{dat.tamano ~ ' KB'}} </td>
+                      <td> {{dat.fecha}} </td>
+                      <td>
+                        <div class="btn-group sharp" data-toggle="radio" style="width: 50px"  text-align:"center">
+                          <button class="btn btn-mini btn-success" type='submit' name='eliminar[]' value ='{{dat.nombre ~ '.' ~ dat.tipo}}'>
+                            <i class="glyphicon-remove glyphicon"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-2 tRight">
+          <a class="btn btn-large btn-danger sharp" href="{{url('limubacadministrator_homepage')}}"><i class="glyphicon glyphicon-remove"></i> REGRESAR</a>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}
